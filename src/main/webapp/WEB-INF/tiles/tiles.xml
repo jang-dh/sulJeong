@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+	"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+ <tiles-definitions>
+   <definition name="layout" template="/WEB-INF/tiles/layout.jsp">
+     <put-attribute name="header" value="/WEB-INF/tiles/header.jsp"/>
+     <put-attribute name="footer" value="/WEB-INF/tiles/footer.jsp"/>
+   </definition>
+  
+   <!-- 
+      Controller에서 리턴되는 viewName이 */* 형태로 온다면
+       layout.jsp 모양으로 출력된다.
+       
+       ex) setViewName("user/login") :  user/login.jsp 
+    -->
+   <definition name="*/*" extends="layout">
+     <put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp"/>
+   </definition> 
+ 
+ 
+ </tiles-definitions>
+
+
+
+

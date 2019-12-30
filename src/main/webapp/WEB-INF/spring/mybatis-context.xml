@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+
+		
+
+ 
+<!-- 
+<beans:bean	id="dataSource" 
+            class="org.apache.commons.dbcp.BasicDataSource"
+			p:driverClassName="oracle.jdbc.OracleDriver"
+			p:url="jdbc:oracle:thin:@127.0.0.1:1521:xe"
+			p:username="scott" p:password="tiger"  
+			p:maxActive="10"/> -->
+			
+				
+	
+	 <!-- 외부설정문서(properties파일) 가져오기 -->
+  <beans:bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+  <beans:property name="locations">
+     <beans:value>/WEB-INF/spring/dbInfo.properties</beans:value>
+  </beans:property>
+</beans:bean> 
+
+<!--  <context:property-placeholder  location="dbInfo.properties"/> 
+ -->
+ 
+<!-- oracle 연결!!!!! -->
+<beans:bean	id="dataSource" 
+   class="org.apache.commons.dbcp.BasicDataSource"
+				p:driverClassName="${driverName}"
+				p:url="${url}"
+				p:username="${userName}"
+				 p:password="${userPass}"  
+				 p:maxActive="10"/>
+										
+ 	
+<!-- <beans:bean id="sqlSessionFactory"
+       class="org.mybatis.spring.SqlSessionFactoryBean"
+		p:dataSource-ref="dataSource" 
+		p:configLocation="classpath:kdb/spring/conf/SqlMapConfig.xml"
+/>  -->
+
+			
+   <beans:bean id="sqlSessionFactory" 
+   class="org.mybatis.spring.SqlSessionFactoryBean">
+		<beans:property name="dataSource" ref="dataSource" />
+		<beans:property name="mapperLocations" value="classpath:mapper/*Mapper.xml" /><!--  Mapper.xml 로끝나는 mppter모두 등록 -->
+		<beans:property name="typeAliasesPackage" value="team.hunter.model.dao" /><!-- domain폴더안에있는 클래스들 별칭 자동만듦 - 클래스명의 첫글만 소문자!! -->
+	    <beans:property name="configLocation" value="classpath:SqlMapConfig.xml"/>
+	</beans:bean>
+	
+	 
+  <beans:bean id="sqlSession"
+     class="org.mybatis.spring.SqlSessionTemplate">
+		<beans:constructor-arg index="0" ref="sqlSessionFactory"/>
+	</beans:bean>
+	
+	<!-- spring Transaction 등록하기 -->
+	<beans:bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager" 
+	id="transactionManager">
+	  <beans:property name="dataSource" ref="dataSource"/>
+	</beans:bean>
+	
+	<!-- 부가적인 transactionManager의 옵션을 설정 -->
+	<!--  <tx:advice transaction-manager="transactionManager"  id="txAdvice">
+	   <tx:attributes>
+	     <tx:method name="*" isolation="DEFAULT" propagation="REQUIRED"/>
+	   </tx:attributes>
+	 </tx:advice> 
+	 
+	 <aop:config>
+	    <aop:advisor advice-ref="txAdvice" 
+	    pointcut="execution(public * kosta.mvc.service.*ServiceImpl.*(..))"/>
+	 </aop:config>
+	
+	-->
+	
+	<!-- tranaction 처리 annotation으로 하기 -->
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	
+</beans:beans>
+
+
+
+
+
+
+
+
+
+

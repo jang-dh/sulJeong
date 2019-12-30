@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <!-- 파일 업로드 기능을 위한 설정 
+      반드시 id="multipartResolver" 필수
+  -->
+  <bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" 
+     id="multipartResolver" />
+     
+   <!-- 다운로드 기능을 처리하기 위한 ViewResolver 등록하기  -->
+   <bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+    <property name="order" value="0"/>
+   </bean>
+
+</beans>
