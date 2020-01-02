@@ -14,4 +14,5 @@ public class FundingRequest {
 	private int memberCode;
 	private String subject;
 	private String filename;
+	private String state;
 }
