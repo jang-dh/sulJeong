@@ -1,38 +1,172 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<html dir="ltr" lang="en">
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Shopping</title>
-<link rel="StyleSheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
-<script src="${pageContext.request.contextPath}/resources/js/jquery-3.4.1.min.js"></script>
+
+    <!-- Meta Tags -->
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="description" content="HelpingPro - Nonprofit, Crowdfunding & Charity HTML5 Template" />
+    <meta name="keywords" content="charity,crowdfunding,nonprofit,orphan,Poor,funding,fundrising,ngo,children" />
+    <meta name="author" content="ThemeMascot" />
+
+    <!-- Page Title -->
+    <title>술:정(井)</title>
+
+    <!-- Favicon and Touch Icons -->
+    <link href="${pageContext.request.contextPath}/resources/images/favicon.png" rel="shortcut icon" type="image/png">
+    <link href="${pageContext.request.contextPath}/resources/images/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="${pageContext.request.contextPath}/resources/images/apple-touch-icon-72x72.png" rel="apple-touch-icon"
+        sizes="72x72">
+    <link href="${pageContext.request.contextPath}/resources/images/apple-touch-icon-114x114.png" rel="apple-touch-icon"
+        sizes="114x114">
+    <link href="${pageContext.request.contextPath}/resources/images/apple-touch-icon-144x144.png" rel="apple-touch-icon"
+        sizes="144x144">
+
+    <!-- Stylesheet -->
+    <link href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="${pageContext.request.contextPath}/resources/css/jquery-ui.min.css" rel="stylesheet" type="text/css">
+    <link href="${pageContext.request.contextPath}/resources/css/animate.css" rel="stylesheet" type="text/css">
+    <link href="${pageContext.request.contextPath}/resources/css/css-plugin-collections.css" rel="stylesheet" />
+    <!-- CSS | menuzord megamenu skins -->
+    <link id="menuzord-menu-skins"
+        href="${pageContext.request.contextPath}/resources/css/menuzord-skins/menuzord-rounded-boxed.css"
+        rel="stylesheet" />
+    <!-- CSS | Main style file -->
+    <link href="${pageContext.request.contextPath}/resources/css/style-main.css" rel="stylesheet" type="text/css">
+    <!-- CSS | Preloader Styles -->
+    <link href="${pageContext.request.contextPath}/resources/css/preloader.css" rel="stylesheet" type="text/css">
+    <!-- CSS | Custom Margin Padding Collection -->
+    <link href="${pageContext.request.contextPath}/resources/css/custom-bootstrap-margin-padding.css" rel="stylesheet"
+        type="text/css">
+    <!-- CSS | Responsive media queries -->
+    <link href="${pageContext.request.contextPath}/resources/css/responsive.css" rel="stylesheet" type="text/css">
+    <!-- CSS | Style css. This is the file where you can place your own custom css code. Just uncomment it and use it. -->
+    <!-- <link href="css/style.css" rel="stylesheet" type="text/css"> -->
+
+    <!-- CSS | Theme Color -->
+    <link href="${pageContext.request.contextPath}/resources/css/colors/theme-skin-orange.css" rel="stylesheet"
+        type="text/css">
+
+    <!-- external javascripts -->
+    <script src="${pageContext.request.contextPath}/resources/js/jquery-2.2.4.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/jquery-ui.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+    <!-- JS | jquery plugin collection for this theme -->
+    <script src="${pageContext.request.contextPath}/resources/js/jquery-plugin-collection.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
 </head>
-<body>
-<div class="navbar navbar-default">
-  <div class="navbar-header">
-    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </button>
-    <a class="navbar-brand" href="${pageContext.request.contextPath}">Home</a>
-  </div>
-  <div class="navbar-collapse collapse navbar-responsive-collapse">
-    <ul class="nav navbar-nav">
-     
-      <li><a href="${pageContext.request.contextPath}/user/login">Login</a></li>
-      <li><a href="${pageContext.request.contextPath}/board/list">Board</a></li>
-     </ul>
-     <c:if test="${sessionScope.loginUser != null}">
-     <ul class="nav navbar-nav navbar-right">
-     	<li class="active"><a href="#">${loginUser}!</a></li>
-      	<li><a href="${pageContext.request.contextPath}/user/logout" class="btn btn-danger">Logout</a></li>
-     </ul>
-     </c:if>
-  </div>
-</div>
 
+<body class="">
+    <div id="wrapper">
+        <!-- preloader -->
+        <div id="preloader">
+            <div id="spinner">
+                <img class="floating" src="${pageContext.request.contextPath}/resources/images/preloaders/13.png"
+                    alt="">
+                <h5 class="line-height-50 font-18 ml-15">Loading...</h5>
+            </div>
+            <div id="disable-preloader" class="btn btn-default btn-sm">Disable Preloader</div>
+        </div>
 
+        <!-- Header -->
+        <header id="header" class="header">
+            <div class="header-nav">
+                <div class="header-nav-wrapper navbar-scrolltofixed bg-lightest">
+                    <div class="container">
+                        <nav id="menuzord-right" class="menuzord default bg-lightest">
+                            <a class="menuzord-brand pull-left flip xs-pull-center mt-20 pt-5 mt-sm-10 pt-sm-0"
+                                href="${pageContext.request.contextPath}">
+                                <img src="${pageContext.request.contextPath}/resources/images/logo-wide.png" alt="">
+                            </a>
+                            <ul class="menuzord-menu">
+                                <li>
+                                    <a href="#home">펀딩</a>
+                                </li>
+                                <li>
+                                    <a href="#">서비스 소개</a>
+                                </li>
+                                <li>
+                                    <a href="#">공지사항</a>
+                                </li>
+                                <li><a href="#">로그인</a>
+                                </li>
+                                <li><a href="#">회원가입</a>
+                                </li>
+                                <li>
+                                    <a class="icon icon-dark icon-bordered icon-circled icon-border-effect effect-circled"
+                                        href="#">
+                                        <i class="fa fa-user"></i>
+                                    </a>
+                                    <div class="megamenu" style="width:fit-content; left:auto;">
+                                        <div class="megamenu-row">
+                                            <h3><a href="#">회원 이름 ></a></h3>
+                                        </div>
+                                        <div class="megamenu-row">
+                                            <div class="col4">
+                                                <div class="icon-box" style="margin-bottom:0px;">
+                                                    <a class="icon" href="#" style="margin-bottom:0px;">
+                                                        <i class="fa fa-diamond"></i>
+                                                    </a>
+                                                    <h5 class="icon-box-title">펀딩내역</h5>
+                                                </div>
+                                            </div>
+                                            <div class="col4">
+                                                <div class="icon-box" style="margin-bottom:0px;">
+                                                    <a class="icon" href="#" style="margin-bottom:0px;">
+                                                        <i class="fa fa-heart"></i>
+                                                    </a>
+                                                    <h5 class="icon-box-title">좋아요</h5>
+                                                </div>
+                                            </div>
+                                            <div class="col4">
+                                                <div class="icon-box" style="margin-bottom:0px;">
+                                                    <a class="icon" href="#" style="margin-bottom:0px;">
+                                                        <i class="fa fa-heart"></i>
+                                                    </a>
+                                                    <h5 class="icon-box-title">내가 만든 펀딩</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="megamenu-row">
+                                        	<div class="col4">
+                                                <div class="icon-box" style="margin-bottom:0px;">
+                                                    <a class="icon" href="#" style="margin-bottom:0px;">
+                                                        <i class="fa fa-comments"></i>
+                                                    </a>
+                                                    <h5 class="icon-box-title">펀딩문의</h5>
+                                                </div>
+                                            </div>
+                                            <div class="col4">
+                                                <div class="icon-box" style="margin-bottom:0px;">
+                                                    <a class="icon" href="#" style="margin-bottom:0px;">
+                                                        <i class="fa fa-envelope"></i>
+                                                    </a>
+                                                    <h5 class="icon-box-title">1:1 문의</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="megamenu-row">
+                                            <button class="btn">로그아웃</button>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li><a href="#" style="padding:0px;"><button
+                                            class="btn btn-border btn-theme-colored btn-lg">펀딩 오픈 신청하기</button></a>
+                                </li>
 
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </header>
