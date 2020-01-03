@@ -16,6 +16,8 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 
 	@Override
 	public int insertPerchase(Purchase purchase) {
+		
+		System.out.println(2);
 		int result = session.insert("purchaseMapper.insertPerchase", purchase);
 		return result;
 	}

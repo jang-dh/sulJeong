@@ -16,7 +16,7 @@ public class PurchaseController {
 	@RequestMapping("/funding/purchase")
 	public String insertPurchase(Purchase purchase) {
 		
-		//System.out.println(1);
+		System.out.println(3);
 
 		service.insertPerchase(purchase);
 		return "fundingDetail";

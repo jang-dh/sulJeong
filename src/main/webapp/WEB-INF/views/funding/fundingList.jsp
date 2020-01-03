@@ -2,6 +2,15 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+<script>
+	$(function() {
+		$("[name=order]").on("change", function() {
+			$("#mailchimp-subscription-form").submit();
+		});
+	});
+</script>
+
+
 <!-- Start main-content -->
 <div class="main-content">
 	<!-- Section: inner-header -->
@@ -30,72 +39,88 @@
 				<div class="col-sm-3"></div>
 				<div class="form-group col-md-1">
 					<div class="media">
-						<a class="flip" href="#"> <img class="media-object" width="60"
+						<a class="flip" href="${pageContext.request.contextPath}/funding">
+							<img class="media-object" width="60"
 							src="http://placehold.it/70x80" alt="">
 						</a>
 						<div class="media-body">
 							<h5 class="media-heading product-title mb-0">
-								<a href="#">전체보기</a>
+								<a href="${pageContext.request.contextPath}/funding">전체보기</a>
 							</h5>
 						</div>
 					</div>
 				</div>
 				<div class="form-group col-md-1">
 					<div class="media">
-						<a class="flip" href="#"> <img class="media-object" width="60"
+						<a class="flip"
+							href="${pageContext.request.contextPath}/funding/category/301">
+							<img class="media-object" width="60"
 							src="http://placehold.it/70x80" alt="">
 						</a>
 						<div class="media-body">
 							<h5 class="media-heading product-title mb-0">
-								<a href="#">탁주</a>
+								<a
+									href="${pageContext.request.contextPath}/funding/category/301">탁주</a>
 							</h5>
 						</div>
 					</div>
 				</div>
 				<div class="form-group col-md-1">
 					<div class="media">
-						<a class="flip" href="#"> <img class="media-object" width="60"
+						<a class="flip"
+							href="${pageContext.request.contextPath}/funding/category/302">
+							<img class="media-object" width="60"
 							src="http://placehold.it/70x80" alt="">
 						</a>
 						<div class="media-body">
 							<h5 class="media-heading product-title mb-0">
-								<a href="#">청주</a>
+								<a
+									href="${pageContext.request.contextPath}/funding/category/302">청주</a>
 							</h5>
 						</div>
 					</div>
 				</div>
 				<div class="form-group col-md-1">
 					<div class="media">
-						<a class="flip" href="#"> <img class="media-object" width="60"
+						<a class="flip"
+							href="${pageContext.request.contextPath}/funding/category/303">
+							<img class="media-object" width="60"
 							src="http://placehold.it/70x80" alt="">
 						</a>
 						<div class="media-body">
 							<h5 class="media-heading product-title mb-0">
-								<a href="#">증류주</a>
+								<a
+									href="${pageContext.request.contextPath}/funding/category/303">증류주</a>
 							</h5>
 						</div>
 					</div>
 				</div>
 				<div class="form-group col-md-1">
 					<div class="media">
-						<a class="flip" href="#"> <img class="media-object" width="60"
+						<a class="flip"
+							href="${pageContext.request.contextPath}/funding/category/304">
+							<img class="media-object" width="60"
 							src="http://placehold.it/70x80" alt="">
 						</a>
 						<div class="media-body">
 							<h5 class="media-heading product-title mb-0">
-								<a href="#">과실주</a>
+								<a
+									href="${pageContext.request.contextPath}/funding/category/304">과실주</a>
 							</h5>
 						</div>
 					</div>
 				</div>
 				<div class="form-group col-md-1">
 					<div class="media">
-						<a class="flip" href="#"> <img class="media-object" width="60"
+						<a class="flip"
+							href="${pageContext.request.contextPath}/funding/category/305">
+							<img class="media-object" width="60"
 							src="http://placehold.it/70x80" alt="">
 						</a>
 						<div class="media-body">
 							<h5 class="media-heading product-title mb-0">
-								<a href="#">와인</a>
+								<a
+									href="${pageContext.request.contextPath}/funding/category/305">와인</a>
 							</h5>
 						</div>
 					</div>
@@ -103,35 +128,32 @@
 			</div>
 			<div class="container pt-30 pb-0">
 				<div class="col-md-5"></div>
-				<div class="form-group col-md-2">
-					<select class="form-control">
-						<option>선택</option>
-						<option>판매자 이름</option>
-						<option>펀딩명</option>
-					</select>
-				</div>
-				<div class="form-group col-md-2">
-					<select class="form-control">
-						<option>인기순</option>
-						<option>마감임박순</option>
-						<option>최신오픈순</option>
-					</select>
-				</div>
-				<div class="form-group col-md-3">
-					<form id="mailchimp-subscription-form" class="newsletter-form"
-						novalidate="true">
+				<form id="mailchimp-subscription-form" class="newsletter-form" novalidate="true" action="">
+					<div class="form-group col-md-2">
+						<select class="form-control" name="order">
+							<option value="likes">인기순</option>
+							<option value="last">마감임박순</option>
+							<option value="new">최신오픈순</option>
+						</select>
+					</div>
+					<div class="form-group col-md-2">
+						<select class="form-control" name="where">
+							<option>선택</option>
+							<option value="md_name">판매자 이름</option>
+							<option value="title">펀딩명</option>
+						</select>
+					</div>
+					<div class="form-group col-md-3">
 						<div class="input-group">
-							<input type="email" value="" name="EMAIL"
-								class="form-control input-lg font-16" data-height="45px"
-								id="mce-EMAIL-footer" style="height: 45px;"> <span
-								class="input-group-btn">
+							<input type="email" value="" name="val" class="form-control input-lg font-16" data-height="45px" id="mce-EMAIL-footer" style="height: 45px;"> 
+							<span class="input-group-btn">
 								<button data-height="45px"
 									class="btn btn-colored btn-theme-colored btn-xs m-0 font-14"
 									type="submit" style="height: 45px;">검색</button>
 							</span>
 						</div>
-					</form>
-				</div>
+					</div>
+				</form>
 			</div>
 		</div>
 	</section>
@@ -141,7 +163,7 @@
 		<div class="container pt-0 pb-40">
 			<div class="section-content">
 				<div class="row multi-row-clearfix">
-					<c:forEach begin="1" end="12">
+					<c:forEach items="${list}" var="fundingList" varStatus="status">
 						<div class="col-sm-6 col-md-3">
 							<div class="causes bg-silver-light maxwidth500 mb-30">
 								<div class="thumb">
@@ -151,27 +173,55 @@
 								<div
 									class="causes-details border-1px bg-white clearfix p-15 pb-30">
 									<h4 class="font-16 text-uppercase">
-										<a href="funding/detail">Education for Childreen</a>
+										<a href="funding/detail">${fundingList.title}</a>
 									</h4>
 									<ul class="list-inline font-weight-600 font-14 clearfix mb-5">
-										<li class="pull-left font-weight-400 text-black-333 pr-0">Raised:
-											<span class="text-theme-colored font-weight-700">$2860</span>
+										<li class="pull-left font-weight-400 text-black-333 pr-0">달성금액:
+											<span class="text-theme-colored font-weight-700">${fundingList.stackPrice}</span>
 										</li>
-										<li class="pull-right font-weight-400 text-black-333 pr-0">Goal:
-											<span class="text-theme-colored font-weight-700">$5000</span>
+										<li class="pull-right font-weight-400 text-black-333 pr-0">목표금액:
+											<span class="text-theme-colored font-weight-700">${fundingList.goalPrice}</span>
 										</li>
 									</ul>
 									<div class="progress-item mt-5">
 										<div class="progress mb-0">
-											<div data-percent="84" class="progress-bar appeared"
-												style="width: 84%;">
-												<span class="percent">0</span><span class="percent">84%</span>
+											<div
+												data-percent="${fundingList.stackPrice/fundingList.goalPrice *100}"
+												class="progress-bar appeared"
+												style="width: ${fundingList.stackPrice/fundingList.goalPrice *100}%;">
+												<span class="percent">0</span><span class="percent">${fundingList.stackPrice/fundingList.goalPrice *100}%</span>
 											</div>
 										</div>
 									</div>
-									<p class="mt-15">Lorem ipsum dolor sit ametconse
-										adipisicing elit. Praesent quossrs it.Lorem ipsum dolor is
-										emmit</p>
+									<div class="pull-left font-weight-400 text-black-333 pr-0">
+										<strong>펀딩종료 </strong>
+									</div>
+									<div class="bg-light text-center"
+										data-countdown="${fundingList.endDate}"></div>
+									<script type="text/javascript">
+										$(document)
+												.ready(
+														function() {
+															$(
+																	'[data-countdown]')
+																	.each(
+																			function() {
+																				var $this = $(this), finalDate = $(
+																						this)
+																						.data(
+																								'countdown');
+																				$this
+																						.countdown(
+																								finalDate,
+																								function(
+																										event) {
+																									$this
+																											.html(event
+																													.strftime('%D 일 %H:%M:%S'));
+																								});
+																			});
+														});
+									</script>
 									<a href="funding/detail"
 										class="btn btn-default btn-theme-colored mt-10 font-16 btn-sm">펀딩하기
 										<i class="flaticon-charity-make-a-donation font-16 ml-5"></i>
