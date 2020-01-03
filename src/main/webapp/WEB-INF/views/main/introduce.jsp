@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+
       <!-- Start main-content -->
   <div class="main-content">
+  
     <!-- Section: inner-header -->
     <section class="inner-header divider layer-overlay overlay-dark-8" data-bg-img="http://placehold.it/1920x1280">
       <div class="container pt-90 pb-40">
@@ -45,7 +48,7 @@
             </div>
             <div class="col-md-4">
               <div class="thumb">
-                <img alt="" src="http://placehold.it/360x265" class="img-fullwidth">
+                <img alt="" src="${pageContext.request.contextPath}/resources/images/introduce/Penguins.jpg" class="img-fullwidth">
               </div>
             </div>
           </div>
@@ -94,196 +97,26 @@
             
               <div class="gallery-isotope grid-4 gutter-small clearfix" data-lightbox="gallery">
                 <!-- Portfolio Item Start -->
+				<!-- 전통주 사진 뿌리기 4x3 12개 -->
+                <c:forEach begin="1" end="12" var="i"> 
                 <div class="gallery-item">
                   <div class="thumb">
-                    <img alt="project" src="http://placehold.it/285x195" class="img-fullwidth">
+                    <img alt="project" src="${pageContext.request.contextPath}/resources/images/introduce/liquor${(i%4)+1}.jpg" class="img-fullwidth">
                     <div class="overlay-shade"></div>
                     <div class="icons-holder">
                       <div class="icons-holder-inner">
                         <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
-                          <a href="images/gallery/gallery-lg1.jpg"  data-lightbox-gallery="gallery"><i class="fa fa-picture-o"></i></a>
+                          <a href="${pageContext.request.contextPath}/resources/images/introduce/liquor${(i%4)+1}.jpg"  data-lightbox-gallery="gallery"><i class="fa fa-picture-o"></i></a>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <!-- Portfolio Item End -->
                 
-                <!-- Portfolio Item Start -->
-                <div class="gallery-item">
-                  <div class="thumb">
-                    <img alt="project" src="http://placehold.it/285x195" class="img-fullwidth">
-                    <div class="overlay-shade"></div>
-                    <div class="icons-holder">
-                      <div class="icons-holder-inner">
-                        <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
-                          <a href="images/gallery/gallery-lg2.jpg"  data-lightbox-gallery="gallery"><i class="fa fa-picture-o"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- Portfolio Item End -->
                 
-                <!-- Portfolio Item Start -->
-                <div class="gallery-item">
-                  <div class="thumb">
-                    <img alt="project" src="http://placehold.it/285x195" class="img-fullwidth">
-                    <div class="overlay-shade"></div>
-                    <div class="icons-holder">
-                      <div class="icons-holder-inner">
-                        <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
-                          <a href="images/gallery/gallery-lg3.jpg"  data-lightbox-gallery="gallery"><i class="fa fa-picture-o"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                </c:forEach>
                 <!-- Portfolio Item End -->
-                
-                <!-- Portfolio Item Start -->
-                <div class="gallery-item">
-                  <div class="thumb">
-                    <img alt="project" src="http://placehold.it/285x195" class="img-fullwidth">
-                    <div class="overlay-shade"></div>
-                    <div class="icons-holder">
-                      <div class="icons-holder-inner">
-                        <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
-                          <a href="images/gallery/gallery-lg4.jpg"  data-lightbox-gallery="gallery"><i class="fa fa-picture-o"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- Portfolio Item End -->
-                
-                <!-- Portfolio Item Start -->
-                <div class="gallery-item">
-                  <div class="thumb">
-                    <img alt="project" src="http://placehold.it/285x195" class="img-fullwidth">
-                    <div class="overlay-shade"></div>
-                    <div class="icons-holder">
-                      <div class="icons-holder-inner">
-                        <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
-                          <a href="images/gallery/gallery-lg5.jpg"  data-lightbox-gallery="gallery"><i class="fa fa-picture-o"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- Portfolio Item End -->
-                
-                <!-- Portfolio Item Start -->
-                <div class="gallery-item">
-                  <div class="thumb">
-                    <img alt="project" src="http://placehold.it/285x195" class="img-fullwidth">
-                    <div class="overlay-shade"></div>
-                    <div class="icons-holder">
-                      <div class="icons-holder-inner">
-                        <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
-                          <a href="images/gallery/gallery-lg6.jpg"  data-lightbox-gallery="gallery"><i class="fa fa-picture-o"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- Portfolio Item End -->
-                
-                <!-- Portfolio Item Start -->
-                <div class="gallery-item">
-                  <div class="thumb">
-                    <img alt="project" src="http://placehold.it/285x195" class="img-fullwidth">
-                    <div class="overlay-shade"></div>
-                    <div class="icons-holder">
-                      <div class="icons-holder-inner">
-                        <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
-                          <a href="images/gallery/gallery-lg7.jpg"  data-lightbox-gallery="gallery"><i class="fa fa-picture-o"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- Portfolio Item End -->
-                
-                <!-- Portfolio Item Start -->
-                <div class="gallery-item">
-                  <div class="thumb">
-                    <img alt="project" src="http://placehold.it/285x195" class="img-fullwidth">
-                    <div class="overlay-shade"></div>
-                    <div class="icons-holder">
-                      <div class="icons-holder-inner">
-                        <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
-                          <a href="images/gallery/gallery-lg8.jpg"  data-lightbox-gallery="gallery"><i class="fa fa-picture-o"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- Portfolio Item End -->
-                
-                <!-- Portfolio Item Start -->
-                <div class="gallery-item">
-                  <div class="thumb">
-                    <img alt="project" src="http://placehold.it/285x195" class="img-fullwidth">
-                    <div class="overlay-shade"></div>
-                    <div class="icons-holder">
-                      <div class="icons-holder-inner">
-                        <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
-                          <a href="images/gallery/gallery-lg9.jpg"  data-lightbox-gallery="gallery"><i class="fa fa-picture-o"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- Portfolio Item End -->
-                
-                <!-- Portfolio Item Start -->
-                <div class="gallery-item">
-                  <div class="thumb">
-                    <img alt="project" src="http://placehold.it/285x195" class="img-fullwidth">
-                    <div class="overlay-shade"></div>
-                    <div class="icons-holder">
-                      <div class="icons-holder-inner">
-                        <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
-                          <a href="images/gallery/gallery-lg10.jpg"  data-lightbox-gallery="gallery"><i class="fa fa-picture-o"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- Portfolio Item End -->
-                
-                <!-- Portfolio Item Start -->
-                <div class="gallery-item">
-                  <div class="thumb">
-                    <img alt="project" src="http://placehold.it/285x195" class="img-fullwidth">
-                    <div class="overlay-shade"></div>
-                    <div class="icons-holder">
-                      <div class="icons-holder-inner">
-                        <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
-                          <a href="images/gallery/gallery-lg11.jpg"  data-lightbox-gallery="gallery"><i class="fa fa-picture-o"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- Portfolio Item End -->
-                
-                <!-- Portfolio Item Start -->
-                <div class="gallery-item">
-                  <div class="thumb">
-                    <img alt="project" src="http://placehold.it/285x195" class="img-fullwidth">
-                    <div class="overlay-shade"></div>
-                    <div class="icons-holder">
-                      <div class="icons-holder-inner">
-                        <div class="styled-icons icon-sm icon-dark icon-circled icon-theme-colored">
-                          <a href="images/gallery/gallery-lg12.jpg"  data-lightbox-gallery="gallery"><i class="fa fa-picture-o"></i></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- Portfolio Item End -->
+
               </div>
               <!-- End Portfolio Gallery Grid -->
                           

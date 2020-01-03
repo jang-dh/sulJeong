@@ -15,7 +15,7 @@ public class NoticeServiceImpl implements NoticeService {
 	private NoticeDAO dao;
 
 	@Override
-	Notice selectByCode(int code) {
+	public Notice selectByCode(int code) {
 		// TODO Auto-generated method stub
 		return null;
 	}

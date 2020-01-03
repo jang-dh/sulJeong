@@ -18,10 +18,19 @@ public class AdminController {
 	@Autowired
 	private NoticeService noticeService;
 	
+	/**
+	 * 서비스소개 페이지 진입
+	 * */
 	@RequestMapping("/introduce")
 	public String introduce() {
 		return "main/introduce";
 	}
+	
+	/**
+	 * 관리자페이지
+	 * */
+	@RequestMapping("/admin/siteManagement")
+	public void siteManagement() {}
 	
 	
 	
@@ -70,6 +79,7 @@ public class AdminController {
 	@RequestMapping("/noticeDetail/{code}")
 	public ModelAndView detail(@PathVariable int code) {
 		noticeService.selectByCode(code);
+		return null;
 	}
 
 }
