@@ -5,11 +5,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class FundingController {
-	
 	@RequestMapping("/funding/detail")
 	public String fundingDetail() {
-		
+
 		return "funding/fundingDetail";
 	}
 
+	@RequestMapping("/funding")
+	public String fundingList() {
+		return "funding/fundingList";
+	}
 }
