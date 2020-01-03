@@ -18,4 +18,11 @@ public class FundingServiceImpl implements FundingService {
 		return fundingDAO.selectAll();
 	}
 
+	@Override
+	public List<Funding> selectByCategory(int categoryCode, String order, String where, String val) {
+		return fundingDAO.selectByCategory(categoryCode, order, where, val);
+	}
+	
+	
+
 }

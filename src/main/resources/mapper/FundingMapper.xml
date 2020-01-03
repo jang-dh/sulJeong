@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="fundingMapper">
-
-	<select id="selectAll" resultType="funding">
-		select code, md_code, title, reward_name, reward_price, goal_price, stack_price, image, category, open_date, end_date, funding_state
-		from funding
+	<select id="select" resultType="funding" parameterType="map">
+		select code, md_code, title, reward_name, reward_price, goal_price,
+		stack_price, image, category, open_date, end_date, funding_state
+		from
+		funding
+		<where>
+			<if test="map.category != null">
+				category = #{map.category}
+			</if>
+			<if test="map.where == title">
+				and title = #{map.val}
+			</if>
+		</where>
 	</select>
 </mapper>
