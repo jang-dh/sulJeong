@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 
   <!-- Start main-content -->
   <div class="main-content">
@@ -72,8 +74,9 @@
          	      </div>
                   <div class="pull-right font-weight-400 text-black-333 pr-0"><strong>후원인원: </strong><span class="text-theme-colored font-weight-700"> 00명</span></div><br>
                   <div class="cart-form-wrapper mt-30">
-                    <form enctype="multipart/form-data" method="post" class="cart">
-                      <input type="hidden" value="productID" name="add-to-cart">
+                    <form enctype="multipart/form-data" method="post" class="cart" action="${pageContext.request.contextPath}/funding/purchase">
+                      <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                      <!-- <input type="hidden" value="productID" name="add-to-cart"> -->
                       <table class="table variations no-border">
                         <tbody>
                           <tr>

@@ -23,4 +23,9 @@ public class FundingController {
 		//model.addAttribute("list", service.selectAll());
 		return "funding/fundingList";
 	}
+	
+	@RequestMapping("/likes")
+	public String likesList() {
+		return "mypage/likesList";
+	}
 }
