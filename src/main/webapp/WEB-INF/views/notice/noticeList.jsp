@@ -43,13 +43,15 @@
 							<c:forEach items="${list}" var="notice" varStatus="status">
 								<tr>
 									<th scope="row">${status.count}</th>
-									<td><a href="/noticeDetail/${notice.code}">${notice.subject}</a></td>
+									<td><a href="${pageContext.request.contextPath}/noticeDetail/${notice.code}">${notice.subject}</a></td>
 									<td>${notice.regdate}</td>
 								</tr>
 							</c:forEach>
+							
 							</tbody>
 						</table>
 					</div>
+					<a href="${pageContext.request.contextPath}/insertFrom" class="btn btn-dark btn-theme-colored btn-circled">등록</a>
 					
           </div>
         </div>

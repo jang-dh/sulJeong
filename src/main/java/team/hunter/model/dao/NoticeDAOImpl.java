@@ -1,6 +1,8 @@
 package team.hunter.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +17,9 @@ public class NoticeDAOImpl implements NoticeDAO {
 	private SqlSession session;
 
 	@Override
-	public List<Notice> selectByCode(int code) {
-		// TODO Auto-generated method stub
-		return null;
+	public Notice selectByCode(int code) {
+		
+		return session.selectOne("noticeMapper.selectByCode", code);
 	}
 
 	@Override
@@ -28,8 +30,8 @@ public class NoticeDAOImpl implements NoticeDAO {
 
 	@Override
 	public int insert(Notice dto) {
-		// TODO Auto-generated method stub
-		return 0;
+
+		return session.insert("noticeMapper.insert",dto );
 	}
 
 	@Override

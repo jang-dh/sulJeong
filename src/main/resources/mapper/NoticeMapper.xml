@@ -7,6 +7,16 @@
 		select code, subject, content, regdate, filename
 		from notice
 	</select>
+	
+	<select id="selectByCode" parameterType="int" resultType="notice">
+		select code, subject, content, regdate, filename
+		from notice
+		where code=#{_parameter}
+	</select>
+	
+	<insert id="insert" parameterType="notice">
+		insert into notice (code, subject, content, regdate, filename) values (SEQ_NO.nextval, #{subject}, #{content}, sysdate, #{filename})
+	</insert>
 
 </mapper>	
 
