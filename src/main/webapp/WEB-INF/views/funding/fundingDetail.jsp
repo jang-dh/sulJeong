@@ -37,7 +37,7 @@
               </div>
               <div class="col-md-7">
                 <div class="product-summary">
-                  <h2 class="product-title">복분자 막걸리</h2>
+                  <h2 class="product-title">복분자 막걸리 </h2>
                   <div class="product_review">
                     <ul class="review_text list-inline">
                       <li>
@@ -47,13 +47,30 @@
                       <li><a href="#">Add reviews</a></li>
                     </ul>
                   </div>
-                  <div class="price"> <del><span class="amount">16,500원</span></del> <ins><span class="amount">13,500원</span></ins> </div>
+                  <div class="price"> <del><span class="amount">16,500원</span></del> <ins><span class="amount">13,500원</span></ins> 
+                  </div>
                   <div class="short-description">
                     <p>Donec volutpat purus tempor sem molestie, sed blandit lacus posuere. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut posuere mollis nulla ut consectetur.</p>
                   </div>
                   <div class="tags"><strong>SKU:</strong> EA34</div>
                   <div class="category"><strong>Category:</strong> <a href="#">Helmets</a>, <a href="#">Horse Rugs</a></div>
-                  <div class="tags"><strong>Tags:</strong> <a href="#">Saddles</a>, <a href="#">Whip</a></div>
+                  <div class="tags"><strong>Tags:</strong> <a href="#">Saddles</a>, <a href="#">Whip</a></div><br>
+         	      <div class="pull-left font-weight-400 text-black-333 pr-0"><strong>펀딩종료 </strong></div>
+         	      	<div class="col-md-3">
+	                <div class="bg-light text-center" data-countdown="2020/03/01"></div>
+	              	</div>
+	              		<script type="text/javascript">
+              			$(document).ready(function() {
+                			$('[data-countdown]').each(function() {
+                  				var $this = $(this), finalDate = $(this).data('countdown');
+                    			$this.countdown(finalDate, function(event) {
+                        			$this.html(event.strftime('%D 일 %H:%M:%S'));
+                   		 		});
+                  			});
+             			});
+            			</script>
+         	      </div>
+                  <div class="pull-right font-weight-400 text-black-333 pr-0"><strong>후원인원: </strong><span class="text-theme-colored font-weight-700"> 00명</span></div><br>
                   <div class="cart-form-wrapper mt-30">
                     <form enctype="multipart/form-data" method="post" class="cart">
                       <input type="hidden" value="productID" name="add-to-cart">
@@ -68,7 +85,11 @@
                   				<div class="progress mb-0">
                     			<div data-percent="84" class="progress-bar"><span class="percent">0</span></div>
                   			</div>
+                  			<br>
+                  			  	<div class="pull-right font-weight-400 text-black-333 pr-0"><a href="#">문의하기</a>
+                  			 	<button class="single_add_to_cart_button btn btn-theme-colored" type="submit">좋아요 <i class="fa fa-thumb-tack text-white mr-10"></i></button></div><br>
                           </tr>
+                          <br>
                           <tr>
                             <td class="name">수량</td>
                             <td class="value">
@@ -77,11 +98,13 @@
                                 <input type="number" size="4" class="input-text qty text" title="Qty" value="1" name="quantity" min="1" step="1">
                                 <input type="button" class="plus" value="+">
                               </div>
+                              <div class="pull-right font-weight-400 text-black-333 pr-0">
+                              <button class="btn btn-default btn-theme-colored mt-10 font-16 btn-sm" type="submit">펀딩하기<i class="flaticon-charity-make-a-donation font-16 ml-5"></i></button>
+                              </div>
                             </td>
                           </tr>
                         </tbody>
                       </table>
-                      <button class="btn btn-default btn-theme-colored mt-10 font-16 btn-sm" type="submit">펀딩하기<i class="flaticon-charity-make-a-donation font-16 ml-5"></i></button>
                     </form>
                   </div>
                 </div>
