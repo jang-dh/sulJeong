@@ -10,5 +10,7 @@ public interface MemberDAO {
 	 * 회원가입
 	 * */
 	int memberJoin(Member member);
+	
+	Member selectByPhone(Member member);
 
 }

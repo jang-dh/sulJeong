@@ -4,11 +4,17 @@
 <%@taglib prefix="sec"  uri="http://www.springframework.org/security/tags"%> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html dir="ltr" lang="en">
-
+<script src="${pageContext.request.contextPath}/resources/js/jquery-2.2.4.min.js"></script>
 <script type="text/javascript">
 	$(function(){
 		$("#logout").click(function(){
-			alert(1);
+			$("#logoutSubmit").submit();
+		});
+		
+		$("a").click(function(){
+			var href = $(this).attr('href');
+			var token = href+"?${_csrf.parameterName}=${_csrf.token}";
+			$(this).attr('href',token);
 		});
 	});
 </script>
@@ -106,7 +112,7 @@
                                 </li>
                                 <li>
 
-                                    <a href="${pageContext.request.contextPath}/notice">공지사항</a>
+                                    <a id="a" href="${pageContext.request.contextPath}/notice">공지사항</a>
 
                                     <c:if test="${empty pageContext.request.userPrincipal}">
 	                                <li><a href="${pageContext.request.contextPath}/login">로그인</a>
@@ -172,13 +178,19 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        
+    	
+    
                                         <div class="megamenu-row">
-                                            <button class="btn" id="logout">로그아웃</button>
+                                       	 <form id="logoutSubmit" action="${pageContext.request.contextPath}/logout" method="post">
+                                       	 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                            <input type="button" class="btn" id="logout" value="로그아웃"/>
+                                         </form>
                                         </div>
                                     </div>
                                 </li>
 								</c:if>
-                                <li><a href="${pageContext.request.contextPath}//fundingOpenRequest" style="padding:0px;"><button
+                                <li><a href="${pageContext.request.contextPath}/fundingOpenRequest" style="padding:0px;"><button
                                             class="btn btn-border btn-theme-colored btn-lg">펀딩 오픈 신청하기</button></a>
                                 </li>
                             </ul>
@@ -186,4 +198,7 @@
                     </div>
                 </div>
             </div>
+            <form id="AutoritySending" method="post">
+            	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" >
+            </form>
         </header>
