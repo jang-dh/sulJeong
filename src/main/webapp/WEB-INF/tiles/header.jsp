@@ -177,7 +177,7 @@
                                         </div>
                                     </div>
                                 </li>
-
+								</c:if>
                                 <li><a href="${pageContext.request.contextPath}//fundingOpenRequest" style="padding:0px;"><button
                                             class="btn btn-border btn-theme-colored btn-lg">펀딩 오픈 신청하기</button></a>
                                 </li>

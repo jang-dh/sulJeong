@@ -16,6 +16,8 @@ public class MemberDAOImpl implements MemberDAO {
 	public Member selectMemberById(String id) {
 		
 		return session.selectOne("memberMapper.selectMemberById", id);
+		
+	}
 
 	@Override
 	public int memberJoin(Member member) {
