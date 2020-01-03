@@ -1,11 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib prefix="sec"  uri="http://www.springframework.org/security/tags"%> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html dir="ltr" lang="en">
 
-<head>
+<script type="text/javascript">
+	$(function(){
+		$("#logout").click(function(){
+			alert(1);
+		});
+	});
+</script>
 
+<head>
+<sec:authentication var="principal" property="principal" />
     <!-- Meta Tags -->
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
@@ -97,11 +106,13 @@
                                 </li>
                                 <li>
                                     <a href="/notice">공지사항</a>
-                                </li>
-                                <li><a href="/login">로그인</a>
-                                </li>
-                                <li><a href="/join">회원가입</a>
-                                </li>
+                                    <c:if test="${empty pageContext.request.userPrincipal}">
+	                                <li><a href="${pageContext.request.contextPath}/login">로그인</a>
+	                                </li>
+	                                <li><a href="/join">회원가입</a>
+	                                </li>
+	                                </c:if>
+	                                <c:if test="${not empty pageContext.request.userPrincipal}">
                                 <li>
                                     <a class="icon icon-dark icon-bordered icon-circled icon-border-effect effect-circled"
                                         href="#">
@@ -109,7 +120,7 @@
                                     </a>
                                     <div class="megamenu" style="width:fit-content; left:auto;">
                                         <div class="megamenu-row">
-                                            <h3><a href="/mypage/myInfoMenu">회원 이름 ></a></h3>
+                                            <h3>${principal.name}님 ></a></h3>
                                         </div>
                                         <div class="megamenu-row">
                                             <div class="col4">
@@ -156,14 +167,14 @@
                                             </div>
                                         </div>
                                         <div class="megamenu-row">
-                                            <button class="btn">로그아웃</button>
+                                            <button class="btn" id="logout">로그아웃</button>
                                         </div>
                                     </div>
                                 </li>
+                                </c:if>
                                 <li><a href="/fundingOpenRequest" style="padding:0px;"><button
                                             class="btn btn-border btn-theme-colored btn-lg">펀딩 오픈 신청하기</button></a>
                                 </li>
-
                             </ul>
                         </nav>
                     </div>
