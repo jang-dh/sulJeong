@@ -1,8 +1,12 @@
 package team.hunter.model.service;
 
-import org.springframework.stereotype.Service;
+import team.hunter.model.dto.Member;
 
-@Service
 public interface MemberService {
 
+	
+	/**
+	 * 회원가입
+	 * */
+	int memberJoin(Member member);
 }

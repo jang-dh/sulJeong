@@ -100,7 +100,7 @@
                                 </li>
                                 <li><a href="/login">로그인</a>
                                 </li>
-                                <li><a href="/join">회원가입</a>
+                                <li><a href="${pageContext.request.contextPath}/join">회원가입</a>
                                 </li>
                                 <li>
                                     <a class="icon icon-dark icon-bordered icon-circled icon-border-effect effect-circled"

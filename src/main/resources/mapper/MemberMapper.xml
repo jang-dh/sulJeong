@@ -2,6 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="memberMapper">
 
+<insert id="memberJoin" parameterType="member">
+INSERT INTO MEMBER (CODE, ID, PWD, NAME, PHONE, EMAIL, EMAIL_ACCEPT) VALUES (SEQ_NO,#{member.id}, #{member.pwd}, #{member.name}, #{member.phone}, #{member.email}, #{member.emailAccept})
+</insert>
+
 </mapper>	
 
 
