@@ -141,7 +141,7 @@
 		<div class="container pt-0 pb-40">
 			<div class="section-content">
 				<div class="row multi-row-clearfix">
-					<c:forEach begin="1" end="12">
+					<c:forEach items="${list}" var="fundingList" varStatus="status">
 						<div class="col-sm-6 col-md-3">
 							<div class="causes bg-silver-light maxwidth500 mb-30">
 								<div class="thumb">
@@ -151,27 +151,26 @@
 								<div
 									class="causes-details border-1px bg-white clearfix p-15 pb-30">
 									<h4 class="font-16 text-uppercase">
-										<a href="funding/detail">Education for Childreen</a>
+										<a href="funding/detail">${fundingList.title}</a>
 									</h4>
 									<ul class="list-inline font-weight-600 font-14 clearfix mb-5">
-										<li class="pull-left font-weight-400 text-black-333 pr-0">Raised:
-											<span class="text-theme-colored font-weight-700">$2860</span>
+										<li class="pull-left font-weight-400 text-black-333 pr-0">달성금액:
+											<span class="text-theme-colored font-weight-700">${fundingList.stackPrice}</span>
 										</li>
-										<li class="pull-right font-weight-400 text-black-333 pr-0">Goal:
-											<span class="text-theme-colored font-weight-700">$5000</span>
+										<li class="pull-right font-weight-400 text-black-333 pr-0">목표금액:
+											<span class="text-theme-colored font-weight-700">${fundingList.goalPrice}</span>
 										</li>
 									</ul>
 									<div class="progress-item mt-5">
 										<div class="progress mb-0">
-											<div data-percent="84" class="progress-bar appeared"
-												style="width: 84%;">
-												<span class="percent">0</span><span class="percent">84%</span>
+											<div data-percent="${fundingList.stackPrice/fundingList.goalPrice *100}" class="progress-bar appeared" style="width: ${fundingList.stackPrice/fundingList.goalPrice *100}%;">
+												<span class="percent">0</span><span class="percent">${fundingList.stackPrice/fundingList.goalPrice *100}%</span>
 											</div>
 										</div>
 									</div>
-									<p class="mt-15">Lorem ipsum dolor sit ametconse
+									<!-- <p class="mt-15">Lorem ipsum dolor sit ametconse
 										adipisicing elit. Praesent quossrs it.Lorem ipsum dolor is
-										emmit</p>
+										emmit</p> -->
 									<a href="funding/detail"
 										class="btn btn-default btn-theme-colored mt-10 font-16 btn-sm">펀딩하기
 										<i class="flaticon-charity-make-a-donation font-16 ml-5"></i>

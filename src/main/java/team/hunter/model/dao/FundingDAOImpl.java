@@ -15,7 +15,7 @@ public class FundingDAOImpl implements FundingDAO {
 
 	@Override
 	public List<Funding> selectAll() {
-		return session.selectList("fundingMapper.select");
+		return session.selectList("fundingMapper.selectAll");
 	}
 
 }
