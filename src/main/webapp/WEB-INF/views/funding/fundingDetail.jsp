@@ -54,9 +54,23 @@
                   </div>
                   <div class="tags"><strong>SKU:</strong> EA34</div>
                   <div class="category"><strong>Category:</strong> <a href="#">Helmets</a>, <a href="#">Horse Rugs</a></div>
-                  <div class="tags"><strong>Tags:</strong> <a href="#">Saddles</a>, <a href="#">Whip</a></div>
-         	      <div class="pull-left font-weight-400 text-black-333 pr-0">남은시간:</div>
-                  <div class="pull-right font-weight-400 text-black-333 pr-0">후원인원: <span class="text-theme-colored font-weight-700"> 00명</span></div>
+                  <div class="tags"><strong>Tags:</strong> <a href="#">Saddles</a>, <a href="#">Whip</a></div><br>
+         	      <div class="pull-left font-weight-400 text-black-333 pr-0"><strong>펀딩종료 </strong></div>
+         	      	<div class="col-md-3">
+	                <div class="bg-light text-center" data-countdown="2020/03/01"></div>
+	              	</div>
+	              		<script type="text/javascript">
+              			$(document).ready(function() {
+                			$('[data-countdown]').each(function() {
+                  				var $this = $(this), finalDate = $(this).data('countdown');
+                    			$this.countdown(finalDate, function(event) {
+                        			$this.html(event.strftime('%D 일 %H:%M:%S'));
+                   		 		});
+                  			});
+             			});
+            			</script>
+         	      </div>
+                  <div class="pull-right font-weight-400 text-black-333 pr-0"><strong>후원인원: </strong><span class="text-theme-colored font-weight-700"> 00명</span></div><br>
                   <div class="cart-form-wrapper mt-30">
                     <form enctype="multipart/form-data" method="post" class="cart">
                       <input type="hidden" value="productID" name="add-to-cart">
