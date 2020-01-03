@@ -90,17 +90,17 @@
                             </a>
                             <ul class="menuzord-menu">
                                 <li>
-                                    <a href="#home">펀딩</a>
+                                    <a href="/funding">펀딩</a>
                                 </li>
                                 <li>
-                                    <a href="#">서비스 소개</a>
+                                    <a href="/introduce">서비스 소개</a>
                                 </li>
                                 <li>
-                                    <a href="#">공지사항</a>
+                                    <a href="/notice">공지사항</a>
                                 </li>
-                                <li><a href="#">로그인</a>
+                                <li><a href="/login">로그인</a>
                                 </li>
-                                <li><a href="#">회원가입</a>
+                                <li><a href="/join">회원가입</a>
                                 </li>
                                 <li>
                                     <a class="icon icon-dark icon-bordered icon-circled icon-border-effect effect-circled"
@@ -109,12 +109,12 @@
                                     </a>
                                     <div class="megamenu" style="width:fit-content; left:auto;">
                                         <div class="megamenu-row">
-                                            <h3><a href="#">회원 이름 ></a></h3>
+                                            <h3><a href="/mypage/myInfoMenu">회원 이름 ></a></h3>
                                         </div>
                                         <div class="megamenu-row">
                                             <div class="col4">
                                                 <div class="icon-box" style="margin-bottom:0px;">
-                                                    <a class="icon" href="#" style="margin-bottom:0px;">
+                                                    <a class="icon" href="mypage/fundingHistory" style="margin-bottom:0px;">
                                                         <i class="fa fa-diamond"></i>
                                                     </a>
                                                     <h5 class="icon-box-title">펀딩내역</h5>
@@ -122,7 +122,7 @@
                                             </div>
                                             <div class="col4">
                                                 <div class="icon-box" style="margin-bottom:0px;">
-                                                    <a class="icon" href="#" style="margin-bottom:0px;">
+                                                    <a class="icon" href="mypage/likes" style="margin-bottom:0px;">
                                                         <i class="fa fa-heart"></i>
                                                     </a>
                                                     <h5 class="icon-box-title">좋아요</h5>
@@ -130,7 +130,7 @@
                                             </div>
                                             <div class="col4">
                                                 <div class="icon-box" style="margin-bottom:0px;">
-                                                    <a class="icon" href="#" style="margin-bottom:0px;">
+                                                    <a class="icon" href="mypage/myOpenFunding" style="margin-bottom:0px;">
                                                         <i class="fa fa-heart"></i>
                                                     </a>
                                                     <h5 class="icon-box-title">내가 만든 펀딩</h5>
@@ -140,7 +140,7 @@
                                         <div class="megamenu-row">
                                         	<div class="col4">
                                                 <div class="icon-box" style="margin-bottom:0px;">
-                                                    <a class="icon" href="#" style="margin-bottom:0px;">
+                                                    <a class="icon" href="mypage/fundingQuestion" style="margin-bottom:0px;">
                                                         <i class="fa fa-comments"></i>
                                                     </a>
                                                     <h5 class="icon-box-title">펀딩문의</h5>
@@ -148,7 +148,7 @@
                                             </div>
                                             <div class="col4">
                                                 <div class="icon-box" style="margin-bottom:0px;">
-                                                    <a class="icon" href="#" style="margin-bottom:0px;">
+                                                    <a class="icon" href="mypage/myQuestion" style="margin-bottom:0px;">
                                                         <i class="fa fa-envelope"></i>
                                                     </a>
                                                     <h5 class="icon-box-title">1:1 문의</h5>
@@ -160,7 +160,7 @@
                                         </div>
                                     </div>
                                 </li>
-                                <li><a href="#" style="padding:0px;"><button
+                                <li><a href="/fundingOpenRequest" style="padding:0px;"><button
                                             class="btn btn-border btn-theme-colored btn-lg">펀딩 오픈 신청하기</button></a>
                                 </li>
 

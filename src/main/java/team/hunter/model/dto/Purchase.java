@@ -17,4 +17,6 @@ public class Purchase {
 	private String qty;
 	private String purchaseState;
 	private String purchaseDate;
+	private String deliveryNumber;
+	private String Courier;
 }
