@@ -24,31 +24,129 @@
 		</div>
 	</section>
 
+	<section>
+		<div class="container pt-40 pb-0">
+			<div class="row">
+				<div class="col-sm-3"></div>
+				<div class="form-group col-md-1">
+					<div class="media">
+						<a class="flip" href="#"> <img class="media-object" width="60"
+							src="http://placehold.it/70x80" alt="">
+						</a>
+						<div class="media-body">
+							<h5 class="media-heading product-title mb-0">
+								<a href="#">전체보기</a>
+							</h5>
+						</div>
+					</div>
+				</div>
+				<div class="form-group col-md-1">
+					<div class="media">
+						<a class="flip" href="#"> <img class="media-object" width="60"
+							src="http://placehold.it/70x80" alt="">
+						</a>
+						<div class="media-body">
+							<h5 class="media-heading product-title mb-0">
+								<a href="#">탁주</a>
+							</h5>
+						</div>
+					</div>
+				</div>
+				<div class="form-group col-md-1">
+					<div class="media">
+						<a class="flip" href="#"> <img class="media-object" width="60"
+							src="http://placehold.it/70x80" alt="">
+						</a>
+						<div class="media-body">
+							<h5 class="media-heading product-title mb-0">
+								<a href="#">청주</a>
+							</h5>
+						</div>
+					</div>
+				</div>
+				<div class="form-group col-md-1">
+					<div class="media">
+						<a class="flip" href="#"> <img class="media-object" width="60"
+							src="http://placehold.it/70x80" alt="">
+						</a>
+						<div class="media-body">
+							<h5 class="media-heading product-title mb-0">
+								<a href="#">증류주</a>
+							</h5>
+						</div>
+					</div>
+				</div>
+				<div class="form-group col-md-1">
+					<div class="media">
+						<a class="flip" href="#"> <img class="media-object" width="60"
+							src="http://placehold.it/70x80" alt="">
+						</a>
+						<div class="media-body">
+							<h5 class="media-heading product-title mb-0">
+								<a href="#">과실주</a>
+							</h5>
+						</div>
+					</div>
+				</div>
+				<div class="form-group col-md-1">
+					<div class="media">
+						<a class="flip" href="#"> <img class="media-object" width="60"
+							src="http://placehold.it/70x80" alt="">
+						</a>
+						<div class="media-body">
+							<h5 class="media-heading product-title mb-0">
+								<a href="#">와인</a>
+							</h5>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="container pt-30 pb-0">
+				<div class="col-md-5"></div>
+				<div class="form-group col-md-2">
+					<select class="form-control">
+						<option>선택</option>
+						<option>판매자 이름</option>
+						<option>펀딩명</option>
+					</select>
+				</div>
+				<div class="form-group col-md-2">
+					<select class="form-control">
+						<option>인기순</option>
+						<option>마감임박순</option>
+						<option>최신오픈순</option>
+					</select>
+				</div>
+				<div class="form-group col-md-3">
+					<form id="mailchimp-subscription-form" class="newsletter-form"
+						novalidate="true">
+						<div class="input-group">
+							<input type="email" value="" name="EMAIL"
+								class="form-control input-lg font-16" data-height="45px"
+								id="mce-EMAIL-footer" style="height: 45px;"> <span
+								class="input-group-btn">
+								<button data-height="45px"
+									class="btn btn-colored btn-theme-colored btn-xs m-0 font-14"
+									type="submit" style="height: 45px;">검색</button>
+							</span>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+
 	<!-- Section: Causes -->
 	<section>
-
-		<div class="container pt-70 pb-40">
-			<form id="mailchimp-subscription-form-footer" class="newsletter-form"
-				novalidate="true">
-				<div class="input-group">
-					<input type="email" value="" name="EMAIL"
-						class="form-control input-lg font-16" data-height="45px"
-						id="mce-EMAIL-footer" style="height: 45px;"> <span
-						class="input-group-btn">
-						<button data-height="45px"
-							class="btn btn-colored btn-theme-colored btn-xs m-0 font-14"
-							type="submit" style="height: 45px;">검색</button>
-					</span>
-				</div>
-			</form>
+		<div class="container pt-0 pb-40">
 			<div class="section-content">
 				<div class="row multi-row-clearfix">
-
 					<c:forEach begin="1" end="12">
 						<div class="col-sm-6 col-md-3">
 							<div class="causes bg-silver-light maxwidth500 mb-30">
 								<div class="thumb">
-									<a href="funding/detail"><img src="http://placehold.it/320x240" alt="" class="img-fullwidth"></a>
+									<a href="funding/detail"><img
+										src="http://placehold.it/320x240" alt="" class="img-fullwidth"></a>
 								</div>
 								<div
 									class="causes-details border-1px bg-white clearfix p-15 pb-30">
@@ -74,8 +172,8 @@
 									<p class="mt-15">Lorem ipsum dolor sit ametconse
 										adipisicing elit. Praesent quossrs it.Lorem ipsum dolor is
 										emmit</p>
-									<a href="page-donate.html"
-										class="btn btn-default btn-theme-colored mt-10 font-16 btn-sm">Donate
+									<a href="funding/detail"
+										class="btn btn-default btn-theme-colored mt-10 font-16 btn-sm">펀딩하기
 										<i class="flaticon-charity-make-a-donation font-16 ml-5"></i>
 									</a>
 								</div>

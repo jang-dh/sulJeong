@@ -1,4 +1,4 @@
-package team.hunter.security;
+package team.hunter.model.security;
 
 import java.io.IOException;
 
@@ -21,7 +21,7 @@ public class MemberAuthenticationFailureHandler implements AuthenticationFailure
 			AuthenticationException exception) throws IOException, ServletException {
 		request.setAttribute("errorMessage", exception.getMessage());
 		//request.getRequestDispatcher("/WEB-INF/views/member/loginForm.jsp").forward(request, response);
-		request.getRequestDispatcher("/member/loginForm").forward(request, response);
+		request.getRequestDispatcher("/login").forward(request, response);
 	}
 
 }
