@@ -8,7 +8,7 @@ public interface NoticeDAO {
 	/**
 	* 전체출력
 	 * */
-	List<Notice> selectByCode(int code);
+	Notice selectByCode(int code);
 	
 	/**
 	* 상세보기

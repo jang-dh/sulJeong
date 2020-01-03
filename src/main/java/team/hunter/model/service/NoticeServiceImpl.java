@@ -15,9 +15,10 @@ public class NoticeServiceImpl implements NoticeService {
 	private NoticeDAO dao;
 
 	@Override
-	Notice selectByCode(int code) {
-		// TODO Auto-generated method stub
-		return null;
+	public Notice selectByCode(int code) {
+		Notice dto = dao.selectByCode(code);
+		if(dto==null) throw new RuntimeException("공지사항 상세보기를 실패했습니다.");
+		return dto;
 	}
 
 	@Override
@@ -29,8 +30,9 @@ public class NoticeServiceImpl implements NoticeService {
 
 	@Override
 	public int insert(Notice dto) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = dao.insert(dto);
+		if(result==0) throw new RuntimeException("공지사항 등록 실패");
+		return result;
 	}
 
 	@Override
