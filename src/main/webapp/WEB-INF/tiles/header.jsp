@@ -106,13 +106,15 @@
                                 </li>
                                 <li>
                                     <a href="/notice">공지사항</a>
+
                                     <c:if test="${empty pageContext.request.userPrincipal}">
 	                                <li><a href="${pageContext.request.contextPath}/login">로그인</a>
 	                                </li>
-	                                <li><a href="/join">회원가입</a>
-	                                </li>
+	                                <li><a href="${pageContext.request.contextPath}/join">회원가입</a>
+                                    </li>
 	                                </c:if>
 	                                <c:if test="${not empty pageContext.request.userPrincipal}">
+
                                 <li>
                                     <a class="icon icon-dark icon-bordered icon-circled icon-border-effect effect-circled"
                                         href="#">
