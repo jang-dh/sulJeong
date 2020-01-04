@@ -19,31 +19,33 @@ import team.hunter.model.service.FundingService;
 public class FundingController {
 	@Autowired
 	private FundingService service;
-	
+
+	//목록 페이지 진입
 	@RequestMapping("/funding")
 	public String funding() {
 		
 		return "redirect:/funding/category";
 	}
 
-	@RequestMapping("/funding/detail")
-	public String fundingDetail() {
+	@RequestMapping("/funding/{code}")
+	public String fundingDetail(@PathVariable int code) {
 
 		return "funding/fundingDetail";
 	}
 
+	//전체 카테고리
 	@RequestMapping("/funding/category")
-	public String fundingList(Model model, String order, String where, String val) {
-		List<Funding> list = service.selectByCategory(0, order, where, val);
+	public String allCategory(Model model, String order, String where, String val) {
+		List<Funding> list = service.selectList(0, order, where, val);
 		model.addAttribute("list", list);
 
 		return "funding/fundingList";
 	}
-	
+
+	//카테고리별
 	@RequestMapping("/funding/category/{categoryCode}")
-	public ModelAndView categoryList(@PathVariable int categoryCode, String order, String where, String val) {
-		List<Funding> list = service.selectByCategory(categoryCode, order, where, val);
+	public ModelAndView eachCategory(@PathVariable int categoryCode, String order, String where, String val) {
+		List<Funding> list = service.selectList(categoryCode, order, where, val);
 		return new ModelAndView("funding/fundingList", "list", list);
 	}
-	
 }
