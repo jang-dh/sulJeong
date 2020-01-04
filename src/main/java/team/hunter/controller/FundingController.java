@@ -20,29 +20,29 @@ public class FundingController {
 	@Autowired
 	private FundingService service;
 
+	@RequestMapping("/funding")
+	public String funding() {
+		
+		return "redirect:/funding/category";
+	}
+
 	@RequestMapping("/funding/detail")
 	public String fundingDetail() {
 
 		return "funding/fundingDetail";
 	}
 
-	@RequestMapping("/funding")
-	public String fundingList(Model model) {
-		List<Funding> list = service.selectAll();
-		for (Funding f : list)
-			System.out.println(f.getEndDate());
+	@RequestMapping("/funding/category")
+	public String fundingList(Model model, String order, String where, String val) {
+		List<Funding> list = service.selectByCategory(0, order, where, val);
 		model.addAttribute("list", list);
 
 		return "funding/fundingList";
 	}
 
 	@RequestMapping("/funding/category/{categoryCode}")
-	public ModelAndView categoryList(@PathVariable int categoryCode, HttpServletRequest request) {
-		String order = request.getParameter("order");
-		String where = request.getParameter("where");
-		String val = request.getParameter("val");
+	public ModelAndView categoryList(@PathVariable int categoryCode, String order, String where, String val) {
 		List<Funding> list = service.selectByCategory(categoryCode, order, where, val);
 		return new ModelAndView("funding/fundingList", "list", list);
 	}
-	
 }

@@ -20,9 +20,9 @@ public class FundingServiceImpl implements FundingService {
 
 	@Override
 	public List<Funding> selectByCategory(int categoryCode, String order, String where, String val) {
+		if(where != null && where.equals("md_name"))
+			return fundingDAO.selectByMdName(categoryCode, order, where, val);
 		return fundingDAO.selectByCategory(categoryCode, order, where, val);
 	}
-	
-	
 
 }

@@ -39,13 +39,14 @@
 				<div class="col-sm-3"></div>
 				<div class="form-group col-md-1">
 					<div class="media">
-						<a class="flip" href="${pageContext.request.contextPath}/funding">
+
+						<a class="flip" href="${pageContext.request.contextPath}/funding/category/">
 							<img class="media-object" width="60"
 							src="http://placehold.it/70x80" alt="">
 						</a>
 						<div class="media-body">
 							<h5 class="media-heading product-title mb-0">
-								<a href="${pageContext.request.contextPath}/funding">전체보기</a>
+								<a href="${pageContext.request.contextPath}/funding/category/">전체보기</a>
 							</h5>
 						</div>
 					</div>
@@ -131,9 +132,10 @@
 				<form id="mailchimp-subscription-form" class="newsletter-form" novalidate="true" action="">
 					<div class="form-group col-md-2">
 						<select class="form-control" name="order">
+							<option>정렬</option>
 							<option value="likes">인기순</option>
-							<option value="last">마감임박순</option>
-							<option value="new">최신오픈순</option>
+							<option value="lastest">마감임박순</option>
+							<option value="newest">최신오픈순</option>
 						</select>
 					</div>
 					<div class="form-group col-md-2">
@@ -199,28 +201,14 @@
 									<div class="bg-light text-center"
 										data-countdown="${fundingList.endDate}"></div>
 									<script type="text/javascript">
-										$(document)
-												.ready(
-														function() {
-															$(
-																	'[data-countdown]')
-																	.each(
-																			function() {
-																				var $this = $(this), finalDate = $(
-																						this)
-																						.data(
-																								'countdown');
-																				$this
-																						.countdown(
-																								finalDate,
-																								function(
-																										event) {
-																									$this
-																											.html(event
-																													.strftime('%D 일 %H:%M:%S'));
-																								});
-																			});
-														});
+										$(document).ready(function() {
+															$('[data-countdown]').each(function() {
+																				var $this = $(this), finalDate = $(this).data('countdown');
+																				$this.countdown(finalDate,function(event) {
+																									$this.html(event.strftime('%D 일 %H:%M:%S'));
+																				});
+															});
+										});
 									</script>
 									<a href="funding/detail"
 										class="btn btn-default btn-theme-colored mt-10 font-16 btn-sm">펀딩하기
