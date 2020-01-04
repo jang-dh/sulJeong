@@ -27,8 +27,8 @@ public class FundingController {
 		return "redirect:/funding/category";
 	}
 
-	@RequestMapping("/funding/detail")
-	public String fundingDetail() {
+	@RequestMapping("/funding/{code}")
+	public String fundingDetail(@PathVariable int code) {
 
 		return "funding/fundingDetail";
 	}
