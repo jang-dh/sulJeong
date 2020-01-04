@@ -1,26 +1,22 @@
 package team.hunter.model.dao;
 
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import team.hunter.model.dto.Purchase;
-
+import team.hunter.model.dto.Likes;
 
 @Repository
-public class PurchaseDAOImpl implements PurchaseDAO {
+public class LikesDAOImpl implements LikesDAO {
 	
 	@Autowired
 	private SqlSession session;
 
 	@Override
-	public int insert(Purchase purchase) {
+	public int insert(Likes likes) {
+		int result = session.insert("likesMapper.insertLike", likes);
 		
-		System.out.println(2);
-		int result = session.insert("purchaseMapper.insertPerchase", purchase);
 		return result;
 	}
-	
 
 }

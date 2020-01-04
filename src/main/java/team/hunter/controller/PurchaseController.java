@@ -11,14 +11,14 @@ import team.hunter.model.service.PurchaseService;
 public class PurchaseController {
 	
 	@Autowired
-	private PurchaseService service;
+	private PurchaseService perchaseService;
 	
 	@RequestMapping("/funding/purchase")
 	public String insertPurchase(Purchase purchase) {
 		
 		System.out.println(3);
 
-		service.insertPerchase(purchase);
+		perchaseService.insertPerchase(purchase);
 		return "fundingDetail";
 	}
 	

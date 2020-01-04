@@ -5,9 +5,9 @@ import team.hunter.model.dto.Purchase;
 public interface PurchaseDAO {
 	
 	/*
-	 * 펀딩후원추가
+	 * 펀딩후원하기
 	 */
-	int insertPerchase(Purchase purchase);
+	int insert(Purchase purchase);
 
 
 }
