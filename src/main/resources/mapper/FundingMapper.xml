@@ -1,67 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="fundingMapper">
-	<sql id="selectSql">
-		select code, md_code, title, reward_name, reward_price, goal_price,
-		stack_price, image, category, open_date, end_date, funding_state
-		from
-		funding
-		<if test="_paramter != null">
-			<where>
-				<if test='category!=null and category!="0"'>
-					category = #{category}
-				</if>
-				<if test='where!=null and where.equals("title")'>
-					and upper(title) like upper('%' || #{val} || '%')
-				</if>
-			</where>
-			<if test='order!=null and order=="lastest"'>
-				order by end_date
-			</if>
-			<if test='order!=null and order=="newest"'>
-				order by open_date desc
-			</if>
-		</if>
-	</sql>
-
 	<select id="select" resultType="funding" parameterType="map">
-		<include refid="selectSql" />
-		<!-- select code, md_code, title, reward_name, reward_price, goal_price, 
-			stack_price, image, category, open_date, end_date, funding_state from funding 
-			<where> <if test='category!=null and category!="0"'> category = #{category} 
-			</if> <if test='where!=null and where.equals("title")'> and upper(title) 
-			like upper('%' || #{val} || '%') </if> </where> <if test='order!=null and 
-			order=="lastest"'> order by end_date </if> <if test='order!=null and order=="newest"'> 
-			order by open_date desc </if> -->
-	</select>
-
-	<select id="selectOrderLikes" resultType="funding"
-		parameterType="map">
-
-	</select>
-
-	<select id="selectByMdName" resultType="funding"
-		parameterType="map">
-		select f.code as code, md_code, title, reward_name,
-		reward_price,
-		goal_price,
-		stack_price, image, category, open_date,
-		end_date,
-		funding_state
-		from funding f, member m
+		select code, md_code, title, reward_name, reward_price, goal_price, stack_price, image, category, open_date, end_date, funding_state
+		from funding
 		<where>
-			<if test='category!=null and category!="0"'>
+			<if test="category!=0">
 				category = #{category}
 			</if>
-			<if test='where!=null and where.equals("md_name")'>
-				md_code = m.code and name like '%' || #{val} || '%'
+			<if test='where!=null and where.equals("title") and val!=null'>
+				and title like '%' || upper(#{val}) || '%'
 			</if>
 		</where>
-		<if test='order!=null and order=="lastest"'>
+		<if test='order!=null and order.equals("lastest")'>
 			order by end_date
 		</if>
-		<if test='order!=null and order=="newest"'>
+		<if test='order!=null and order.equals("newest")'>
 			order by open_date desc
 		</if>
+	</select>
+
+	<select id="selectLikesOrder" resultType="funding" parameterType="map">
+		select distinct f.code as code, md_code, title, reward_name, goal_price, stack_price, image, category, open_date, end_date, funding_state, count(*)over(PARTITION by funding_code) as cnt
+		from funding f, likes l
+		<where>
+			l.funding_code = f.code
+			<if test='where!=null and where.equals("title") and val!=null'>
+				and title like '%' || upper(#{val}) || '%'
+			</if>
+		</where>
+		order by cnt desc
+	</select>
+
+	<select id="selectByMdName" resultType="funding" parameterType="map">
+		select f.code as code, md_code, title, reward_name, reward_price, goal_price, stack_price, image, category, open_date, end_date, funding_state
+		from funding f, member m
+		<where>
+			md_code = m.code
+			<if test='where!=null and where.equals("md_name") and val!=null'>
+				and m.name like '%' || #{val} || '%'
+			</if>
+			<if test="category!=0">
+				and category = #{category}
+			</if>
+		</where>
+		<if test='order!=null and order.equals("lastest")'>
+			order by end_date
+		</if>
+		<if test='order!=null and order.equals("newest")'>
+			order by open_date desc
+		</if>
+	</select>
+	
+	<select id="selectByMdNameLikesOrder" resultType="funding" parameterType="map">
+		select distinct f.code as code, md_code, title, reward_name, goal_price, stack_price, image, category, open_date, end_date, funding_state, count(*)over(PARTITION by funding_code) as cnt
+		from funding f, likes l, member m
+		<where>
+			f.code = l.funding_code and f.md_code = m.code
+			<if test='where!=null and where.equals("md_name") and val!=null'>
+				and m.name like '%' || #{val} || '%'
+			</if>
+			<if test="category!=0">
+				and category = #{category}
+			</if>
+		</where>
+		order by cnt desc
 	</select>
 </mapper>

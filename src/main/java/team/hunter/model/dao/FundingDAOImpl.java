@@ -16,18 +16,18 @@ public class FundingDAOImpl implements FundingDAO {
 	private SqlSession session;
 
 	@Override
-	public List<Funding> selectAll() {
-		return session.selectList("fundingMapper.selectAll");
-	}
-
-	@Override
-	public List<Funding> selectByCategory(int categoryCode, String order, String where, String val) {
-		Map<String, String> map = new HashMap<String, String>();
-		System.out.println(where);
-		map.put("category", Integer.toString(categoryCode));
+	public List<Funding> select(int categoryCode, String order, String where, String val) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("category", categoryCode);
 		map.put("order", order);
 		map.put("where", where);
 		map.put("val", val);
+		
+		System.out.println("call dao.select");
+		System.out.println("cate : " + categoryCode);
+		System.out.println("order : " + order);
+		System.out.println("where : " + where);
+		System.out.println("val : " + val);
 		return session.selectList("fundingMapper.select", map);
 	}
 
@@ -38,7 +38,44 @@ public class FundingDAOImpl implements FundingDAO {
 		map.put("order", order);
 		map.put("where", where);
 		map.put("val", val);
+		
+		System.out.println("call dao.selectByMdName");
+		System.out.println("cate : " + categoryCode);
+		System.out.println("order : " + order);
+		System.out.println("where : " + where);
+		System.out.println("val : " + val);
 		return session.selectList("fundingMapper.selectByMdName", map);
 	}
 
+	@Override
+	public List<Funding> selectLikesOrder(int categoryCode, String order, String where, String val) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("category", Integer.toString(categoryCode));
+		map.put("order", order);
+		map.put("where", where);
+		map.put("val", val);
+		
+		System.out.println("call dao.selectLikesOrder");
+		System.out.println("cate : " + categoryCode);
+		System.out.println("order : " + order);
+		System.out.println("where : " + where);
+		System.out.println("val : " + val);
+		return session.selectList("fundingMapper.selectLikesOrder", map);
+	}
+
+	@Override
+	public List<Funding> selectByMdNameLikesOrder(int categoryCode, String order, String where, String val) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("category", Integer.toString(categoryCode));
+		map.put("order", order);
+		map.put("where", where);
+		map.put("val", val);
+		
+		System.out.println("call dao.selectByMdNameLikesOrder");
+		System.out.println("cate : " + categoryCode);
+		System.out.println("order : " + order);
+		System.out.println("where : " + where);
+		System.out.println("val : " + val);
+		return session.selectList("fundingMapper.selectByMdNameLikesOrder", map);
+	}
 }

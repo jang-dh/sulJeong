@@ -415,7 +415,6 @@
 	<section>
 		<div class="container pt-70 pb-40">
 			<div class="section-content">
-				<div class="row multi-row-clearfix">
 					<h2 class="text-uppercase line-bottom-center mt-0">
 						<span class="text-theme-colored">인기</span> 펀딩
 					</h2>
