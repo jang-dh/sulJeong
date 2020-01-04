@@ -19,7 +19,7 @@ import team.hunter.model.service.FundingService;
 public class FundingController {
 	@Autowired
 	private FundingService service;
-	
+
 	@RequestMapping("/funding")
 	public String funding() {
 		
@@ -39,11 +39,10 @@ public class FundingController {
 
 		return "funding/fundingList";
 	}
-	
+
 	@RequestMapping("/funding/category/{categoryCode}")
 	public ModelAndView categoryList(@PathVariable int categoryCode, String order, String where, String val) {
 		List<Funding> list = service.selectByCategory(categoryCode, order, where, val);
 		return new ModelAndView("funding/fundingList", "list", list);
 	}
-	
 }
