@@ -39,10 +39,8 @@
 				<div class="col-sm-3"></div>
 				<div class="form-group col-md-1">
 					<div class="media">
-
 						<a class="flip" href="${pageContext.request.contextPath}/funding/category/">
-							<img class="media-object" width="60"
-							src="http://placehold.it/70x80" alt="">
+							<img class="media-object" width="60" src="http://placehold.it/70x80" alt="">
 						</a>
 						<div class="media-body">
 							<h5 class="media-heading product-title mb-0">

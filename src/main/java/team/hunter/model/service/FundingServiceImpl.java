@@ -28,4 +28,23 @@ public class FundingServiceImpl implements FundingService {
 		return fundingDAO.select(categoryCode, order, where, val);
 	}
 
+	@Override
+	public Funding selectByCode(int code) {
+		return fundingDAO.selectByCode(code);
+	}
+
+	@Override
+	public List<Funding> selectLikesRankFour() {
+		return fundingDAO.selectLikesRankFour();
+	}
+
+	@Override
+	public List<Funding> selectLastestFour() {
+		return fundingDAO.selectLastestFour();
+	}
+
+	@Override
+	public List<Funding> selectNewestFour() {
+		return fundingDAO.selectNewestFour();
+	}
 }

@@ -27,9 +27,10 @@ public class FundingController {
 		return "redirect:/funding/category";
 	}
 
+	//펀딩 상세페이지 이동
 	@RequestMapping("/funding/{code}")
-	public String fundingDetail(@PathVariable int code) {
-
+	public String fundingDetail(@PathVariable int code, Model model) {
+		model.addAttribute("funding", service.selectByCode(code));
 		return "funding/fundingDetail";
 	}
 

@@ -78,4 +78,25 @@ public class FundingDAOImpl implements FundingDAO {
 		System.out.println("val : " + val);
 		return session.selectList("fundingMapper.selectByMdNameLikesOrder", map);
 	}
+
+	@Override
+	public Funding selectByCode(int code) {
+		return session.selectOne("fundingMapper.selectByCode", code);
+	}
+
+	@Override
+	public List<Funding> selectLikesRankFour() {
+		return session.selectList("fundingMapper.selectLikesRankFour");
+		
+	}
+
+	@Override
+	public List<Funding> selectLastestFour() {
+		return session.selectList("fundingMapper.selectLastestFour");
+	}
+
+	@Override
+	public List<Funding> selectNewestFour() {
+		return session.selectList("fundingMapper.selectNewestFour");
+	}
 }
