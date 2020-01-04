@@ -525,7 +525,7 @@
 					</div>
 					<div class="row">
 					<h2 class="text-uppercase line-bottom-center mt-0">
-						<span class="text-theme-colored">최신오픈</span> 펀딩
+						<span class="text-theme-colored">오픈임박</span> 펀딩
 					</h2>
 					<c:forEach items="${openFour}" var="list">
 						<div class="col-sm-6 col-md-3">
@@ -560,7 +560,7 @@
 									<div class="pull-left font-weight-400 text-black-333 pr-0">
 										<strong>펀딩종료 </strong>
 									</div>
-									<div class="bg-light text-center"
+									<%-- <div class="bg-light text-center"
 										data-countdown="${list.endDate}"></div>
 									<script type="text/javascript">
 										$(document).ready(function() {
@@ -571,7 +571,7 @@
 												});
 											});
 										});
-									</script>
+									</script> --%>
 									<a href="funding/${list.code}"
 										class="btn btn-default btn-theme-colored mt-10 font-16 btn-sm">펀딩하기
 										<i class="flaticon-charity-make-a-donation font-16 ml-5"></i>
