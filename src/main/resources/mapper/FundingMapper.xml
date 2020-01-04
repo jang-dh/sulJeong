@@ -6,19 +6,21 @@
 		stack_price, image, category, open_date, end_date, funding_state
 		from
 		funding
-		<where>
-			<if test='category!=null and category!="0"'>
-				category = #{category}
+		<if test="_paramter != null">
+			<where>
+				<if test='category!=null and category!="0"'>
+					category = #{category}
+				</if>
+				<if test='where!=null and where.equals("title")'>
+					and upper(title) like upper('%' || #{val} || '%')
+				</if>
+			</where>
+			<if test='order!=null and order=="lastest"'>
+				order by end_date
 			</if>
-			<if test='where!=null and where.equals("title")'>
-				and upper(title) like upper('%' || #{val} || '%')
+			<if test='order!=null and order=="newest"'>
+				order by open_date desc
 			</if>
-		</where>
-		<if test='order!=null and order=="lastest"'>
-			order by end_date
-		</if>
-		<if test='order!=null and order=="newest"'>
-			order by open_date desc
 		</if>
 	</sql>
 
@@ -38,11 +40,14 @@
 
 	</select>
 
-	<select id="selectByMdName" resultType="funding" parameterType="map">
+	<select id="selectByMdName" resultType="funding"
+		parameterType="map">
 		select f.code as code, md_code, title, reward_name,
-		reward_price, goal_price,
+		reward_price,
+		goal_price,
 		stack_price, image, category, open_date,
-		end_date, funding_state
+		end_date,
+		funding_state
 		from funding f, member m
 		<where>
 			<if test='category!=null and category!="0"'>
