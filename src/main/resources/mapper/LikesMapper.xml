@@ -3,7 +3,7 @@
 <mapper namespace="likesMapper">
 
 	<insert id="insertLike" parameterType="likes">
-		insert into likes(code, member_code, funding_code) values(#{code},#{memberCode},#{fundingCode});
+		insert into likes(code, member_code, funding_code) values(#{code},#{memberCode},#{fundingCode})
 	</insert>
 	
 	<!-- <select id="select" resultType="likes">

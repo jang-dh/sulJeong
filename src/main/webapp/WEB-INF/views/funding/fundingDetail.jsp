@@ -3,6 +3,21 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
+<script>
+$(document).reday(function () {
+	$("#likeButton").click(function () {
+		$.ajax({
+			type:'POST',
+			url:"serialize",
+			data: $("#frm").serialize(),
+			success: function (data) {
+				alert ("좋아요가 등록되었습니다.");
+			}
+		})	
+	})
+})
+</script>
+
 
   <!-- Start main-content -->
   <div class="main-content">
@@ -74,7 +89,7 @@
          	      </div>
                   <div class="pull-right font-weight-400 text-black-333 pr-0"><strong>후원인원: </strong><span class="text-theme-colored font-weight-700"> 00명</span></div><br>
                   <div class="cart-form-wrapper mt-30">
-                    <form enctype="multipart/form-data" method="post" class="cart" action="${pageContext.request.contextPath}/funding/purchase">
+                    <form id="frm" enctype="multipart/form-data" method="post" class="cart" action="${pageContext.request.contextPath}/funding/purchase">
                       <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                       <!-- <input type="hidden" value="productID" name="add-to-cart"> -->
                       <table class="table variations no-border">
@@ -102,7 +117,7 @@
                                 <input type="button" class="plus" value="+">
                               </div>
                               <div class="pull-right font-weight-400 text-black-333 pr-0">
-                              <button class="btn btn-default btn-theme-colored mt-10 font-16 btn-sm" type="submit">펀딩하기<i class="flaticon-charity-make-a-donation font-16 ml-5"></i></button>
+                              <input type="button" id="likeButton" class="btn btn-default btn-theme-colored mt-10 font-16 btn-sm" class="flaticon-charity-make-a-donation font-16 ml-5" value="펀딩하기">
                               </div>
                             </td>
                           </tr>

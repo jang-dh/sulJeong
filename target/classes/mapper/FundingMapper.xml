@@ -29,10 +29,7 @@
 			<if test='where!=null and where.equals("title") and val!=null'>
 				and title like '%' || upper(#{val}) || '%'
 			</if>
-<<<<<<< HEAD
-=======
 			and funding_state = 'open'
->>>>>>> 25000467db3e6490fb3b996ff21fb6381aaa24bc
 		</where>
 		order by cnt desc
 	</select>
@@ -48,10 +45,7 @@
 			<if test="category!=0">
 				and category = #{category}
 			</if>
-<<<<<<< HEAD
-=======
 			and funding_state = 'open'
->>>>>>> 25000467db3e6490fb3b996ff21fb6381aaa24bc
 		</where>
 		<if test='order!=null and order.equals("lastest")'>
 			order by end_date
@@ -62,11 +56,7 @@
 	</select>
 	
 	<select id="selectByMdNameLikesOrder" resultType="funding" parameterType="map">
-<<<<<<< HEAD
-		select distinct f.code as code, md_code, title, reward_name, goal_price, stack_price, image, category, open_date, end_date, funding_state, count(*)over(PARTITION by funding_code) as cnt
-=======
 		select distinct f.code as code, md_code, title, reward_name, reward_price, goal_price, stack_price, image, category, open_date, end_date, funding_state, count(*)over(PARTITION by funding_code) as cnt
->>>>>>> 25000467db3e6490fb3b996ff21fb6381aaa24bc
 		from funding f, likes l, member m
 		<where>
 			f.code = l.funding_code and f.md_code = m.code
@@ -76,10 +66,6 @@
 			<if test="category!=0">
 				and category = #{category}
 			</if>
-<<<<<<< HEAD
-		</where>
-		order by cnt desc
-=======
 			and funding_state = 'open'
 		</where>
 		order by cnt desc
@@ -123,6 +109,5 @@
         			order by open_date)
 			where rownum < 5
 		]]>
->>>>>>> 25000467db3e6490fb3b996ff21fb6381aaa24bc
 	</select>
 </mapper>
