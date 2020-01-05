@@ -1,7 +1,9 @@
 package team.hunter.model.service;
 
-import org.springframework.stereotype.Service;
+import team.hunter.model.dto.FundingRequest;
 
 public interface FundingQuestionService {
-
+	
+	int questionInsert(FundingRequest fundingRequest); 
+	
 }

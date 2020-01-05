@@ -28,6 +28,28 @@
 			});
 		});
 	});
+	
+	$("#funding_question").validate({
+        submitHandler: function(form) {
+          var form_btn = $(form).find('button[type="submit"]');
+          var form_result_div = '#form-result';
+          $(form_result_div).remove();
+          form_btn.before('<div id="form-result" class="alert alert-success" role="alert" style="display: none;"></div>');
+          var form_btn_old_msg = form_btn.html();
+          form_btn.html(form_btn.prop('disabled', true).data("loading-text"));
+          $(form).ajaxSubmit({
+            dataType:  'json',
+            success: function(data) {
+              if( data.status == 'true' ) {
+                $(form).find('.form-control').val('');
+              }
+              form_btn.prop('disabled', false).html(form_btn_old_msg);
+              $(form_result_div).html(data.message).fadeIn('slow');
+              setTimeout(function(){ $(form_result_div).fadeOut('slow') }, 6000);
+            }
+          });
+        }
+      });
 </script>
 
 <!-- Start main-content -->
@@ -177,13 +199,14 @@
 							</div>
 						</div>
 					</div>
+					<form id="product_form" name="product_form" method="post" enctype="multipart/form-data">
 					<div class="col-md-12">
 						<div class="horizontal-tab product-tab">
 							<ul class="nav nav-tabs">
-								<li class="active"><a href="#tab1" data-toggle="tab">Description</a></li>
-								<li><a href="#tab2" data-toggle="tab">Additional
-										Information</a></li>
-								<li><a href="#tab3" data-toggle="tab">Reviews</a></li>
+								<li class="active"><a href="#tab1" data-toggle="tab">상품상세</a></li>
+								<li><a href="#tab2" data-toggle="tab">상품리뷰</a></li>
+								<li><a href="#tab3" data-toggle="tab">상품문의</a></li>
+								<li><a href="#tab4" data-toggle="tab">배송/교환/반품 안내</a></li>
 							</ul>
 							<div class="tab-content">
 								<div class="tab-pane fade in active" id="tab1">
@@ -203,8 +226,6 @@
 										ratione tempora consectetur quos minus voluptates nisi hic
 										alias libero explicabo reiciendis sint ut quo nulla ipsa
 										aliquid neque molestias et qui sunt. Odit, molestiae.</p>
-								</div>
-								<div class="tab-pane fade" id="tab2">
 									<table class="table table-striped">
 										<tbody>
 											<tr>
@@ -230,7 +251,7 @@
 										</tbody>
 									</table>
 								</div>
-								<div class="tab-pane fade" id="tab3">
+								<div class="tab-pane fade" id="tab2">
 									<div class="reviews">
 										<ol class="commentlist">
 											<li class="comment">
@@ -282,8 +303,26 @@
 										</ol>
 									</div>
 								</div>
+								<div class="tab-pane fade" id="tab3">
+									<div class="col-sm-6">
+										<div class="funding_question">
+											<label>제목 <small>*</small></label>
+											<input name="form_content" type="text" placeholder="제목을 입력해 주세요." class="form-control">
+											<label>문의내용 <small>*</small></label>
+					                		<textarea id="form_message" name="form_message" class="form-control required" rows="5" placeholder="내용을 입력해 주세요.	"></textarea>
+											<div class="pull-left font-weight-400 text-black-333 pr-0 mt-15 mb-15">
+											<a href="#">문의하기</a>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="tab-pane fade" id="#tab4">
+									
+								</div>
 							</div>
 						</div>
+					</div>
+					</form>
 					</div>
 				</div>
 				<div class="col-md-12">
