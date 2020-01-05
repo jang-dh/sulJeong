@@ -9,6 +9,11 @@
 		<include refid="selectMember"></include>
 		where id=#{_parameter}
 	</select>
+	
+	<select id="selectByPhone" parameterType="member" resultType="member">
+		<include refid="selectMember"></include>
+		where phone=#{phone} and name=#{name}
+	</select>
 
 <insert id="memberJoin" parameterType="member">
 INSERT INTO MEMBER (CODE, ID, PWD, NAME, PHONE, EMAIL, EMAIL_ACCEPT,ADDR) 
