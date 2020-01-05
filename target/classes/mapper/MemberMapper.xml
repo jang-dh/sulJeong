@@ -11,7 +11,8 @@
 	</select>
 
 <insert id="memberJoin" parameterType="member">
-INSERT INTO MEMBER (CODE, ID, PWD, NAME, PHONE, EMAIL, EMAIL_ACCEPT) VALUES (SEQ_NO,#{member.id}, #{member.pwd}, #{member.name}, #{member.phone}, #{member.email}, #{member.emailAccept})
+INSERT INTO MEMBER (CODE, ID, PWD, NAME, PHONE, EMAIL, EMAIL_ACCEPT,ADDR) 
+VALUES (SEQ_NO.nextval,#{id}, #{pwd}, #{name}, #{phone}, #{email}, #{emailAccept},#{addr})
 </insert>
 
 </mapper>	
