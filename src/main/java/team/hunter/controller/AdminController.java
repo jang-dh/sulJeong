@@ -99,9 +99,11 @@ public class AdminController {
 	/**
 	 * �������� 
 	 * �����ϱ�*/
-	@PostMapping("/updateForm")
-	public ModelAndView updateForm() {
-		return null;
+	@RequestMapping("/updateForm/{code}")
+	public ModelAndView updateForm(@PathVariable int code) {
+		Notice notice = noticeService.selectByCode(code);
+		ModelAndView m  = new ModelAndView("form/noticeUpdateForm", "detail", notice);
+		return m;
 	}
 	
 	/**
@@ -149,7 +151,6 @@ public class AdminController {
 			String path = session.getServletContext().getRealPath("/WEB-INF/save");
 			
 			
-			
 			if(file.getSize()>0) {
 				//÷�ε� �����̸� ������ ����
 				String fileName = file.getOriginalFilename();
@@ -166,15 +167,20 @@ public class AdminController {
 		return "redirect:notice";
 	}
 	
-	@RequestMapping("/down")
-	public ModelAndView down(String fname, HttpSession session) {
-		
+	@RequestMapping("/down/{code}")
+	public ModelAndView down(@PathVariable int code, HttpSession session) {
+		Notice notice = noticeService.selectByCode(code);
 		ModelAndView mv = new ModelAndView();
 		String path = session.getServletContext().getRealPath("/WEB-INF/save");
-		mv.addObject("fname", new File(path+"/"+fname));
+		mv.addObject("fname", new File(path+"/"+notice.getFilename()));
 		mv.setViewName("downLoadView"); //bean�� ���̵� ã�� �� �ֵ��� �ؾ��Ѵ�...
+		//AJAX로 구현해야할거 같음
 		return mv;
 	}
 	
+//	@RequestMapping("/update")
+//	public String update(Notice notice, MultipartFile file, HttpSession session) {
+//		
+//	}
 
 }
