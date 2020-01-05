@@ -16,11 +16,11 @@ public class LikesController {
 	private LikesService likesService;
 	
 	@ResponseBody
-	@RequestMapping(value = "/serialize", method = RequestMethod.POST)
-	public String insertLikes(Likes likes) {
+	@RequestMapping(value = "/funding/serialize", method = RequestMethod.POST)
+	public int insertLikes(String fundingCode) {
+		Likes likes = new Likes(3, Integer.parseInt(fundingCode));
 		System.out.println("likes");
-		likesService.insert(likes);
-		return "funding/fundingDetail";
+		return likesService.insert(likes);
 	}
 
 }
