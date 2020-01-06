@@ -15,5 +15,10 @@ public class PersonalQuestionServiceImpl implements PersonalQuestionService {
 	public List<PersonalQuestion> personalQuestionList(int memberCode) {
 		return personalqDAO.personalQuestionList(memberCode);
 	}
+	@Override
+	public int personalQuestionInsert(PersonalQuestion personalQuestion) {
+		personalqDAO.personalQuestionInsert(personalQuestion);
+		return 0;
+	}
 
 }

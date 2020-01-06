@@ -18,4 +18,10 @@ public class PersonalQuestionDAOImpl implements PersonalQuestionDAO {
 		return list;
 	}
 
+	@Override
+	public int personalQuestionInsert(PersonalQuestion personalQuestion) {
+		int result = session.insert("personalQuestionMapper.personalQuestionInsert", personalQuestion);
+		return result;
+	}
+
 }

@@ -5,19 +5,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html dir="ltr" lang="en">
 <script src="${pageContext.request.contextPath}/resources/js/jquery-2.2.4.min.js"></script>
-<script type="text/javascript">
-	$(function(){
-		$("#logout").click(function(){
-			$("#logoutSubmit").submit();
-		});
-		
-		$("a").click(function(){
-			var href = $(this).attr('href');
-			var token = href+"?${_csrf.parameterName}=${_csrf.token}";
-			$(this).attr('href',token);
-		});
-	});
-</script>
+
 
 <head>
 <sec:authentication var="principal" property="principal" />
@@ -198,7 +186,4 @@
                     </div>
                 </div>
             </div>
-            <form id="AutoritySending" method="post">
-            	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" >
-            </form>
         </header>
