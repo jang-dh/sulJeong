@@ -28,28 +28,6 @@
 			});
 		});
 	});
-	
-	$("#funding_question").validate({
-        submitHandler: function(form) {
-          var form_btn = $(form).find('button[type="submit"]');
-          var form_result_div = '#form-result';
-          $(form_result_div).remove();
-          form_btn.before('<div id="form-result" class="alert alert-success" role="alert" style="display: none;"></div>');
-          var form_btn_old_msg = form_btn.html();
-          form_btn.html(form_btn.prop('disabled', true).data("loading-text"));
-          $(form).ajaxSubmit({
-            dataType:  'json',
-            success: function(data) {
-              if( data.status == 'true' ) {
-                $(form).find('.form-control').val('');
-              }
-              form_btn.prop('disabled', false).html(form_btn_old_msg);
-              $(form_result_div).html(data.message).fadeIn('slow');
-              setTimeout(function(){ $(form_result_div).fadeOut('slow') }, 6000);
-            }
-          });
-        }
-      });
 </script>
 
 <!-- Start main-content -->
@@ -212,8 +190,9 @@
 						</div>
 					</div>
 				</div>
-				<form id="product_form" name="product_form" method="post"
-					enctype="multipart/form-data">
+				<form id="product_form" name="product_form" action="${pageContext.request.contextPath}/funding/fundingQuestionInsert"
+				method="post">
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 					<div class="col-md-12">
 						<div class="horizontal-tab product-tab">
 							<ul class="nav nav-tabs">
@@ -267,15 +246,23 @@
 									<div class="tab-pane fade" id="tab2">
 									<!-- <div class="col-sm-6"> -->
 									<div class="funding_question">
-										<label>제목 <small>*</small></label> <input name="form_content"
-											type="text" placeholder="제목을 입력해 주세요." class="form-control">
+										<label>제목 <small>*</small></label> 
+										<input name="form_content" type="text" placeholder="제목을 입력해 주세요." class="form-control">
 										<label>문의내용 <small>*</small></label>
 										<textarea id="form_message" name="form_message"
 											class="form-control required" rows="5"
 											placeholder="내용을 입력해 주세요.	"></textarea>
 										<!-- <div
 											class="pull-left font-weight-400 text-black-333 pr-0 mt-15 mb-15"> -->
-											<a href="#">문의하기</a>
+										<button type="button" class="btn btn-dark btn-flat"
+											data-toggle="modal" data-target=".bs-example-modal-sm">문의하기</button>
+
+										<div class="modal fade bs-example-modal-sm" tabindex="-1"
+											role="dialog" aria-labelledby="mySmallModalLabel">
+											<div class="modal-dialog modal-sm">
+												<div class="modal-content">문의가 등록 되었습니다.</div>
+											</div>
+										</div>
 										<!-- </div> -->
 									</div>
 									<!-- </div> -->
