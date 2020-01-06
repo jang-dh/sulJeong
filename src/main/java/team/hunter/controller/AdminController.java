@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +25,7 @@ public class AdminController {
 	private NoticeService noticeService;
 	
 	/**
-	 * ¼­ºñ½º¼Ò°³ ÆäÀÌÁö ÁøÀÔ
+	 * ï¿½ï¿½ï¿½ñ½º¼Ò°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	 * */
 	@RequestMapping("/introduce")
 	public String introduce() {
@@ -34,11 +33,16 @@ public class AdminController {
 	}
 	
 	/**
-	 * °ü¸®ÀÚÆäÀÌÁö
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * */
 	@RequestMapping("/admin/siteManagement")
 	public void siteManagement() {}
 	
+	@RequestMapping("/admin/{request}")
+	public String iframeTest(@PathVariable String request) {
+		
+		return "admin/iframe/"+request;
+	}
 	
 	
 	
@@ -71,7 +75,7 @@ public class AdminController {
 	
 	
 	/**
-	 * °øÁö»çÇ×À¸·Î µé¾î°¡´Â ÄÁÆ®·Ñ·¯ + °øÁö»çÇ× ÀüÃ¼ Ãâ·Â
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½î°¡ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½Ñ·ï¿½ + ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½
 	 * */
 	@RequestMapping("/notice")
 	public String notice(Model m) {
@@ -81,7 +85,7 @@ public class AdminController {
 	}
 
 	/**
-	 * °øÁö»çÇ× »ó¼¼º¸±â
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ó¼¼ºï¿½ï¿½ï¿½
 	 * */
 	@RequestMapping("/noticeDetail/{code}")
 	public ModelAndView detail(@PathVariable int code) {
@@ -93,15 +97,17 @@ public class AdminController {
 	}
 	
 	/**
-	 * °øÁö»çÇ× 
-	 * ¼öÁ¤ÇÏ±â*/
-	@PostMapping("/updateForm")
-	public ModelAndView updateForm() {
-		return null;
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½*/
+	@RequestMapping("/updateForm/{code}")
+	public ModelAndView updateForm(@PathVariable int code) {
+		Notice notice = noticeService.selectByCode(code);
+		ModelAndView m  = new ModelAndView("form/noticeUpdateForm", "detail", notice);
+		return m;
 	}
 	
 	/**
-	 * °øÁö»çÇ× µî·ÏÆß
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * */
 	@RequestMapping("/insertFrom")
 	public String insertFrom() {
@@ -111,7 +117,7 @@ public class AdminController {
 	}
 	
 	/**
-	 * °øÁö»çÇ× µî·Ï
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	 * */
 //	@RequestMapping("/insert")
 //	public ModelAndView insert(String subject, String content, MultipartFile file, HttpSession session) {
@@ -120,10 +126,10 @@ public class AdminController {
 //		try{
 //			notice.setSubject(subject);
 //			notice.setContent(content);
-//			//½ÇÁ¦ ÀúÀå°æ·Î °¡Áö°í ¿À±â
+//			//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 //			String path = session.getServletContext().getRealPath("/WEB-INF/save");
 //			
-//			//Ã·ºÎµÈ ÆÄÀÏÀÌ¸§ °¡Áö°í ¿À±â
+//			//Ã·ï¿½Îµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 //			String fileName = file.getOriginalFilename();
 //			notice.setFilename(fileName);
 //			file.transferTo(new File(path+"/"+fileName));
@@ -141,13 +147,12 @@ public class AdminController {
 
 	try{
 
-			//½ÇÁ¦ ÀúÀå°æ·Î °¡Áö°í ¿À±â
+			//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 			String path = session.getServletContext().getRealPath("/WEB-INF/save");
 			
 			
-			
 			if(file.getSize()>0) {
-				//Ã·ºÎµÈ ÆÄÀÏÀÌ¸§ °¡Áö°í ¿À±â
+				//Ã·ï¿½Îµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 				String fileName = file.getOriginalFilename();
 				notice.setFilename(fileName);
 				file.transferTo(new File(path+"/"+fileName));
@@ -162,15 +167,20 @@ public class AdminController {
 		return "redirect:notice";
 	}
 	
-	@RequestMapping("/down")
-	public ModelAndView down(String fname, HttpSession session) {
-		
+	@RequestMapping("/down/{code}")
+	public ModelAndView down(@PathVariable int code, HttpSession session) {
+		Notice notice = noticeService.selectByCode(code);
 		ModelAndView mv = new ModelAndView();
 		String path = session.getServletContext().getRealPath("/WEB-INF/save");
-		mv.addObject("fname", new File(path+"/"+fname));
-		mv.setViewName("downLoadView"); //beanÀÇ ¾ÆÀÌµğ¸¦ Ã£À» ¼ö ÀÖµµ·Ï ÇØ¾ßÇÑ´Ù...
+		mv.addObject("fname", new File(path+"/"+notice.getFilename()));
+		mv.setViewName("downLoadView"); //beanï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ Ã£ï¿½ï¿½ ï¿½ï¿½ ï¿½Öµï¿½ï¿½ï¿½ ï¿½Ø¾ï¿½ï¿½Ñ´ï¿½...
+		//AJAXë¡œ êµ¬í˜„í•´ì•¼í• ê±° ê°™ìŒ
 		return mv;
 	}
 	
+//	@RequestMapping("/update")
+//	public String update(Notice notice, MultipartFile file, HttpSession session) {
+//		
+//	}
 
 }

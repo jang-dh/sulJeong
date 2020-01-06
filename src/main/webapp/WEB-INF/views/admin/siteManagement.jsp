@@ -25,32 +25,32 @@
               <div class="tab-pane fade in active" id="tab16">
                 <div class="row">
                   <div class="col-md-12">
-                  <img class="pull-left flip pr-20" width="300" src="http://placehold.it/155x90" alt="">
-                    <p>펀딩오픈신청입니다.</p>
+                  
+                    <iframe src="${pageContext.request.contextPath}/admin/fundingRequest" height="400px"></iframe>
                   </div>
                 </div>
               </div>
               <div class="tab-pane fade" id="tab17">
                 <div class="row">
                   <div class="col-md-12">
-                    <img class="pull-left flip pr-20" width="300" src="http://placehold.it/155x90" alt="">
-                    <p>펀딩 등록입니다.</p>
+   
+                    <iframe src="${pageContext.request.contextPath}/admin/fundingInsert" height="400px"></iframe>
                   </div>
                 </div>
               </div>
               <div class="tab-pane fade" id="tab18">
                 <div class="row">
                   <div class="col-md-12">
-                    <img class="pull-left flip pr-20" width="300" src="http://placehold.it/155x90" alt="">
-                    <p>1:1 문의 내역입니다.</p>
+                   
+                    <iframe src="${pageContext.request.contextPath}/admin/personalQuestion" height="400px"></iframe>
                   </div>
                 </div>
               </div>
               <div class="tab-pane fade" id="tab19">
                 <div class="row">
                   <div class="col-md-12">
-                    <img class="pull-left flip pr-20" width="300" src="http://placehold.it/155x90" alt="">
-                    <p>사이트 통계입니다</p>
+                    
+                    <iframe src="${pageContext.request.contextPath}/admin/statistics" height="400px"></iframe>
                   </div>
                 </div>
               </div>
