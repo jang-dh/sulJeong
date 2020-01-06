@@ -6,6 +6,7 @@
 	<select id="selectAll" resultType="notice">
 		select code, subject, content, regdate, filename
 		from notice
+		order by code desc
 	</select>
 	
 	<select id="selectByCode" parameterType="int" resultType="notice">
