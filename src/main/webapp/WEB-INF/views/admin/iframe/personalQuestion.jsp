@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -64,6 +65,48 @@
 <![endif]-->
 </head>
 <body>
-<h1>personal question page 123</h1>
+<div class="main-content">
+    <section>
+      <div class="container">
+
+
+        
+        <div class="row">
+          <div class="col-md-12 mt-40">
+            <hr>
+            <h4 class="title">1:1 문의내역</h4>
+
+					<div data-example-id="hoverable-table" class="bs-example">
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th scope="row">글번호</th>
+									<th>제목</th>
+									<th>등록일</th>
+									<th>상태</th>
+								</tr>
+							</thead>
+							<tbody>
+							<c:forEach items="${list}" var="question" varStatus="status">
+								<tr>
+									<th scope="row">${status.count}</th>
+									<td><a href="${pageContext.request.contextPath}/personalQuestionDetail/${question.code}">${question.subject}</a></td>
+									<td>${question.regdate}</td>
+									<td>${question.state}</td>
+								</tr>
+							</c:forEach>
+							
+							</tbody>
+						</table>
+					</div>
+					
+					
+          </div>
+        </div>
+
+      </div>
+    </section> 
+  </div>
+  <!-- end main-content -->
 </body>
 </html>

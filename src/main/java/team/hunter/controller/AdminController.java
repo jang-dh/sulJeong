@@ -16,13 +16,17 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import team.hunter.model.dto.Notice;
+import team.hunter.model.dto.PersonalQuestion;
 import team.hunter.model.service.NoticeService;
+import team.hunter.model.service.PersonalAnswerService;
 
 @Controller
 public class AdminController {
 	
 	@Autowired
 	private NoticeService noticeService;
+	@Autowired
+	private PersonalAnswerService personalAnswerService;
 	
 	/**
 	 * ���񽺼Ұ� ������ ����
@@ -38,15 +42,45 @@ public class AdminController {
 	@RequestMapping("/admin/siteManagement")
 	public void siteManagement() {}
 	
-	@RequestMapping("/admin/{request}")
-	public String iframeTest(@PathVariable String request) {
+	@RequestMapping("/admin/fundingRequest")
+	public String fundingRequest() {
 		
-		return "admin/iframe/"+request;
+		return "admin/iframe/fundingRequest";
 	}
 	
+	@RequestMapping("/admin/fundingInsert")
+	public String fundingInsert() {
+		
+		return "admin/iframe/fundingInsert";
+	}
+	//1:1문의 조회
+	@RequestMapping("/admin/personalQuestion")
+	public ModelAndView personalQuestion() {
+		List<PersonalQuestion> list = personalAnswerService.selectAll();
+		
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("list", list);
+		mv.setViewName("admin/iframe/personalQuestion");
+		
+		
+		return mv;
+	}
 	
+	@RequestMapping("/personalQuestionDetail/{code}")
+	public String personalQuestionDetail(@PathVariable Long code) {
+		
+		return "mypage/personalQuestionDetail";
+	}
 	
+	@RequestMapping("/admin/statistics")
+	public String statistics() {
+		
+		return "admin/iframe/statistics";
+	}
 	
+
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	
 	
 	
