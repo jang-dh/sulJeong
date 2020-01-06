@@ -4,10 +4,62 @@
 
 <script>
 	$(function() {
+		let isEnd = false;
+		let listCount = $(".thumb").length;
+		var curUrl = location.href;
+		
+		//정렬 조건 변경 시
 		$("[name=order]").on("change", function() {
 			$("#mailchimp-subscription-form").submit();
 		});
+		//
+		
+		//스크롤 시
+		$(window).scroll(function() {
+			let $window = $(this);
+            let scrollTop = $window.scrollTop();
+            let windowHeight = $window.height();
+            let documentHeight = $(document).height();
+            
+            if(scrollTop + windowHeight + 30 > documentHeight){
+            	console.log(listCount);
+            	console.log(curUrl);
+            	var curParams = curUrl.split('category/')[1];
+        		
+        		//if(curParams == '')
+        			//console.log(1);
+        		//else
+	            	//console.log(curParams.);
+            	//fetchList();
+            }
+		});
+		//fetchList();
 	});
+	//jquery End
+	
+	//리스트 덧붙이기
+	let fetchList = function() {
+		if(isEnd == true)
+			return ;
+		
+		//현재 요소 개수
+		var listCount = $(".thumb").length;
+
+		//현재 url
+		var curUrl = location.href;
+		var curParams = curUrl.split('category')[1];
+		
+		//현재 페이지의 검색 조건
+		var categoryCode = '0';
+		var order = null;
+		var where = null;
+		var val = null;
+		if(curParams == '')
+			categoryCode = '0';
+		else if(curParams.startWith('3'))
+			categoryCode = curParams.substring(0, 3);
+	//fetchList End
+	}
 </script>
 
 
