@@ -3,11 +3,16 @@
     
     
 <script type="text/javascript">
-    if($('input:checkbox[id=form_choose_emailCheck]').is(':checked') == false){
-    	$('[id=form_choose_emailCheck]').attr('value', '0');
-    }else{
-    	$('[id=form_choose_emailCheck]').attr('value', '1');
+
+$(function() {
+    if($('input:checkbox[id=emailAccept]').is(':checked') == false){
+    	$('[id=emailAccept]').attr('value', '0');
     }
+    
+    if($('input:checkbox[id=emailAccept]').is(':checked') == true){
+    	$('[id=emailAccept]').attr('value', '1');
+    }
+})
 </script>
     <body>
 		<div class="row">
@@ -59,11 +64,11 @@
               <div class="row">
                 <div class="form-group col-md-6">
                   <label for="form_choose_password">Choose Password</label>
-                  <input id="pwd" name="pwd" class="form-control" type="text">
+                  <input id="pwd" name="pwd" class="form-control" type="password">
                 </div>
                 <div class="form-group col-md-6">
                   <label>Re-enter Password</label>
-                  <input id="pwdCheck" name="pwdCheck" class="form-control" type="text">
+                  <input id="pwdCheck" name="pwdCheck" class="form-control" type="password">
                 </div>
               </div>
               
@@ -82,7 +87,7 @@
               <div class="row">
                 <div class="form-group col-md-12">
                   <label for="form_choose_username">이메일 수신동의(선택)</label>
-                  <input id="form_choose_emailCheck" name="emailAccept" type="checkbox" value="">
+                  <input id="emailAccept" name="emailAccept" type="checkbox" value="">
                 </div>
               </div>
               <div class="form-group">
