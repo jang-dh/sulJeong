@@ -4,7 +4,7 @@
     
 <script type="text/javascript">
 
-$(function() {
+function CheckForm(join) {
     if($('input:checkbox[id=emailAccept]').is(':checked') == false){
     	$('[id=emailAccept]').attr('value', '0');
     }
@@ -12,13 +12,13 @@ $(function() {
     if($('input:checkbox[id=emailAccept]').is(':checked') == true){
     	$('[id=emailAccept]').attr('value', '1');
     }
-})
+}
 </script>
     <body>
 		<div class="row">
           <div class="col-md-6 col-md-push-3">
           <br><br>
-            <form name="reg-form" class="register-form" method="post"  action="${pageContext.request.contextPath}/memberJoin">
+            <form name="reg-form" class="register-form" method="post"  action="${pageContext.request.contextPath}/memberJoin" onsubmit="return CheckForm(this)">
             <!-- 스프링 security 4에선 POST 전송시무조건 csrt 를 보내야 한다. (GET은 안보내도 됨)-->
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" >
               <div class="icon-box mb-0 p-0">

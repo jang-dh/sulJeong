@@ -38,14 +38,16 @@ $(function(){
 
 </script>
 
+<body>
+
 <ul id="myTab" class="nav nav-tabs boot-tabs">
   <li class="active"><a href="#home" data-toggle="tab">아이디 찾기</a></li>
   <li><a href="#profile" data-toggle="tab">비밀번호 찾기</a></li>
-  
 </ul>
+
 <div id="myTabContent" class="tab-content">
   <div class="tab-pane fade in active" id="home">
-  		<div class="main-content">
+    <div class="main-content">
 	<section>
       <div class="container">
         <div class="row">
@@ -80,6 +82,10 @@ $(function(){
   </div>
   </div>
   <div class="tab-pane fade" id="profile">
-  		비빌번호 찾기 폼<p>
+    <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
   </div>
 </div> 
+
+</body>
+
+
