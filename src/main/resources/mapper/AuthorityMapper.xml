@@ -13,7 +13,7 @@
  <!-- 권한 등록 -->
  <insert id="insertAuthority" parameterType="authority">
    insert into Authority(member_code, role)
-   values(#{member_code} , #{role})
+   values(#{memberCode} , #{role})
  </insert>
  
 </mapper>	

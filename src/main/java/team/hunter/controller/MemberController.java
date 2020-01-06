@@ -30,5 +30,10 @@ public class MemberController {
 		memberService.memberJoin(member);
 		return "redirect:/";
 	}
+	
+	@RequestMapping("/searchLoginInfoForm")
+	public String searchLoginInfoForm() {
+		return "form/searchLoginInfoForm";
+	}
 
 }
