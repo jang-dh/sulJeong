@@ -2,6 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="personalAnswerMapper">
 
+	<select id="selectAll" resultType="personalQuestion">
+	select code, member_code, content, subject, regdate, state from personal_question order by regdate desc
+	</select>
+
 </mapper>	
 
 

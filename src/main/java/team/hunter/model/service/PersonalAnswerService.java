@@ -1,7 +1,11 @@
 package team.hunter.model.service;
 
-import org.springframework.stereotype.Service;
+import java.util.List;
+
+import team.hunter.model.dto.PersonalQuestion;
 
 public interface PersonalAnswerService {
 
+	List<PersonalQuestion> selectAll();
+	
 }
