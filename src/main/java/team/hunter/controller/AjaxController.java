@@ -18,4 +18,10 @@ public class AjaxController {
 		return memberService.selectByPhone(member);
 	}
 	
+	@PostMapping("/findPWD")
+	public Member findPWD(Member member) {
+		System.out.println(member.getName() + member.getPhone());
+		return memberService.selectByPhone(member);
+	}
+	
 }

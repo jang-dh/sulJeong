@@ -241,6 +241,15 @@
 			<version>4.7</version>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- email로 비밀번호 보내기 -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4</version>
+		</dependency>
+
+
 	</dependencies>
 	<build>
 		<plugins>
