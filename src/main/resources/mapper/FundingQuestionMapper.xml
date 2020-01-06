@@ -3,8 +3,8 @@
 <mapper namespace="fundingQuestionMapper">
 
 	<insert id="insertQuestion" parameterType="fundingQuestion">
-		insert into funding_question (funding_code, member_code, content, subject, regdate, state)
-		values ({#fundingCode), (#memberCode), (#content), (#subject), (#regdate), (#state)}
+		insert into funding_question (code, funding_code, member_code, content, subject, regdate, state)
+		values (seq_no.nextval, {#fundingCode}, {#memberCode}, {#content}, {#subject}, sysdate, '등록'}
 	</insert>
 	
 </mapper>	
