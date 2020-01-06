@@ -5,7 +5,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html dir="ltr" lang="en">
 <script src="${pageContext.request.contextPath}/resources/js/jquery-2.2.4.min.js"></script>
-
+<script type="text/javascript">
+   $(function(){
+      $("#logout").click(function(){
+         $("#logoutSubmit").submit();
+      });
+   });
+</script>
 
 <head>
 <sec:authentication var="principal" property="principal" />
