@@ -1,8 +1,8 @@
 package team.hunter.model.service;
 
-import team.hunter.model.dto.FundingRequest;
+import team.hunter.model.dto.FundingQuestion;
 
 public interface FundingQuestionService {
-	int questionInsert(FundingRequest fundingRequest); 
+	int fundingQuestionInsert(FundingQuestion fundingQuestion); 
 	
 }

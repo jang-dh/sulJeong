@@ -1,11 +1,11 @@
 package team.hunter.model.dao;
 
-import team.hunter.model.dto.FundingRequest;
+import team.hunter.model.dto.FundingQuestion;
 
 public interface FundingQuestionDAO {
 	/*
 	 * 펀딩 문의 등록하기
 	 */
-	int questionInsert(FundingRequest fundingRequest);
+	int fundingQuestionInsert(FundingQuestion fundingQuestion);
 
 }
