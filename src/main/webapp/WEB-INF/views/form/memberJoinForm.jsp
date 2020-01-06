@@ -3,7 +3,6 @@
     
     
 <script type="text/javascript">
-
 $(function() {
     if($('input:checkbox[id=emailAccept]').is(':checked') == false){
     	$('[id=emailAccept]').attr('value', '0');
@@ -12,7 +11,8 @@ $(function() {
     if($('input:checkbox[id=emailAccept]').is(':checked') == true){
     	$('[id=emailAccept]').attr('value', '1');
     }
-})
+});
+
 </script>
     <body>
 		<div class="row">

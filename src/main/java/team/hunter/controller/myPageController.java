@@ -37,4 +37,5 @@ public class myPageController {
 		personalQs.personalQuestionInsert(personalQuestion);
 		return "redirect:/mypage/myQuestion";
 	}
+
 }
