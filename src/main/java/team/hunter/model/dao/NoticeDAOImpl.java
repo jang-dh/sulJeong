@@ -35,15 +35,15 @@ public class NoticeDAOImpl implements NoticeDAO {
 	}
 
 	@Override
-	public int delete(Notice code) {
+	public int delete(int code) {
 		// TODO Auto-generated method stub
-		return 0;
+		return session.delete("noticeMapper.delete", code);
 	}
 
 	@Override
-	public int update(Notice code) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int update(Notice notice) {
+		
+		return session.update("noticeMapper.update", notice);
 	}
 
 }

@@ -17,7 +17,7 @@
 	   
 	   $("input[value=삭제하기]").click(function(){
 		  
-		   $("#requestForm").attr("action", "${pageContext.request.contextPath}/board/updateForm");
+		   $("#requestForm").attr("action", "${pageContext.request.contextPath}/delete?code=${detail.code}");
 		   $("#requestForm").submit();
 	   })
 	   
@@ -58,7 +58,7 @@
             <p>${detail.content}</p>
             <p>작성일 : ${detail.regdate}</p>
             <c:if test="${!empty detail.filename}">
-            <a class="btn btn-gray mt-20" href="${pageContext.request.contextPath}/down/${detail.code}">${detail.filename }</a>
+            <a class="btn btn-gray mt-20" href="${pageContext.request.contextPath}/down?fileName=${detail.filename}">${detail.filename }</a>
             </c:if>   
             <hr>         
             <a href="${pageContext.request.contextPath}/notice" class="active">리스트로 돌아가기</a>

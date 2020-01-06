@@ -18,6 +18,18 @@
 	<insert id="insert" parameterType="notice">
 		insert into notice (code, subject, content, regdate, filename) values (SEQ_NO.nextval, #{subject}, #{content}, sysdate, #{filename})
 	</insert>
+	
+	<update id="update" parameterType="notice">
+		update notice 
+		set subject=#{subject}, content=#{content}, filename=#{filename}
+		where code=#{code}		
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		delete
+		from notice
+		where code=#{_parameter}
+	</delete>
 
 </mapper>	
 

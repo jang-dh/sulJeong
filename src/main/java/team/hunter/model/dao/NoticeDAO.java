@@ -6,27 +6,27 @@ import team.hunter.model.dto.Notice;
 
 public interface NoticeDAO {
 	/**
-	* ÀüÃ¼Ãâ·Â
+	* ï¿½ï¿½Ã¼ï¿½ï¿½ï¿½
 	 * */
 	Notice selectByCode(int code);
 	
 	/**
-	* »ó¼¼º¸±â
+	* ï¿½ó¼¼ºï¿½ï¿½ï¿½
 	 * */
 	List<Notice> select();
 		
 	/**
-	* µî·Ï
+	* ï¿½ï¿½ï¿½
 	* */
 	int insert(Notice dto);
 		
 	/**
-	* »èÁ¦
+	* ï¿½ï¿½ï¿½ï¿½
 	* */
-	int delete(Notice code);
+	int delete(int code);
 	
 	/**
-	 * °Ô½Ã¹° ¼öÁ¤
+	 * ï¿½Ô½Ã¹ï¿½ ï¿½ï¿½ï¿½ï¿½
 	 * */
 	int update(Notice code);
 }
