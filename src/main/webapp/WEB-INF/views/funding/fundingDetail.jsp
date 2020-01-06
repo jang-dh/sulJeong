@@ -55,7 +55,8 @@
 <!-- Start main-content -->
 <div class="main-content">
 	<!-- Section: inner-header -->
-	<section class="inner-header divider layer-overlay overlay-dark-8" data-bg-img="http://placehold.it/1920x1280">
+	<section class="inner-header divider layer-overlay overlay-dark-8"
+		data-bg-img="http://placehold.it/1920x1280">
 		<div class="container pt-90 pb-40">
 			<!-- Section Content -->
 			<div class="section-content">
@@ -82,7 +83,8 @@
 							<div class="product-image">
 								<div class="zoom-gallery">
 									<a href="http://placehold.it/460x460" title="Title Here 1">
-									<img src="http://placehold.it/460x460" alt=""></a>
+										<img src="http://placehold.it/460x460" alt="">
+									</a>
 								</div>
 							</div>
 						</div>
@@ -157,56 +159,67 @@
 							</div>
 							<div class="progress-item mt-15">
 								<div class="progress mb-0">
-									<div data-percent="${fundingList.stackPrice/fundingList.goalPrice *100}" class="progress-bar">
+									<div
+										data-percent="${fundingList.stackPrice/fundingList.goalPrice *100}"
+										class="progress-bar">
 										<span class="percent">${fundingList.stackPrice/fundingList.goalPrice *100}%</span>
 									</div>
 								</div>
 							</div>
-							<div class="pull-left font-weight-400 text-black-333 pr-0 mt-15 mb-15">
-								<a href="#">문의하기</a>
+							<div
+								class="pull-right font-weight-400 text-black-333 pr-0 mt-15 mb-15">
+								<button class="single_add_to_cart_button btn btn-theme-colored"
+									type="button">
+									좋아요 <i class="fa fa-thumbs-up text-white mr-10"></i>
+								</button>
+								<div class="font-icon-list col-md-2 col-sm-3 col-xs-6 col-xs-6">
+
+								</div>
 							</div>
-							<div class="pull-right font-weight-400 text-black-333 pr-0 mt-15 mb-15">
-								<button class="single_add_to_cart_button btn btn-theme-colored" type="button">좋아요 <i class="fa fa-thumb-tack text-white mr-10"></i></button>
-							</div>
-							<div class="cart-form-wrapper mt-30">
-								<form id="frm" enctype="multipart/form-data" method="post"class="cart"
-									action="${pageContext.request.contextPath}/funding/purchase">
-									<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-									<!-- <input type="hidden" value="productID" name="add-to-cart"> -->
-									<table class="table variations no-border">
-										<tbody>
-											<tr>
-												<td class="name"><div class="mt-10">수량</div></td>
-												<td class="value mt-10">
-													<div class="quantity buttons_added mt-10">
-														<input type="button" class="minus" value="-">
-														<input type="number" size="4" class="input-text qty text" title="Qty" value="1" name="quantity" min="1" step="1">
-														<input type="button" class="plus" value="+">
-													</div>
-												</td>
-												<td>
-													<div class="pull-right font-weight-400 text-black-333 pr-0">
-														<input type="button" id="likeButton"
-															class="btn btn-default btn-theme-colored mt-5 font-16 btn-sm"
-															class="flaticon-charity-make-a-donation font-16 ml-5"
-															value="펀딩하기">
-													</div>
-												</td>
-											</tr>
-										</tbody>
-									</table>
-								</form>
-							</div>
+
+						</div>
+						<div class="cart-form-wrapper mt-30">
+							<form id="frm" enctype="multipart/form-data" method="post"
+								class="cart"
+								action="${pageContext.request.contextPath}/funding/purchase">
+								<input type="hidden" name="${_csrf.parameterName}"
+									value="${_csrf.token}" />
+								<!-- <input type="hidden" value="productID" name="add-to-cart"> -->
+								<table class="table variations no-border">
+									<tbody>
+										<tr>
+											<td class="name"><div class="mt-10">수량</div></td>
+											<td class="value mt-10">
+												<div class="quantity buttons_added mt-10">
+													<input type="button" class="minus" value="-"> <input
+														type="number" size="4" class="input-text qty text"
+														title="Qty" value="1" name="quantity" min="1" step="1">
+													<input type="button" class="plus" value="+">
+												</div>
+											</td>
+											<td>
+												<div class="pull-right font-weight-400 text-black-333 pr-0">
+													<input type="button" id="likeButton"
+														class="btn btn-default btn-theme-colored mt-5 font-16 btn-sm"
+														class="flaticon-charity-make-a-donation font-16 ml-5"
+														value="펀딩하기">
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</form>
 						</div>
 					</div>
-					<form id="product_form" name="product_form" method="post" enctype="multipart/form-data">
+				</div>
+				<form id="product_form" name="product_form" method="post"
+					enctype="multipart/form-data">
 					<div class="col-md-12">
 						<div class="horizontal-tab product-tab">
 							<ul class="nav nav-tabs">
 								<li class="active"><a href="#tab1" data-toggle="tab">상품상세</a></li>
-								<li><a href="#tab2" data-toggle="tab">상품리뷰</a></li>
-								<li><a href="#tab3" data-toggle="tab">상품문의</a></li>
-								<li><a href="#tab4" data-toggle="tab">배송/교환/반품 안내</a></li>
+								<li><a href="#tab2" data-toggle="tab">상품문의</a></li>
+								<li><a href="#tab3" data-toggle="tab">배송/교환/반품 안내</a></li>
 							</ul>
 							<div class="tab-content">
 								<div class="tab-pane fade in active" id="tab1">
@@ -251,81 +264,100 @@
 										</tbody>
 									</table>
 								</div>
-								<div class="tab-pane fade" id="tab2">
-									<div class="reviews">
-										<ol class="commentlist">
-											<li class="comment">
-												<div class="media">
-													<a href="#" class="media-left"><img class="img-circle"
-														alt="" src="https://placehold.it/75x75" width="75"></a>
-													<div class="media-body">
-														<ul class="review_text list-inline">
-															<li>
-																<div title="Rated 5.00 out of 5" class="star-rating">
-																	<span style="width: 100%;">5.00</span>
-																</div>
-															</li>
-															<li>
-																<h5 class="media-heading meta">
-																	<span class="author">Tom Joe</span> â€“ Mar 15, 2015:
-																</h5>
-															</li>
-														</ul>
-														Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-														Donec volutpat purus tempor sem molestie, sed blandit
-														lacus posuere. Lorem ipsum dolor sit amet.
-													</div>
-												</div>
-											</li>
-											<li class="comment">
-												<div class="media">
-													<a href="#" class="media-left"><img class="img-circle"
-														alt="" src="https://placehold.it/75x75" width="75"></a>
-													<div class="media-body">
-														<ul class="review_text list-inline">
-															<li>
-																<div title="Rated 4.00 out of 5" class="star-rating">
-																	<span style="width: 80%;">4.00</span>
-																</div>
-															</li>
-															<li>
-																<h5 class="media-heading meta">
-																	<span class="author">Mark Doe</span> â€“ Jan 23, 2015:
-																</h5>
-															</li>
-														</ul>
-														Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-														Donec volutpat purus tempor sem molestie, sed blandit
-														lacus posuere. Lorem ipsum dolor sit amet.
-													</div>
-												</div>
-											</li>
-										</ol>
+									<div class="tab-pane fade" id="tab2">
+									<!-- <div class="col-sm-6"> -->
+									<div class="funding_question">
+										<label>제목 <small>*</small></label> <input name="form_content"
+											type="text" placeholder="제목을 입력해 주세요." class="form-control">
+										<label>문의내용 <small>*</small></label>
+										<textarea id="form_message" name="form_message"
+											class="form-control required" rows="5"
+											placeholder="내용을 입력해 주세요.	"></textarea>
+										<!-- <div
+											class="pull-left font-weight-400 text-black-333 pr-0 mt-15 mb-15"> -->
+											<a href="#">문의하기</a>
+										<!-- </div> -->
 									</div>
+									<!-- </div> -->
 								</div>
 								<div class="tab-pane fade" id="tab3">
-									<div class="col-sm-6">
-										<div class="funding_question">
-											<label>제목 <small>*</small></label>
-											<input name="form_content" type="text" placeholder="제목을 입력해 주세요." class="form-control">
-											<label>문의내용 <small>*</small></label>
-					                		<textarea id="form_message" name="form_message" class="form-control required" rows="5" placeholder="내용을 입력해 주세요.	"></textarea>
-											<div class="pull-left font-weight-400 text-black-333 pr-0 mt-15 mb-15">
-											<a href="#">문의하기</a>
-											</div>
-										</div>
+									<!-- <div class="col-sm-6"> -->
+									<h5 class="prod-delivery-return-policy-title">배송정보</h5>
+									<table class="prod-delivery-return-policy-table">
+										<colgroup>
+											<col width="150px">
+											<col width="340px">
+											<col width="150px">
+											<col width="*">
+										</colgroup>
+										<tbody>
+											<tr>
+												<th>배송방법</th>
+												<td>순차배송</td>
+												<th rowspan="2">배송비</th>
+												<td rowspan="2">2,500원<br>- 19,800원 이상 구매 시 무료배송<br>-
+													도서산간 지역 추가비용 없음
+												</td>
+											</tr>
+											<tr>
+												<th>묶음배송 여부</th>
+												<td>가능</td>
+											</tr>
+											<tr>
+												<th>배송기간</th>
+												<td colspan="3">
+													<ul>
+														<li class="prod-delivery-period-contents etc-pdd-info">
+															ㆍ<span>주문 및 결제 완료 후, 2-3일 이내 도착</span>
+														</li>
+														<li class="prod-delivery-period-contents">ㆍ도서 산간 지역등은
+															하루가 더 소요될 수 있습니다.
+															<p class="prod-delivery-period__notice">ㆍ천재지변, 물량 수급
+																변동 등 예외적인 사유 발생 시, 다소 지연될 수 있는 점 양해 부탁드립니다.</p>
+														</li>
+													</ul>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+
+									<h5 class="prod-delivery-return-policy-title">교환/반품 안내</h5>
+									<table class="prod-delivery-return-policy-table">
+										<colgroup>
+											<col width="160px">
+											<col width="*">
+										</colgroup>
+										<tbody>
+											<tr>
+												<th>교환/반품 신청 기준일</th>
+												<td>
+													<p>ㆍ[단순변심/ 주문 오류의 경우] 신선식품인 술이 포함되어 단순변심 교환/반품을 받지
+														않습니다.</p>
+													<p>
+														ㆍ상품의 내용이 표시·광고의 내용과 다른 경우에는 상품을 수령한 날부터 3개월 이내, 그 사실을 안 날
+														또는 알 수 있었던 날부터<br> <span
+															class="prod-delivery-return-policy__limit-list__indent">
+															30일 이내에 청약철회 가능</span>
+													</p>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+
+									<div class="product-item__table product-seller">
+
+										<p class="prod-minor-notice">미성년자가 체결한 계약은 법정대리인이 동의하지 않는
+											경우 본인 또는 법정대리인이 취소할 수 있습니다.</p>
 									</div>
-								</div>
-								<div class="tab-pane fade" id="#tab4">
-									
 								</div>
 							</div>
 						</div>
 					</div>
-					</form>
-					</div>
-				</div>
+				</form>
+			</div>
+			<div>
 				<div class="col-md-12">
+					<!-- 아래 네모 네개 시작 -->
 					<h3 class="line-bottom">Related Products</h3>
 					<div class="row multi-row-clearfix">
 						<div class="products related">
@@ -464,8 +496,9 @@
 						</div>
 					</div>
 				</div>
+				<!-- 아래 네모 네개 -->
 			</div>
 		</div>
 	</section>
-<!-- end main-content -->
+	<!-- end main-content -->
 </div>
