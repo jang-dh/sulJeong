@@ -26,4 +26,9 @@ public class MemberDAOImpl implements MemberDAO {
 
 	}
 
+	@Override
+	public Member selectByPhone(Member member) {
+		return session.selectOne("memberMapper.selectByPhone",member);
+	}
+
 }

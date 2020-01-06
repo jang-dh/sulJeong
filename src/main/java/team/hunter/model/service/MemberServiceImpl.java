@@ -19,4 +19,9 @@ public class MemberServiceImpl implements MemberService {
 		return result;
 	}
 
+	@Override
+	public Member selectByPhone(Member member) {
+		return memberDAO.selectByPhone(member);
+	}
+
 }
