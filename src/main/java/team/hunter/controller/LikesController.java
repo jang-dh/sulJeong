@@ -12,15 +12,15 @@ import team.hunter.model.service.LikesService;
 @Controller
 public class LikesController {
 	
-	@Autowired
-	private LikesService likesService;
-	
-	@ResponseBody
-	@RequestMapping(value = "/funding/serialize", method = RequestMethod.POST)
-	public int insertLikes(String fundingCode) {
-		Likes likes = new Likes(3, Integer.parseInt(fundingCode));
-		System.out.println("likes");
-		return likesService.insert(likes);
-	}
+//	@Autowired
+//	private LikesService likesService;
+//	
+//	@ResponseBody
+//	@RequestMapping(value = "/funding/serialize", method = RequestMethod.POST)
+//	public int insertLikes(String fundingCode) {
+//		Likes likes = new Likes(3, Integer.parseInt(fundingCode));
+//		System.out.println("likes");
+//		return likesService.insert(likes);
+//	}
 
 }
