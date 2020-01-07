@@ -10,7 +10,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Likes {
-	private int code;
 	private int memberCode;
 	private int fundingCode;
 }

@@ -2,6 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="personalQuestionMapper">
 
+	<select id="personalQuestionList" parameterType="int" resultType="personalQuestion">
+		select code, member_code, content, subject, regdate, state from personal_question
+		where member_code=#{_parameter}
+	</select>
+	
+	<insert id="personalQuestionInsert" parameterType="personalQuestion">
+		insert into personal_question(code, member_code, content, subject, regdate, state) 
+		values(seq_no.nextval, #{memberCode}, #{content}, #{subject}, sysdate, '진행중')
+	</insert>
 </mapper>	
 
 
