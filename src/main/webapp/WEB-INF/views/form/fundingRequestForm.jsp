@@ -7,18 +7,16 @@
 		<div class="col-md-6 col-md-push-3">
 			<div data-example-id="basic-forms" class="bs-example mb-30">
 			<h2>펀딩 오픈 신청하기</h2><p>
-				<form>
+				<form action="${pageContext.request.contextPath}/fundingInsert" method="post" >
 					<div class="form-group">
 						<label for="exampleInputEmail2">펀딩 주제</label> 
-						<input type="text"
-							placeholder="Funding Subject" id="exampleInputEmail2"
-							class="form-control">
+						<input type="text" placeholder="Funding Subject" id="subject" name="subject" class="form-control">
 						<!-- <textarea class="form-control"rows="3"></textarea> -->
 					</div>
 
 					<div class="form-group">
-						<label for="exampleInputFile2">File input</label> <input
-							type="file" id="exampleInputFile2">
+						<label for="exampleInputFile2">File input</label> 
+						<input type="file" id="exampleInputFile2">
 					</div>
 
 					<button class="btn btn-default" type="submit">Submit</button>
