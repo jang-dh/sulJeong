@@ -3,7 +3,6 @@ package team.hunter.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,16 +11,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import team.hunter.model.dto.Funding;
-import team.hunter.model.dto.FundingQuestion;
-import team.hunter.model.dto.Member;
-import team.hunter.model.service.FundingQuestionService;
 import team.hunter.model.service.FundingService;
 
 @Controller
 public class FundingController {
 	@Autowired
 	private FundingService service;
-	private FundingQuestionService fundingQuestionService;
 
 	//목록 페이지 진입
 	@RequestMapping("/funding")
@@ -69,15 +64,6 @@ public class FundingController {
 			list = list.subList(listCnt, list.size());
 		
 		return list;
-	}
-	
-	//펀딩 문의 추가
-	@RequestMapping("/funding/fundingQuestionInsert")
-	public String fundingQuestionInsert(FundingQuestion fundingQuestion) {
-		Member member = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		fundingQuestion.setMemberCode(member.getCode());
-		fundingQuestionService.fundingQuestionInsert(fundingQuestion);
-		return "redirect:/funding/{code}";
 	}
 }
 
