@@ -5,7 +5,9 @@ import org.springframework.stereotype.Controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import team.hunter.model.dto.FundingRequest;
 import team.hunter.model.dto.Member;
+import team.hunter.model.service.FundingRequestService;
 import team.hunter.model.service.MemberService;
 
 @Controller
@@ -13,6 +15,8 @@ public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired FundingRequestService fundingRequestService;
 
 	@RequestMapping("/login")
 	public String login() {
@@ -40,6 +44,12 @@ public class MemberController {
 	public String fundingOpenRequest() {
 		
 		return "form/fundingRequestForm";
+	}
+	
+	@RequestMapping("/fundingInsert")
+	public String fundingInsert(FundingRequest fundingRequest) {
+		fundingRequestService.fundingInsert(fundingRequest);
+		return "redirect:/";
 	}
 
 }

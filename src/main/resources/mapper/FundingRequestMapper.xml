@@ -2,6 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="fundingRequestMapper">
 
+<insert id="fundingInsert" parameterType="fundingRequest">
+insert into funding_request(CODE,MEMBER_CODE,SUBJECT,FILENAME,STATE)
+values(SEQ_NO.nextval,#{memberCode},#{subject},#{filename},'미승인')
+</insert>
 </mapper>	
 
 
