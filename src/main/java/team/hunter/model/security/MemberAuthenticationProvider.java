@@ -23,7 +23,7 @@ import team.hunter.model.dto.Member;
 public class MemberAuthenticationProvider implements AuthenticationProvider {
 	@Autowired private MemberDAO memberDAO;
 	@Autowired private AuthorityDAO authorityDAO;
-	//@Autowired private PasswordEncoder passwordEncoder;
+	@Autowired private PasswordEncoder passwordEncoder;
 	
 	/**
 	 * 사용자가 인증을 위해 id, password를 입력해서 전송하면 Authentication을 만들어서
@@ -47,11 +47,10 @@ public class MemberAuthenticationProvider implements AuthenticationProvider {
 		}
 		
 		//비밀번호 비교
-		//boolean result = passwordEncoder.matches(authentication.getCredentials().toString(), member.getPwd());
-		
-//		if(!authentication.getCredentials().equals(member.getPwd())) {
-//			throw new UsernameNotFoundException("ID 또는 비밀번호를 확인해주세요");
-//		}
+		String inputPwd = authentication.getCredentials().toString();
+		if(!passwordEncoder.matches(inputPwd, member.getPwd())) {
+			throw new UsernameNotFoundException("ID 또는 비밀번호를 확인해주세요 ");
+		}
 		
 		//인증 성공하였으니 모든 권한을 검색한다.
 		List<Authority> authList = authorityDAO.selectAuthorityByMemberCode(member.getCode());

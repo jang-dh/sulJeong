@@ -11,7 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Notice {
 	private int code;
-	private int subject;
+	private String subject;
 	private String content;
 	private String regdate;
 	private String filename;

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>string</title>
+<title>술:정(井)</title>
 </head>
 <body>
 <div id="container">
