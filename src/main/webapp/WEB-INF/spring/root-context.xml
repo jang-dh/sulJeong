@@ -32,8 +32,6 @@
 
 	</bean>
 
-	<bean id="email" class="team.hunter.model.email.Email" />
-	<bean id="emailSender" class="team.hunter.model.email.EmailSender" />
 
 
 </beans>
