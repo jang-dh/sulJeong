@@ -279,17 +279,16 @@
 										<input name="form_content" type="text" 
 											class="form-control required" rows="5"
 											placeholder="내용을 입력해 주세요.">
-										<!-- <div
-											class="pull-left font-weight-400 text-black-333 pr-0 mt-15 mb-15"> -->
+										
 										<button type="button" class="btn btn-dark btn-flat question"
 											data-toggle="modal" data-target=".bs-example-modal-sm">문의하기</button>
-<!-- 
+
 										<div class="modal fade bs-example-modal-sm" tabindex="-1"
 											role="dialog" aria-labelledby="mySmallModalLabel">
 											<div class="modal-dialog modal-sm">
 												<div class="modal-content">문의가 등록 되었습니다.</div>
 											</div>
-										</div> -->
+										</div>
 										<!-- </div> -->
 									</div>
 									<!-- </div> -->
