@@ -3,6 +3,7 @@ package team.hunter.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,12 +12,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import team.hunter.model.dto.Funding;
+import team.hunter.model.dto.Likes;
+import team.hunter.model.dto.Member;
 import team.hunter.model.service.FundingService;
+import team.hunter.model.service.LikesService;
 
 @Controller
 public class FundingController {
 	@Autowired
 	private FundingService service;
+	
+	@Autowired
+	private LikesService likesService;
 
 	//목록 페이지 진입
 	@RequestMapping("/funding")
@@ -27,7 +34,13 @@ public class FundingController {
 	//펀딩 상세페이지 이동
 	@RequestMapping("/funding/{code}")
 	public String fundingDetail(@PathVariable int code, Model model) {
+		Member member =(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
 		model.addAttribute("funding", service.selectByCode(code));
+		
+		if(member != null)
+			model.addAttribute("likes", likesService.select(new Likes(member.getCode(), code)));	
+		
 		return "funding/fundingDetail";
 	}
 

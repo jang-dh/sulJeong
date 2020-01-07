@@ -29,7 +29,7 @@
 							data-thumb="http://placehold.it/1920x1280" data-rotate="0"
 							data-saveperformance="off" data-title="Slide 1"
 							data-description="">
-							<!-- MAIN IMAGE --> <img src="http://placehold.it/1920x1280"
+							<!-- MAIN IMAGE --> <img src="${pageContext.request.contextPath}/resources/images/main/slider-main.jpg"
 							alt="" data-bgposition="center 40%" data-bgfit="cover"
 							data-bgrepeat="no-repeat" class="rev-slidebg"
 							data-bgparallax="10" data-no-retina> <!-- LAYERS --> <!-- LAYER NR. 1 -->
@@ -117,7 +117,7 @@
 							data-thumb="http://placehold.it/1920x1280" data-rotate="0"
 							data-saveperformance="off" data-title="Slide 2"
 							data-description="">
-							<!-- MAIN IMAGE --> <img src="http://placehold.it/1920x1280"
+							<!-- MAIN IMAGE --> <img src="${pageContext.request.contextPath}/resources/images/main/slider-second.jpg"
 							alt="" data-bgposition="center 40%" data-bgfit="cover"
 							data-bgrepeat="no-repeat" class="rev-slidebg"
 							data-bgparallax="10" data-no-retina> <!-- LAYERS --> <!-- LAYER NR. 1 -->
@@ -207,7 +207,7 @@
 							data-thumb="http://placehold.it/1920x1280" data-rotate="0"
 							data-saveperformance="off" data-title="Slide 3"
 							data-description="">
-							<!-- MAIN IMAGE --> <img src="http://placehold.it/1920x1280"
+							<!-- MAIN IMAGE --> <img src="${pageContext.request.contextPath}/resources/images/main/slider-third.jpg"
 							alt="" data-bgposition="center center" data-bgfit="cover"
 							data-bgrepeat="no-repeat" class="rev-slidebg"
 							data-bgparallax="10" data-no-retina> <!-- LAYERS --> <!-- LAYER NR. 1 -->
@@ -434,16 +434,15 @@
 										</div>
 									</div>
 									<div class="pull-left font-weight-400 text-black-333 pr-0">
-										<strong>펀딩종료 </strong>
+										<strong>펀딩종료까지 </strong>
 									</div>
-									<div class="bg-light text-center"
-										data-countdown="${list.endDate}"></div>
+									<div class="text-center" data-countdown="${list.endDate}"></div>
 									<script type="text/javascript">
 										$(document).ready(function() {
 											$('[data-countdown]').each(function() {
 												var $this = $(this), finalDate = $(this).data('countdown');
 												$this.countdown(finalDate,function(event) {
-													$this.html(event.strftime('%D 일 %H:%M:%S'));
+													$this.html(event.strftime('%D 일'));
 												});
 											});
 										});
@@ -492,22 +491,20 @@
 										</div>
 									</div>
 									<div class="pull-left font-weight-400 text-black-333 pr-0">
-										<strong>펀딩종료 </strong>
+										<strong>펀딩종료까지 </strong>
 									</div>
-									<div class="bg-light text-center"
-										data-countdown="${list.endDate}"></div>
+									<div class="text-center" data-countdown="${list.endDate}"></div>
 									<script type="text/javascript">
 										$(document).ready(function() {
 											$('[data-countdown]').each(function() {
 												var $this = $(this), finalDate = $(this).data('countdown');
 												$this.countdown(finalDate,function(event) {
-													$this.html(event.strftime('%D 일 %H:%M:%S'));
+													$this.html(event.strftime('%D 일'));
 												});
 											});
 										});
 									</script>
-									<a href="funding/${list.code}"
-										class="btn btn-default btn-theme-colored mt-10 font-16 btn-sm">펀딩하기
+									<a href="funding/${list.code}" class="btn btn-default btn-theme-colored mt-10 font-16 btn-sm">펀딩하기
 										<i class="flaticon-charity-make-a-donation font-16 ml-5"></i>
 									</a>
 								</div>

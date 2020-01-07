@@ -22,7 +22,7 @@
 		$('[data-countdown]').each(function() {
 			var $this = $(this), finalDate = $(this).data('countdown');
 			$this.countdown(finalDate,function(event) {
-				$this.html(event.strftime('%D 일 %H:%M:%S'));
+				$this.html(event.strftime('%D 일'));
 			});
 		});
 	} 
@@ -137,9 +137,9 @@
 		html += '</div>';
 		html += '</div>';
 		html += '<div class="pull-left font-weight-400 text-black-333 pr-0">';
-		html += '<strong>펀딩종료 </strong>';
+		html += '<strong>펀딩종료까지 </strong>';
 		html += '</div>';
-		html += '<div class="bg-light text-center" data-countdown="' + item.endDate + '"></div>';
+		html += '<div class="text-center" data-countdown="' + item.endDate + '"></div>';
 		html += '<a href="' + item.code + '" class="btn btn-default btn-theme-colored mt-10 font-16 btn-sm">펀딩하기 <i class="flaticon-charity-make-a-donation font-16 ml-5"></i>';
 		html += '</a>';
 		html += '</div>';
@@ -317,7 +317,7 @@
 										</div>
 									</div>
 									<div class="pull-left font-weight-400 text-black-333 pr-0">
-										<strong>펀딩종료 </strong>
+										<strong>펀딩종료까지 </strong>
 									</div>
 									<div class="bg-light text-center" data-countdown="${fundingList.endDate}"></div>
 									<script type="text/javascript">
@@ -325,7 +325,7 @@
 											$('[data-countdown]').each(function() {
 												var $this = $(this), finalDate = $(this).data('countdown');
 												$this.countdown(finalDate,function(event) {
-													$this.html(event.strftime('%D 일 %H:%M:%S'));
+													$this.html(event.strftime('%D 일'));
 												});
 											});
 										});
