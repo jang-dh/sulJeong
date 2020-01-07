@@ -22,8 +22,12 @@ public class FundingQuestionDAOImpl implements FundingQuestionDAO {
 	}
 	@Override
 	public List<FundingQuestion> fundingQuestionList(int memberCode) {
-		session.selectList("fundingQuestionMapper.fundingQuestionList", memberCode);
-		return null;
+		return session.selectList("fundingQuestionMapper.fundingQuestionList", memberCode);
+	}
+	@Override
+	public FundingQuestion selectByCode(int code) {
+		FundingQuestion fundingQuestion = session.selectOne("fundingQuestionMapper.selectByCode", code);
+		return fundingQuestion;
 	}
 
 }

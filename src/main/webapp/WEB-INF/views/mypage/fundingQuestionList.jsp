@@ -38,14 +38,16 @@
 									<th scope="row">글번호</th>
 									<th>제목</th>
 									<th>등록일</th>
+									<th>진행상태</th>
 								</tr>
 							</thead>
 							<tbody>
 							<c:forEach items="${list}" var="question" varStatus="status">
 								<tr>
 									<th scope="row">${status.count}</th>
-									<td><a href="${pageContext.request.contextPath}/noticeDetail/${question.code}">${question.subject}</a></td>
+									<td><a href="${pageContext.request.contextPath}/mypage/fundingQuestionDetailPage/${question.code}">${question.subject}</a></td>
 									<td>${question.regdate}</td>
+									<td>${question.state}</td>
 								</tr>
 							</c:forEach>
 							

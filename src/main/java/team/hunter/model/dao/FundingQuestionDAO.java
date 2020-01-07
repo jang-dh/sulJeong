@@ -12,4 +12,6 @@ public interface FundingQuestionDAO {
 	int questionInsert(FundingRequest fundingRequest);
 
 	List<FundingQuestion> fundingQuestionList(int memberCode);
+	
+	FundingQuestion selectByCode(int code);
 }

@@ -25,7 +25,14 @@ public class FundingQuestionServiceImpl implements FundingQuestionService {
 	@Override
 	public List<FundingQuestion> fundingQuestionList(int memberCode) {
 		List<FundingQuestion> list = fundingQuestionDAO.fundingQuestionList(memberCode);
-		return null;
+		return list;
+	}
+
+
+	@Override
+	public FundingQuestion selectByCode(int code) {
+		FundingQuestion fundingQuestion = fundingQuestionDAO.selectByCode(code);
+		return fundingQuestion;
 	}
 
 }

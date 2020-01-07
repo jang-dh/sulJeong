@@ -8,8 +8,13 @@
 	</insert>
 	
 	<select id="fundingQuestionList" parameterType="int" resultType="fundingQuestion">
-		select code, funding_code, member_code, content, regdate, state from funding_question
+		select code, funding_code, member_code, content, subject, regdate, state from funding_question
 		where member_code=#{_parameter}
+	</select>
+	
+	<select id="selectByCode" parameterType="int" resultType="fundingQuestion">
+		select code, funding_code, member_code, content, subject, regdate, state from funding_question
+		where code=#{_parameter}
 	</select>
 </mapper>	
 
