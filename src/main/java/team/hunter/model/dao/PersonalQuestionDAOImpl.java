@@ -23,5 +23,4 @@ public class PersonalQuestionDAOImpl implements PersonalQuestionDAO {
 		int result = session.insert("personalQuestionMapper.personalQuestionInsert", personalQuestion);
 		return result;
 	}
-
 }

@@ -1,7 +1,10 @@
 package team.hunter.model.service;
 
-import org.springframework.stereotype.Service;
+import team.hunter.model.dto.Purchase;
 
 public interface PurchaseService {
+	
+	
+	int insertPerchase(Purchase purchase);
 
 }

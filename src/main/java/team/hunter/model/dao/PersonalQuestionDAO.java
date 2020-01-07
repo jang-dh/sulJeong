@@ -8,4 +8,5 @@ public interface PersonalQuestionDAO {
 	List<PersonalQuestion> personalQuestionList(int memberCode);
 	
 	int personalQuestionInsert(PersonalQuestion personalQuestion);
+
 }

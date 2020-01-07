@@ -12,7 +12,8 @@ function CheckForm(join) {
     if($('input:checkbox[id=emailAccept]').is(':checked') == true){
     	$('[id=emailAccept]').attr('value', '1');
     }
-}
+};
+
 </script>
     <body>
 		<div class="row">
