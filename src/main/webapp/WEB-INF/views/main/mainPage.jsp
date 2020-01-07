@@ -3,21 +3,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!-- Revolution Slider 5.x CSS settings -->
-<link
-	href="${pageContext.request.contextPath}/resources/js/revolution-slider/css/settings.css"
-	rel="stylesheet" type="text/css" />
-<link
-	href="${pageContext.request.contextPath}/resources/js/revolution-slider/css/layers.css"
-	rel="stylesheet" type="text/css" />
-<link
-	href="${pageContext.request.contextPath}/resources/js/revolution-slider/css/navigation.css"
-	rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/js/revolution-slider/css/settings.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/js/revolution-slider/css/layers.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/js/revolution-slider/css/navigation.css" rel="stylesheet" type="text/css" />
 
 <!-- Revolution Slider 5.x SCRIPTS -->
-<script
-	src="${pageContext.request.contextPath}/resources/js/revolution-slider/js/jquery.themepunch.tools.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/js/revolution-slider/js/jquery.themepunch.revolution.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/revolution-slider/js/jquery.themepunch.tools.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/revolution-slider/js/jquery.themepunch.revolution.min.js"></script>
 
 <!-- Start main-content -->
 <div class="main-content">
@@ -557,21 +549,6 @@
 											</div>
 										</div>
 									</div>
-									<div class="pull-left font-weight-400 text-black-333 pr-0">
-										<strong>펀딩종료 </strong>
-									</div>
-									<%-- <div class="bg-light text-center"
-										data-countdown="${list.endDate}"></div>
-									<script type="text/javascript">
-										$(document).ready(function() {
-											$('[data-countdown]').each(function() {
-												var $this = $(this), finalDate = $(this).data('countdown');
-												$this.countdown(finalDate,function(event) {
-													$this.html(event.strftime('%D 일 %H:%M:%S'));
-												});
-											});
-										});
-									</script> --%>
 									<a href="funding/${list.code}"
 										class="btn btn-default btn-theme-colored mt-10 font-16 btn-sm">펀딩하기
 										<i class="flaticon-charity-make-a-donation font-16 ml-5"></i>

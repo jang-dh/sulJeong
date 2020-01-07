@@ -9,7 +9,7 @@
 		$("button[type=button]").on("click", function() {
 			//alert(${funding.code});
 			$.ajax({
-				url : "serialize", // 서버요청주소
+				url : "insertLikes", // 서버요청주소
 				type : "post", // 요청방식(get | post | put | patch | delete)
 				data : "fundingCode=" + ${funding.code},
 				dataType : "text", //서버가 보내온 데이터 타입

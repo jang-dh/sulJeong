@@ -3,14 +3,17 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <script>
+	//fetchList 제어
 	let isEnd = false;
 	let flag = true;
 	
+	//contextPath 얻기
 	function getContextPath() {
 		var hostIndex = location.href.indexOf(location.host) + location.host.length;
 		return location.href.substring(hostIndex, location.href.indexOf('/', hostIndex + 1) );
 	}
 	
+	//동적으로 추가된 data-countdown에 이벤트 주기
 	function init() { 
 		$('.data-countdown').not('.initialized').each(function() { 
 			var ac = $(this).addClass('initialized'); 
@@ -25,7 +28,7 @@
 	} 
 	
 	$(function() {
-		//let listCount = $(".thumb").length;
+		//현재 url
 		var curUrl = location.href;
 		
 		//정렬 조건 변경 시
@@ -81,7 +84,7 @@
 			val = params[2].split('val=')[1];
 		}
 		$.ajax({
-			url : getContextPath() + "/funding/category/fetchList",
+			url : getContextPath() + "/funding/fetchList",
 			type : "get",
 			dataType : "json",
 			data : {categoryCode : categoryCode, order : order, where : where, val : val, listCnt : listCnt},
@@ -107,7 +110,7 @@
 	
 	let renderList = function(mode, item) {
 		var per = item.stackPrice / item.goalPrice * 100;
-		let html = '<div class="col-sm-6 col-md-3">';
+		let html = '<div class="col-sm-6 col-md-3 wow fadeIn">';
 		html += '<div class="causes bg-silver-light maxwidth500 mb-30">';
 		html += '<div class="thumb">';
 		html += '<a href="${pageContext.request.contextPath}/funding/' + item.code + '">';
@@ -156,8 +159,7 @@
 <!-- Start main-content -->
 <div class="main-content">
 	<!-- Section: inner-header -->
-	<section class="inner-header divider layer-overlay overlay-dark-8"
-		data-bg-img="http://placehold.it/1920x1280">
+	<section class="inner-header divider layer-overlay overlay-dark-8" data-bg-img="http://placehold.it/1920x1280">
 		<div class="container pt-90 pb-40">
 			<!-- Section Content -->
 			<div class="section-content">
@@ -193,10 +195,8 @@
 				</div>
 				<div class="form-group col-md-1">
 					<div class="media">
-						<a class="flip"
-							href="${pageContext.request.contextPath}/funding/category/301">
-							<img class="media-object" width="60"
-							src="http://placehold.it/70x80" alt="">
+						<a class="flip" href="${pageContext.request.contextPath}/funding/category/301">
+							<img class="media-object" width="60" src="http://placehold.it/70x80" alt="">
 						</a>
 						<div class="media-body">
 							<h5 class="media-heading product-title mb-0">
@@ -207,10 +207,8 @@
 				</div>
 				<div class="form-group col-md-1">
 					<div class="media">
-						<a class="flip"
-							href="${pageContext.request.contextPath}/funding/category/302">
-							<img class="media-object" width="60"
-							src="http://placehold.it/70x80" alt="">
+						<a class="flip" href="${pageContext.request.contextPath}/funding/category/302">
+							<img class="media-object" width="60" src="http://placehold.it/70x80" alt="">
 						</a>
 						<div class="media-body">
 							<h5 class="media-heading product-title mb-0">
@@ -221,10 +219,8 @@
 				</div>
 				<div class="form-group col-md-1">
 					<div class="media">
-						<a class="flip"
-							href="${pageContext.request.contextPath}/funding/category/303">
-							<img class="media-object" width="60"
-							src="http://placehold.it/70x80" alt="">
+						<a class="flip" href="${pageContext.request.contextPath}/funding/category/303">
+							<img class="media-object" width="60" src="http://placehold.it/70x80" alt="">
 						</a>
 						<div class="media-body">
 							<h5 class="media-heading product-title mb-0">
@@ -235,10 +231,8 @@
 				</div>
 				<div class="form-group col-md-1">
 					<div class="media">
-						<a class="flip"
-							href="${pageContext.request.contextPath}/funding/category/304">
-							<img class="media-object" width="60"
-							src="http://placehold.it/70x80" alt="">
+						<a class="flip" href="${pageContext.request.contextPath}/funding/category/304">
+							<img class="media-object" width="60" src="http://placehold.it/70x80" alt="">
 						</a>
 						<div class="media-body">
 							<h5 class="media-heading product-title mb-0">
@@ -249,10 +243,8 @@
 				</div>
 				<div class="form-group col-md-1">
 					<div class="media">
-						<a class="flip"
-							href="${pageContext.request.contextPath}/funding/category/305">
-							<img class="media-object" width="60"
-							src="http://placehold.it/70x80" alt="">
+						<a class="flip" href="${pageContext.request.contextPath}/funding/category/305">
+							<img class="media-object" width="60" src="http://placehold.it/70x80" alt="">
 						</a>
 						<div class="media-body">
 							<h5 class="media-heading product-title mb-0">
