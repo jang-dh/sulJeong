@@ -18,7 +18,7 @@ public class NoticeServiceImpl implements NoticeService {
 	public Notice selectByCode(int code) {
 
 		Notice dto = dao.selectByCode(code);
-		if(dto==null) throw new RuntimeException("°øÁö»çÇ× »ó¼¼º¸±â¸¦ ½ÇÆĞÇß½À´Ï´Ù.");
+		if(dto==null) throw new RuntimeException("ê³µì§€ì‚¬í•­ ì¡°íšŒì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.");
 		return dto;
 
 	}
@@ -26,27 +26,29 @@ public class NoticeServiceImpl implements NoticeService {
 	@Override
 	public List<Notice> select() {
 		List<Notice> list = dao.select();
-		if(list ==null) throw new RuntimeException("°øÁö»çÇ× Ãâ·Â ½ÇÆĞ");
+		if(list ==null) throw new RuntimeException("ìƒì„¸í˜ì´ì§€ ì¡°íšŒì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.");
 		return list;
 	}
 
 	@Override
 	public int insert(Notice dto) {
 		int result = dao.insert(dto);
-		if(result==0) throw new RuntimeException("°øÁö»çÇ× µî·Ï ½ÇÆĞ");
+		if(result==0) throw new RuntimeException("ê³µì§€ì‚¬í•­ ë“±ë¡ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.");
 		return result;
 	}
 
 	@Override
-	public int delete(Notice code) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int delete(int code) {
+		int result = dao.delete(code);
+		if(result==0) throw new RuntimeException("ê³µì§€ì‚¬í•­ ì‚­ì œì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.");
+		return result;
 	}
 
 	@Override
 	public int update(Notice code) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = dao.update(code);
+		if(result==0) throw new RuntimeException("ê³µì§€ì‚¬í•­ ìˆ˜ì •ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.");
+		return result;
 	}
 
 }

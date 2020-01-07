@@ -33,6 +33,7 @@
               <hr>
               <p>다음 사항을 작성해주세요</p>
               <form id="job_apply_form" name="job_apply_form" action="${pageContext.request.contextPath}/insert" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" >
                 <div class="row">
                   <div class="col-sm-6">
                     <div class="form-group">

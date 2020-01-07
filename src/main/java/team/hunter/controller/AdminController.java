@@ -149,33 +149,7 @@ public class AdminController {
 		return "form/noticeForm";
 
 	}
-	
-	/**
-	 * �������� ���
-	 * */
-//	@RequestMapping("/insert")
-//	public ModelAndView insert(String subject, String content, MultipartFile file, HttpSession session) {
-//		Notice notice = new Notice();
-//		ModelAndView mv = new ModelAndView();
-//		try{
-//			notice.setSubject(subject);
-//			notice.setContent(content);
-//			//���� ������ ������ ����
-//			String path = session.getServletContext().getRealPath("/WEB-INF/save");
-//			
-//			//÷�ε� �����̸� ������ ����
-//			String fileName = file.getOriginalFilename();
-//			notice.setFilename(fileName);
-//			file.transferTo(new File(path+"/"+fileName));
-//
-//			noticeService.insert(notice);
-//			mv.setViewName("notice/noticeList");
-//		}catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//		
-//		return mv;
-//	}
+
 	@RequestMapping("/insert")
 	public String insert(Notice notice, MultipartFile file, HttpSession session) {
 
@@ -200,21 +174,46 @@ public class AdminController {
 		
 		return "redirect:notice";
 	}
+
 	
-	@RequestMapping("/down/{code}")
-	public ModelAndView down(@PathVariable int code, HttpSession session) {
-		Notice notice = noticeService.selectByCode(code);
+	@RequestMapping("/down")
+	public ModelAndView down(String fileName, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		String path = session.getServletContext().getRealPath("/WEB-INF/save");
-		mv.addObject("fname", new File(path+"/"+notice.getFilename()));
-		mv.setViewName("downLoadView"); //bean�� ���̵� ã�� �� �ֵ��� �ؾ��Ѵ�...
-		//AJAX로 구현해야할거 같음
+		mv.addObject("fname", new File(path+"/"+fileName));
+		mv.setViewName("downLoadView"); //bean의 아이디를 찾을 수 있도록 해야한다...
 		return mv;
 	}
 	
-//	@RequestMapping("/update")
-//	public String update(Notice notice, MultipartFile file, HttpSession session) {
-//		
-//	}
+	@RequestMapping("/update")
+	public String update(Notice notice, MultipartFile file, HttpSession session) {
+		try{
+			//���� ������ ������ ����
+			String path = session.getServletContext().getRealPath("/WEB-INF/save");
+			
+			
+			if(file.getSize()>0) {
+				//÷�ε� �����̸� ������ ����
+				String fileName = file.getOriginalFilename();
+				notice.setFilename(fileName);
+				file.transferTo(new File(path+"/"+fileName));
+			}
+
+			//noticeService.insert(notice);
+			noticeService.update(notice);
+
+		}catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return "redirect:notice";
+	}
+	
+	@RequestMapping("delete")
+	public String delete(int code) {
+		noticeService.delete(code);
+
+		return "redirect:notice";
+	}
 
 }
