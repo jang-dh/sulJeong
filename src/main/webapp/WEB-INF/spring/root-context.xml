@@ -9,4 +9,6 @@
 		
 	<context:component-scan base-package="team.hunter.model"/>
 	<bean class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" id="passwordEncoder"/>
+	
+	
 </beans>

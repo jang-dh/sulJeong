@@ -33,4 +33,10 @@ public class AjaxController {
 		return likesService.insert(likes);
 	}
 	
+	@PostMapping("/findPWD")
+	public Member findPWD(Member member) {
+		System.out.println(member.getName() + member.getPhone());
+		return memberService.selectByPhone(member);
+	}
+	
 }

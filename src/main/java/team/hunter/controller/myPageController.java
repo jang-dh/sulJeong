@@ -8,8 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import team.hunter.model.dto.FundingQuestion;
 import team.hunter.model.dto.Member;
 import team.hunter.model.dto.PersonalQuestion;
+import team.hunter.model.service.FundingQuestionService;
 import team.hunter.model.service.PersonalQuestionService;
 
 @Controller
@@ -17,6 +19,8 @@ import team.hunter.model.service.PersonalQuestionService;
 public class myPageController {
 	@Autowired
 	private PersonalQuestionService personalQs;
+	@Autowired
+	private FundingQuestionService fundingQs;
 	
 	@RequestMapping("myQuestion")
 	public ModelAndView personalQuestionList() {
@@ -38,4 +42,14 @@ public class myPageController {
 		return "redirect:/mypage/myQuestion";
 	}
 
+	
+	@RequestMapping("fundingQuestion")
+	public ModelAndView fundingQuestion() {
+		Member member =(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		List<FundingQuestion> list = fundingQs.fundingQuestionList(member.getCode());
+		return new ModelAndView("mypage/fundingQuestionList", "list", list);
+	}
+	
+	@RequestMapping("fundingQuestionList")
+	public void fundingQuestionList() {}
 }
