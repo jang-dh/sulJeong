@@ -1,10 +1,10 @@
 package team.hunter.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import team.hunter.model.dto.Likes;
@@ -26,10 +26,10 @@ public class AjaxController {
 		return memberService.selectByPhone(member);
 	}
 
-	@RequestMapping(value = "/funding/serialize", method = RequestMethod.POST)
+	@RequestMapping(value = "/funding/insertLikes", method = RequestMethod.POST)
 	public int insertLikes(String fundingCode) {
-		Likes likes = new Likes(3, Integer.parseInt(fundingCode));
-		System.out.println("likes");
+		Member member =(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Likes likes = new Likes(member.getCode(), Integer.parseInt(fundingCode));
 		return likesService.insert(likes);
 	}
 	

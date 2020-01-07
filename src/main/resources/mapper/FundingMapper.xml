@@ -25,7 +25,7 @@
 		select distinct f.code as code, md_code, title, reward_name, goal_price, stack_price, image, category, open_date, end_date, funding_state, count(*)over(PARTITION by funding_code) as cnt
 		from funding f, likes l
 		<where>
-			l.funding_code = f.code
+			l.funding_code(+) = f.code
 			<if test='where!=null and where.equals("title") and val!=null'>
 				and title like '%' || upper(#{val}) || '%'
 			</if>
