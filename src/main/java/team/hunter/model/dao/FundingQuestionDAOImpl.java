@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import team.hunter.model.dto.FundingQuestion;
-import team.hunter.model.dto.FundingRequest;
 
 @Repository
 public class FundingQuestionDAOImpl implements FundingQuestionDAO {
@@ -14,8 +13,8 @@ public class FundingQuestionDAOImpl implements FundingQuestionDAO {
 	private SqlSession session;
 
 	@Override
-	public int fundingQuestionInsert(FundingQuestion fundingQuestion) {
-		int result = session.insert("FundingQuestionMapper.fundingQuestionInsert", fundingQuestion);
+	public int insert(FundingQuestion fundingQuestion) {
+		int result = session.insert("fundingQuestionMapper.fundingQuestionInsert", fundingQuestion);
 		return result;
 	}
 

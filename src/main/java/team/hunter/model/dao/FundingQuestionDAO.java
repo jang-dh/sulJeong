@@ -6,6 +6,6 @@ public interface FundingQuestionDAO {
 	/*
 	 * 펀딩 문의 등록하기
 	 */
-	int fundingQuestionInsert(FundingQuestion fundingQuestion);
+	int insert(FundingQuestion fundingQuestion);
 
 }

@@ -6,7 +6,7 @@
 
 <script type="text/javascript">
 	$(function() {
-		$("button[type=button]").on("click", function() {
+		$(".likes").on("click", function() {
 			//alert(${funding.code});
 			$.ajax({
 				url : "insertLikes", // 서버요청주소
@@ -25,6 +25,33 @@
 					alert(err + " 오류 발생");
 				} //실패 시
 				
+			});
+		});
+	});
+	
+	$(function () {
+		$(".question").on("click", function () {
+			var fundingCode = ${funding.code};
+			var content = $('input[name="form_content"]').val();
+			var subject = $('input[name="form_subject"]').val();
+
+			//alert(1);
+			$.ajax({
+				url: "fundingQuestionInsert", // 서버요청주소
+				type: "post", // 요청방식
+				data: {fundingCode : fundingCode, subject : subject, content : content},
+				dataType: "text",
+				beforeSend: function (xhr) 
+				{
+					xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+				},
+				success: function (result) {
+					if(result == '1')
+						alert("문의가 등록되었습니다.")
+				},
+				erorr: function (err) {
+					alert(err + "오류 발생")
+				}
 			});
 		});
 	});
@@ -116,7 +143,7 @@
 										$('[data-countdown]').each(function() {
 											var $this = $(this), finalDate = $(this).data('countdown');
 											$this.countdown(finalDate,function(event) {
-												$this.html(event.strftime('%D 일 %H:%M:%S'));
+												$this.html(event.strftime('%D 일'));
 											});
 										});
 									});
@@ -146,7 +173,7 @@
 							</div>
 							<div
 								class="pull-right font-weight-400 text-black-333 pr-0 mt-15 mb-15">
-								<button class="single_add_to_cart_button btn btn-theme-colored"
+								<button class="single_add_to_cart_button btn btn-theme-colored likes"
 									type="button">
 									좋아요 <i class="fa fa-thumbs-up text-white mr-10"></i>
 								</button>
@@ -247,22 +274,22 @@
 									<!-- <div class="col-sm-6"> -->
 									<div class="funding_question">
 										<label>제목 <small>*</small></label> 
-										<input name="form_content" type="text" placeholder="제목을 입력해 주세요." class="form-control">
+										<input name="form_subject" type="text" placeholder="제목을 입력해 주세요." class="form-control">
 										<label>문의내용 <small>*</small></label>
-										<textarea id="form_message" name="form_message"
+										<input name="form_content" type="text" 
 											class="form-control required" rows="5"
-											placeholder="내용을 입력해 주세요.	"></textarea>
+											placeholder="내용을 입력해 주세요.">
 										<!-- <div
 											class="pull-left font-weight-400 text-black-333 pr-0 mt-15 mb-15"> -->
-										<button type="button" class="btn btn-dark btn-flat"
+										<button type="button" class="btn btn-dark btn-flat question"
 											data-toggle="modal" data-target=".bs-example-modal-sm">문의하기</button>
-
+<!-- 
 										<div class="modal fade bs-example-modal-sm" tabindex="-1"
 											role="dialog" aria-labelledby="mySmallModalLabel">
 											<div class="modal-dialog modal-sm">
 												<div class="modal-content">문의가 등록 되었습니다.</div>
 											</div>
-										</div>
+										</div> -->
 										<!-- </div> -->
 									</div>
 									<!-- </div> -->
