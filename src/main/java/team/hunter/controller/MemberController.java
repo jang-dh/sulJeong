@@ -35,5 +35,11 @@ public class MemberController {
 	public String searchLoginInfoForm() {
 		return "form/searchLoginInfoForm";
 	}
+	
+	@RequestMapping("/fundingOpenRequest")
+	public String fundingOpenRequest() {
+		
+		return "form/fundingRequestForm";
+	}
 
 }
