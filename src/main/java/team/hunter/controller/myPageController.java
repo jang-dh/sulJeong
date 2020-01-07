@@ -22,8 +22,20 @@ public class myPageController {
 	public ModelAndView personalQuestionList() {
 		Member member =(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		List<PersonalQuestion> list = personalQs.personalQuestionList(member.getCode());
-		System.out.println(list);
-		
 		return new ModelAndView("mypage/personalQuestionList", "list", list);
 	}
+	
+	@RequestMapping("personalQuestionForm")
+	public String personalQuestionForm() {
+		return "form/personalQuestionForm";
+	}
+	
+	@RequestMapping("personalQuestionInsert")
+	public String personalQuestionInsert(PersonalQuestion personalQuestion) {
+		Member member =(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		personalQuestion.setMemberCode(member.getCode());
+		personalQs.personalQuestionInsert(personalQuestion);
+		return "redirect:/mypage/myQuestion";
+	}
+
 }

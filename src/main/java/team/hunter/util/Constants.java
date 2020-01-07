@@ -2,9 +2,13 @@ package team.hunter.util;
 
 
 public interface Constants {
-	//°ü¸®ÀÚ ±ÇÇÑ
 	String ROLE_ADMIN = "ROLE_ADMIN";
-	
-	//È¸¿ø ±ÇÇÑ
 	String ROLE_MEMBER = "ROLE_MEMBER";
+	
+	//ì „í†µì£¼ ì¹´í…Œê³ ë¦¬
+	int takju = 301;
+	int riceWine = 302;
+	int distill = 303;
+	int fruitWine = 304;
+	int wine = 305;
 }

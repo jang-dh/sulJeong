@@ -10,12 +10,6 @@
 		$("#logout").click(function(){
 			$("#logoutSubmit").submit();
 		});
-		
-		$("a").click(function(){
-			var href = $(this).attr('href');
-			var token = href+"?${_csrf.parameterName}=${_csrf.token}";
-			$(this).attr('href',token);
-		});
 	});
 </script>
 
@@ -198,7 +192,4 @@
                     </div>
                 </div>
             </div>
-            <form id="AutoritySending" method="post">
-            	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" >
-            </form>
         </header>
