@@ -45,13 +45,13 @@ public class AdminController {
 	@RequestMapping("/admin/fundingRequest")
 	public String fundingRequest() {
 		
-		return "admin/iframe/fundingRequest";
+		return "admin/fundingRequest";
 	}
 	
 	@RequestMapping("/admin/fundingInsert")
 	public String fundingInsert() {
 		
-		return "admin/iframe/fundingInsert";
+		return "admin/fundingInsert";
 	}
 	//1:1문의 조회
 	@RequestMapping("/admin/personalQuestion")
@@ -60,7 +60,7 @@ public class AdminController {
 		
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("list", list);
-		mv.setViewName("admin/iframe/personalQuestion");
+		mv.setViewName("admin/personalQuestion");
 		
 		
 		return mv;
@@ -75,7 +75,7 @@ public class AdminController {
 	@RequestMapping("/admin/statistics")
 	public String statistics() {
 		
-		return "admin/iframe/statistics";
+		return "admin/statistics";
 	}
 	
 
