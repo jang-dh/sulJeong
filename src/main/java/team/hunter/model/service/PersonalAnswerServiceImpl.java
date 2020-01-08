@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sun.org.apache.bcel.internal.Constants;
 
 import team.hunter.model.dao.PersonalAnswerDAO;
 import team.hunter.model.dto.PersonalAnswer;
