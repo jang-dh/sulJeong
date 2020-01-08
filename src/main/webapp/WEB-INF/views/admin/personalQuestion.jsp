@@ -45,7 +45,7 @@
 									<td><a href="${pageContext.request.contextPath}/personalQuestionDetail/${question.code}">${question.subject}</a></td>
 									<td>${question.regdate}</td>
 									<c:choose>
-										<c:when test="${question.state == '200'}">
+										<c:when test="${question.state == '200' or question.state =='진행중'}">
 											<td>진행중</td>
 										</c:when>
 										<c:otherwise>
