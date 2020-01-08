@@ -27,6 +27,7 @@
 				and funding_code = #{fundingCode}
 			</if>
 		</where>
+		order by funding_state
 	</select>
 </mapper>	
 

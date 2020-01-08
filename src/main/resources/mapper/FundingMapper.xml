@@ -11,7 +11,7 @@
 			<if test='where!=null and where.equals("title") and val!=null'>
 				and title like '%' || upper(#{val}) || '%'
 			</if>
-			and funding_state = 'open'
+			and funding_state = '501'
 		</where>
 		<if test='order!=null and order.equals("lastest")'>
 			order by end_date
@@ -29,7 +29,7 @@
 			<if test='where!=null and where.equals("title") and val!=null'>
 				and title like '%' || upper(#{val}) || '%'
 			</if>
-			and funding_state = 'open'
+			and funding_state = '501'
 		</where>
 		order by cnt desc
 	</select>
@@ -45,7 +45,7 @@
 			<if test="category!=0">
 				and category = #{category}
 			</if>
-			and funding_state = 'open'
+			and funding_state = '501'
 		</where>
 		<if test='order!=null and order.equals("lastest")'>
 			order by end_date
@@ -66,7 +66,7 @@
 			<if test="category!=0">
 				and category = #{category}
 			</if>
-			and funding_state = 'open'
+			and funding_state = '501'
 		</where>
 		order by cnt desc
 	</select>
@@ -94,7 +94,7 @@
 			select code, md_code, title, reward_name, reward_price, goal_price, stack_price, image, category, open_date, end_date, funding_state
 			from ( select code, md_code, title, reward_name, reward_price, goal_price, stack_price, image, category, open_date, end_date, funding_state 
 	        		from funding
-	        		where funding_state = 'open'
+	        		where funding_state = '501'
 	        		order by end_date)
 			where rownum < 5
 		]]>
@@ -105,7 +105,7 @@
 			select code, md_code, title, reward_name, reward_price, goal_price, stack_price, image, category, open_date, end_date, funding_state
 			from ( select code, md_code, title, reward_name, reward_price, goal_price, stack_price, image, category, open_date, end_date, funding_state 
         			from funding
-        			where funding_state = 'before_open'
+        			where funding_state = '502'
         			order by open_date)
 			where rownum < 5
 		]]>

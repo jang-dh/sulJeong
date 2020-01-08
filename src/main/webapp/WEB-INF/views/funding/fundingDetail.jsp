@@ -5,11 +5,19 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <script type="text/javascript">
+	//jquery
 	$(function() {
-		$(".likes").on("click", function() {
-			//alert(${funding.code});
+		if(${likes != null}){
+			$(".insertLikes").hide();
+			$(".deleteLikes").show();
+		}else{
+			$(".insertLikes").show();
+			$(".deleteLikes").hide();
+		}
+		
+		$(".insertLikes").on("click", function() {
 			$.ajax({
-				url : "insertLikes", // 서버요청주소
+				url : "${pageContext.request.contextPath}/likes/insert", // 서버요청주소
 				type : "post", // 요청방식(get | post | put | patch | delete)
 				data : "fundingCode=" + ${funding.code},
 				dataType : "text", //서버가 보내온 데이터 타입
@@ -20,16 +28,39 @@
 				success : function(result) {
 					if(result == '1')
 						alert("좋아요가 등록되었습니다.");
+					$(".insertLikes").hide();
+					$(".deleteLikes").show();
 				}, //성공 시
 				erorr : function(err) {
 					alert(err + " 오류 발생");
 				} //실패 시
-				
 			});
+			//ajax End			
 		});
-	});
+		
+		$(".deleteLikes").on("click", function() {
+			$.ajax({
+				url : "${pageContext.request.contextPath}/likes/delete", // 서버요청주소
+				type : "post", // 요청방식(get | post | put | patch | delete)
+				data : "fundingCode=" + ${funding.code},
+				dataType : "text", //서버가 보내온 데이터 타입
+				beforeSend : function(xhr)
+                {   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
+                    xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+                },
+				success : function(result) {
+					if(result == '1')
+						alert("좋아요가 취소되었습니다.");
+					$(".deleteLikes").hide();
+					$(".insertLikes").show();
+				}, //성공 시
+				erorr : function(err) {
+					alert(err + " 오류 발생");
+				} //실패 시
+			});
+			//ajax End			
+		});
 	
-	$(function () {
 		$(".question").on("click", function () {
 			var fundingCode = ${funding.code};
 			var content = $('input[name="form_content"]').val();
@@ -171,15 +202,15 @@
 									</div>
 								</div>
 							</div>
-							<div
-								class="pull-right font-weight-400 text-black-333 pr-0 mt-15 mb-15">
-								<button class="single_add_to_cart_button btn btn-theme-colored likes"
-									type="button">
-									좋아요 <i class="fa fa-thumbs-up text-white mr-10"></i>
+							<div class="pull-right font-weight-400 text-black-333 pr-0 mt-15 mb-15">
+								<button class="single_add_to_cart_button btn btn-theme-colored deleteLikes" type="button">
+									좋아요 취소 <i class="fa fa-thumbs-down text-white mr-10"></i>
 								</button>
-								<div class="font-icon-list col-md-2 col-sm-3 col-xs-6 col-xs-6">
-
-								</div>
+								<div class="font-icon-list col-md-2 col-sm-3 col-xs-6 col-xs-6"></div>
+								<button class="single_add_to_cart_button btn btn-default btn-theme-colored insertLikes" type="button">
+									좋아요 <i class="fa fa-thumbs-up"></i>
+								</button>
+								<div class="font-icon-list col-md-2 col-sm-3 col-xs-6 col-xs-6"></div>
 							</div>
 
 						</div>

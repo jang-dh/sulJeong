@@ -34,7 +34,9 @@ public class FundingController {
 	//펀딩 상세페이지 이동
 	@RequestMapping("/funding/{code}")
 	public String fundingDetail(@PathVariable int code, Model model) {
-		Member member =(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Member member = null;
+		if(!SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser"))
+			member =(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		model.addAttribute("funding", service.selectByCode(code));
 		
