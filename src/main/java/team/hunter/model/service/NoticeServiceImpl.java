@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import team.hunter.model.dao.NoticeDAO;
+import team.hunter.model.dto.Funding;
+import team.hunter.model.dto.FundingRequest;
 import team.hunter.model.dto.Notice;
 
 @Service
@@ -48,6 +50,20 @@ public class NoticeServiceImpl implements NoticeService {
 	public int update(Notice code) {
 		int result = dao.update(code);
 		if(result==0) throw new RuntimeException("공지사항 수정에 실패했습니다.");
+		return result;
+	}
+
+	@Override
+	public List<FundingRequest> selectFundingRequest() {
+		List<FundingRequest> list = dao.selectFundingRequest();
+		if(list ==null) throw new RuntimeException("오류입니다.");
+		return list;
+	}
+
+	@Override
+	public int fundInsert(Funding funding) {
+		int result = dao.fundInsert(funding);
+		if(result==0) throw new RuntimeException("펀딩 등록에 실패했습니다.");
 		return result;
 	}
 

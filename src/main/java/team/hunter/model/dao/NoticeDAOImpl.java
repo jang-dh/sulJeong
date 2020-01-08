@@ -8,6 +8,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import team.hunter.model.dto.Funding;
+import team.hunter.model.dto.FundingRequest;
 import team.hunter.model.dto.Notice;
 
 @Repository
@@ -44,6 +46,18 @@ public class NoticeDAOImpl implements NoticeDAO {
 	public int update(Notice notice) {
 		
 		return session.update("noticeMapper.update", notice);
+	}
+
+	@Override
+	public List<FundingRequest> selectFundingRequest() {
+		
+		return session.selectList("noticeMapper.selectFundingRequest");
+	}
+
+	@Override
+	public int fundInsert(Funding funding) {
+		
+		return session.insert("noticeMapper.fundInsert", funding);
 	}
 
 }

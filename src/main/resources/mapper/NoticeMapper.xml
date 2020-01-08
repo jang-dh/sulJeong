@@ -30,6 +30,14 @@
 		from notice
 		where code=#{_parameter}
 	</delete>
+	
+	<select id="selectFundingRequest" resultType="fundingRequest">
+		select code, member_code, subject, state, regdate from funding_request
+	</select>
+	
+	<insert id="fundInsert" parameterType="funding">
+		insert into funding values(SEQ_NO.nextval, #{mdCode}, #{title}, #{rewardName}, #{rewardPrice}, #{goalPrice}, 0, #{image}, #{category}, #{openDate}, #{endDate}, '502')
+	</insert>
 
 </mapper>	
 
