@@ -38,4 +38,14 @@ public class MemberDAOImpl implements MemberDAO {
 		session.update("memberMapper.newPassword", member);
 		
 	}
+
+	@Override
+	public int changeMyInfo(Member member) {
+		return session.update("memberMapper.changeMyInfo", member);
+	}
+
+	@Override
+	public int membershipWithdrawal(Member member) {
+		return session.delete("memberMapper.membershipWithdrawal", member);
+	}
 }

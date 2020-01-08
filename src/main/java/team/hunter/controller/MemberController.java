@@ -41,6 +41,9 @@ public class MemberController {
 	
 	@RequestMapping("/memberJoin")
 	public String memberJoin(Member member) {
+		if(member.getEmailAccept()==null) {
+			member.setEmailAccept("0");
+		}
 		memberService.memberJoin(member);
 		return "redirect:/";
 	}

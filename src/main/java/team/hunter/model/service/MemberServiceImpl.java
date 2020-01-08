@@ -2,6 +2,8 @@ package team.hunter.model.service;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -60,6 +62,35 @@ public class MemberServiceImpl implements MemberService {
 		member.setPwd(pwd);
 				
 		memberDAO.newPassword(member);
+	}
+
+	@Override
+	public Member changeMyInfo(Member member) {
+		//가입 전에 비밀번호 평문을 암호화 해서 저장한다.
+		String pwd = passwordEncoder.encode(member.getPwd());
+		member.setPwd(pwd);
+				
+		int result = memberDAO.changeMyInfo(member);
+		Member memberDB = memberDAO.selectMemberById(member.getId());
+		
+		return memberDB;
+	}
+	
+	@Transactional
+	@Override
+	public int membershipWithdrawal(Member member) {
+		Member memberDB = memberDAO.selectMemberById(member.getId());
+		if(!passwordEncoder.matches(member.getPwd(), memberDB.getPwd())) {
+			throw new RuntimeException("비밀번호를 확인해주세요 ");
+		}
+		int result = authorityDAO.membershipWithdrawal(memberDB.getCode());
+		System.out.println(result);
+		if(result!=0) {
+			result = memberDAO.membershipWithdrawal(member);
+			System.out.println(result);
+		}
+		
+		return result;
 	}
 
 }
