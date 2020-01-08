@@ -147,6 +147,7 @@ $(function() {
 								</div>
 							</div>
 						</div>
+						<%-- <form action="transfer"> --%>
 						<div class="col-md-7">
 							<div class="product-summary">
 								<h2 class="product-title">${funding.title}</h2>
@@ -235,8 +236,8 @@ $(function() {
 								</button>
 								<div class="font-icon-list col-md-2 col-sm-3 col-xs-6 col-xs-6"></div>
 							</div>
-
 						</div>
+						<%-- </form> --%>
 						<div class="cart-form-wrapper mt-30">
 							<form id="frm" enctype="multipart/form-data" method="post"
 								class="cart"

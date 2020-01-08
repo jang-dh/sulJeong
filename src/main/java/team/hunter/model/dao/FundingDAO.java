@@ -54,4 +54,9 @@ public interface FundingDAO {
 	 * 진행된 펀딩을 마감
 	 * */
 	public int updateFundingStateClose();
+	
+	/**
+	 * 달성금액 업데이트
+	 * */
+	public int updateStackPrice();
 }

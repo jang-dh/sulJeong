@@ -148,4 +148,11 @@
 			where sysdate >= end_date and funding_state = '501'
 		]]>
 	</update>
+	
+	<!-- transaction -->
+	<update id="updateStackPrice" parameterType="funding">
+		update funding
+		set stack_price = stack_price + #{rewardPrice}
+		where funding_code=#{stackPrice}
+	</update>
 </mapper>

@@ -26,5 +26,4 @@ public class PurchaseServiceImpl implements PurchaseService {
 		List<Purchase> list = purchaseDAO.selectAll();
 		return list;
 	}
-
 }

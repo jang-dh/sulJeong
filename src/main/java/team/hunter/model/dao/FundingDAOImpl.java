@@ -109,4 +109,9 @@ public class FundingDAOImpl implements FundingDAO {
 	public int updateFundingStateClose() {
 		return session.update("fundingMapper.updateFundingStateClose");
 	}
+	
+	@Override
+	public int updateStackPrice() {
+		return session.update("fundingMapper.updateStackPrice");
+	}
 }
