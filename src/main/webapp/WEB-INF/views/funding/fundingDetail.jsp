@@ -7,6 +7,7 @@
 <script type="text/javascript">
 //jquery
 $(function() {
+	
 	if(${likes != null}){
 		$(".insertLikes").hide();
 		$(".deleteLikes").show();
@@ -336,12 +337,12 @@ $(function() {
 										<button type="button" class="btn btn-dark btn-flat question"
 											data-toggle="modal" data-target=".bs-example-modal-sm">문의하기</button>
 
-										<div class="modal fade bs-example-modal-sm" tabindex="-1"
+										<!-- <div class="modal fade bs-example-modal-sm" tabindex="-1"
 											role="dialog" aria-labelledby="mySmallModalLabel">
 											<div class="modal-dialog modal-sm">
 												<div class="modal-content">문의가 등록 되었습니다.</div>
 											</div>
-										</div>
+										</div> -->
 										<!-- </div> -->
 									</div>
 									<!-- </div> -->
