@@ -9,10 +9,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import team.hunter.model.dto.FundingAnswer;
 import team.hunter.model.dto.FundingQuestion;
 import team.hunter.model.dto.Member;
 import team.hunter.model.dto.PersonalQuestion;
+import team.hunter.model.service.FundingAnswerService;
 import team.hunter.model.service.FundingQuestionService;
+import team.hunter.model.service.MemberService;
 import team.hunter.model.service.PersonalQuestionService;
 
 @Controller
@@ -22,6 +25,10 @@ public class myPageController {
 	private PersonalQuestionService personalQs;
 	@Autowired
 	private FundingQuestionService fundingQs;
+	@Autowired
+	private FundingAnswerService fundingAs;
+	@Autowired
+	private MemberService memberService;
 	
 	@RequestMapping("myQuestion")
 	public ModelAndView personalQuestionList() {
@@ -54,8 +61,23 @@ public class myPageController {
 	@RequestMapping("fundingQuestionDetailPage/{code}")
 	public ModelAndView fundingQuestionDetail(@PathVariable int code) {
 		FundingQuestion fundingQuestion =fundingQs.selectByCode(code);
+		FundingAnswer fundingAnswer = fundingAs.selectByCode(code);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("detail", fundingQuestion);
+		mv.addObject("answer", fundingAnswer);
+		mv.setViewName("mypage/fundingQuestionDetail");
 		
-		return new ModelAndView("mypage/fundingQuestionDetail", "detail", fundingQuestion);
+		return mv;
+	}
+	
+	@RequestMapping("myInfoMenu")
+	public ModelAndView myInfoMenu() {
+		Member member =(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		member = memberService.selectByPhone(member);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("member", member);
+		mv.setViewName("mypage/chooseMyInfoMenu");
+		return mv;
 	}
 	
 }

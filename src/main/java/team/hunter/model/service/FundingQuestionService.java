@@ -11,4 +11,5 @@ public interface FundingQuestionService {
 	List<FundingQuestion> fundingQuestionList(int memberCode);
 	
 	FundingQuestion selectByCode(int code);
+	
 }

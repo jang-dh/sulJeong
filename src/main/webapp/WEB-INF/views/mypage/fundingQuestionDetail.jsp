@@ -4,6 +4,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <script>
+	//contextPath 얻기
+	function getContextPath() {
+		var hostIndex = location.href.indexOf(location.host) + location.host.length;
+		return location.href.substring(hostIndex, location.href.indexOf('/', hostIndex + 1) );
+	}
+
 $(function(){
 	$("#insertBtn").click(function(){
 		if($("#contentBox").val()==""){
@@ -13,27 +19,26 @@ $(function(){
 		}
 		
 		var contentVal = $("#contentBox").val();
+		console.log(contentVal);
 		
 		//var allDate = {"name":nameVal, "phone":phoneVal};
-		var allDate = "${_csrf.parameterName}=${_csrf.token}"+"&content="+contentVal;
+		var allDate = "${_csrf.parameterName}=${_csrf.token}"+"&contentBox="+contentVal+"&code="+${detail.code};
 		  $.ajax({
-				 url: "contentInsert", //서버요청주소
+				 url: getContextPath() + "/contentInsert", //서버요청주소
 				 type:"post", //요청방식(get|post|put:patch:delete)
 				 dataType:"json", //서버가 보내온 데이터 타입(text,html,xml,json)
 				 data: allDate ,//서버에게 보내는 parameter 정보
 				 success:function(result){
-				    $("#comments").html(result.content+" | "+result.regdate)
+				    $("#comments").html(result.questionCode + "| " + result.content+" | "+result.regdate)
+				    $("#insertComment").hide();
 					
 				 } ,//성공했을대
 				 error:function(err){
+					 alert("답변은 한개만 등록가능합니다.");
 				 }//오류발생했을때
-			 }); 
+		}); 
 	});
 });
-
-
-
-
 
 
 </script>    
@@ -72,17 +77,27 @@ $(function(){
           </div>
         </div>
       </div>
-      
-      <hr>
-      
-      <h3> 댓글 ajax</h3>
-      <input type="text" name="content" id="contentBox" value=""> <p>
-      <button type="button" name="insert" id="insertBtn" >등록</button>
-       
-      <div id="comments">
-      
+      <c:if test="${empty answer}">
+      <div class="container" id="insertComment">
+        <div class="row">
+          <div class="col-md-6 col-md-push-3">
+            <div class="border-1px p-30 mb-0">
+              <h5 class="text-theme-colored mt-0 pt-5">답변하기</h5>
+                  <label>Message <small>*</small></label>
+                  <textarea name="form_message" class="form-control required" rows="6" placeholder="답변 내용 작성" name="contentBox" id="contentBox"></textarea>
+                  <input name="form_botcheck" class="form-control" type="hidden" value="" />
+                  <button type="button" class="btn btn-block btn-dark btn-theme-colored btn-sm mt-20 pt-10 pb-10" data-loading-text="Please wait..." name="insertBtn" id="insertBtn" >답변 등록</button>
+            </div>
+          </div>
+        </div>
       </div>
+      </c:if>
     </section>
+    
+    
+    <div id="comments">
+      		${answer.questionCode} ${answer.content} ${answer.regdate}
+    </div>
 
 
     
