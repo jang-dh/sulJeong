@@ -1,7 +1,9 @@
 package team.hunter.model.service;
 
-import org.springframework.stereotype.Service;
+import team.hunter.model.dto.FundingAnswer;
 
 public interface FundingAnswerService {
-
+	int contentInsert(FundingAnswer fundingAnswer);
+	
+	FundingAnswer selectByCode(int code);
 }

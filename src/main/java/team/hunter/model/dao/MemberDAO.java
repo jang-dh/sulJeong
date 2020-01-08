@@ -13,4 +13,9 @@ public interface MemberDAO {
 	
 	Member selectByPhone(Member member);
 
+	
+	/**
+	 * 비밀번호 이메일로 찾기
+	 * */
+	void newPassword(Member member) throws Exception;
 }
