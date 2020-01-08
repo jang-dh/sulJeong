@@ -57,7 +57,7 @@
 												<tr>
 													<th scope="row">${state.count}</th>
 													<td>${fundingReqManage.id}</td>
-													<td>${fundingReqManage.subject}</td>
+													<td><a href="${pageContext.request.contextPath}/mypage/myOpenFundingReqManage/${fundingReqManage.code}">${fundingReqManage.subject}</a></td>
 													<td>${fundingReqManage.regdate}</td>
 													<td>${fundingReqManage.state}</td>
 												</tr>
@@ -76,6 +76,7 @@
 									<table class="table table-hover">
 										<thead>
 											<tr>
+												<th>#</th>
 												<th>아이디</th>
 												<th>이름</th>
 												<th>주소</th>
@@ -84,8 +85,9 @@
 										</thead>
 										<tbody>
 											<c:forEach items="${fundingOpenPeople}"
-												var="fundingOpenPeople">
+												var="fundingOpenPeople" varStatus="state">
 												<tr>
+													<th scope="row">${state.count}</th>
 													<th scope="row">${fundingOpenPeople.id}</th>
 													<td>${fundingOpenPeople.name}</td>
 													<td>${fundingOpenPeople.addr}</td>

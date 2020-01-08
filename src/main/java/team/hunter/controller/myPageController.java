@@ -109,4 +109,15 @@ public class myPageController {
 		return "mypage/myOpenFundingDetail";
 	}
 	
+	/**
+	 * 내가 오픈한 펀딩 상세페이지 - 펀딩 문의자 관리
+	 * */
+	@RequestMapping("/myOpenFundingReqManage/{questionCode}")
+	public String myOpenFundingReqManage(@PathVariable int questionCode, Model model) {
+		FundingQuestion fundingQuestion = fundingReqService.myOpenFundingReqManage(questionCode);
+		model.addAttribute("fundingQuestion", fundingQuestion);
+		return "mypage/myOpenFundingReqManage";
+	}
+	
+	
 }

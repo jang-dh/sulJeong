@@ -39,4 +39,10 @@ public class FundingRequestDAOImpl implements FundingRequestDAO {
 		List<Member> list = session.selectList("fundingRequestMapper.myFundingOpenDetailUserManage", fundingCode);
 		return list;
 	}
+
+	@Override
+	public FundingQuestion myOpenFundingReqManage(int questionCode) {
+		FundingQuestion fundingQuestion = session.selectOne("fundingRequestMapper.myFundingOpenDetailsDetail", questionCode);
+		return fundingQuestion;
+	}
 }

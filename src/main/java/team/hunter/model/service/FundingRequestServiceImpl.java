@@ -47,4 +47,10 @@ public class FundingRequestServiceImpl implements FundingRequestService {
 		List<Member> list = fundingrequestDAO.myFundingOpenDetailSecond(fundingCode);
 		return list;
 	}
+
+	@Override
+	public FundingQuestion myOpenFundingReqManage(int questionCode) {
+		FundingQuestion fundingQuestion = fundingrequestDAO.myOpenFundingReqManage(questionCode);
+		return fundingQuestion;
+	}
 }

@@ -28,4 +28,9 @@ public interface FundingRequestDAO {
 	 * 펀딩 디테일 페이지 - 펀딩 참가 사용자 관리
 	 * */
 	List<Member> myFundingOpenDetailSecond(int fundingCode);
+	
+	/**
+	 * 펀딩 디테일 페이지 - 펀딩 문의 관리 상세페이지
+	 * */
+	FundingQuestion myOpenFundingReqManage(int questionCode);
 }
