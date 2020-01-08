@@ -14,6 +14,12 @@
 		 #{purchaseState}, sysdate, #{deliveryNumber}, #{Courier})
 	</insert>
 	
+	<!-- <update id="withDraw" parameterType="purchase">
+		update bank
+	    set balance = balance - #{transferAmount}
+	    where account=#{output}
+	</update> -->
+	
 	<select id="selectByCode" resultType="purchase"></select>
 
 </mapper>	
