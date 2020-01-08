@@ -1,17 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="fundingMapper">
-	<select id="select" resultType="funding" parameterType="map">
-		select code, md_code, title, reward_name, reward_price, goal_price, stack_price, image, category, open_date, end_date, funding_state
-		from funding
+	<resultMap type="funding" id="fundingMap">
+		<id column="code" property="code"/>
+		<result column="md_code" property="mdCode"/>
+		<result column="title" property="title"/>
+		<result column="reward_name" property="rewardName"/>
+		<result column="reward_price" property="rewardPrice"/>
+		<result column="goal_price" property="goalPrice"/>
+		<result column="stack_price" property="stackPrice"/>
+		<result column="image" property="image"/>
+		<result column="category" property="category"/>
+		<result column="open_date" property="openDate"/>
+		<result column="end_date" property="endDate"/>
+		<result column="funding_state" property="fundingState"/>
+		<association property="member" javaType="member">
+			<id column="code" property="code"/>
+			<result column="id" property="id"/>
+			<result column="name" property="name"/>
+		</association>		
+	</resultMap>
+
+	<select id="select" resultMap="fundingMap" parameterType="map">
+		select f.code, md_code, title, reward_name, reward_price, goal_price, stack_price, image, category, open_date, end_date, funding_state, name
+		from funding f, member m
 		<where>
+			f.md_code = m.code and f.funding_state = '501'
 			<if test="category!=0">
-				category = #{category}
+				and f.category = #{category}
 			</if>
 			<if test='where!=null and where.equals("title") and val!=null'>
 				and title like '%' || upper(#{val}) || '%'
 			</if>
-			and funding_state = '501'
 		</where>
 		<if test='order!=null and order.equals("lastest")'>
 			order by end_date
@@ -21,11 +41,11 @@
 		</if>
 	</select>
 
-	<select id="selectLikesOrder" resultType="funding" parameterType="map">
-		select distinct f.code as code, md_code, title, reward_name, goal_price, stack_price, image, category, open_date, end_date, funding_state, count(*)over(PARTITION by funding_code) as cnt
-		from funding f, likes l
+	<select id="selectLikesOrder" resultMap="fundingMap" parameterType="map">
+		select distinct f.code as code, md_code, title, reward_name, goal_price, stack_price, image, category, open_date, end_date, funding_state, count(*)over(PARTITION by funding_code) as cnt, m.name
+		from funding f, likes l, member m
 		<where>
-			l.funding_code(+) = f.code
+			l.funding_code(+) = f.code and f.md_code = m.code
 			<if test='where!=null and where.equals("title") and val!=null'>
 				and title like '%' || upper(#{val}) || '%'
 			</if>
@@ -34,11 +54,11 @@
 		order by cnt desc
 	</select>
 
-	<select id="selectByMdName" resultType="funding" parameterType="map">
-		select f.code as code, md_code, title, reward_name, reward_price, goal_price, stack_price, image, category, open_date, end_date, funding_state
+	<select id="selectByMdName" resultMap="fundingMap" parameterType="map">
+		select f.code, md_code, title, reward_name, reward_price, goal_price, stack_price, image, category, open_date, end_date, funding_state, name
 		from funding f, member m
 		<where>
-			md_code = m.code
+			f.md_code = m.code
 			<if test='where!=null and where.equals("md_name") and val!=null'>
 				and m.name like '%' || #{val} || '%'
 			</if>
@@ -55,8 +75,8 @@
 		</if>
 	</select>
 	
-	<select id="selectByMdNameLikesOrder" resultType="funding" parameterType="map">
-		select distinct f.code as code, md_code, title, reward_name, reward_price, goal_price, stack_price, image, category, open_date, end_date, funding_state, count(*)over(PARTITION by funding_code) as cnt
+	<select id="selectByMdNameLikesOrder" resultMap="fundingMap" parameterType="map">
+		select distinct f.code as code, md_code, title, reward_name, reward_price, goal_price, stack_price, image, category, open_date, end_date, funding_state, count(*)over(PARTITION by funding_code) as cnt, name
 		from funding f, likes l, member m
 		<where>
 			f.code = l.funding_code and f.md_code = m.code
@@ -71,43 +91,61 @@
 		order by cnt desc
 	</select>
 	
-	<select id="selectByCode" resultType="funding" parameterType="int">
-		select code, md_code, title, reward_name, reward_price, goal_price, stack_price, image, category, open_date, end_date, funding_state
-		from funding
-		where code = #{_parameter}
+	<select id="selectByCode" resultMap="fundingMap" parameterType="int">
+		select f.code, md_code, title, reward_name, reward_price, goal_price, stack_price, image, category, open_date, end_date, funding_state, m.name
+		from funding f, member m
+		where f.code = #{_parameter} and f.md_code = m.code
 	</select>
 	
 
-	<select id="selectLikesRankFour" resultType="funding">
+	<select id="selectLikesRankFour" resultMap="fundingMap">
 		<![CDATA[
-			select code, md_code, title, reward_name, reward_price, goal_price, stack_price, image, category, open_date, end_date, funding_state
-			from ( select distinct f.code as code, md_code, title, reward_name, reward_price, goal_price, stack_price, image, category, open_date, end_date, funding_state, count(*)over(PARTITION by funding_code) as cnt
-					from funding f, likes l
-					where l.funding_code = f.code
+			select code, md_code, title, reward_name, reward_price, goal_price, stack_price, image, category, open_date, end_date, funding_state, name
+			from ( select distinct f.code as code, md_code, title, reward_name, reward_price, goal_price, stack_price, image, category, open_date, end_date, funding_state, count(*)over(PARTITION by funding_code) as cnt, m.name
+					from funding f, likes l, member m
+					where l.funding_code = f.code and f.md_code = m.code
 					order by cnt desc)
 			where rownum < 5
 		]]>
 	</select>
 		
-	<select id="selectLastestFour" resultType="funding">
+	<select id="selectLastestFour" resultMap="fundingMap">
 		<![CDATA[
-			select code, md_code, title, reward_name, reward_price, goal_price, stack_price, image, category, open_date, end_date, funding_state
-			from ( select code, md_code, title, reward_name, reward_price, goal_price, stack_price, image, category, open_date, end_date, funding_state 
-	        		from funding
-	        		where funding_state = '501'
+			select code, md_code, title, reward_name, reward_price, goal_price, stack_price, image, category, open_date, end_date, funding_state, name 
+			from ( select f.code, md_code, title, reward_name, reward_price, goal_price, stack_price, image, category, open_date, end_date, funding_state, m.name 
+	        		from funding f, member m
+	        		where funding_state = '501' and f.md_code = m.code
 	        		order by end_date)
 			where rownum < 5
 		]]>
 	</select>
 	
-	<select id="selectNewestFour" resultType="funding">
+	<select id="selectNewestFour" resultMap="fundingMap">
 		<![CDATA[
-			select code, md_code, title, reward_name, reward_price, goal_price, stack_price, image, category, open_date, end_date, funding_state
-			from ( select code, md_code, title, reward_name, reward_price, goal_price, stack_price, image, category, open_date, end_date, funding_state 
-        			from funding
-        			where funding_state = '502'
+			select code, md_code, title, reward_name, reward_price, goal_price, stack_price, image, category, open_date, end_date, funding_state, name
+			from ( select f.code, md_code, title, reward_name, reward_price, goal_price, stack_price, image, category, open_date, end_date, funding_state, m.name
+        			from funding f, member m
+        			where funding_state = '502' and f.md_code = m.code
         			order by open_date)
 			where rownum < 5
 		]]>
 	</select>
+	
+	<update id="updateFundingStateOpen">
+		<![CDATA[
+			update funding 
+			set funding_state = '501'
+			where sysdate >= open_date and sysdate <= end_date and funding_state = '502'
+		]]>
+	</update>
+	
+	<update id="updateFundingStateClose">
+		<![CDATA[
+			UPDATE FUNDING 
+			SET funding_state = case when stack_price >= goal_price then '503'
+									else '504'
+									end
+			where sysdate >= end_date and funding_state = '501'
+		]]>
+	</update>
 </mapper>

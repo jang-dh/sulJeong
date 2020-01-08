@@ -40,9 +40,18 @@ public interface FundingDAO {
 	 * */
 	public List<Funding> selectNewestFour();
 	
-	
 	/**
 	 * 마감임박 4개
 	 * */
 	public List<Funding> selectLastestFour();
+	
+	/**
+	 * 오픈 예정 펀딩을 오픈 상태로 갱신
+	 * */
+	public int updateFundingStateOpen();
+	
+	/**
+	 * 진행된 펀딩을 마감
+	 * */
+	public int updateFundingStateClose();
 }

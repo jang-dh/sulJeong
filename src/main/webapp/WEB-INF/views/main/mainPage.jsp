@@ -415,6 +415,7 @@
 									<h4 class="font-16 text-uppercase">
 										<a href="funding/${list.code}">${list.title}</a>
 									</h4>
+									${list.member.name}
 									<ul class="list-inline font-weight-600 font-14 clearfix mb-5">
 										<li class="pull-left font-weight-400 text-black-333 pr-0">달성금액:
 											<span class="text-theme-colored font-weight-700">${list.stackPrice}</span>
@@ -472,6 +473,7 @@
 									<h4 class="font-16 text-uppercase">
 										<a href="funding/${list.code}">${list.title}</a>
 									</h4>
+									${list.member.name}
 									<ul class="list-inline font-weight-600 font-14 clearfix mb-5">
 										<li class="pull-left font-weight-400 text-black-333 pr-0">달성금액:
 											<span class="text-theme-colored font-weight-700">${list.stackPrice}</span>
@@ -528,6 +530,7 @@
 									<h4 class="font-16 text-uppercase">
 										<a href="funding/${list.code}">${list.title}</a>
 									</h4>
+									${list.member.name}
 									<ul class="list-inline font-weight-600 font-14 clearfix mb-5">
 										<li class="pull-left font-weight-400 text-black-333 pr-0">달성금액:
 											<span class="text-theme-colored font-weight-700">${list.stackPrice}</span>
@@ -546,9 +549,8 @@
 											</div>
 										</div>
 									</div>
-									<a href="funding/${list.code}"
-										class="btn btn-default btn-theme-colored mt-10 font-16 btn-sm">펀딩하기
-										<i class="flaticon-charity-make-a-donation font-16 ml-5"></i>
+									<a href="funding/${list.code}" class="btn btn-default btn-theme-colored mt-10 font-16 btn-sm">보러가기
+										<i class="fa fa-arrow-circle-right font-16 ml-5"></i>
 									</a>
 								</div>
 							</div>

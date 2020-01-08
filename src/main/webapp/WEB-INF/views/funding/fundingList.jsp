@@ -301,6 +301,7 @@
 									<h4 class="font-16 text-uppercase">
 										<a href="${pageContext.request.contextPath}/funding/${fundingList.code}">${fundingList.title}</a>
 									</h4>
+									${fundingList.member.name}
 									<ul class="list-inline font-weight-600 font-14 clearfix mb-5">
 										<li class="pull-left font-weight-400 text-black-333 pr-0">달성금액:
 											<span class="text-theme-colored font-weight-700">${fundingList.stackPrice}</span>
