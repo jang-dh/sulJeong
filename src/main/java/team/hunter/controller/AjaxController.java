@@ -1,5 +1,7 @@
 package team.hunter.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,6 +13,10 @@ import team.hunter.model.dto.FundingQuestion;
 import team.hunter.model.dto.Likes;
 import team.hunter.model.dto.Member;
 import team.hunter.model.service.FundingQuestionService;
+import team.hunter.model.dto.FundingAnswer;
+import team.hunter.model.dto.Likes;
+import team.hunter.model.dto.Member;
+import team.hunter.model.service.FundingAnswerService;
 import team.hunter.model.service.LikesService;
 import team.hunter.model.service.MemberService;
 
@@ -24,6 +30,7 @@ public class AjaxController {
 	
 	@Autowired
 	private FundingQuestionService fundingQuestionService;
+	private FundingAnswerService fundingAs;
 
 	@PostMapping("/findId")
 	public Member findId(Member member) {
@@ -51,4 +58,17 @@ public class AjaxController {
 		return fundingQuestionService.insert(fundigQuestion);
 	}
 	
+	@PostMapping("/findPWD")
+	public Member findPWD(Member member) {
+		System.out.println(member.getName() + member.getPhone());
+		return memberService.selectByPhone(member);
+	}
+	
+	@PostMapping("/contentInsert")
+	public FundingAnswer contentInsert(int code, String contentBox){
+		FundingAnswer fundingAnswer = new FundingAnswer(code, contentBox, null);
+		fundingAs.contentInsert(fundingAnswer);
+		fundingAnswer = fundingAs.selectByCode(code);
+		return fundingAnswer;
+	}
 }
