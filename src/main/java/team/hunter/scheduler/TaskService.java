@@ -4,9 +4,9 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 @Service
-public class TaskTestService {
+public class TaskService {
  
-	//@Scheduled(cron="0/3 * * * * *")
+	@Scheduled(cron="0/3 * * * * *")
     public void TestScheduler(){
         System.out.println("스케줄링 테스트");
     }

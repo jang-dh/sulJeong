@@ -196,7 +196,7 @@
 			<div class="section-content">
 				<div class="row multi-row-clearfix" id="list-funding">
 					<c:if test="${fn:length(list) == 0}">
-						<section class="bg-white-f12">
+						<section class="bg-white-f12 exists">
 							<div class="container pb-0">
 								<div class="section-title">
 									<div class="row">
@@ -205,7 +205,7 @@
 												<!-- <h5 class="sub-title">Sub Title Here</h5> -->
 												<h2 class="title">아직 좋아한 펀딩이 없습니다.</h2>
 												<p>다양한 전통주가 회원님의 후원을 기다립니다!</p>
-												<a href="${pageContext.request.contextPath}/funding" class="btn btn-dark btn-theme-colored btn-lg">펀딩 보러가기 <i class="fa fa-arrow-circle-right"></i></a>
+												<a href="${pageContext.request.contextPath}/funding" class="btn btn-dark btn-theme-colored btn-lg mt-20">펀딩 보러가기 <i class="fa fa-arrow-circle-right"></i></a>
 											</div>
 										</div>
 									</div>
