@@ -18,7 +18,6 @@ public class PurchaseServiceImpl implements PurchaseService {
 	public int insert(Purchase purchase) {
 		System.out.println("service : " + purchase);
 		int result = purchaseDAO.insert(purchase);
-		//if(result==0) throw new RuntimeException("삽입실패");
 		return result;
 	}
 	
