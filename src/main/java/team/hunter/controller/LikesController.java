@@ -26,7 +26,7 @@ public class LikesController {
 		List<Funding> list = likesService.selectFundingByMemberCode(member.getCode());
 		if (list.size() > 4)
 			list = list.subList(0, 4);
-
+	
 		model.addAttribute("list", list);
 
 		return "mypage/likesList";

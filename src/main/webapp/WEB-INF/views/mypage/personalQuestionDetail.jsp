@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <!-- Start main-content -->
   <div class="main-content">
     <!-- Section: inner-header -->
@@ -13,11 +13,7 @@
           <div class="row"> 
             <div class="col-md-6">
               <h2 class="text-white font-36">1:1 문의</h2>
-              <ol class="breadcrumb text-left mt-10 white">
-				<li><a href="${pageContext.request.contextPath}">Home</a></li>
-                <li><a href="${pageContext.request.contextPath}/mypage/myQuestion">QnA</a></li>
-                <li class="active">Detail</li>
-              </ol>
+              
             </div>
           </div>
         </div>
@@ -39,12 +35,13 @@
             <c:choose>
             	<c:when test="${!empty question.personalAnswer.content}">
 		            <form>
-		            	<input class="form-control" type="text" value=" ${question.personalAnswer.content}" readonly/>
+		            	<input class="form-control" type="text" value=" ${question.personalAnswer.content} " readonly/>
 		            </form>
 	            </c:when>
 	            <c:otherwise>
 	            	아직 등록된 답변이 없습니다.<p>
 	            	<!-- 관리자 권한이 있을때만 보이게 해야함 -->
+	            	<sec:authorize access="hasRole('ROLE_ADMIN')">
 	            	<form action="${pageContext.request.contextPath}/admin/answerInsert" method="post">
 	            		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" >
 	            		<input type="hidden" name="questionCode" value="${question.code}">
@@ -52,6 +49,7 @@
                   		<textarea name="content" class="form-control required" rows="5" placeholder="내용을 입력해 주세요"></textarea><br>
                   		<input type="submit" value="등록" class="btn btn-dark btn-theme-colored btn-circled">
 	            	</form>
+	            	</sec:authorize>
 	            </c:otherwise>
             </c:choose>
             <a href="${pageContext.request.contextPath}/mypage/myQuestion" class="active">리스트로 돌아가기</a>
