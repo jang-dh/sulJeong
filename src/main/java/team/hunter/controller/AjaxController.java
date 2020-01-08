@@ -54,7 +54,7 @@ public class AjaxController {
 		
 		Member member = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
-		FundingQuestion fundigQuestion =new FundingQuestion(0, Integer.parseInt(fundingCode), member.getCode(), content, subject, null, null);
+		FundingQuestion fundigQuestion =new FundingQuestion(0, Integer.parseInt(fundingCode), member.getCode(), content, subject, null, null,null,null);
 		return fundingQuestionService.insert(fundigQuestion);
 	}
 	
