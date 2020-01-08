@@ -45,7 +45,7 @@ public class LikesController {
 		return list;
 	}
 
-	@RequestMapping("likes/delete")
+	@RequestMapping("/likes/delete")
 	public @ResponseBody int deleteLikes(int fundingCode) {
 		Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		int result = likesService.delete(new Likes(member.getCode(), fundingCode));

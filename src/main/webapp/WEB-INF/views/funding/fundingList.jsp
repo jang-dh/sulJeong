@@ -330,7 +330,7 @@
 											});
 										});
 									</script>
-									<a href="${fundingList.code}" class="btn btn-default btn-theme-colored mt-10 font-16 btn-sm">펀딩하기
+									<a href="${pageContext.request.contextPath}/funding/${fundingList.code}" class="btn btn-default btn-theme-colored mt-10 font-16 btn-sm">펀딩하기
 										<i class="flaticon-charity-make-a-donation font-16 ml-5"></i>
 									</a>
 								</div>

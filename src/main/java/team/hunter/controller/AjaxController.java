@@ -31,7 +31,7 @@ public class AjaxController {
 		return memberService.selectByPhone(member);
 	}
 
-	@RequestMapping(value = "/funding/insertLikes", method = RequestMethod.POST)
+	@RequestMapping(value = "/likes/insert", method = RequestMethod.POST)
 	public int insertLikes(String fundingCode) {
 		Member member =(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Likes likes = new Likes(member.getCode(), Integer.parseInt(fundingCode));
