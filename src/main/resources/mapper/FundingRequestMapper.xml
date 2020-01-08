@@ -3,8 +3,8 @@
 <mapper namespace="fundingRequestMapper">
 
 <insert id="fundingInsert" parameterType="fundingRequest">
-insert into funding_request(CODE,MEMBER_CODE,SUBJECT,FILENAME,STATE)
-values(SEQ_NO.nextval,#{memberCode},#{subject},#{filename},'미승인')
+insert into funding_request(CODE,MEMBER_CODE,SUBJECT,FILENAME,STATE,REGDATE)
+values(SEQ_NO.nextval,#{memberCode},#{subject},#{filename},'100',SYSDATE)
 </insert>
 </mapper>	
 
