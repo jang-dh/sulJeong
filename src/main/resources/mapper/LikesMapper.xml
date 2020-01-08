@@ -2,14 +2,33 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="likesMapper">
 
-	<insert id="insertLike" parameterType="likes">
+	<insert id="insert" parameterType="likes">
 		insert into likes(member_code, funding_code) values(#{memberCode},#{fundingCode})
 	</insert>
 	
-	<!-- <select id="select" resultType="likes">
-		select code, member_code, funding_code from likes
-	</select> -->
-
+	<select id="selectFundingByMemberCode" resultType="funding" parameterType="int">
+		select code, md_code, title, reward_name, reward_price, goal_price, stack_price, image, category, open_date, end_date, funding_state
+		from likes, funding
+		where likes.funding_code = funding.code and likes.member_code = #{_parameter}
+	</select>
+	
+	<delete id="delete" parameterType="likes">
+		delete from likes where member_code = #{memberCode} and funding_code = #{fundingCode}
+	</delete>
+	
+	<select id="select" resultType="likes" parameterType="likes">
+		select member_code, funding_code
+		from likes
+		<where>
+			<if test="memberCode != null">
+				member_code = #{memberCode}
+			</if>
+			<if test="fundingCode != null">
+				and funding_code = #{fundingCode}
+			</if>
+		</where>
+		order by funding_state
+	</select>
 </mapper>	
 
 

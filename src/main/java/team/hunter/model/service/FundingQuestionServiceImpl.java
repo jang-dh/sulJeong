@@ -16,8 +16,8 @@ public class FundingQuestionServiceImpl implements FundingQuestionService {
 	private FundingQuestionDAO fundingQuestionDAO;
 
 	@Override
-	public int questionInsert(FundingRequest fundingRequest) {
-		int result = fundingQuestionDAO.questionInsert(fundingRequest);
+	public int insert(FundingQuestion fundingQuestion) {
+		int result = fundingQuestionDAO.insert(fundingQuestion);
 		return result;
 	}
 

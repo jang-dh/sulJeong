@@ -4,7 +4,7 @@ public interface Constants {
 	String ROLE_ADMIN = "ROLE_ADMIN";
 	String ROLE_MEMBER = "ROLE_MEMBER";
 
-	//전통주 카테고리 funding category
+  //전통주 카테고리 funding category
 	int TAKJU = 301; // 탁주
 	int RICE_WINE = 302; //청주
 	int DISTILL = 303; //증류주
@@ -15,6 +15,7 @@ public interface Constants {
 	String REJECTED = "100";
 	String APPROVED = "101";
 	String CONSIDERING = "102";
+
 	// 문의 답변 question answer state
 	String BEFORE_ANSWER = "200";
 	String AFTER_ANSWER = "201";

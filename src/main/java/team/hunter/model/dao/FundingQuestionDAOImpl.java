@@ -16,8 +16,8 @@ public class FundingQuestionDAOImpl implements FundingQuestionDAO {
 	private SqlSession session;
 
 	@Override
-	public int questionInsert(FundingRequest fundingRequest) {
-		int result = session.insert("FundingQuestionMapper.insertQuestion", fundingRequest);
+	public int insert(FundingQuestion fundingQuestion) {
+		int result = session.insert("fundingQuestionMapper.fundingQuestionInsert", fundingQuestion);
 		return result;
 	}
 	@Override

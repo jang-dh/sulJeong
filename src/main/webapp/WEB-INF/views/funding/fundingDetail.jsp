@@ -5,11 +5,19 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <script type="text/javascript">
+	//jquery
 	$(function() {
-		$("button[type=button]").on("click", function() {
-			//alert(${funding.code});
+		if(${likes != null}){
+			$(".insertLikes").hide();
+			$(".deleteLikes").show();
+		}else{
+			$(".insertLikes").show();
+			$(".deleteLikes").hide();
+		}
+		
+		$(".insertLikes").on("click", function() {
 			$.ajax({
-				url : "serialize", // 서버요청주소
+				url : "${pageContext.request.contextPath}/likes/insert", // 서버요청주소
 				type : "post", // 요청방식(get | post | put | patch | delete)
 				data : "fundingCode=" + ${funding.code},
 				dataType : "text", //서버가 보내온 데이터 타입
@@ -20,36 +28,64 @@
 				success : function(result) {
 					if(result == '1')
 						alert("좋아요가 등록되었습니다.");
+					$(".insertLikes").hide();
+					$(".deleteLikes").show();
 				}, //성공 시
 				erorr : function(err) {
 					alert(err + " 오류 발생");
 				} //실패 시
-				
+			});
+			//ajax End			
+		});
+		
+		$(".deleteLikes").on("click", function() {
+			$.ajax({
+				url : "${pageContext.request.contextPath}/likes/delete", // 서버요청주소
+				type : "post", // 요청방식(get | post | put | patch | delete)
+				data : "fundingCode=" + ${funding.code},
+				dataType : "text", //서버가 보내온 데이터 타입
+				beforeSend : function(xhr)
+                {   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
+                    xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+                },
+				success : function(result) {
+					if(result == '1')
+						alert("좋아요가 취소되었습니다.");
+					$(".deleteLikes").hide();
+					$(".insertLikes").show();
+				}, //성공 시
+				erorr : function(err) {
+					alert(err + " 오류 발생");
+				} //실패 시
+			});
+			//ajax End			
+		});
+	
+		$(".question").on("click", function () {
+			var fundingCode = ${funding.code};
+			var content = $('input[name="form_content"]').val();
+			var subject = $('input[name="form_subject"]').val();
+
+			//alert(1);
+			$.ajax({
+				url: "fundingQuestionInsert", // 서버요청주소
+				type: "post", // 요청방식
+				data: {fundingCode : fundingCode, subject : subject, content : content},
+				dataType: "text",
+				beforeSend: function (xhr) 
+				{
+					xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+				},
+				success: function (result) {
+					if(result == '1')
+						alert("문의가 등록되었습니다.")
+				},
+				erorr: function (err) {
+					alert(err + "오류 발생")
+				}
 			});
 		});
 	});
-	
-	$("#funding_question").validate({
-        submitHandler: function(form) {
-          var form_btn = $(form).find('button[type="submit"]');
-          var form_result_div = '#form-result';
-          $(form_result_div).remove();
-          form_btn.before('<div id="form-result" class="alert alert-success" role="alert" style="display: none;"></div>');
-          var form_btn_old_msg = form_btn.html();
-          form_btn.html(form_btn.prop('disabled', true).data("loading-text"));
-          $(form).ajaxSubmit({
-            dataType:  'json',
-            success: function(data) {
-              if( data.status == 'true' ) {
-                $(form).find('.form-control').val('');
-              }
-              form_btn.prop('disabled', false).html(form_btn_old_msg);
-              $(form_result_div).html(data.message).fadeIn('slow');
-              setTimeout(function(){ $(form_result_div).fadeOut('slow') }, 6000);
-            }
-          });
-        }
-      });
 </script>
 
 <!-- Start main-content -->
@@ -138,7 +174,7 @@
 										$('[data-countdown]').each(function() {
 											var $this = $(this), finalDate = $(this).data('countdown');
 											$this.countdown(finalDate,function(event) {
-												$this.html(event.strftime('%D 일 %H:%M:%S'));
+												$this.html(event.strftime('%D 일'));
 											});
 										});
 									});
@@ -166,15 +202,15 @@
 									</div>
 								</div>
 							</div>
-							<div
-								class="pull-right font-weight-400 text-black-333 pr-0 mt-15 mb-15">
-								<button class="single_add_to_cart_button btn btn-theme-colored"
-									type="button">
-									좋아요 <i class="fa fa-thumbs-up text-white mr-10"></i>
+							<div class="pull-right font-weight-400 text-black-333 pr-0 mt-15 mb-15">
+								<button class="single_add_to_cart_button btn btn-theme-colored deleteLikes" type="button">
+									좋아요 취소 <i class="fa fa-thumbs-down text-white mr-10"></i>
 								</button>
-								<div class="font-icon-list col-md-2 col-sm-3 col-xs-6 col-xs-6">
-
-								</div>
+								<div class="font-icon-list col-md-2 col-sm-3 col-xs-6 col-xs-6"></div>
+								<button class="single_add_to_cart_button btn btn-default btn-theme-colored insertLikes" type="button">
+									좋아요 <i class="fa fa-thumbs-up"></i>
+								</button>
+								<div class="font-icon-list col-md-2 col-sm-3 col-xs-6 col-xs-6"></div>
 							</div>
 
 						</div>
@@ -212,8 +248,9 @@
 						</div>
 					</div>
 				</div>
-				<form id="product_form" name="product_form" method="post"
-					enctype="multipart/form-data">
+				<form id="product_form" name="product_form" action="${pageContext.request.contextPath}/funding/fundingQuestionInsert"
+				method="post">
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 					<div class="col-md-12">
 						<div class="horizontal-tab product-tab">
 							<ul class="nav nav-tabs">
@@ -267,15 +304,22 @@
 									<div class="tab-pane fade" id="tab2">
 									<!-- <div class="col-sm-6"> -->
 									<div class="funding_question">
-										<label>제목 <small>*</small></label> <input name="form_content"
-											type="text" placeholder="제목을 입력해 주세요." class="form-control">
+										<label>제목 <small>*</small></label> 
+										<input name="form_subject" type="text" placeholder="제목을 입력해 주세요." class="form-control">
 										<label>문의내용 <small>*</small></label>
-										<textarea id="form_message" name="form_message"
+										<input name="form_content" type="text" 
 											class="form-control required" rows="5"
-											placeholder="내용을 입력해 주세요.	"></textarea>
-										<!-- <div
-											class="pull-left font-weight-400 text-black-333 pr-0 mt-15 mb-15"> -->
-											<a href="#">문의하기</a>
+											placeholder="내용을 입력해 주세요.">
+										
+										<button type="button" class="btn btn-dark btn-flat question"
+											data-toggle="modal" data-target=".bs-example-modal-sm">문의하기</button>
+
+										<div class="modal fade bs-example-modal-sm" tabindex="-1"
+											role="dialog" aria-labelledby="mySmallModalLabel">
+											<div class="modal-dialog modal-sm">
+												<div class="modal-content">문의가 등록 되었습니다.</div>
+											</div>
+										</div>
 										<!-- </div> -->
 									</div>
 									<!-- </div> -->
