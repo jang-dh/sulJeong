@@ -6,6 +6,13 @@
 insert into funding_request(CODE,MEMBER_CODE,SUBJECT,FILENAME,STATE,REGDATE)
 values(SEQ_NO.nextval,#{memberCode},#{subject},#{filename},'100',SYSDATE)
 </insert>
+
+
+<select id="myFundingOpenList" resultType="funding" parameterType="int">
+		select code, md_code, title, reward_name, reward_price, goal_price, stack_price, image, category, open_date, end_date, funding_state
+		from funding
+		where md_code = #{_parameter}
+</select>
 </mapper>	
 
 
