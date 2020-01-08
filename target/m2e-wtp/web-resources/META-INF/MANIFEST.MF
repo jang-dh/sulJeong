@@ -1,5 +1,4 @@
 Manifest-Version: 1.0
-Built-By: d
-Build-Jdk: 1.8.0_181
+Built-By: jeeni
+Build-Jdk: 12.0.2
 Created-By: Maven Integration for Eclipse
-
