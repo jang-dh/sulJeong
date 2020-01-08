@@ -16,7 +16,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 
 	@Override
 	public int insert(Purchase purchase) {
-		System.out.println(1);
+		System.out.println("service : " + purchase);
 		int result = purchaseDAO.insert(purchase);
 		//if(result==0) throw new RuntimeException("삽입실패");
 		return result;
