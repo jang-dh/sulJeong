@@ -8,22 +8,22 @@ public interface FundingDAO {
 	/**
 	 * 펀딩 목록
 	 * */
-	public List<Funding> select(int categoryCode, String order, String where, String val);
+	public List<Funding> select(String categoryCode, String order, String where, String val);
 
 	/**
 	 * 판매자 이름
 	 * */
-	public List<Funding> selectByMdName(int categoryCode, String order, String where, String val);
+	public List<Funding> selectByMdName(String categoryCode, String order, String where, String val);
 
 	/**
 	 * 좋아요
 	 * */
-	public List<Funding> selectLikesOrder(int categoryCode, String order, String where, String val);
+	public List<Funding> selectLikesOrder(String categoryCode, String order, String where, String val);
 
 	/**
 	 * 판매자 이름 & 좋아요
 	 * */
-	public List<Funding> selectByMdNameLikesOrder(int categoryCode, String order, String where, String val);
+	public List<Funding> selectByMdNameLikesOrder(String categoryCode, String order, String where, String val);
 
 	/**
 	 * 펀딩 코드로 검색
