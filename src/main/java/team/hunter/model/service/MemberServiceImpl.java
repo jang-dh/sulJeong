@@ -33,7 +33,6 @@ public class MemberServiceImpl implements MemberService {
 		String pwd = passwordEncoder.encode(member.getPwd());
 		member.setPwd(pwd);
 		
-		//System.out.println("member : " + member.getCode());
 		
 		//가입하기
 		int result = memberDAO.memberJoin(member);
@@ -51,6 +50,16 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public Member selectByPhone(Member member) {
 		return memberDAO.selectByPhone(member);
+	}
+
+	@Override
+	public void newPassword(Member member) throws Exception {
+		
+		//가입 전에 비밀번호 평문을 암호화 해서 저장한다.
+		String pwd = passwordEncoder.encode(member.getPwd());
+		member.setPwd(pwd);
+				
+		memberDAO.newPassword(member);
 	}
 
 }

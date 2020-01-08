@@ -1,5 +1,8 @@
 package team.hunter.model.dao;
 
+import java.util.List;
+
+import team.hunter.model.dto.FundingQuestion;
 import team.hunter.model.dto.FundingRequest;
 
 public interface FundingQuestionDAO {
@@ -8,4 +11,7 @@ public interface FundingQuestionDAO {
 	 */
 	int questionInsert(FundingRequest fundingRequest);
 
+	List<FundingQuestion> fundingQuestionList(int memberCode);
+	
+	FundingQuestion selectByCode(int code);
 }

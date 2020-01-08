@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+<<<<<<< HEAD
+Built-By: kosta
+=======
+Built-By: Administrator
+>>>>>>> 6f5974b1030865bad6e3248f6968afcffd0b2674
+Build-Jdk: 1.8.0_221
+Created-By: Maven Integration for Eclipse
+

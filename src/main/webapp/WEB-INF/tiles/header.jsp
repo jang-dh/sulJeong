@@ -11,6 +11,7 @@
 			$("#logoutSubmit").submit();
 		});
 	});
+
 </script>
 
 <head>
