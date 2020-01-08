@@ -17,4 +17,9 @@ public class FundingQuestion {
 	private String subject;
 	private String regdate;
 	private String state;
+	
+	//memebr ID
+	private String id;
+	//펀딩 답변 1:1
+	private FundingAnswer fundingAnswer;
 }

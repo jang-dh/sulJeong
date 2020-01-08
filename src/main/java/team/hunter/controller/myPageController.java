@@ -11,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -86,6 +87,9 @@ public class myPageController {
 		return mv;
 	}
 	
+	/**
+	 * 내가 오픈한 펀딩 리스트 
+	 * */
 	@RequestMapping("/myOpenFunding")
 	public ModelAndView myOpenFunding() {
 		Member member =(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -122,6 +126,22 @@ public class myPageController {
 			
 		}
 		return mv;
+	}
+	/**
+	 * 내가 오픈한 펀딩 상세페이지
+	 * */
+	@RequestMapping("/myOpenFunding/{fundingCode}")
+	public String myOpenDetail(@PathVariable int fundingCode, Model model ) {
+//		Member member = null;
+//		if(!SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser"))
+//			member =(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		//펀딩 문의 관리
+		model.addAttribute("fundingReqManage", fundingReqService.myFundingOpenDetail(fundingCode));
+		
+		//펀딩 참가한 사용자
+		model.addAttribute("fundingOpenPeople", fundingReqService.myFundingOpenDetailSecond(fundingCode));
+		return "mypage/myOpenFundingDetail";
 	}
 	
 }
