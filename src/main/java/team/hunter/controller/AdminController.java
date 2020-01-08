@@ -266,7 +266,7 @@ public class AdminController {
 			}
 
 			noticeService.insert(notice);
-			System.out.println("------------확인---------------");
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
