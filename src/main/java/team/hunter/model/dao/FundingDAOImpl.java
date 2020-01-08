@@ -18,7 +18,7 @@ public class FundingDAOImpl implements FundingDAO {
 	@Override
 	public List<Funding> select(int categoryCode, String order, String where, String val) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("category", categoryCode);
+		map.put("category", Integer.toString(categoryCode));
 		map.put("order", order);
 		map.put("where", where);
 		map.put("val", val);
