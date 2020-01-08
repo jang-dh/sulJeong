@@ -10,6 +10,7 @@
 		select code, md_code, title, reward_name, reward_price, goal_price, stack_price, image, category, open_date, end_date, funding_state
 		from likes, funding
 		where likes.funding_code = funding.code and likes.member_code = #{_parameter}
+		order by funding_state
 	</select>
 	
 	<delete id="delete" parameterType="likes">
@@ -27,7 +28,6 @@
 				and funding_code = #{fundingCode}
 			</if>
 		</where>
-		order by funding_state
 	</select>
 </mapper>	
 
