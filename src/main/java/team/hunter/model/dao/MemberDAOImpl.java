@@ -31,4 +31,11 @@ public class MemberDAOImpl implements MemberDAO {
 		return session.selectOne("memberMapper.selectByPhone",member);
 	}
 
+	@Override
+	public void newPassword(Member member) throws Exception {
+		String password = member.getPwd();
+		member.setPwd(password);
+		session.update("memberMapper.newPassword", member);
+		
+	}
 }
