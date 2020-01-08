@@ -4,7 +4,7 @@
 
 <insert id="fundingInsert" parameterType="fundingRequest">
 insert into funding_request(CODE,MEMBER_CODE,SUBJECT,FILENAME,STATE,REGDATE)
-values(SEQ_NO.nextval,#{memberCode},#{subject},#{filename},'100',SYSDATE)
+values(SEQ_NO.nextval,#{memberCode},#{subject},#{filename},'102',SYSDATE)
 </insert>
 
 

@@ -67,4 +67,25 @@ public class NoticeServiceImpl implements NoticeService {
 		return result;
 	}
 
+	@Override
+	public FundingRequest selectFundingRequestByCode(int code) {
+		FundingRequest fundingRequest = dao.selectFundingRequestByCode(code);
+		if(fundingRequest==null) throw new RuntimeException("해당 페이지 조회에 실패했습니다.");
+		return fundingRequest;
+	}
+
+	@Override
+	public int fundingRequestReject(int code) {
+		int result = dao.fundingRequestReject(code);
+		if(result==0) throw new RuntimeException("펀딩등록 거절 실패");
+		return result;
+	}
+
+	@Override
+	public int fundingRequestApprove(int code) {
+		int result = dao.fundingRequestApprove(code);
+		if(result==0) throw new RuntimeException("펀딩등록 승인 실패");
+		return result;
+	}
+
 }

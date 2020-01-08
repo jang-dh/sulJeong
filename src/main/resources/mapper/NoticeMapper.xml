@@ -38,6 +38,18 @@
 	<insert id="fundInsert" parameterType="funding">
 		insert into funding values(SEQ_NO.nextval, #{mdCode}, #{title}, #{rewardName}, #{rewardPrice}, #{goalPrice}, 0, #{image}, #{category}, #{openDate}, #{endDate}, '502')
 	</insert>
+	
+	<select id="selectFundingRequestByCode" parameterType="int" resultType="fundingRequest">
+		select code, member_code, subject, filename, state, regdate from funding_request where code=#{_parameter}
+	</select>
+	
+	<update id="fundingRequestReject" parameterType="int">
+		update funding_request set state='100' where code=#{code}
+	</update>
+	
+	<update id="fundingRequestApprove" parameterType="int">
+		update funding_request set state='101' where code=#{code}
+	</update>
 
 </mapper>	
 

@@ -60,4 +60,22 @@ public class NoticeDAOImpl implements NoticeDAO {
 		return session.insert("noticeMapper.fundInsert", funding);
 	}
 
+	@Override
+	public FundingRequest selectFundingRequestByCode(int code) {
+		
+		return session.selectOne("noticeMapper.selectFundingRequestByCode", code);
+	}
+
+	@Override
+	public int fundingRequestReject(int code) {
+
+		return session.update("noticeMapper.fundingRequestReject", code);
+	}
+
+	@Override
+	public int fundingRequestApprove(int code) {
+		
+		return session.update("noticeMapper.fundingRequestApprove", code);
+	}
+
 }

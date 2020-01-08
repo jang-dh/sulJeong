@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <section>
       <div class="container pt-20 pb-20">
@@ -21,7 +22,51 @@
           <div class="col-md-9">
             <div class="tab-content">
 
-			  <h1>iframe test123</h1>
+			  <div class="main-content">
+    <section>
+      <div class="container">
+
+<h4 class="title">펀딩등록신청</h4>
+
+					<div data-example-id="hoverable-table" class="bs-example" style="width:70%">
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th scope="row">글번호</th>
+									<th>제목</th>
+									<th>등록일</th>
+									<th>상태</th>
+								</tr>
+							</thead>
+							<tbody>
+							
+							<c:set var="length" value="${fn:length(list)}" />
+							<c:forEach items="${list}" var="request" varStatus="status">
+								<tr>
+									<th scope="row">${length-status.index}</th>
+									<td><a href="${pageContext.request.contextPath}/admin/fundingRequestDetail?code=${request.code}">${request.subject}</a></td>
+									<td>${request.regdate}</td>
+									<c:choose>
+										<c:when test="${request.state eq '100'}">
+											<td>신청 거절</td>
+										</c:when>
+										<c:when test="${request.state eq '101'}">
+											<td>신청 승인</td>
+										</c:when>
+										<c:otherwise>
+											<td>심사중...</td>
+										</c:otherwise>
+									</c:choose>
+								</tr>
+							</c:forEach>
+							
+							</tbody>
+						</table>
+					</div>
+
+      </div>
+    </section> 
+  </div>
 
             </div>
           </div>          
