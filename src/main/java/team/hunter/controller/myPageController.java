@@ -1,11 +1,18 @@
 package team.hunter.controller;
 
+import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -86,6 +93,35 @@ public class myPageController {
 		List<Funding> myOpenFundingList = fundingReqService.myFundingOpenList(member.getCode());
 		//System.out.println(myOpenFundingList);
 		return new ModelAndView("mypage/myOpenFundingList","myOpenFundingList",myOpenFundingList);
+	}
+	
+	@PostMapping("/changeMyInfo")
+	public ModelAndView changeMyInfo(Member member) {
+		if(member.getEmailAccept()==null) {
+			member.setEmailAccept("0");
+		}
+		member = memberService.changeMyInfo(member);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("member", member);
+		mv.setViewName("mypage/chooseMyInfoMenu");
+		return mv;
+	}
+	
+	@PostMapping("/membershipWithdrawal")
+	public ModelAndView membershipWithdrawal(Member member, HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		try {
+			memberService.membershipWithdrawal(member);
+			session.invalidate();
+			mv.setViewName("redirect:/");
+			
+		}catch (Exception e) {
+			mv.setViewName("mypage/chooseMyInfoMenu");
+			mv.addObject("message", e.getMessage());
+			return mv;
+			
+		}
+		return mv;
 	}
 	
 }
