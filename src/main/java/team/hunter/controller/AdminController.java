@@ -49,9 +49,12 @@ public class AdminController {
 	public void siteManagement() {}
 	
 	@RequestMapping("/admin/fundingRequest")
-	public String fundingRequest() {
-		
-		return "admin/fundingRequest";
+	public ModelAndView fundingRequest() {
+		List<FundingRequest> list = noticeService.selectFundingRequest();
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("list", list);
+		mv.setViewName("admin/fundingRequest");
+		return mv;
 	}
 	
 	@RequestMapping("/admin/fundingInsert")
@@ -362,6 +365,33 @@ public class AdminController {
 		}
 		
 		return "redirect:/admin/siteManagement";
+	}
+	
+	@RequestMapping("/admin/fundingRequestDetail")
+	public ModelAndView fundingRequestDetail(int code) {
+
+		FundingRequest fundingRequest = noticeService.selectFundingRequestByCode(code); 
+		ModelAndView m = new ModelAndView("admin/fundingRequestDetail", "detail", fundingRequest);
+		return m;
+		
+	}
+	
+	/**
+	 * 펀딩등록 신청 거절하기
+	 * */
+	@RequestMapping("/admin/reject")
+	public String fundingRequestReject(int code) {
+		noticeService.fundingRequestReject(code);
+		return "redirect:/admin/fundingRequest";
+	}
+	
+	/**
+	 * 펀딩등록 신청 승인하기
+	 * */
+	@RequestMapping("/admin/approve")
+	public String fundingRequestApprove(int code) {
+		noticeService.fundingRequestApprove(code);
+		return "redirect:/admin/fundingRequest";
 	}
 
 }
