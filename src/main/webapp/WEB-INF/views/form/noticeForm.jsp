@@ -32,8 +32,8 @@
               <h3 class="text-theme-colored mt-0 pt-5">공지사항 등록</h3>
               <hr>
               <p>다음 사항을 작성해주세요</p>
-              <form id="job_apply_form" name="job_apply_form" action="${pageContext.request.contextPath}/insert" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" >
+              <form id="job_apply_form" name="job_apply_form" action="${pageContext.request.contextPath}/insert?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data">
+                
                 <div class="row">
                   <div class="col-sm-6">
                     <div class="form-group">
