@@ -29,4 +29,10 @@ public interface FundingService {
 	 * 최신오픈 4개
 	 * */
 	public List<Funding> selectNewestFour();
+	
+	/**
+	 * 오픈 예정 펀딩을 오픈 상태로 갱신
+	 * */
+	public int updateFundingState();
+	
 }

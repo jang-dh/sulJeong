@@ -130,4 +130,22 @@
 			where rownum < 5
 		]]>
 	</select>
+	
+	<update id="updateFundingStateOpen">
+		<![CDATA[
+			update funding 
+			set funding_state = '501'
+			where sysdate >= open_date and sysdate <= end_date and funding_state = '502'
+		]]>
+	</update>
+	
+	<update id="updateFundingStateClose">
+		<![CDATA[
+			UPDATE FUNDING 
+			SET funding_state = case when stack_price >= goal_price then '503'
+									else '504'
+									end
+			where sysdate >= end_date and funding_state = '501'
+		]]>
+	</update>
 </mapper>

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import team.hunter.model.dao.FundingDAO;
 import team.hunter.model.dto.Funding;
@@ -46,5 +47,13 @@ public class FundingServiceImpl implements FundingService {
 	@Override
 	public List<Funding> selectNewestFour() {
 		return fundingDAO.selectNewestFour();
+	}
+
+	@Override
+	@Transactional
+	public int updateFundingState() {
+		int result = fundingDAO.updateFundingStateClose();
+		result += fundingDAO.updateFundingStateOpen();
+		return result;
 	}
 }

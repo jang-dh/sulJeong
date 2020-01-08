@@ -99,4 +99,14 @@ public class FundingDAOImpl implements FundingDAO {
 	public List<Funding> selectNewestFour() {
 		return session.selectList("fundingMapper.selectNewestFour");
 	}
+
+	@Override
+	public int updateFundingStateOpen() {
+		return session.update("fundingMapper.updateFundingStateOpen");
+	}
+
+	@Override
+	public int updateFundingStateClose() {
+		return session.update("fundingMapper.updateFundingStateClose");
+	}
 }
