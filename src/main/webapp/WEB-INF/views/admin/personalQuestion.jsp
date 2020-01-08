@@ -44,7 +44,14 @@
 									<th scope="row">${status.count}</th>
 									<td><a href="${pageContext.request.contextPath}/personalQuestionDetail/${question.code}">${question.subject}</a></td>
 									<td>${question.regdate}</td>
-									<td>${question.state}</td>
+									<c:choose>
+										<c:when test="${question.state == '200'}">
+											<td>진행중</td>
+										</c:when>
+										<c:otherwise>
+											<td>답변완료</td>
+										</c:otherwise>
+									</c:choose>
 								</tr>
 							</c:forEach>
 							

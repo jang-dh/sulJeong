@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import team.hunter.model.dto.Notice;
+import team.hunter.model.dto.PersonalAnswer;
 import team.hunter.model.dto.PersonalQuestion;
 import team.hunter.model.service.NoticeService;
 import team.hunter.model.service.PersonalAnswerService;
@@ -66,11 +67,30 @@ public class AdminController {
 		return mv;
 	}
 	
+	//1:1 문의 상세보기
 	@RequestMapping("/personalQuestionDetail/{code}")
-	public String personalQuestionDetail(@PathVariable Long code) {
+	public String personalQuestionDetail(@PathVariable int code, Model model) {
+		
+		PersonalQuestion question = personalAnswerService.selectByCodeQuestion(code);
+//		System.out.println(question.getMember().getId());
+//		System.out.println("question.getPersonalAnswer().getContent()"+question.getPersonalAnswer().getContent());
+//		System.out.println("question.getContent()" + question.getContent());
+//		
+		System.out.println(question.getSubject());
+		model.addAttribute("question", question);
 		
 		return "mypage/personalQuestionDetail";
 	}
+	
+	//1:1 문의 답변
+	@RequestMapping("/admin/answerInsert")
+	public String answerInsert(PersonalAnswer answer) {
+		
+		personalAnswerService.insertPersonalAnswer(answer);
+		return "redirect:/personalQuestionDetail/"+answer.getQuestionCode();
+		
+	}
+	
 	
 	@RequestMapping("/admin/statistics")
 	public String statistics() {
