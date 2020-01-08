@@ -10,25 +10,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import team.hunter.model.dto.FundingAnswer;
+import team.hunter.model.dto.Funding;
 import team.hunter.model.dto.FundingQuestion;
 import team.hunter.model.dto.Member;
 import team.hunter.model.dto.PersonalQuestion;
 import team.hunter.model.service.FundingAnswerService;
 import team.hunter.model.service.FundingQuestionService;
 import team.hunter.model.service.MemberService;
+import team.hunter.model.service.FundingRequestService;
 import team.hunter.model.service.PersonalQuestionService;
 
 @Controller
 @RequestMapping("mypage")
 public class myPageController {
-	@Autowired
-	private PersonalQuestionService personalQs;
-	@Autowired
-	private FundingQuestionService fundingQs;
-	@Autowired
-	private FundingAnswerService fundingAs;
-	@Autowired
-	private MemberService memberService;
+	@Autowired private PersonalQuestionService personalQs;
+	@Autowired private FundingQuestionService fundingQs;
+	@Autowired private FundingAnswerService fundingAs;
+	@Autowired private MemberService memberService;
+	@Autowired private FundingRequestService fundingReqService;
 	
 	@RequestMapping("myQuestion")
 	public ModelAndView personalQuestionList() {
@@ -78,6 +77,15 @@ public class myPageController {
 		mv.addObject("member", member);
 		mv.setViewName("mypage/chooseMyInfoMenu");
 		return mv;
+	}
+	
+	@RequestMapping("/myOpenFunding")
+	public ModelAndView myOpenFunding() {
+		Member member =(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		//System.out.println(member.getCode()+"너 나오니???????????");
+		List<Funding> myOpenFundingList = fundingReqService.myFundingOpenList(member.getCode());
+		//System.out.println(myOpenFundingList);
+		return new ModelAndView("mypage/myOpenFundingList","myOpenFundingList",myOpenFundingList);
 	}
 	
 }

@@ -18,6 +18,7 @@ public class FundingRequest {
 	private String subject;
 	private String filename;
 	private String state;
+	private String regdate;
 	
 	private MultipartFile file;
 }
