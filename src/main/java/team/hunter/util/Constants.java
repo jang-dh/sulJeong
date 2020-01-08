@@ -1,6 +1,4 @@
 package team.hunter.util;
-
-
 public interface Constants {
 	//권한 authority
 	String ROLE_ADMIN = "ROLE_ADMIN";

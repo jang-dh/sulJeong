@@ -44,7 +44,7 @@
 							<c:forEach items="${list}" var="question" varStatus="status">
 								<tr>
 									<th scope="row">${status.count}</th>
-									<td><a href="${pageContext.request.contextPath}/noticeDetail/${question.code}">${question.subject}</a></td>
+									<td><a href="${pageContext.request.contextPath}/personalQuestionDetail/${question.code}">${question.subject}</a></td>
 									<td>${question.regdate}</td>
 								</tr>
 							</c:forEach>
