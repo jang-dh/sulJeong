@@ -71,11 +71,9 @@ public class AjaxController {
 	}
 	
 	@PostMapping("/fundingAnswer")
-	public String fundingAnswer(String content, String questionCode) {
-		//System.out.println(questionCode+content+"너 나오니???!!!!!!!!!");
-		//System.out.println(questionCode+"너 나오니??????????!!!!!!");
+	public FundingAnswer fundingAnswer(String content, String questionCode) {
 		fundingAs.fundingAnswerinsert(new FundingAnswer(Integer.parseInt(questionCode), content, null));
 		FundingAnswer fundingAnswer2 = fundingAs.selectByCode(Integer.parseInt(questionCode));
-		return fundingAnswer2.getContent();
+		return fundingAnswer2;
 	}
 }

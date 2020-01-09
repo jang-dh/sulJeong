@@ -26,4 +26,10 @@ public class FundingAnswerDAOImpl implements FundingAnswerDAO {
 		return result;
 	}
 
+	@Override
+	public int updateAnswerCode(int code) {
+		int result = session.update("fundingAnswerMapper.fundingAnswerState", code);
+		return result;
+	}
+
 }

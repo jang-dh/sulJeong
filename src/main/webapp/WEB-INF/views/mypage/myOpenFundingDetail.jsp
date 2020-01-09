@@ -80,6 +80,7 @@
 												<th>아이디</th>
 												<th>이름</th>
 												<th>주소</th>
+												<th>택배회사</th>
 												<th>송장번호</th>
 											</tr>
 										</thead>
@@ -91,9 +92,14 @@
 													<th scope="row">${fundingOpenPeople.id}</th>
 													<td>${fundingOpenPeople.name}</td>
 													<td>${fundingOpenPeople.addr}</td>
-													<td><input type="text" id="deliveryCode"
-														name="deliveryCode">
-													<button>입력</button></td>
+													<td>
+													<input type="text" id="deliveryCode" name="deliveryCode">
+													<button>입력</button>
+													</td>
+													<td>
+													<input type="text" id="courierName" name="courierName">
+													<button>입력</button>
+													</td>
 												</tr>
 											</c:forEach>
 											

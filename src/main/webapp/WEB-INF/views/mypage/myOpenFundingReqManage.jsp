@@ -22,7 +22,7 @@
 				dataType : "text", //서버가 보내온 데이터 타입(text,html,xml,json)
 				data : allDate,//서버에게 보내는 parameter 정보
 				success : function(result) {
-					$("#showId").html(result)
+					$("#showId").html(result.content)
 				},//성공했을대
 				error : function(err) {
 					$("#showId").html("틀렸어!!!!!!!!!!!!!!")

@@ -1,22 +1,15 @@
 package team.hunter.controller;
 
-import java.io.PrintWriter;
 import java.util.List;
-
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
 import team.hunter.model.dto.FundingAnswer;
 import team.hunter.model.dto.Funding;
 import team.hunter.model.dto.FundingQuestion;
@@ -133,9 +126,17 @@ public class myPageController {
 //		Member member = null;
 //		if(!SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser"))
 //			member =(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		
+		List<FundingQuestion> fundingReqManage = fundingReqService.myFundingOpenDetail(fundingCode);
+//		for(FundingQuestion fq : fundingReqManage) {
+//			if(fq.getState().equals("201")){
+//				fq.setState("답변 완료!");
+//			}else {
+//				fq.setState("답변 대기중");
+//			}
+//			fundingReqManage.add(fq);
+//		}
 		//펀딩 문의 관리
-		model.addAttribute("fundingReqManage", fundingReqService.myFundingOpenDetail(fundingCode));
+		model.addAttribute("fundingReqManage", fundingReqManage);
 		
 		//펀딩 참가한 사용자
 		model.addAttribute("fundingOpenPeople", fundingReqService.myFundingOpenDetailSecond(fundingCode));
@@ -146,21 +147,12 @@ public class myPageController {
 	 * 내가 오픈한 펀딩 상세페이지 - 펀딩 문의자 관리(펀딩문의 내용보기 + 답변보기)
 	 * */
 	@RequestMapping("/myOpenFundingReqManage/{questionCode}")
-	public String myOpenFundingReqManage(@PathVariable int questionCode, Model model, HttpSession session) {
+	public String myOpenFundingReqManage(@PathVariable int questionCode, Model model) {
 		FundingQuestion fundingQuestion = fundingReqService.myOpenFundingReqManage(questionCode);
 		FundingAnswer fundingAnswer = fundingReqService.myOpenFundingAnswerManage(questionCode);
-		//model.addAttribute("fundingQuestion", fundingQuestion);
-		//model.addAttribute("fundingAnswer", fundingAnswer);
-		session.setAttribute("fundingQuestion", fundingQuestion);
-		session.setAttribute("fundingAnswer", fundingAnswer);
-		//System.out.println(fundingQuestion.getCode()+"/?????????");
 		
-		//System.out.println(fundingAnswer.getQuestionCode());
-		
-		//리스트로 돌아가기 하기 위해 펀딩 코드가 필요
-		Member member =(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		List<Funding> myOpenFundingList = fundingReqService.myFundingOpenList(member.getCode());
-		model.addAttribute("myOpenFundingList", myOpenFundingList);
+		model.addAttribute("fundingQuestion", fundingQuestion);
+		model.addAttribute("fundingAnswer", fundingAnswer);
 		
 		return "mypage/myOpenFundingReqManage";
 	}

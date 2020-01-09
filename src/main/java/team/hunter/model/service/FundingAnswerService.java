@@ -11,4 +11,6 @@ public interface FundingAnswerService {
 	 * 펀딩 문의에 대한 답변 등록하기
 	 * */
 	int fundingAnswerinsert(FundingAnswer fundingAnswer);
+	
+	
 }
