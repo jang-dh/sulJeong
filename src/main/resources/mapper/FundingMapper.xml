@@ -154,5 +154,8 @@
 		update funding
 		set stack_price = stack_price + #{purchasePrice}
 		where code=#{code}
+		<!-- 
+			DaoImpl map의 purchasePrice, code 참고해서 funding을 업데이트를 한다.
+		 -->
 	</update>
 </mapper>
