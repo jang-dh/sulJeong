@@ -42,4 +42,19 @@ public interface NoticeDAO {
 	 * 펀딩 등록하기
 	 * */
 	int fundInsert(Funding funding);
+	
+	/**
+	 * FundingRequest 상세보기
+	 * */
+	FundingRequest selectFundingRequestByCode(int code);
+	
+	/**
+	 * 펀딩등록 신청 거절하기
+	 * */
+	int fundingRequestReject(int code);
+	
+	/**
+	 * 펀딩등록 신청 승인하기
+	 * */
+	int fundingRequestApprove(int code);
 }

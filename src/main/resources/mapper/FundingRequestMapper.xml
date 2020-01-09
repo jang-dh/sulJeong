@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="fundingRequestMapper">
-
 	<resultMap type="fundingQuestion" id="fundingReqManageDetail">
 		<id column="code" property="code" />
 		<result column="id" property="id" /><!-- 이부분 문제야 -->
@@ -49,12 +48,6 @@
 		from funding f , member m
 		where f.md_code=m.code and f.code=#{_parameter}
 	</select>
-
-
-
-
-
-
 
 	<!-- 수녕 : 내가 만든 펀딩 detail페이지 - 펀딩 문의 관리 상세페이지 -->
 	<select id="myFundingOpenDetailsDetail"

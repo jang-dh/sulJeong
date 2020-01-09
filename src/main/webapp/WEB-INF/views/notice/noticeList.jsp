@@ -2,6 +2,10 @@
     pageEncoding="UTF-8"%>
  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <div class="main-content">
+
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+
     <!-- Section: inner-header -->
     <section class="inner-header divider layer-overlay overlay-dark-8" data-bg-img="http://placehold.it/1920x1280">
       <div class="container pt-90 pb-40">
@@ -10,10 +14,7 @@
           <div class="row"> 
             <div class="col-md-6">
               <h2 class="text-white font-36">공지사항</h2>
-              <ol class="breadcrumb text-left mt-10 white">
-                <li><a href="${pageContext.request.contextPath}">Home</a></li>
-                <li class="active">Notice</li>
-              </ol>
+              
             </div>
           </div>
         </div>
@@ -40,9 +41,10 @@
 								</tr>
 							</thead>
 							<tbody>
+							<c:set var="length" value="${fn:length(list)}" />
 							<c:forEach items="${list}" var="notice" varStatus="status">
 								<tr>
-									<th scope="row">${status.count}</th>
+									<th scope="row">${length-status.index}</th>
 									<td><a href="${pageContext.request.contextPath}/noticeDetail/${notice.code}">${notice.subject}</a></td>
 									<td>${notice.regdate}</td>
 								</tr>
@@ -51,8 +53,9 @@
 							</tbody>
 						</table>
 					</div>
+					<sec:authorize access="hasRole('ROLE_ADMIN')">
 					<a href="${pageContext.request.contextPath}/insertFrom" class="btn btn-dark btn-theme-colored btn-circled">등록</a>
-					
+					</sec:authorize>
           </div>
         </div>
 

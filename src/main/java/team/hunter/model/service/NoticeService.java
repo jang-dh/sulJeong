@@ -2,6 +2,8 @@ package team.hunter.model.service;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.RequestMapping;
+
 import team.hunter.model.dto.Funding;
 import team.hunter.model.dto.FundingRequest;
 import team.hunter.model.dto.Notice;
@@ -42,4 +44,20 @@ public interface NoticeService {
 	 * 펀딩 등록하기
 	 * */
 	int fundInsert(Funding funding);
+	
+	/**
+	 * FundingRequest 상세보기
+	 * */
+	FundingRequest selectFundingRequestByCode(int code);
+	
+	/**
+	 * 펀딩등록 신청 거절하기
+	 * */
+	int fundingRequestReject(int code);
+	
+	/**
+	 * 펀딩등록 신청 승인하기
+	 * */
+	int fundingRequestApprove(int code);
+	
 }

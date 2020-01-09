@@ -81,19 +81,23 @@
                         <div class="form-group mb-10">
                           <select name="category" class="form-control required" required="" >
     					    <option value="">-주종선택-</option>
-   						    <option value="탁주">탁주</option>
-    					    <option value="청주">청주</option>
-    					    <option value="증류주">증류주</option>
-    					    <option value="과실주">과실주</option>
-    					    <option value="와인">와인</option>
+   						    <option value="301">탁주</option>
+    					    <option value="302">청주</option>
+    					    <option value="303">증류주</option>
+    					    <option value="304">과실주</option>
+    					    <option value="305">와인</option>
 						  </select>
                            
                         </div>
                       </div>
                     </div>
 					  <div class="form-group">
-						<label>파일 업로드</label>
+						<label>썸네일 업로드</label>
 					    <input name="file" class="file"	type="file" multiple data-show-upload="false" data-show-caption="true"> 
+					  </div>
+					  <div class="form-group">
+						<label>상세보기 업로드</label>
+					    <input name="file2" class="file"	type="file" multiple data-show-upload="false" data-show-caption="true"> 
 					  </div>
 					<div class="form-group mb-0 mt-20">
                       <input name="form_botcheck" class="form-control" type="hidden" value="">

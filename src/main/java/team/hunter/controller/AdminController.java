@@ -49,9 +49,12 @@ public class AdminController {
 	public void siteManagement() {}
 	
 	@RequestMapping("/admin/fundingRequest")
-	public String fundingRequest() {
-		
-		return "admin/fundingRequest";
+	public ModelAndView fundingRequest() {
+		List<FundingRequest> list = noticeService.selectFundingRequest();
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("list", list);
+		mv.setViewName("admin/fundingRequest");
+		return mv;
 	}
 	
 	@RequestMapping("/admin/fundingInsert")
@@ -256,7 +259,7 @@ public class AdminController {
 		try {
 
 			// ���� ������ ������ ����
-			String path = session.getServletContext().getRealPath("/WEB-INF/save");
+			String path = session.getServletContext().getRealPath("/resources/save");
 
 			if (file.getSize() > 0) {
 				// ÷�ε� �����̸� ������ ����
@@ -266,7 +269,7 @@ public class AdminController {
 			}
 
 			noticeService.insert(notice);
-			System.out.println("------------확인---------------");
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -320,7 +323,8 @@ public class AdminController {
 	 * Funding Insert 
 	 * */
 	@RequestMapping("/admin/fundInsert")
-	public String fundInsert(Funding funding, MultipartFile file, HttpSession session) {
+	public String fundInsert(Funding funding, MultipartFile file,MultipartFile file2, HttpSession session) {
+		String fileName = null;
 		System.out.println(funding.getOpenDate());
 		System.out.println(funding.getEndDate());
 		SimpleDateFormat originFormat = new SimpleDateFormat("MM/dd/yyyy");
@@ -337,6 +341,7 @@ public class AdminController {
 			funding.setEndDate(newEndDate);
 			
 			
+			
 		}catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -344,15 +349,25 @@ public class AdminController {
 		try{
 
 			
-			String path = session.getServletContext().getRealPath("/WEB-INF/funding");
+			String path = session.getServletContext().getRealPath("/resources/images/funding");
 			
 			
 			if(file.getSize()>0) {
 				//÷�ε� �����̸� ������ ����
-				String fileName = file.getOriginalFilename();
+				
+				fileName = file.getOriginalFilename();
+				String Thumnail = "Thumnail_"+fileName;
 				funding.setImage(fileName);
 				//notice.setFilename(fileName);
-				file.transferTo(new File(path+"/"+fileName));
+				file.transferTo(new File(path+"/"+Thumnail));
+			}
+			
+			if(file2.getSize()>0) {
+				//÷�ε� �����̸� ������ ����
+//				String fileName = file2.getOriginalFilename();
+				String Detail = "Detail_"+fileName;
+				//notice.setFilename(fileName);
+				file2.transferTo(new File(path+"/"+Detail));
 			}
 
 			noticeService.fundInsert(funding);
@@ -362,6 +377,33 @@ public class AdminController {
 		}
 		
 		return "redirect:/admin/siteManagement";
+	}
+	
+	@RequestMapping("/admin/fundingRequestDetail")
+	public ModelAndView fundingRequestDetail(int code) {
+
+		FundingRequest fundingRequest = noticeService.selectFundingRequestByCode(code); 
+		ModelAndView m = new ModelAndView("admin/fundingRequestDetail", "detail", fundingRequest);
+		return m;
+		
+	}
+	
+	/**
+	 * 펀딩등록 신청 거절하기
+	 * */
+	@RequestMapping("/admin/reject")
+	public String fundingRequestReject(int code) {
+		noticeService.fundingRequestReject(code);
+		return "redirect:/admin/fundingRequest";
+	}
+	
+	/**
+	 * 펀딩등록 신청 승인하기
+	 * */
+	@RequestMapping("/admin/approve")
+	public String fundingRequestApprove(int code) {
+		noticeService.fundingRequestApprove(code);
+		return "redirect:/admin/fundingRequest";
 	}
 
 }
