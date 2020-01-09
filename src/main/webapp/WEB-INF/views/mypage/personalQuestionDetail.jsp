@@ -34,9 +34,10 @@
             <h3 class="text-theme-colored mt-0 mb-20">답변</h3>
             <c:choose>
             	<c:when test="${!empty question.personalAnswer.content}">
-		            <form>
+<%-- 		            <form>
 		            	<input class="form-control" type="text" value=" ${question.personalAnswer.content} " readonly/>
 		            </form>
+ --%>		            <textarea class="form-control required" rows="5" readonly>${question.personalAnswer.content}</textarea>
 	            </c:when>
 	            <c:otherwise>
 	            	아직 등록된 답변이 없습니다.<p>
