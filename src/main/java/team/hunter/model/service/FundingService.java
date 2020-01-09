@@ -8,7 +8,7 @@ public interface FundingService {
 	/**
 	 * 조건 별 펀딩 목록
 	 * */
-	public List<Funding> selectList(int categoryCode, String order, String where, String val);
+	public List<Funding> selectList(String categoryCode, String order, String where, String val);
 
 	/**
 	 * 펀딩 코드로 펀딩 찾기

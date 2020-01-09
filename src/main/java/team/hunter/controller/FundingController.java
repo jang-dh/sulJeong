@@ -50,7 +50,7 @@ public class FundingController {
 	//전체 카테고리
 	@RequestMapping("/funding/category/")
 	public String allCategory(Model model, String order, String where, String val) {
-		List<Funding> list = service.selectList(0, order, where, val);
+		List<Funding> list = service.selectList("0", order, where, val);
 		
 		if(list.size() > 8)
 			list = list.subList(0, 8);
@@ -62,7 +62,7 @@ public class FundingController {
 
 	//카테고리별
 	@RequestMapping("/funding/category/{categoryCode}")
-	public ModelAndView eachCategory(@PathVariable int categoryCode, String order, String where, String val) {
+	public ModelAndView eachCategory(@PathVariable String categoryCode, String order, String where, String val) {
 		List<Funding> list = service.selectList(categoryCode, order, where, val);
 		if(list.size() > 8)
 			list = list.subList(0, 8);
@@ -71,7 +71,7 @@ public class FundingController {
 	
 	//리스트 추가
 	@RequestMapping("/funding/fetchList")
-	public @ResponseBody List<Funding> fetchList(int categoryCode, String order, String where, String val, int listCnt){
+	public @ResponseBody List<Funding> fetchList(String categoryCode, String order, String where, String val, int listCnt){
 		List<Funding> list = service.selectList(categoryCode, order, where, val);
 		
 		if(list.size() > listCnt + 4)
