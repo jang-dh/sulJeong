@@ -29,5 +29,4 @@ public class FundingQuestionDAOImpl implements FundingQuestionDAO {
 		FundingQuestion fundingQuestion = session.selectOne("fundingQuestionMapper.selectByCode", code);
 		return fundingQuestion;
 	}
-
 }

@@ -16,6 +16,10 @@
    values(#{memberCode} , #{role})
  </insert>
  
+ <delete id="membershipWithdrawal" parameterType="int">
+ 	delete from Authority where member_code=#{_parameter}
+ </delete>
+ 
 </mapper>	
 
 

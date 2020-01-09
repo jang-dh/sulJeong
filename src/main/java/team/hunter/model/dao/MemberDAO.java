@@ -18,4 +18,8 @@ public interface MemberDAO {
 	 * 비밀번호 이메일로 찾기
 	 * */
 	void newPassword(Member member) throws Exception;
+	
+	int changeMyInfo(Member member);
+	
+	int membershipWithdrawal(Member member);
 }

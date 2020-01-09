@@ -1,5 +1,7 @@
 package team.hunter.model.service;
 
+import org.springframework.security.core.Authentication;
+
 import team.hunter.model.dto.Member;
 
 public interface MemberService {
@@ -15,5 +17,9 @@ public interface MemberService {
 	 * 비밀번호 이메일로 찾기
 	 * */
 	void newPassword(Member member) throws Exception;
+	
+	Member changeMyInfo(Member member);
+	
+	int membershipWithdrawal(Member member);
 
 }

@@ -13,8 +13,8 @@ public class Purchase {
 	private int code;
 	private int memberCode;
 	private int fundingCode;
-	private String price;
-	private String qty;
+	private int price;
+	private int qty;
 	private String purchaseState;
 	private String purchaseDate;
 	private String deliveryNumber;

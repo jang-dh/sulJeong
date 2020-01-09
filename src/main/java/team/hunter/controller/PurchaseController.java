@@ -7,7 +7,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import team.hunter.model.dto.Funding;
+import team.hunter.model.dto.Member;
 import team.hunter.model.dto.Purchase;
 import team.hunter.model.service.PurchaseService;
 
@@ -15,22 +20,28 @@ import team.hunter.model.service.PurchaseService;
 public class PurchaseController {
 	
 	@Autowired
-	private PurchaseService perchaseService;
+	private PurchaseService purchaseService;
 	
-	@RequestMapping("/purchase")
-	public String insertPurchase(Purchase purchase) {
-		
-		System.out.println(3);
+	@RequestMapping(value = "/insertPurchase", method = RequestMethod.POST)
+	@ResponseBody
+	public int insertPurchase(int fundingCode, int price, int qty) {
 
-		perchaseService.insert(purchase);
-		return "fundingDetail";
+		System.out.println("fundingCode : " + fundingCode);
+		System.out.println("price : " + price);
+		System.out.println("qty : " + qty);
+
+		Member member = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Purchase purchase = new Purchase(0, member.getCode(), fundingCode, price, qty, null, null, null, null);
+		return purchaseService.insert(purchase);
 	}
 	
 	@RequestMapping("/mypage/fundingHistory")
-	public String fundingHistory(Model model) {
+	public ModelAndView fundingHistory() {
 		//Member member = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		List<Purchase> list = perchaseService.selectAll();
-		model.addAttribute("list", list);
-		return "mypage/myFundingHistory";
+		List<Purchase> list = purchaseService.selectAll();
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("list", list);
+		mv.setViewName("mypage/myFundingHistory");
+		return mv;
 	}
 }

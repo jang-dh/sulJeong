@@ -31,6 +31,17 @@
 		pwd = #{pwd}
 		where email=#{email} and name=#{name} and phone=#{phone}
 	</update>
+	
+	<update id="changeMyInfo">
+		update member
+		set
+		name = #{name}, pwd = #{pwd}, phone=#{phone}, email=#{email}, email_accept=#{emailAccept}, addr=#{addr}
+		where id=#{id}
+	</update>
+	
+	<delete id="membershipWithdrawal" parameterType="member">
+		delete from member where id=#{id}
+	</delete>
 
 </mapper>	
 

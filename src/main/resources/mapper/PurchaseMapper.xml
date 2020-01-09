@@ -11,8 +11,12 @@
 	<insert id="insert" parameterType="purchase">
 		INSERT INTO PURCHASE (code, member_code, funding_code, price, qty, purchase_state, purchase_date, delivery_code, Courier) 
 		VALUES (seq_no.nextval, #{memberCode}, #{fundingCode}, #{price}, #{qty},
-		 #{purchaseState}, #{purchaseDate}, #{deliveryNumber}, #{Courier})
+		 #{purchaseState}, sysdate, #{deliveryNumber}, #{Courier})
 	</insert>
+	
+	<select id="updateFundingCode" parameterType="purchase">
+		select count(*) from purchase where funding_code = ?
+	</select>
 	
 	<select id="selectByCode" resultType="purchase"></select>
 
