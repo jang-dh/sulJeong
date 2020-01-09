@@ -8,31 +8,7 @@ import org.springframework.stereotype.Repository;
 public class StatisticsDAOImpl implements StatisticsDAO {
 	
 	@Autowired
-	private SqlSession session;
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	private SqlSession session;	
 	
 	
 	
