@@ -57,7 +57,7 @@
             <a class="btn btn-gray mt-20" href="${pageContext.request.contextPath}/down?fileName=${detail.filename}">${detail.filename }</a>
             </c:if>   
             <hr>         
-            <a href="${pageContext.request.contextPath}/notice" class="active">리스트로 돌아가기</a>
+            <a href="${pageContext.request.contextPath}/admin/fundingRequest" class="active">리스트로 돌아가기</a>
             <p></p>
 			<sec:authorize access="hasRole('ROLE_ADMIN')">
             <form name="requestForm" method="post" id="requestForm">

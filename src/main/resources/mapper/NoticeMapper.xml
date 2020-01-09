@@ -32,7 +32,7 @@
 	</delete>
 	
 	<select id="selectFundingRequest" resultType="fundingRequest">
-		select code, member_code, subject, state, regdate from funding_request
+		select code, member_code, subject, state, regdate from funding_request order by code desc
 	</select>
 	
 	<insert id="fundInsert" parameterType="funding">

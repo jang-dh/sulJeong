@@ -259,7 +259,7 @@ public class AdminController {
 		try {
 
 			// ���� ������ ������ ����
-			String path = session.getServletContext().getRealPath("/WEB-INF/save");
+			String path = session.getServletContext().getRealPath("/resources/save");
 
 			if (file.getSize() > 0) {
 				// ÷�ε� �����̸� ������ ����
@@ -323,7 +323,8 @@ public class AdminController {
 	 * Funding Insert 
 	 * */
 	@RequestMapping("/admin/fundInsert")
-	public String fundInsert(Funding funding, MultipartFile file, HttpSession session) {
+	public String fundInsert(Funding funding, MultipartFile file,MultipartFile file2, HttpSession session) {
+		String fileName = null;
 		System.out.println(funding.getOpenDate());
 		System.out.println(funding.getEndDate());
 		SimpleDateFormat originFormat = new SimpleDateFormat("MM/dd/yyyy");
@@ -340,6 +341,7 @@ public class AdminController {
 			funding.setEndDate(newEndDate);
 			
 			
+			
 		}catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -347,15 +349,25 @@ public class AdminController {
 		try{
 
 			
-			String path = session.getServletContext().getRealPath("/WEB-INF/funding");
+			String path = session.getServletContext().getRealPath("/resources/images/funding");
 			
 			
 			if(file.getSize()>0) {
 				//÷�ε� �����̸� ������ ����
-				String fileName = file.getOriginalFilename();
+				
+				fileName = file.getOriginalFilename();
+				String Thumnail = "Thumnail_"+fileName;
 				funding.setImage(fileName);
 				//notice.setFilename(fileName);
-				file.transferTo(new File(path+"/"+fileName));
+				file.transferTo(new File(path+"/"+Thumnail));
+			}
+			
+			if(file2.getSize()>0) {
+				//÷�ε� �����̸� ������ ����
+//				String fileName = file2.getOriginalFilename();
+				String Detail = "Detail_"+fileName;
+				//notice.setFilename(fileName);
+				file2.transferTo(new File(path+"/"+Detail));
 			}
 
 			noticeService.fundInsert(funding);
