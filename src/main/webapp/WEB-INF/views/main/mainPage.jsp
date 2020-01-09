@@ -418,8 +418,7 @@
 						<div class="col-sm-6 col-md-3">
 							<div class="causes bg-silver-light maxwidth500 mb-30">
 								<div class="thumb">
-									<a href="funding/${list.code}"><img
-										src="http://placehold.it/320x240" alt="" class="img-fullwidth"></a>
+									<a href="funding/${list.code}"><img src="${pageContext.request.contextPath}/resources/images/funding/Thumnail_${list.image}" alt="" class="img-fullwidth"></a>
 								</div>
 								<div
 									class="causes-details border-1px bg-white clearfix p-15 pb-30">
@@ -466,8 +465,7 @@
 						<div class="col-sm-6 col-md-3">
 							<div class="causes bg-silver-light maxwidth500 mb-30">
 								<div class="thumb">
-									<a href="funding/${list.code}"><img
-										src="http://placehold.it/320x240" alt="" class="img-fullwidth"></a>
+									<a href="funding/${list.code}"><img src="${pageContext.request.contextPath}/resources/images/funding/Thumnail_${list.image}" alt="" class="img-fullwidth"></a>
 								</div>
 								<div
 									class="causes-details border-1px bg-white clearfix p-15 pb-30">
@@ -513,8 +511,7 @@
 						<div class="col-sm-6 col-md-3">
 							<div class="causes bg-silver-light maxwidth500 mb-30">
 								<div class="thumb">
-									<a href="funding/${list.code}"><img
-										src="http://placehold.it/320x240" alt="" class="img-fullwidth"></a>
+									<a href="funding/${list.code}"><img src="${pageContext.request.contextPath}/resources/images/funding/Thumnail_${list.image}" alt="" class="img-fullwidth"></a>
 								</div>
 								<div
 									class="causes-details border-1px bg-white clearfix p-15 pb-30">

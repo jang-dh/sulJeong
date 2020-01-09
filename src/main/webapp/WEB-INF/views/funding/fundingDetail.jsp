@@ -114,8 +114,7 @@ $(function() {
 <!-- Start main-content -->
 <div class="main-content">
 	<!-- Section: inner-header -->
-	<section class="inner-header divider layer-overlay overlay-dark-8"
-		data-bg-img="http://placehold.it/1920x1280">
+	<section class="inner-header divider layer-overlay overlay-dark-8" data-bg-img="${pageContext.request.contextPath}/resources/images/main/slider-main.jpg">
 		<div class="container pt-90 pb-40">
 			<!-- Section Content -->
 			<div class="section-content">
@@ -142,7 +141,7 @@ $(function() {
 							<div class="product-image">
 								<div class="zoom-gallery">
 									<a href="http://placehold.it/460x460" title="Title Here 1">
-										<img src="http://placehold.it/460x460" alt="">
+										<img src="${pageContext.request.contextPath}/resources/images/funding/Thumnail_${funding.image}" alt="">
 									</a>
 								</div>
 							</div>
