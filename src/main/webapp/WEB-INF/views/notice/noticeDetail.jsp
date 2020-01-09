@@ -21,6 +21,7 @@
 		   $("#requestForm").attr("action", "${pageContext.request.contextPath}/delete?code=${detail.code}");
 		   $("#requestForm").submit();
 	   })
+
 	   
    })
 </script>
@@ -70,10 +71,8 @@
           </div>
         </div>
       </div>
+     
     </section>
 
-
-    
-    
   </div>
   <!-- end main-content -->
