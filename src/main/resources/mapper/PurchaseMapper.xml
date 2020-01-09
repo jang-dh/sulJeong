@@ -14,8 +14,8 @@
 		 #{purchaseState}, sysdate, #{deliveryNumber}, #{Courier})
 	</insert>
 	
-	<select id="updateFundingCode" parameterType="purchase">
-		select count(*) from purchase where funding_code = ?
+	<select id="countFundingCode" parameterType="purchase" resultType="purchase">
+		select count(*) from purchase where funding_code=#{_parameter}
 	</select>
 	
 	<select id="selectByCode" resultType="purchase"></select>

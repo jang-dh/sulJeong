@@ -9,12 +9,16 @@ public interface PurchaseService {
 	/*
 	 * 펀딩하기
 	 */
-	int insert(Purchase purchase);
+	public int insert(Purchase purchase);
 	
 	/*
 	 * 전체검색
 	 */
-	List<Purchase> selectAll();
+	public List<Purchase> selectAll();
 	
+	/*
+	 *  후원인원 증가
+	 */
+	Purchase countFundingCode(int fundingCode);
 
 }
