@@ -7,15 +7,24 @@
 		values (seq_no.nextval, #{fundingCode}, #{memberCode}, #{content}, #{subject}, sysdate, '등록')
 	</insert>
 	
-	<select id="fundingQuestionList" parameterType="int" resultType="fundingQuestion">
-		select code, funding_code, member_code, content, subject, regdate, state from funding_question
-		where member_code=#{_parameter}
-	</select>
-	
 	<select id="selectByCode" parameterType="int" resultType="fundingQuestion">
 		select code, funding_code, member_code, content, subject, regdate, state from funding_question
 		where code=#{_parameter}
 	</select>
+	
+	<select id="listCount" parameterType="int" resultType="Integer">
+		select count(*) from funding_question where member_code=#{_parameter}
+	</select>
+	
+	
+	<select id="fundingQuestionList" parameterType="member" resultType="fundingQuestion">
+	<![CDATA[
+		SELECT code, funding_code, member_code, content, subject, regdate, state 
+		FROM (SELECT a.*, ROWNUM rnum FROM (SELECT * FROM funding_question WHERE MEMBER_CODE=#{code} ORDER BY code DESC) a 
+		WHERE ROWNUM <= (#{startIndex}*#{cntPerPage})) WHERE rnum >= ((#{startIndex}-1)*#{cntPerPage}+1)
+	]]>	
+	</select>
+	
 </mapper>	
 
 
