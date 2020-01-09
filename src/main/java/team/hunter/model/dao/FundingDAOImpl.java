@@ -16,7 +16,7 @@ public class FundingDAOImpl implements FundingDAO {
 	private SqlSession session;
 
 	@Override
-	public List<Funding> select(int categoryCode, String order, String where, String val) {
+	public List<Funding> select(String categoryCode, String order, String where, String val) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("category", categoryCode);
 		map.put("order", order);
@@ -32,9 +32,9 @@ public class FundingDAOImpl implements FundingDAO {
 	}
 
 	@Override
-	public List<Funding> selectByMdName(int categoryCode, String order, String where, String val) {
+	public List<Funding> selectByMdName(String categoryCode, String order, String where, String val) {
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("category", Integer.toString(categoryCode));
+		map.put("category", categoryCode);
 		map.put("order", order);
 		map.put("where", where);
 		map.put("val", val);
@@ -48,9 +48,9 @@ public class FundingDAOImpl implements FundingDAO {
 	}
 
 	@Override
-	public List<Funding> selectLikesOrder(int categoryCode, String order, String where, String val) {
+	public List<Funding> selectLikesOrder(String categoryCode, String order, String where, String val) {
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("category", Integer.toString(categoryCode));
+		map.put("category", categoryCode);
 		map.put("order", order);
 		map.put("where", where);
 		map.put("val", val);
@@ -64,9 +64,9 @@ public class FundingDAOImpl implements FundingDAO {
 	}
 
 	@Override
-	public List<Funding> selectByMdNameLikesOrder(int categoryCode, String order, String where, String val) {
+	public List<Funding> selectByMdNameLikesOrder(String categoryCode, String order, String where, String val) {
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("category", Integer.toString(categoryCode));
+		map.put("category", categoryCode);
 		map.put("order", order);
 		map.put("where", where);
 		map.put("val", val);
@@ -99,4 +99,27 @@ public class FundingDAOImpl implements FundingDAO {
 	public List<Funding> selectNewestFour() {
 		return session.selectList("fundingMapper.selectNewestFour");
 	}
+
+	@Override
+	public int updateFundingStateOpen() {
+		return session.update("fundingMapper.updateFundingStateOpen");
+	}
+
+	@Override
+	public int updateFundingStateClose() {
+		return session.update("fundingMapper.updateFundingStateClose");
+	}
+	
+	@Override
+	public int updateStackPrice(int code, int price) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		//map 타입에 map 이름으로 code와 purchasePrice를 넣어 주세요
+		map.put("code", code);
+		map.put("purchasePrice", price);
+		
+		System.out.println("DaoCode : " + code);
+		System.out.println("DaoPrice : " + price);
+		return session.update("fundingMapper.updateStackPrice");
+	}
+	
 }

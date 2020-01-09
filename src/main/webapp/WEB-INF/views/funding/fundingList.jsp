@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <script>
 	//fetchList 제어
@@ -159,7 +160,7 @@
 <!-- Start main-content -->
 <div class="main-content">
 	<!-- Section: inner-header -->
-	<section class="inner-header divider layer-overlay overlay-dark-8" data-bg-img="http://placehold.it/1920x1280">
+	<section class="inner-header divider layer-overlay overlay-dark-8" data-bg-img="${pageContext.request.contextPath}/resources/images/main/slider-main.jpg">
 		<div class="container pt-90 pb-40">
 			<!-- Section Content -->
 			<div class="section-content">
@@ -301,12 +302,13 @@
 									<h4 class="font-16 text-uppercase">
 										<a href="${pageContext.request.contextPath}/funding/${fundingList.code}">${fundingList.title}</a>
 									</h4>
+									${fundingList.member.name}
 									<ul class="list-inline font-weight-600 font-14 clearfix mb-5">
 										<li class="pull-left font-weight-400 text-black-333 pr-0">달성금액:
-											<span class="text-theme-colored font-weight-700">${fundingList.stackPrice}</span>
+											<span class="text-theme-colored font-weight-700"><fmt:formatNumber>${fundingList.stackPrice}원</fmt:formatNumber></span>
 										</li>
 										<li class="pull-right font-weight-400 text-black-333 pr-0">목표금액:
-											<span class="text-theme-colored font-weight-700">${fundingList.goalPrice}</span>
+											<span class="text-theme-colored font-weight-700"><fmt:formatNumber>${fundingList.goalPrice}원</fmt:formatNumber></span>
 										</li>
 									</ul>
 									<div class="progress-item mt-5">

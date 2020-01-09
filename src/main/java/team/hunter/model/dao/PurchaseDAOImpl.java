@@ -19,7 +19,7 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 	@Override
 	public int insert(Purchase purchase) {
 		
-		System.out.println(2);
+		System.out.println("Dao : " + purchase);
 		return session.insert("purchaseMapper.insert", purchase);
 	}
 	
