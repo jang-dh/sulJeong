@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import team.hunter.model.dto.FundingAnswer;
@@ -111,22 +112,6 @@ public class myPageController {
 		return mv;
 	}
 	
-	@PostMapping("/membershipWithdrawal")
-	public ModelAndView membershipWithdrawal(Member member, HttpSession session) {
-		ModelAndView mv = new ModelAndView();
-		try {
-			memberService.membershipWithdrawal(member);
-			session.invalidate();
-			mv.setViewName("redirect:/");
-			
-		}catch (Exception e) {
-			mv.setViewName("mypage/chooseMyInfoMenu");
-			mv.addObject("message", e.getMessage());
-			return mv;
-			
-		}
-		return mv;
-	}
 	/**
 	 * 내가 오픈한 펀딩 상세페이지
 	 * */
