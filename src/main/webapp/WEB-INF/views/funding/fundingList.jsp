@@ -305,10 +305,10 @@
 									${fundingList.member.name}
 									<ul class="list-inline font-weight-600 font-14 clearfix mb-5">
 										<li class="pull-left font-weight-400 text-black-333 pr-0">달성금액:
-											<span class="text-theme-colored font-weight-700"><fmt:formatNumber>${fundingList.stackPrice}원</fmt:formatNumber></span>
+											<span class="text-theme-colored font-weight-700"><fmt:formatNumber>${fundingList.stackPrice}</fmt:formatNumber>원</span>
 										</li>
 										<li class="pull-right font-weight-400 text-black-333 pr-0">목표금액:
-											<span class="text-theme-colored font-weight-700"><fmt:formatNumber>${fundingList.goalPrice}원</fmt:formatNumber></span>
+											<span class="text-theme-colored font-weight-700"><fmt:formatNumber>${fundingList.goalPrice}</fmt:formatNumber>원</span>
 										</li>
 									</ul>
 									<div class="progress-item mt-5">

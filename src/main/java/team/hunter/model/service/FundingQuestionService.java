@@ -4,8 +4,6 @@ import team.hunter.model.dto.FundingQuestion;
 
 import java.util.List;
 
-import team.hunter.model.dto.FundingQuestion;
-import team.hunter.model.dto.FundingRequest;
 
 public interface FundingQuestionService {
   int insert(FundingQuestion fundingQuestion); 
@@ -14,4 +12,6 @@ public interface FundingQuestionService {
 	List<FundingQuestion> fundingQuestionList(int memberCode);
 	
 	FundingQuestion selectByCode(int code);
+	
+
 }

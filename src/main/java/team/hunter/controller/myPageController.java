@@ -93,9 +93,7 @@ public class myPageController {
 	@RequestMapping("/myOpenFunding")
 	public ModelAndView myOpenFunding() {
 		Member member =(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		//System.out.println(member.getCode()+"너 나오니???????????");
 		List<Funding> myOpenFundingList = fundingReqService.myFundingOpenList(member.getCode());
-		//System.out.println(myOpenFundingList);
 		return new ModelAndView("mypage/myOpenFundingList","myOpenFundingList",myOpenFundingList);
 	}
 	
@@ -145,12 +143,25 @@ public class myPageController {
 	}
 	
 	/**
-	 * 내가 오픈한 펀딩 상세페이지 - 펀딩 문의자 관리
+	 * 내가 오픈한 펀딩 상세페이지 - 펀딩 문의자 관리(펀딩문의 내용보기 + 답변보기)
 	 * */
 	@RequestMapping("/myOpenFundingReqManage/{questionCode}")
-	public String myOpenFundingReqManage(@PathVariable int questionCode, Model model) {
+	public String myOpenFundingReqManage(@PathVariable int questionCode, Model model, HttpSession session) {
 		FundingQuestion fundingQuestion = fundingReqService.myOpenFundingReqManage(questionCode);
-		model.addAttribute("fundingQuestion", fundingQuestion);
+		FundingAnswer fundingAnswer = fundingReqService.myOpenFundingAnswerManage(questionCode);
+		//model.addAttribute("fundingQuestion", fundingQuestion);
+		//model.addAttribute("fundingAnswer", fundingAnswer);
+		session.setAttribute("fundingQuestion", fundingQuestion);
+		session.setAttribute("fundingAnswer", fundingAnswer);
+		//System.out.println(fundingQuestion.getCode()+"/?????????");
+		
+		//System.out.println(fundingAnswer.getQuestionCode());
+		
+		//리스트로 돌아가기 하기 위해 펀딩 코드가 필요
+		Member member =(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		List<Funding> myOpenFundingList = fundingReqService.myFundingOpenList(member.getCode());
+		model.addAttribute("myOpenFundingList", myOpenFundingList);
+		
 		return "mypage/myOpenFundingReqManage";
 	}
 	

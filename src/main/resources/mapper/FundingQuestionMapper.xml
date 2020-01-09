@@ -16,6 +16,8 @@
 		select code, funding_code, member_code, content, subject, regdate, state from funding_question
 		where code=#{_parameter}
 	</select>
+	
+	
 </mapper>	
 
 

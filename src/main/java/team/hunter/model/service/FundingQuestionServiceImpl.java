@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import team.hunter.model.dao.FundingQuestionDAO;
 import team.hunter.model.dto.FundingQuestion;
-import team.hunter.model.dto.FundingRequest;
 
 @Service
 public class FundingQuestionServiceImpl implements FundingQuestionService {
@@ -34,5 +33,6 @@ public class FundingQuestionServiceImpl implements FundingQuestionService {
 		FundingQuestion fundingQuestion = fundingQuestionDAO.selectByCode(code);
 		return fundingQuestion;
 	}
+
 
 }

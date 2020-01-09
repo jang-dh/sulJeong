@@ -9,6 +9,12 @@
 	<select id="selectByCode" parameterType="int" resultType="fundingAnswer">
 		select question_code, content, regdate from funding_answer where question_code=#{_parameter}
 	</select>
+	
+	<!-- 수녕 : 펀딩 문의에 대한 답변 등록 -->
+	<insert id="fundingAnswerInsert" parameterType="fundingAnswer">
+	insert into funding_answer(question_code,content,regdate) 
+	values(#{questionCode},#{content},sysdate)
+	</insert>
 
 </mapper>	
 

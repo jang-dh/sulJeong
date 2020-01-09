@@ -1,6 +1,5 @@
 package team.hunter.controller;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -8,14 +7,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
 import team.hunter.model.dto.FundingQuestion;
 import team.hunter.model.dto.Likes;
 import team.hunter.model.dto.Member;
 import team.hunter.model.service.FundingQuestionService;
 import team.hunter.model.dto.FundingAnswer;
-import team.hunter.model.dto.Likes;
-import team.hunter.model.dto.Member;
 import team.hunter.model.service.FundingAnswerService;
 import team.hunter.model.service.LikesService;
 import team.hunter.model.service.MemberService;
@@ -72,5 +68,14 @@ public class AjaxController {
 		fundingAs.contentInsert(fundingAnswer);
 		fundingAnswer = fundingAs.selectByCode(code);
 		return fundingAnswer;
+	}
+	
+	@PostMapping("/fundingAnswer")
+	public String fundingAnswer(String content, String questionCode) {
+		//System.out.println(questionCode+content+"너 나오니???!!!!!!!!!");
+		//System.out.println(questionCode+"너 나오니??????????!!!!!!");
+		fundingAs.fundingAnswerinsert(new FundingAnswer(Integer.parseInt(questionCode), content, null));
+		FundingAnswer fundingAnswer2 = fundingAs.selectByCode(Integer.parseInt(questionCode));
+		return fundingAnswer2.getContent();
 	}
 }

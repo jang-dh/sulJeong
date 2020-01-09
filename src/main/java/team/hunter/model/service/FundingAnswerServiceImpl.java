@@ -22,4 +22,9 @@ public class FundingAnswerServiceImpl implements FundingAnswerService {
 		return fundingAnswerDB;
 	}
 
+	@Override
+	public int fundingAnswerinsert(FundingAnswer fundingAnswer) {
+		int result = fundingAnswerDAO.fundingAnswerinsert(fundingAnswer);
+		return result;
+	}
 }

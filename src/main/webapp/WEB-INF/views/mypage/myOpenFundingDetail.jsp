@@ -56,7 +56,7 @@
 											<c:forEach items="${fundingReqManage}" var="fundingReqManage" varStatus="state">
 												<tr>
 													<th scope="row">${state.count}</th>
-													<td>${fundingReqManage.id}</td>
+													<td>${fundingReqManage.member.id}</td>
 													<td><a href="${pageContext.request.contextPath}/mypage/myOpenFundingReqManage/${fundingReqManage.code}">${fundingReqManage.subject}</a></td>
 													<td>${fundingReqManage.regdate}</td>
 													<td>${fundingReqManage.state}</td>
