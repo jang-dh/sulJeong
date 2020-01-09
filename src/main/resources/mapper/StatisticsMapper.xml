@@ -13,7 +13,7 @@
 	
 	
 	<update id="insertTodayVisit">
-		update statistics set visit=visit+1
+		update statistics set visit=visit+1 where regdate=to_char(sysdate,'yy/mm/dd')
 	</update>
 
 </mapper>	
