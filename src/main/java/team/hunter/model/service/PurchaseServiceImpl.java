@@ -23,10 +23,11 @@ public class PurchaseServiceImpl implements PurchaseService {
 	@Override
 	@Transactional
 	public int insert(Purchase purchase) {
-		System.out.println("price : " + purchase.getPrice());
-		fundingDAO.updateStackPrice(purchase.getFundingCode(), purchase.getPrice());
-		System.out.println("service : " + purchase);
 		int result = purchaseDAO.insert(purchase);
+		System.out.println("price : " + purchase.getPrice());
+		result = result + fundingDAO.updateStackPrice(purchase.getFundingCode(), purchase.getPrice() * purchase.getQty());
+		System.out.println("result : " + result);
+		
 		return result;
 	}
 	
