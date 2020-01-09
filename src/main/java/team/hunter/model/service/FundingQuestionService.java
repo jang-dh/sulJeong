@@ -1,12 +1,15 @@
 package team.hunter.model.service;
 
+import team.hunter.model.dto.FundingQuestion;
+
 import java.util.List;
 
 import team.hunter.model.dto.FundingQuestion;
 import team.hunter.model.dto.FundingRequest;
 
 public interface FundingQuestionService {
-	int questionInsert(FundingRequest fundingRequest); 
+  int insert(FundingQuestion fundingQuestion); 
+  
 
 	List<FundingQuestion> fundingQuestionList(int memberCode);
 	

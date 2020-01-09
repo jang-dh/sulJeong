@@ -3,7 +3,7 @@
 
 <script>
 	$(function(){
-		$("#login").click(function(){
+		$("#login-form").submit(function(){
 			if($("#form_username_email").val()==""){
 				alert("아이디를 입력해주세요");
 				$("#form_username_email").focus();
@@ -14,7 +14,6 @@
 				$("#form_password").focus();
 				return false;
 			}
-			$("#login-form").submit();
 		});
 	});
 </script>
@@ -47,7 +46,7 @@ ${errorMessage}
                   Remember me </label>
               </div>
               <div class="form-group pull-right mt-10">
-                <button type="button" class="btn btn-dark btn-sm" id="login" value="Login">Login</button>
+                <input type="submit" class="btn btn-dark btn-sm" id="login" value="Login">
               </div>
               <div class="clear text-center pt-10">
                 <a class="text-theme-colored font-weight-600 font-12" href="${pageContext.request.contextPath}/searchLoginInfoForm">Forgot Your Information?</a>

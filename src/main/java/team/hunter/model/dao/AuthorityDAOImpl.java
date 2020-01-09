@@ -23,4 +23,10 @@ public class AuthorityDAOImpl implements AuthorityDAO {
 		return sqlSession.selectList("authorityMapper.selectAuthorityByMemberCode", memberCode);
 	}
 
+	@Override
+	public int membershipWithdrawal(int memberCode) {
+		
+		return sqlSession.delete("authorityMapper.membershipWithdrawal", memberCode);
+	}
+
 }

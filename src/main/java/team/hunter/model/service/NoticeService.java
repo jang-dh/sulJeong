@@ -2,6 +2,8 @@ package team.hunter.model.service;
 
 import java.util.List;
 
+import team.hunter.model.dto.Funding;
+import team.hunter.model.dto.FundingRequest;
 import team.hunter.model.dto.Notice;
 
 public interface NoticeService {
@@ -29,4 +31,15 @@ public interface NoticeService {
 	 * 공지사항 수정
 	 * */
 	int update(Notice code);
+	
+	/**
+	 * 펀딩 등록 전에 
+	 * 펀딩신청자 목록 가지고 오기
+	 * */
+	List<FundingRequest> selectFundingRequest();
+	
+	/**
+	 * 펀딩 등록하기
+	 * */
+	int fundInsert(Funding funding);
 }

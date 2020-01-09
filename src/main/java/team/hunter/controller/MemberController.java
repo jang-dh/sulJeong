@@ -6,6 +6,7 @@ import java.io.IOException;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +24,9 @@ public class MemberController {
 	private MemberService memberService;
 	
 	@Autowired FundingRequestService fundingRequestService;
+	
+	//파일 경로 저장
+	private String path ="C:\\Edu\\springFileSave\\";
 
 	@RequestMapping("/login")
 	public String login() {
@@ -37,6 +41,9 @@ public class MemberController {
 	
 	@RequestMapping("/memberJoin")
 	public String memberJoin(Member member) {
+		if(member.getEmailAccept()==null) {
+			member.setEmailAccept("0");
+		}
 		memberService.memberJoin(member);
 		return "redirect:/";
 	}
@@ -53,15 +60,16 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/fundingInsert")
-	public String fundingInsert(FundingRequest fundingRequest, HttpSession session) throws IOException {
+	public String fundingInsert(FundingRequest fundingRequest) throws IOException {
+		Member member =(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		MultipartFile file = fundingRequest.getFile();
-		
-		if(file.getSize() > 0) {
-			String path = session.getServletContext().getRealPath("/WEB-INF/save");
-			String fileName = file.getOriginalFilename();
-			file.transferTo(new File(path+"/"+fileName)); //폴더에 저장완료
-			fundingRequest.setFilename(fileName); //dto에 파일이름 저장
-		}
+    	if(file.getSize() > 0 ) {//파일이 첨부되었다면....
+    		String fileName = file.getOriginalFilename();
+    		fundingRequest.setFilename(fileName);
+    		//파일저장
+    		file.transferTo(new File(path+"/" + fileName));
+    	}
+    	fundingRequest.setMemberCode(member.getCode());
 		fundingRequestService.fundingInsert(fundingRequest);
 		return "redirect:/";
 	}
