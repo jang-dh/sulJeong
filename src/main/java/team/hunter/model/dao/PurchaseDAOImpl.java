@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import team.hunter.model.dto.Funding;
 import team.hunter.model.dto.Purchase;
 
 
@@ -26,6 +27,12 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 	@Override
 	public List<Purchase> selectAll() {
 		return session.selectList("purchaseMapper.selectAll");
+	}
+	
+	@Override
+	public Purchase countFundingCode(int fundingCode) {
+		Purchase purchase = session.selectOne("purchaseMapper.countFundingCode", fundingCode);
+		return purchase;
 	}
 
 }
