@@ -2,12 +2,12 @@ package team.hunter.model.listener;
 
 
 
+import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import team.hunter.model.dao.StatisticsDAO;
 
@@ -16,7 +16,7 @@ import team.hunter.model.dao.StatisticsDAO;
 
 
 
-@Component
+@WebListener
 public class SessionListener implements HttpSessionListener {
 	@Autowired
 	private StatisticsDAO dao;
