@@ -5,11 +5,11 @@ public interface Constants {
 	String ROLE_MEMBER = "ROLE_MEMBER";
 
   //전통주 카테고리 funding category
-	int TAKJU = 301; // 탁주
-	int RICE_WINE = 302; //청주
-	int DISTILL = 303; //증류주
-	int FRUIT_WINE = 304; //과실주
-	int WINE = 305; //와인
+	String TAKJU = "301"; // 탁주
+	String RICE_WINE = "302"; //청주
+	String DISTILL = "303"; //증류주
+	String FRUIT_WINE = "304"; //과실주
+	String WINE = "305"; //와인
 
 	// 펀딩 오픈 funding open request state
 	String REJECTED = "100";
