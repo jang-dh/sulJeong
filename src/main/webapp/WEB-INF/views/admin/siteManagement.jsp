@@ -52,7 +52,7 @@
               data : [${data},20,5,40,23,60,45]
             }
           ]
-        
+      
       };
         window.onload = function(){
           var chart_lineChart = document.getElementById("lineChart").getContext("2d");
