@@ -14,7 +14,7 @@ public interface PurchaseService {
 	/*
 	 * 전체검색
 	 */
-	public List<Purchase> selectAll();
+	public List<Purchase> myPurchaseList(int memberCode);
 	
 	/*
 	 *  후원인원 증가

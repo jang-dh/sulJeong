@@ -14,7 +14,7 @@ public interface PurchaseDAO {
 	/*
 	 * 펀딩내역 보기
 	 */
-	public List<Purchase> selectAll();
+	public List<Purchase> myPurchaseList(int memberCode);
 	
 	/*
 	 * 후원인원 증가

@@ -120,7 +120,7 @@ $(function() {
 			<div class="section-content">
 				<div class="row">
 					<div class="col-md-6">
-						<h2 class="text-white font-36">Product Details</h2>
+						<h2 class="text-white font-36">펀딩 상세 페이지</h2>
 						<ol class="breadcrumb text-left mt-10 white">
 							<li><a href="#">Home</a></li>
 							<li><a href="#">Pages</a></li>
@@ -149,7 +149,7 @@ $(function() {
 						<%-- <form action="transfer"> --%>
 						<div class="col-md-7">
 							<div class="product-summary">
-								<h2 class="product-title">${funding.title}</h2>
+								<h2 class="product-title">${purchaseDate}</h2>
 								<div class="product_review">
 									<ul class="review_text list-inline">
 										<li>

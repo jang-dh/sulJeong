@@ -34,8 +34,11 @@ public class PurchaseServiceImpl implements PurchaseService {
 	}
 	
 	@Override
-	public List<Purchase> selectAll() {
-		List<Purchase> list = purchaseDAO.selectAll();
+	public List<Purchase> myPurchaseList(int memberCode) {
+		List<Purchase> list = purchaseDAO.myPurchaseList(memberCode);
+		
+		System.out.println("서비스에서 찍은 : " + memberCode);
+		System.out.println("서비스에서 찍은 : " + list);
 		return list;
 	}
 	
