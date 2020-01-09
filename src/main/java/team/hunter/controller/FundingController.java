@@ -43,7 +43,8 @@ public class FundingController {
 			member =(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		model.addAttribute("funding", service.selectByCode(code));
-		model.addAttribute("purchase", purchaseService.countFundingCode(code));
+		model.addAttribute("fundingSponser", purchaseService.countFundingCode(code));
+		
 		if(member != null)
 			model.addAttribute("likes", likesService.select(new Likes(member.getCode(), code)));	
 		

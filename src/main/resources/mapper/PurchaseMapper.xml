@@ -14,7 +14,7 @@
 		 #{purchaseState}, sysdate, #{deliveryNumber}, #{Courier})
 	</insert>
 	
-	<select id="countFundingCode" parameterType="purchase" resultType="purchase">
+	<select id="countFundingCode" parameterType="int" resultType="int">
 		select count(*) from purchase where funding_code=#{_parameter}
 	</select>
 	

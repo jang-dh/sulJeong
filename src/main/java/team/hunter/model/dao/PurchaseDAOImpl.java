@@ -30,9 +30,13 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 	}
 	
 	@Override
-	public Purchase countFundingCode(int fundingCode) {
-		Purchase purchase = session.selectOne("purchaseMapper.countFundingCode", fundingCode);
-		return purchase;
+	public int countFundingCode(int fundingCode) {
+		
+		System.out.println("전");
+		int fundingSponserCount = session.selectOne("purchaseMapper.countFundingCode", fundingCode);
+		
+		System.out.println("후");
+		return fundingSponserCount;
 	}
 
 }

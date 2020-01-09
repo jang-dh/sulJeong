@@ -205,7 +205,7 @@ $(function() {
 							</div>
 							<div class="pull-right font-weight-400 text-black-333 pr-0">
 								<strong>후원인원: </strong><span
-									class="text-theme-colored font-weight-700"> 0명</span>
+									class="text-theme-colored font-weight-700"> ${fundingSponser} 명</span>
 							</div>
 							<br>
 							<div>

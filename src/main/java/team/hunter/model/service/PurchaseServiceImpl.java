@@ -40,9 +40,11 @@ public class PurchaseServiceImpl implements PurchaseService {
 	}
 	
 	@Override
-	public Purchase countFundingCode(int fundingCode) {
-		Purchase purchase = purchaseDAO.countFundingCode(fundingCode);
-		return purchase;
+	public int countFundingCode(int fundingCode) {
+		
+		int result = purchaseDAO.countFundingCode(fundingCode);
+		System.out.println("fundingcode service : " + result);
+		return result;
 	}
 	
 }

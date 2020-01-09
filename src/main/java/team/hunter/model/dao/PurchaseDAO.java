@@ -19,7 +19,7 @@ public interface PurchaseDAO {
 	/*
 	 * 후원인원 증가
 	 */
-	Purchase countFundingCode(int fundingCode);
+	public int countFundingCode(int fundingCode);
 	
 	
 
