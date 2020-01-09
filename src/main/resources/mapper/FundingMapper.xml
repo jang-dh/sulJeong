@@ -150,9 +150,9 @@
 	</update>
 	
 	<!-- transaction -->
-	<update id="updateStackPrice" parameterType="funding">
+	<update id="updateStackPrice" parameterType="map">
 		update funding
-		set stack_price = stack_price + #{rewardPrice}
-		where funding_code=#{stackPrice}
+		set stack_price = stack_price + #{purchasePrice}
+		where code=#{code}
 	</update>
 </mapper>

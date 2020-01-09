@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import team.hunter.model.dto.Funding;
 import team.hunter.model.dto.Member;
 import team.hunter.model.dto.Purchase;
 import team.hunter.model.service.PurchaseService;

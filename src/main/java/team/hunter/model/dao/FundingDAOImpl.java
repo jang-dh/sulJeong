@@ -111,7 +111,11 @@ public class FundingDAOImpl implements FundingDAO {
 	}
 	
 	@Override
-	public int updateStackPrice() {
+	public int updateStackPrice(int code, int price) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("code", code);
+		map.put("purchasePrice", price);
 		return session.update("fundingMapper.updateStackPrice");
 	}
+	
 }

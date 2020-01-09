@@ -4,8 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import team.hunter.model.dao.FundingDAO;
 import team.hunter.model.dao.PurchaseDAO;
+import team.hunter.model.dto.Funding;
 import team.hunter.model.dto.Purchase;
 
 @Service
@@ -13,9 +16,15 @@ public class PurchaseServiceImpl implements PurchaseService {
 	
 	@Autowired
 	private PurchaseDAO purchaseDAO;
+	
+	@Autowired
+	private FundingDAO fundingDAO;
 
 	@Override
+	@Transactional
 	public int insert(Purchase purchase) {
+		System.out.println("price : " + purchase.getPrice());
+		fundingDAO.updateStackPrice(purchase.getFundingCode(), purchase.getPrice());
 		System.out.println("service : " + purchase);
 		int result = purchaseDAO.insert(purchase);
 		return result;
@@ -26,4 +35,5 @@ public class PurchaseServiceImpl implements PurchaseService {
 		List<Purchase> list = purchaseDAO.selectAll();
 		return list;
 	}
+	
 }

@@ -16,8 +16,5 @@ public interface PurchaseService {
 	 */
 	List<Purchase> selectAll();
 	
-	
-	
-	
 
 }
