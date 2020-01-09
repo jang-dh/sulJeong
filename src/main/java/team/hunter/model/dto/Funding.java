@@ -22,4 +22,6 @@ public class Funding {
 	private String openDate;
 	private String endDate;
 	private String fundingState;
+	
+	private Member member;
 }

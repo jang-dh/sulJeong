@@ -30,6 +30,7 @@
 			</props>
 		</property>
 
+
 	</bean>
 	
 	<bean id="email" class="team.hunter.model.email.Email"/>

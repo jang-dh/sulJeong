@@ -11,6 +11,16 @@
 <script src="${pageContext.request.contextPath}/resources/js/revolution-slider/js/jquery.themepunch.tools.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/revolution-slider/js/jquery.themepunch.revolution.min.js"></script>
 
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('[data-countdown]').each(function() {
+			var $this = $(this), finalDate = $(this).data('countdown');
+			$this.countdown(finalDate,function(event) {
+				$this.html(event.strftime('%D 일'));
+			});
+		});
+	});
+</script>
 <!-- Start main-content -->
 <div class="main-content">
 	<!-- Section: home -->
@@ -26,7 +36,7 @@
 						<li data-index="rs-1" data-transition="slidingoverlayhorizontal"
 							data-slotamount="default" data-easein="default"
 							data-easeout="default" data-masterspeed="default"
-							data-thumb="http://placehold.it/1920x1280" data-rotate="0"
+							data-rotate="0"
 							data-saveperformance="off" data-title="Slide 1"
 							data-description="">
 							<!-- MAIN IMAGE --> <img src="${pageContext.request.contextPath}/resources/images/main/slider-main.jpg"
@@ -61,7 +71,7 @@
 								data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
 								data-start="1000" data-splitin="none" data-splitout="none"
 								data-responsive_offset="on"
-								style="z-index: 7; white-space: nowrap; font-weight: 700;">Charity
+								style="z-index: 7; white-space: nowrap; font-weight: 700;">술:정(井)
 							</div> <!-- LAYER NR. 3 -->
 							<div
 								class="tp-caption tp-resizeme text-uppercase text-white font-roboto-slab bg-theme-colored-transparent pl-20 pr-20"
@@ -76,8 +86,9 @@
 								data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
 								data-start="1000" data-splitin="none" data-splitout="none"
 								data-responsive_offset="on"
-								style="z-index: 7; white-space: nowrap; font-weight: 600;">is
-								the best social work</div> <!-- LAYER NR. 4 -->
+								style="z-index: 7; white-space: nowrap; font-weight: 600;">오늘부터 술은 특별하고 의미있게
+								
+								</div> <!-- LAYER NR. 4 -->
 							<div class="tp-caption tp-resizeme text-white" id="rs-1-layer-4"
 								data-x="['left']" data-hoffset="['35']" data-y="['middle']"
 								data-voffset="['35','35','40']" data-fontsize="['16','18',24']"
@@ -114,7 +125,7 @@
 						<li data-index="rs-2" data-transition="slidingoverlayhorizontal"
 							data-slotamount="default" data-easein="default"
 							data-easeout="default" data-masterspeed="default"
-							data-thumb="http://placehold.it/1920x1280" data-rotate="0"
+							 data-rotate="0"
 							data-saveperformance="off" data-title="Slide 2"
 							data-description="">
 							<!-- MAIN IMAGE --> <img src="${pageContext.request.contextPath}/resources/images/main/slider-second.jpg"
@@ -204,7 +215,7 @@
 						<li data-index="rs-3" data-transition="slidingoverlayhorizontal"
 							data-slotamount="default" data-easein="default"
 							data-easeout="default" data-masterspeed="default"
-							data-thumb="http://placehold.it/1920x1280" data-rotate="0"
+							 data-rotate="0"
 							data-saveperformance="off" data-title="Slide 3"
 							data-description="">
 							<!-- MAIN IMAGE --> <img src="${pageContext.request.contextPath}/resources/images/main/slider-third.jpg"
@@ -415,6 +426,7 @@
 									<h4 class="font-16 text-uppercase">
 										<a href="funding/${list.code}">${list.title}</a>
 									</h4>
+									${list.member.name}
 									<ul class="list-inline font-weight-600 font-14 clearfix mb-5">
 										<li class="pull-left font-weight-400 text-black-333 pr-0">달성금액:
 											<span class="text-theme-colored font-weight-700">${list.stackPrice}</span>
@@ -437,16 +449,6 @@
 										<strong>펀딩종료까지 </strong>
 									</div>
 									<div class="text-center" data-countdown="${list.endDate}"></div>
-									<script type="text/javascript">
-										$(document).ready(function() {
-											$('[data-countdown]').each(function() {
-												var $this = $(this), finalDate = $(this).data('countdown');
-												$this.countdown(finalDate,function(event) {
-													$this.html(event.strftime('%D 일'));
-												});
-											});
-										});
-									</script>
 									<a href="funding/${list.code}"
 										class="btn btn-default btn-theme-colored mt-10 font-16 btn-sm">펀딩하기
 										<i class="flaticon-charity-make-a-donation font-16 ml-5"></i>
@@ -472,6 +474,7 @@
 									<h4 class="font-16 text-uppercase">
 										<a href="funding/${list.code}">${list.title}</a>
 									</h4>
+									${list.member.name}
 									<ul class="list-inline font-weight-600 font-14 clearfix mb-5">
 										<li class="pull-left font-weight-400 text-black-333 pr-0">달성금액:
 											<span class="text-theme-colored font-weight-700">${list.stackPrice}</span>
@@ -494,16 +497,6 @@
 										<strong>펀딩종료까지 </strong>
 									</div>
 									<div class="text-center" data-countdown="${list.endDate}"></div>
-									<script type="text/javascript">
-										$(document).ready(function() {
-											$('[data-countdown]').each(function() {
-												var $this = $(this), finalDate = $(this).data('countdown');
-												$this.countdown(finalDate,function(event) {
-													$this.html(event.strftime('%D 일'));
-												});
-											});
-										});
-									</script>
 									<a href="funding/${list.code}" class="btn btn-default btn-theme-colored mt-10 font-16 btn-sm">펀딩하기
 										<i class="flaticon-charity-make-a-donation font-16 ml-5"></i>
 									</a>
@@ -528,6 +521,7 @@
 									<h4 class="font-16 text-uppercase">
 										<a href="funding/${list.code}">${list.title}</a>
 									</h4>
+									${list.member.name}
 									<ul class="list-inline font-weight-600 font-14 clearfix mb-5">
 										<li class="pull-left font-weight-400 text-black-333 pr-0">달성금액:
 											<span class="text-theme-colored font-weight-700">${list.stackPrice}</span>
@@ -546,9 +540,12 @@
 											</div>
 										</div>
 									</div>
-									<a href="funding/${list.code}"
-										class="btn btn-default btn-theme-colored mt-10 font-16 btn-sm">펀딩하기
-										<i class="flaticon-charity-make-a-donation font-16 ml-5"></i>
+									<div class="pull-left font-weight-400 text-black-333 pr-0">
+										<strong>펀딩시작까지 </strong>
+									</div>
+									<div class="text-center" data-countdown="${list.openDate}"></div>
+									<a href="funding/${list.code}" class="btn btn-default btn-theme-colored mt-10 font-16 btn-sm">보러가기
+										<i class="fa fa-arrow-circle-right font-16 ml-5"></i>
 									</a>
 								</div>
 							</div>

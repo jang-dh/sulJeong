@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import team.hunter.model.dao.FundingDAO;
 import team.hunter.model.dto.Funding;
@@ -14,7 +15,7 @@ public class FundingServiceImpl implements FundingService {
 	private FundingDAO fundingDAO;
 	
 	@Override
-	public List<Funding> selectList(int categoryCode, String order, String where, String val) {
+	public List<Funding> selectList(String categoryCode, String order, String where, String val) {
 		//판매자 이름으로 펀딩 검색하고  좋아요순으로 정렬
 		if(where != null && where.equals("md_name") && order != null && order.equals("likes"))
 			return fundingDAO.selectByMdNameLikesOrder(categoryCode, order, where, val);
@@ -46,5 +47,13 @@ public class FundingServiceImpl implements FundingService {
 	@Override
 	public List<Funding> selectNewestFour() {
 		return fundingDAO.selectNewestFour();
+	}
+
+	@Override
+	@Transactional
+	public int updateFundingState() {
+		int result = fundingDAO.updateFundingStateClose();
+		result += fundingDAO.updateFundingStateOpen();
+		return result;
 	}
 }

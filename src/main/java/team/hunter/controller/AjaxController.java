@@ -30,6 +30,8 @@ public class AjaxController {
 	
 	@Autowired
 	private FundingQuestionService fundingQuestionService;
+	
+	@Autowired
 	private FundingAnswerService fundingAs;
 
 	@PostMapping("/findId")
