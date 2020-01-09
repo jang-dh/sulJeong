@@ -1,11 +1,19 @@
 package team.hunter.controller;
 
+import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -79,6 +87,9 @@ public class myPageController {
 		return mv;
 	}
 	
+	/**
+	 * 내가 오픈한 펀딩 리스트 
+	 * */
 	@RequestMapping("/myOpenFunding")
 	public ModelAndView myOpenFunding() {
 		Member member =(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -87,5 +98,61 @@ public class myPageController {
 		//System.out.println(myOpenFundingList);
 		return new ModelAndView("mypage/myOpenFundingList","myOpenFundingList",myOpenFundingList);
 	}
+	
+	@PostMapping("/changeMyInfo")
+	public ModelAndView changeMyInfo(Member member) {
+		if(member.getEmailAccept()==null) {
+			member.setEmailAccept("0");
+		}
+		member = memberService.changeMyInfo(member);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("member", member);
+		mv.setViewName("mypage/chooseMyInfoMenu");
+		return mv;
+	}
+	
+	@PostMapping("/membershipWithdrawal")
+	public ModelAndView membershipWithdrawal(Member member, HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		try {
+			memberService.membershipWithdrawal(member);
+			session.invalidate();
+			mv.setViewName("redirect:/");
+			
+		}catch (Exception e) {
+			mv.setViewName("mypage/chooseMyInfoMenu");
+			mv.addObject("message", e.getMessage());
+			return mv;
+			
+		}
+		return mv;
+	}
+	/**
+	 * 내가 오픈한 펀딩 상세페이지
+	 * */
+	@RequestMapping("/myOpenFunding/{fundingCode}")
+	public String myOpenDetail(@PathVariable int fundingCode, Model model ) {
+//		Member member = null;
+//		if(!SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser"))
+//			member =(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		//펀딩 문의 관리
+		model.addAttribute("fundingReqManage", fundingReqService.myFundingOpenDetail(fundingCode));
+		
+		//펀딩 참가한 사용자
+		model.addAttribute("fundingOpenPeople", fundingReqService.myFundingOpenDetailSecond(fundingCode));
+		return "mypage/myOpenFundingDetail";
+	}
+	
+	/**
+	 * 내가 오픈한 펀딩 상세페이지 - 펀딩 문의자 관리
+	 * */
+	@RequestMapping("/myOpenFundingReqManage/{questionCode}")
+	public String myOpenFundingReqManage(@PathVariable int questionCode, Model model) {
+		FundingQuestion fundingQuestion = fundingReqService.myOpenFundingReqManage(questionCode);
+		model.addAttribute("fundingQuestion", fundingQuestion);
+		return "mypage/myOpenFundingReqManage";
+	}
+	
 	
 }

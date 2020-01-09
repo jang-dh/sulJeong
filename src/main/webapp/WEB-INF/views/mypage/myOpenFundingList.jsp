@@ -89,13 +89,13 @@
 						<div class="col-sm-6 col-md-3">
 							<div class="causes bg-silver-light maxwidth500 mb-30">
 								<div class="thumb">
-									<a href="${pageContext.request.contextPath}/funding/${fundingList.code}"><img
+									<a href="${pageContext.request.contextPath}/mypage/myOpenFunding/${fundingList.code}"><img
 										src="http://placehold.it/320x240" alt="" class="img-fullwidth"></a>
 								</div>
 								<div
 									class="causes-details border-1px bg-white clearfix p-15 pb-30">
 									<h4 class="font-16 text-uppercase">
-										<a href="${pageContext.request.contextPath}/funding/${fundingList.code}">${fundingList.title}</a>
+										<a href="${pageContext.request.contextPath}/mypage/myOpenFunding/${fundingList.code}">${fundingList.title}</a>
 									</h4>
 									<ul class="list-inline font-weight-600 font-14 clearfix mb-5">
 										<li class="pull-left font-weight-400 text-black-333 pr-0">달성금액:
@@ -129,10 +129,7 @@
 											});
 										});
 									</script>
-									<a href="${fundingList.code}"
-										class="btn btn-default btn-theme-colored mt-10 font-16 btn-sm">펀딩하기
-										<i class="flaticon-charity-make-a-donation font-16 ml-5"></i>
-									</a>
+									
 								</div>
 							</div>
 						</div>
