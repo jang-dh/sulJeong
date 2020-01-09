@@ -47,6 +47,9 @@
 		update personal_question set state='201' where code=#{_parameter}
 	</update>
 
+
+
+
 </mapper>	
 
 
