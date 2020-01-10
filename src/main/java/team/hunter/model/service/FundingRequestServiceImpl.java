@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import team.hunter.model.dao.FundingRequestDAO;
 import team.hunter.model.dto.Funding;
+import team.hunter.model.dto.FundingAnswer;
 import team.hunter.model.dto.FundingQuestion;
 import team.hunter.model.dto.FundingRequest;
 import team.hunter.model.dto.Member;
@@ -52,5 +53,11 @@ public class FundingRequestServiceImpl implements FundingRequestService {
 	public FundingQuestion myOpenFundingReqManage(int questionCode) {
 		FundingQuestion fundingQuestion = fundingrequestDAO.myOpenFundingReqManage(questionCode);
 		return fundingQuestion;
+	}
+
+	@Override
+	public FundingAnswer myOpenFundingAnswerManage(int questionCode) {
+		FundingAnswer fundingAnswer = fundingrequestDAO.myOpenFundingAnswerManage(questionCode);
+		return fundingAnswer;
 	}
 }

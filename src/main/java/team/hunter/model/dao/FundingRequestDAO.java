@@ -3,6 +3,7 @@ package team.hunter.model.dao;
 import java.util.List;
 
 import team.hunter.model.dto.Funding;
+import team.hunter.model.dto.FundingAnswer;
 import team.hunter.model.dto.FundingQuestion;
 import team.hunter.model.dto.FundingRequest;
 import team.hunter.model.dto.Member;
@@ -30,7 +31,12 @@ public interface FundingRequestDAO {
 	List<Member> myFundingOpenDetailSecond(int fundingCode);
 	
 	/**
-	 * 펀딩 디테일 페이지 - 펀딩 문의 관리 상세페이지
+	 * 펀딩 디테일 페이지 - 펀딩 문의 관리 상세페이지(문의내용)
 	 * */
 	FundingQuestion myOpenFundingReqManage(int questionCode);
+	
+	/**
+	 * 펀딩 디테일 페이지 - 펀딩 문의 관리 상세페이지(답변내용)
+	 * */
+	FundingAnswer myOpenFundingAnswerManage(int questionCode);
 }

@@ -16,4 +16,5 @@ public interface FundingQuestionDAO {
 	FundingQuestion selectByCode(int code);
 	
 	int listCount(int memberCode);
+
 }

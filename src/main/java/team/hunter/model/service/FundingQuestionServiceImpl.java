@@ -41,5 +41,4 @@ public class FundingQuestionServiceImpl implements FundingQuestionService {
 		
 		return fundingQuestionDAO.listCount(memberCode);
 	}
-
 }

@@ -14,4 +14,5 @@ public interface FundingQuestionService {
 	FundingQuestion selectByCode(int code);
 	
 	int listCount(int memberCode);
+
 }

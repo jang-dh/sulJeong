@@ -33,5 +33,8 @@ public class FundingQuestionDAOImpl implements FundingQuestionDAO {
 	public int listCount(int memberCode) {
 		return session.selectOne("fundingQuestionMapper.listCount",memberCode);
 	}
+	
 
 }
+
+

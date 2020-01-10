@@ -3,6 +3,7 @@ package team.hunter.model.service;
 import java.util.List;
 
 import team.hunter.model.dto.Funding;
+import team.hunter.model.dto.FundingAnswer;
 import team.hunter.model.dto.FundingQuestion;
 import team.hunter.model.dto.FundingRequest;
 import team.hunter.model.dto.Member;
@@ -33,4 +34,9 @@ public interface FundingRequestService {
 	 * 펀딩 디테일 페이지 - 펀딩 문의 관리 상세페이지
 	 * */
 	FundingQuestion myOpenFundingReqManage(int questionCode);
+	
+	/**
+	 * 펀딩 디테일 페이지 - 펀딩 문의 관리 상세페이지(답변내용)
+	 * */
+	FundingAnswer myOpenFundingAnswerManage(int questionCode);
 }

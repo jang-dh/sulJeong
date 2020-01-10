@@ -2,6 +2,7 @@ package team.hunter.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import team.hunter.model.dto.FundingAnswer;
 import team.hunter.model.dto.Funding;
 import team.hunter.model.dto.FundingAnswer;
 import team.hunter.model.dto.FundingQuestion;
@@ -106,9 +108,7 @@ public class myPageController {
 	@RequestMapping("/myOpenFunding")
 	public ModelAndView myOpenFunding() {
 		Member member =(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		//System.out.println(member.getCode()+"너 나오니???????????");
 		List<Funding> myOpenFundingList = fundingReqService.myFundingOpenList(member.getCode());
-		//System.out.println(myOpenFundingList);
 		return new ModelAndView("mypage/myOpenFundingList","myOpenFundingList",myOpenFundingList);
 	}
 	
@@ -132,9 +132,17 @@ public class myPageController {
 //		Member member = null;
 //		if(!SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser"))
 //			member =(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		
+		List<FundingQuestion> fundingReqManage = fundingReqService.myFundingOpenDetail(fundingCode);
+//		for(FundingQuestion fq : fundingReqManage) {
+//			if(fq.getState().equals("201")){
+//				fq.setState("답변 완료!");
+//			}else {
+//				fq.setState("답변 대기중");
+//			}
+//			fundingReqManage.add(fq);
+//		}
 		//펀딩 문의 관리
-		model.addAttribute("fundingReqManage", fundingReqService.myFundingOpenDetail(fundingCode));
+		model.addAttribute("fundingReqManage", fundingReqManage);
 		
 		//펀딩 참가한 사용자
 		model.addAttribute("fundingOpenPeople", fundingReqService.myFundingOpenDetailSecond(fundingCode));
@@ -142,12 +150,18 @@ public class myPageController {
 	}
 	
 	/**
-	 * 내가 오픈한 펀딩 상세페이지 - 펀딩 문의자 관리
+	 * 내가 오픈한 펀딩 상세페이지 - 펀딩 문의자 관리(펀딩문의 내용보기 + 답변보기)
 	 * */
 	@RequestMapping("/myOpenFundingReqManage/{questionCode}")
 	public String myOpenFundingReqManage(@PathVariable int questionCode, Model model) {
 		FundingQuestion fundingQuestion = fundingReqService.myOpenFundingReqManage(questionCode);
+		FundingAnswer fundingAnswer = fundingReqService.myOpenFundingAnswerManage(questionCode);
+		
 		model.addAttribute("fundingQuestion", fundingQuestion);
+		model.addAttribute("fundingAnswer", fundingAnswer);
+		
+		//System.out.println(fundingQuestion.getCode()+"짜증나게 하지말고 나와라");
+		
 		return "mypage/myOpenFundingReqManage";
 	}
 	
