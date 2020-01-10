@@ -23,7 +23,7 @@
 		$('[data-countdown]').each(function() {
 			var $this = $(this), finalDate = $(this).data('countdown');
 			$this.countdown(finalDate,function(event) {
-				$this.html(event.strftime('%D 일'));
+				$this.html(event.strftime('%D 일 %H:%M:%S'));
 			});
 		});
 	} 
@@ -110,7 +110,7 @@
 	//fetchList End
 	
 	let renderList = function(mode, item) {
-		var per = item.stackPrice / item.goalPrice * 100;
+		var per = Math.floor(item.stackPrice / item.goalPrice * 100);
 		let html = '<div class="col-sm-6 col-md-3 wow fadeIn">';
 		html += '<div class="causes bg-silver-light maxwidth500 mb-30">';
 		html += '<div class="thumb">';
@@ -314,7 +314,7 @@
 									<div class="progress-item mt-5">
 										<div class="progress mb-0">
 											<div data-percent="${fundingList.stackPrice/fundingList.goalPrice *100}" class="progress-bar appeared" style="width: ${fundingList.stackPrice/fundingList.goalPrice *100}%;">
-												<span class="percent">0</span><span class="percent">${fundingList.stackPrice / fundingList.goalPrice * 100}%</span>
+												<span class="percent">0</span><span class="percent"><fmt:formatNumber value="${fundingList.stackPrice / fundingList.goalPrice}" type="percent"/></span>
 											</div>
 										</div>
 									</div>
@@ -327,7 +327,7 @@
 											$('[data-countdown]').each(function() {
 												var $this = $(this), finalDate = $(this).data('countdown');
 												$this.countdown(finalDate,function(event) {
-													$this.html(event.strftime('%D 일'));
+													$this.html(event.strftime('%D 일 %H:%M:%S'));
 												});
 											});
 										});
