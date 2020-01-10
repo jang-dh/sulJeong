@@ -19,13 +19,13 @@
 			$.ajax({
 				url : "${pageContext.request.contextPath}/fundingAnswer", //서버요청주소
 				type : "post", //요청방식(get|post|put:patch:delete)
-				dataType : "text", //서버가 보내온 데이터 타입(text,html,xml,json)
+				dataType : "json", //서버가 보내온 데이터 타입(text,html,xml,json)
 				data : allDate,//서버에게 보내는 parameter 정보
 				success : function(result) {
 					$("#showId").html(result.content)
 				},//성공했을대
 				error : function(err) {
-					$("#showId").html("틀렸어!!!!!!!!!!!!!!")
+					alert("답변은 한번만 입력 가능합니다.")
 				}//오류발생했을때
 			});
 		});
@@ -94,54 +94,13 @@
 		</table>
 
 
-
-
-	<%-- <table>
-		<tr>
-			<td>작성자 | ${fundingQuestion.member.id}</td>
-		</tr>
-		<tr>
-			<td>작성일 | ${fundingQuestion.regdate}</td>
-		</tr>
-		<tr>
-			<td>제목 | ${fundingQuestion.subject}</td>
-		</tr>
-		<tr>
-			<td>내용</td>
-		</tr>
-		<tr>
-			<td>${fundingQuestion.content}</td>
-		</tr>
-		<c:choose>
-			<c:when test="${not empty fundingAnswer}">
-				<tr>
-					<td>답변</td>
-				</tr>
-				<tr>
-					<td>${fundingAnswer.content}</td>
-				</tr>
-				<tr>
-					<td>답변등록일 | ${fundingAnswer.regdate}</td>
-				</tr>
-			</c:when>
-
-			<c:otherwise>
-				<tr>
-					<td>등록된 답변이 없습니다.</td>
-				</tr>
-			</c:otherwise>
-		</c:choose>
-
-	</table> --%>
-
 	<c:choose>
-		<c:when test="${fundingAnswer.content==null}">
-			<input type="text" id="answerText" name="answerText">
-			<button type="button" class="btn btn-dark btn-sm" id="answerButton"
-				name="answerButton">등록</button>
+		<c:when test="${fundingAnswer.content!=null}">
+			<input type="hidden">
 		</c:when>
 		<c:otherwise>
-			<h1></h1>
+			<input type="text" id="answerText" name="answerText">
+			<button type="button" class="btn btn-dark btn-sm" id="answerButton" name="answerButton">등록</button>
 		</c:otherwise>
 	</c:choose>
 	<br>

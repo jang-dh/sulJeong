@@ -154,6 +154,8 @@ public class myPageController {
 		model.addAttribute("fundingQuestion", fundingQuestion);
 		model.addAttribute("fundingAnswer", fundingAnswer);
 		
+		//System.out.println(fundingQuestion.getCode()+"짜증나게 하지말고 나와라");
+		
 		return "mypage/myOpenFundingReqManage";
 	}
 	

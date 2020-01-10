@@ -19,8 +19,8 @@
 	<!-- 수녕 : 펀딩 문의 답변 상태변경 -->
 	<update id="fundingAnswerState" parameterType="int">
 	update funding_question
-	set state='답변 등록됨'
-	where code = {_parameter}
+	set state='201'
+	where code = #{_parameter}
 	</update>
 </mapper>	
 

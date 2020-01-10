@@ -59,7 +59,14 @@
 													<td>${fundingReqManage.member.id}</td>
 													<td><a href="${pageContext.request.contextPath}/mypage/myOpenFundingReqManage/${fundingReqManage.code}">${fundingReqManage.subject}</a></td>
 													<td>${fundingReqManage.regdate}</td>
-													<td>${fundingReqManage.state}</td>
+													<c:choose>
+													<c:when test="${fundingReqManage.state=='201'}">
+													<td>답변완료</td>
+													</c:when>
+													<c:otherwise>
+													<td>답변 대기중</td>
+													</c:otherwise>
+													</c:choose>
 												</tr>
 											</c:forEach>
 
@@ -92,14 +99,15 @@
 													<th scope="row">${fundingOpenPeople.id}</th>
 													<td>${fundingOpenPeople.name}</td>
 													<td>${fundingOpenPeople.addr}</td>
+													
 													<td>
 													<input type="text" id="deliveryCode" name="deliveryCode">
-													<button>입력</button>
 													</td>
 													<td>
 													<input type="text" id="courierName" name="courierName">
 													<button>입력</button>
 													</td>
+													
 												</tr>
 											</c:forEach>
 											
