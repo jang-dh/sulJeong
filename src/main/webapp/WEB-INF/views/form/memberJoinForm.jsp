@@ -7,7 +7,7 @@
 		
 		$("#Authenticate").click(function(){
 
-			window.open("https://www.skbroadband.com/popup/Identify_Popup.do", "본인 인증");
+			window.open("${pageContext.request.contextPath}/identityVerificationForm", "본인 인증", "width=500,height=600");
 		});
 		
 		$("#register").click(function() {

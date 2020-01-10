@@ -74,9 +74,10 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
-	@RequestMapping("/Authenticate")
+	@RequestMapping("/identityVerificationForm")
 	public String Authenticate() {
-		return "form/authenticate";
+		return "form/identityVerification/identityVerificationForm";
 	}
+	
 
 }
