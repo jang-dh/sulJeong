@@ -1,9 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
-
+	 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script type="text/javascript">
 	$(function() {
+		
+		
+		$("#Authenticate").click(function(){
+
+			window.open("${pageContext.request.contextPath}/identityVerificationForm", "본인 인증", "width=500,height=600");
+		});
+		
 		$("#register").click(function() {
 			if($('#name').val()==""){
 				alert("성함을 입력해주세요");
@@ -38,6 +44,7 @@
 				return false;
 			}
 		});
+		
 	});
 
 	function CheckForm(join) {
@@ -90,8 +97,8 @@
 							class="form-control" type="text">
 					</div>
 					<div class="form-group col-md-6">
-						<label>휴대폰 성인인증</label> <input type="button" value="인증하기"
-							name="Authenticate" class="form-control">
+						<label>휴대폰 성인인증</label> <input type="button" value="본인인증"
+							name="Authenticate" id="Authenticate" class="form-control">
 					</div>
 				</div>
 

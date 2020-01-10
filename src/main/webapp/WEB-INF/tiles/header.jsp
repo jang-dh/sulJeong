@@ -65,6 +65,7 @@
     <script src="${pageContext.request.contextPath}/resources/js/jquery-2.2.4.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/jquery-ui.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/chart.js"></script>
     <!-- JS | jquery plugin collection for this theme -->
     <script src="${pageContext.request.contextPath}/resources/js/jquery-plugin-collection.js"></script>
 
@@ -172,6 +173,17 @@
                                                     <h5 class="icon-box-title">1:1 문의</h5>
                                                 </div>
                                             </div>
+                                            <!-- 관리자 권한이 있을 때만 보임 -->
+                                            <sec:authorize access="hasRole('ROLE_ADMIN')">
+                                            <div class="col4">
+                                                <div class="icon-box" style="margin-bottom:0px;">
+                                                    <a class="icon" href="${pageContext.request.contextPath}/admin/siteManagement" style="margin-bottom:0px;">
+                                                        <i class="fa fa-cog"></i>
+                                                    </a>
+                                                    <h5 class="icon-box-title">&nbsp;&nbsp;관리자</h5>
+                                                </div>
+                                            </div>
+                                            </sec:authorize>
                                         </div>
                                         
     	
@@ -193,4 +205,5 @@
                     </div>
                 </div>
             </div>
+            
         </header>

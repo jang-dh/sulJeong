@@ -43,7 +43,7 @@ public interface NoticeService {
 	/**
 	 * 펀딩 등록하기
 	 * */
-	int fundInsert(Funding funding);
+	int fundInsert(Funding funding, int code);
 	
 	/**
 	 * FundingRequest 상세보기

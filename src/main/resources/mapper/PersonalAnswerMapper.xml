@@ -27,7 +27,7 @@
 
 
 	<select id="selectAllQuestion" resultType="personalQuestion">
-		select code, member_code, content, subject, regdate, state from personal_question order by regdate desc
+		select code, member_code, content, subject, regdate, state from personal_question order by code desc
 	</select>
 	
 	<select id="selectByCodeQuestion" resultMap="personalQuestionMap" parameterType="int">
@@ -46,6 +46,9 @@
 	<update id="updatePersonalQuestionState" parameterType="int">
 		update personal_question set state='201' where code=#{_parameter}
 	</update>
+
+
+
 
 </mapper>	
 

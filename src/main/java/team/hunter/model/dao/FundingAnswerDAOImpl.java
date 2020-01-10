@@ -19,5 +19,17 @@ public class FundingAnswerDAOImpl implements FundingAnswerDAO {
 	public FundingAnswer selectByCode(int code) {
 		return session.selectOne("fundingAnswerMapper.selectByCode", code);
 	}
+	
+	@Override
+	public int fundingAnswerinsert(FundingAnswer fundingAnswer) {
+		int result = session.insert("fundingAnswerMapper.fundingAnswerInsert", fundingAnswer);
+		return result;
+	}
+
+	@Override
+	public int updateAnswerCode(int code) {
+		int result = session.update("fundingAnswerMapper.fundingAnswerState", code);
+		return result;
+	}
 
 }

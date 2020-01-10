@@ -29,6 +29,8 @@ import team.hunter.model.service.PersonalAnswerService;
 @Controller
 public class AdminController {
 	
+	
+	
 	@Autowired
 	private NoticeService noticeService;
 	@Autowired
@@ -39,6 +41,7 @@ public class AdminController {
 	 * */
 	@RequestMapping("/introduce")
 	public String introduce() {
+		
 		return "main/introduce";
 	}
 	
@@ -259,7 +262,7 @@ public class AdminController {
 		try {
 
 			// ���� ������ ������ ����
-			String path = session.getServletContext().getRealPath("/resources/save");
+			String path = session.getServletContext().getRealPath("/resources/images/save");
 
 			if (file.getSize() > 0) {
 				// ÷�ε� �����̸� ������ ����
@@ -323,7 +326,7 @@ public class AdminController {
 	 * Funding Insert 
 	 * */
 	@RequestMapping("/admin/fundInsert")
-	public String fundInsert(Funding funding, MultipartFile file,MultipartFile file2, HttpSession session) {
+	public String fundInsert(Funding funding, MultipartFile file,MultipartFile file2, HttpSession session, int code) {
 		String fileName = null;
 		System.out.println(funding.getOpenDate());
 		System.out.println(funding.getEndDate());
@@ -370,7 +373,7 @@ public class AdminController {
 				file2.transferTo(new File(path+"/"+Detail));
 			}
 
-			noticeService.fundInsert(funding);
+			noticeService.fundInsert(funding, code);
 
 		}catch (IOException e) {
 			e.printStackTrace();

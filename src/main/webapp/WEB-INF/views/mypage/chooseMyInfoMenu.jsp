@@ -45,7 +45,7 @@ $(function(){
 		}
 	});
 	
-	$("#reg-form2").submit(function() {
+	$("#membership_withdrawal").click(function() {
 		var con = confirm("정말로 탈퇴하시겠습니까?");
 		
 		if(con){
@@ -60,6 +60,26 @@ $(function(){
 				$('#pwd2').focus();
 				return false;
 			}
+				
+				var idVal = $("#id2").val()
+				var pwdVal = $("#pwd2").val();
+				
+				var allDate = "${_csrf.parameterName}=${_csrf.token}"+"&id="+idVal +"&pwd="+pwdVal;
+				  $.ajax({
+						 url: "${pageContext.request.contextPath}/membershipWithdrawal", //서버요청주소
+						 type:"post", //요청방식(get|post|put:patch:delete)
+						 dataType:"json", //서버가 보내온 데이터 타입(text,html,xml,json)
+						 data: allDate ,//서버에게 보내는 parameter 정보
+						 success:function(result){
+							alert("회원탈퇴 하셨습니다. 메인페이지로 이동합니다.");
+						    location.href='${pageContext.request.contextPath}';
+						 } ,//성공했을대
+						 error:function(err){
+							 alert("비밀번호를 확인해 주세요.");
+						 }//오류발생했을때
+					 }); 
+			  
+			
 		}else{
 			return false;
 		}
@@ -166,8 +186,6 @@ $(function(){
 				<div class="col-md-6 col-md-push-3">
 					<br>
 					<br>
-					<form name="reg-form" class="register-form" method="post" id="reg-form2"
-						action="${pageContext.request.contextPath}/mypage/membershipWithdrawal">
 						<!-- 스프링 security 4에선 POST 전송시무조건 csrt 를 보내야 한다. (GET은 안보내도 됨)-->
 						<input type="hidden" name="${_csrf.parameterName}"
 							value="${_csrf.token}">
@@ -194,11 +212,10 @@ $(function(){
 						</div>
 
 						<div class="form-group">
-							<button class="btn btn-dark btn-lg btn-block mt-15" type="submit" id="membership_withdrawal">membership withdrawal</button>
+							<button class="btn btn-dark btn-lg btn-block mt-15" type="button" id="membership_withdrawal">membership withdrawal</button>
 						</div>
-					</form>
 				</div>
 			</div>
-		
+		</div>
 	</div>
 </div>

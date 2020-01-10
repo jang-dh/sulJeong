@@ -3,6 +3,11 @@
 
 <script>
 	$(function(){
+		if('${errorMessage}' != ""){
+			alert('${errorMessage}');
+		}
+			
+		
 		$("#login-form").submit(function(){
 			if($("#form_username_email").val()==""){
 				alert("아이디를 입력해주세요");
@@ -15,9 +20,22 @@
 				return false;
 			}
 		});
-	});
+		
+		$("#login-form").submit(function() {
+				if($('#id').val()==""){
+					alert("아이디를 입력해주세요");
+					$('#id').focus();
+					return false;
+				}
+				
+				if($('#pwd').val()==""){
+					alert("비밀번호를 입력해주세요");
+					$('#pwd').focus();
+					return false;
+				}
+			});
+		});
 </script>
-${errorMessage}
 <div class="main-content">
 	<section>
       <div class="container">
@@ -25,7 +43,6 @@ ${errorMessage}
           <div class="col-md-6 col-md-push-3">
             <h4 class="text-gray mt-0 pt-5"> Login</h4>
             <hr>
-            <p>Lorem ipsum dolor sit amet, consectetur elit.</p>
             <form id="login-form" name="login-form" class="clearfix" action="${pageContext.request.contextPath}/loginCheck" method="post">
             	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" >
               <div class="row">

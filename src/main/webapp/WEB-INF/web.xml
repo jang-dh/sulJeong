@@ -15,12 +15,11 @@
 	
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
 	<listener>
+		<listener-class>team.hunter.listener.SessionListener</listener-class>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
 	</listener>
-	
-	<listener>
-      <listener-class>team.hunter.model.listener.SessionListener</listener-class>
- 	</listener>
+
 
 	
 	<!-- Spring Filter 한글처리 등록 -->

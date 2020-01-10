@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import team.hunter.model.dao.FundingQuestionDAO;
 import team.hunter.model.dto.FundingQuestion;
-import team.hunter.model.dto.FundingRequest;
+import team.hunter.model.dto.Member;
 
 @Service
 public class FundingQuestionServiceImpl implements FundingQuestionService {
@@ -23,8 +23,8 @@ public class FundingQuestionServiceImpl implements FundingQuestionService {
 
 
 	@Override
-	public List<FundingQuestion> fundingQuestionList(int memberCode) {
-		List<FundingQuestion> list = fundingQuestionDAO.fundingQuestionList(memberCode);
+	public List<FundingQuestion> fundingQuestionList(Member member) {
+		List<FundingQuestion> list = fundingQuestionDAO.fundingQuestionList(member);
 		return list;
 	}
 
@@ -35,4 +35,10 @@ public class FundingQuestionServiceImpl implements FundingQuestionService {
 		return fundingQuestion;
 	}
 
+
+	@Override
+	public int listCount(int memberCode) {
+		
+		return fundingQuestionDAO.listCount(memberCode);
+	}
 }

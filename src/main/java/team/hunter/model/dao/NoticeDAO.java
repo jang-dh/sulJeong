@@ -44,6 +44,12 @@ public interface NoticeDAO {
 	int fundInsert(Funding funding);
 	
 	/**
+	 * 펀딩등록할 때
+	 * 펀딩신청 상태변경
+	 * */
+	int fundingRequestStateChange(int code);
+	
+	/**
 	 * FundingRequest 상세보기
 	 * */
 	FundingRequest selectFundingRequestByCode(int code);
