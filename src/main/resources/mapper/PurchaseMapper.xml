@@ -3,20 +3,24 @@
 <mapper namespace="purchaseMapper">
 
 	<select id="selectPurchaseByMemberCode" resultType="purchase" parameterType="int">
-		SELECT code, member_code, funding_code, price, qty, purchase_state, purchase_date, delivery_code, courier
-		FROM purchase
+		select code, member_code, funding_code, price, qty, purchase_state, purchase_date, delivery_code, courier
+		from purchase
 		where member_code = #{_parameter}
 	</select>
 	
 	<insert id="insert" parameterType="purchase">
-		INSERT INTO PURCHASE (code, member_code, funding_code, price, qty, purchase_state, purchase_date, delivery_code, Courier) 
-		VALUES (seq_no.nextval, #{memberCode}, #{fundingCode}, #{price}, #{qty},
+		insert into purchase (code, member_code, funding_code, price, qty, purchase_state, purchase_date, delivery_code, Courier) 
+		values (seq_no.nextval, #{memberCode}, #{fundingCode}, #{price}, #{qty},
 		 #{purchaseState}, sysdate, #{deliveryNumber}, #{Courier})
 	</insert>
 	
 	<select id="countFundingCode" parameterType="int" resultType="int">
-		select count(*) from purchase where funding_code=#{_parameter}
+		select count(*) from purchase where funding_code = #{_parameter}
 	</select>
+	
+	<delete id="delete" parameterType="purchase">
+		delete from purchase where code = #{_parameter}
+	</delete>
 	
 </mapper>	
 

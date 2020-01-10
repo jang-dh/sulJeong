@@ -12,13 +12,19 @@ public interface PurchaseService {
 	public int insert(Purchase purchase);
 	
 	/*
+	 * 후원인원 증가
+	 */
+	public int countFundingCode(int fundingCode);
+	
+	/*
 	 * 전체검색
 	 */
 	public List<Purchase> myPurchaseList(int memberCode);
 	
 	/*
-	 *  후원인원 증가
+	 * 후원한 펀딩 삭제
 	 */
-	public int countFundingCode(int fundingCode);
+	public int deletePurchaseList(int code);
+	
 
 }

@@ -89,7 +89,7 @@
                         </tr>
                         <tr>
                           <td><input type="text" class="form-control" placeholder="State/country" value=""></td>
-                        </tr>
+                        </tr>	
                         <tr>
                           <td><input type="text" class="form-control" placeholder="Postcod/zip" value=""></td>
                         </tr>

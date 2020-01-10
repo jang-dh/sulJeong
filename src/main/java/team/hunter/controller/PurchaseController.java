@@ -27,9 +27,9 @@ public class PurchaseController {
 	@ResponseBody
 	public int insertPurchase(int fundingCode, int price, int qty) {
 
-		System.out.println("fundingCode : " + fundingCode);
-		System.out.println("price : " + price);
-		System.out.println("qty : " + qty);
+//		System.out.println("fundingCode : " + fundingCode);
+//		System.out.println("price : " + price);
+//		System.out.println("qty : " + qty);
 
 		Member member = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Purchase purchase = new Purchase(0, member.getCode(), fundingCode, price, qty, null, null, null, null);
@@ -45,5 +45,11 @@ public class PurchaseController {
 		System.out.println("이것은 컨트롤러 " + list + "이다.");
 		
 		return new ModelAndView("mypage/myFundingHistory", "list", list);
+	}
+	
+	@RequestMapping("/mypage/delete")
+	public String delete(int code) {
+		purchaseService.deletePurchaseList(code);
+		return "redirect:mypage/fundingHistory";
 	}
 }

@@ -24,11 +24,11 @@ public class PurchaseServiceImpl implements PurchaseService {
 	@Transactional
 	public int insert(Purchase purchase) {
 		int result = purchaseDAO.insert(purchase);
-		System.out.println("price : " + purchase.getPrice());
-		System.out.println("purchase : " + purchase);
+//		System.out.println("price : " + purchase.getPrice());
+//		System.out.println("purchase : " + purchase);
  
 		result = fundingDAO.updateStackPrice(purchase.getFundingCode(), purchase.getPrice()*purchase.getQty());
-		System.out.println("result : " + result);
+//		System.out.println("result : " + result);
 		
 		return result;
 	}
@@ -47,6 +47,12 @@ public class PurchaseServiceImpl implements PurchaseService {
 		
 		int result = purchaseDAO.countFundingCode(fundingCode);
 		System.out.println("fundingcode service : " + result);
+		return result;
+	}
+	
+	@Override
+	public int deletePurchaseList(int code) {
+		int result = purchaseDAO.deleteList(code);
 		return result;
 	}
 	

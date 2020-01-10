@@ -18,8 +18,6 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 	
 	@Override
 	public int insert(Purchase purchase) {
-		
-		System.out.println("Dao : " + purchase);
 		return session.insert("purchaseMapper.insert", purchase);
 	}
 	
@@ -31,12 +29,14 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 	
 	@Override
 	public int countFundingCode(int fundingCode) {
-		
-		System.out.println("전");
 		int fundingSponserCount = session.selectOne("purchaseMapper.countFundingCode", fundingCode);
-		
-		System.out.println("후");
 		return fundingSponserCount;
+	}
+	
+	@Override
+	public int deleteList(int code) {
+		int deletePurchaseFundingList = session.delete("purchaseMapper.delete", code);
+		return deletePurchaseFundingList;
 	}
 
 }
