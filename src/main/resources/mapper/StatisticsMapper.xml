@@ -11,14 +11,14 @@
 	</update>
 	
 	<update id="updateFundingApply">
-		update statistics set funding_apply=funding_apply+1 where regdate=to_char(sysdate,'yy/mm/dd');
+		update statistics set funding_apply=funding_apply+1 where regdate=to_char(sysdate,'yy/mm/dd')
 	</update>
 	
 	<update id="updateTotalFundingStackPrice" parameterType="int">
-		update statistics set purchase_price =purchase_price + #{_parameter} where regdate=to_char(sysdate,'yy/mm/dd');
+		update statistics set purchase_price =purchase_price + #{_parameter} where regdate=to_char(sysdate,'yy/mm/dd')
 	</update>
 	
-	<select id="selectWeekData" resultType="statisticsDAO">
+	<select id="selectWeekData" resultType="statistics">
 		select regdate, visit, purchase_count, purchase_price, funding_apply 
 		from (select rownum,regdate, visit, purchase_count, purchase_price, funding_apply
         from (select regdate, visit, purchase_count, purchase_price, funding_apply from statistics order by regdate desc))
