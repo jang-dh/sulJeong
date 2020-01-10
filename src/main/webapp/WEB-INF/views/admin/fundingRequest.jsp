@@ -53,6 +53,9 @@
 										<c:when test="${request.state eq '101'}">
 											<td>신청 승인</td>
 										</c:when>
+										<c:when test="${request.state eq '103'}">
+											<td>펀딩 등록 완료</td>
+										</c:when>
 										<c:otherwise>
 											<td>심사중...</td>
 										</c:otherwise>

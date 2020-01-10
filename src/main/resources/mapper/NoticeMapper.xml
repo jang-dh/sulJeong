@@ -50,6 +50,10 @@
 	<update id="fundingRequestApprove" parameterType="int">
 		update funding_request set state='101' where code=#{code}
 	</update>
+	
+	<update id="fundingRequestStateChange" parameterType="int">
+		update funding_request set state='103' where code=#{code}
+	</update>
 
 </mapper>	
 
