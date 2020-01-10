@@ -8,10 +8,10 @@
 <script type="text/javascript">
 
 	$(function(){
-		   $("input[value=후원취소]").click(function(){
-			   $("#deleteForm").attr("action", "${pageContext.request.contextPath}/purchase/delete");
-			   $("#deleteForm").submit();
-		   })
+		$("input[value=후원취소]").click(function(){
+			$("#deleteForm").attr("action", "${pageContext.request.contextPath}/purchase/delete");
+			$("#deleteForm").submit();
+		})
 	})
 </script>
   <!-- Start main-content-->
@@ -55,9 +55,9 @@
                 <c:forEach items="${list}" var="purchase" varStatus="status">
                   <tr class="cart_item">
                     <td class="product-thumbnail"><a href="#">${purchase.purchaseDate} <img alt="member" src="http://placehold.it/320x360"></a></td>
-                    <td class="product-name"><a class="text-theme-colored" href="#">${purchase.code}</a>
+                    <td class="product-name"><a class="text-theme-colored" href="#">${funding_Code}</a>
                       <ul class="variation">
-                        <li class="product-title">${funding.title}<span>Black</span></li>
+                        <li class="product-title">${funding.title}<span>${funding.title}</span></li>
                       </ul></td>
                     <td class="product-price"><span class="amount"><fmt:formatNumber>${purchase.price}</fmt:formatNumber>원</span></td>
                     <td class="product-quantity"><!-- <div class="quantity buttons_added"> -->
@@ -68,12 +68,15 @@
                       <!-- </div> --></td>
                     <td class="product-subtotal"><span class="amount"><fmt:formatNumber>${purchase.price * purchase.qty}</fmt:formatNumber>원</span></td>
                     <td>
-                    <form name="deleteForm" method="post" id="deleteForm">
-                    	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-                    	<input type="hidden" name="code" value="${purchase.code}">
-                    	<input type="button" class="remove" value="후원취소">
-                    	
-                    </form>
+	                    <form name="deleteForm" method="post" id="deleteForm">
+	                    	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+	                    	<input type="hidden" name="code" value="${purchase.code}">
+	                    	<input type="button" class="remove" value="후원취소">
+	                    </form>
+	                    <ul>
+	                    	<li class="deliver">택배 회사 : ${purchase.deliveryNumber }</li>
+	                    	<li class="courier">송장 번호 : ${purchase.courier }</li>
+	                    </ul>
                     </td>
                   </tr>
                 </c:forEach>
@@ -83,7 +86,7 @@
             <div class="col-md-10 col-md-offset-1 mt-30">
               <div class="row">
                 <div class="col-md-6">
-                  <h4>Calculate Shipping</h4>
+                  <h4>받는사람 정보</h4>
                   <form class="form" action="#">
                     <table class="table no-border">
                       <tbody>

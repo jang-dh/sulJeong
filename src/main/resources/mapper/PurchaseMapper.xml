@@ -2,6 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="purchaseMapper">
 
+	<!-- 후원한 펀딩 내역 페이지 - 펀딩 후원 내역 resultMap -->
+	<resultMap type="funding" id="fundingTitleMap">
+		<id column="code" property="code" />
+		<result column="title" property="title" />
+		<association property="member" javaType="member">
+			<id column="code" property="code" />
+			<result column="name" property="name" />
+			<result column="addr" property="addr" />
+			<result column="phone" property="phone" />
+		</association>
+	</resultMap>
+
 	<select id="selectPurchaseByMemberCode" resultType="purchase" parameterType="int">
 		select code, member_code, funding_code, price, qty, purchase_state, purchase_date, delivery_number, courier
 		from purchase
@@ -11,8 +23,16 @@
 	<insert id="insert" parameterType="purchase">
 		insert into purchase (code, member_code, funding_code, price, qty, purchase_state, purchase_date, delivery_number, Courier) 
 		values (seq_no.nextval, #{memberCode}, #{fundingCode}, #{price}, #{qty},
-		 #{purchaseState}, sysdate, #{deliveryNumber}, #{Courier})
+		 #{purchaseState}, sysdate, #{deliveryNumber}, #{courier})
 	</insert>
+	
+	<select id="fundingTitle"
+		resultMap="fundingTitleMap" parameterType="int">
+		select f.title , m.name, m.addr, m.phone
+		from funding f inner join member m
+		on f.member_code = m.code
+		where m.code = #{_parameter}
+	</select>
 	
 	<select id="countFundingCode" parameterType="int" resultType="int">
 		select count(*) from purchase where funding_code = #{_parameter}
