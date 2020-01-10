@@ -31,11 +31,14 @@ import team.hunter.model.service.StatisticsService;
 @Controller
 public class AdminController {
 	
-	
+
 	@Autowired
 	private NoticeService noticeService;
 	@Autowired
 	private PersonalAnswerService personalAnswerService;
+	@Autowired
+	private StatisticsService statisticsService;
+	
 	
 	/**
 	 * ���񽺼Ұ� ������ ����
@@ -47,10 +50,20 @@ public class AdminController {
 	}
 	
 	/**
-	 * ������������
+	 * 사이트 통계 
 	 * */
 	@RequestMapping("/admin/siteManagement")
-	public void siteManagement() {}
+	public ModelAndView siteManagement() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("admin/siteManagement");
+		List<Statistics>list = statisticsService.selectWeekData();
+//		String week = "";
+//		for(Statistics s : list) {
+//			week += s.getRegdate() +",";
+//		}
+		mv.addObject("weekData", list);
+		return mv;
+	}
 	
 	@RequestMapping("/admin/fundingRequest")
 	public ModelAndView fundingRequest() {
@@ -112,6 +125,9 @@ public class AdminController {
 		
 		return "admin/statistics";
 	}
+	
+	
+	
 	
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////
