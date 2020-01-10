@@ -61,7 +61,15 @@
 										<th scope="row">${question.code}</th>
 										<td><a href="${pageContext.request.contextPath}/mypage/fundingQuestionDetailPage/${question.code}">${question.subject}</a></td>
 										<td>${question.regdate}</td>
-										<td>${question.state}</td>
+										<c:choose>
+											<c:when test="${question.state=='200'}">
+												<td>답변대기중</td>
+											</c:when>
+											<c:otherwise>
+												<td>답변완료</td>
+											</c:otherwise>
+										</c:choose>
+										
 									</tr>
 								</c:forEach>
 							</tbody>

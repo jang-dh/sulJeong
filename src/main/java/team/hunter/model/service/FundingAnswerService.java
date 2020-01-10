@@ -1,6 +1,7 @@
 package team.hunter.model.service;
 
 import team.hunter.model.dto.FundingAnswer;
+import team.hunter.model.dto.FundingQuestion;
 
 public interface FundingAnswerService {
 	int contentInsert(FundingAnswer fundingAnswer);
@@ -12,5 +13,7 @@ public interface FundingAnswerService {
 	 * */
 	int fundingAnswerinsert(FundingAnswer fundingAnswer);
 	
+	
+	FundingQuestion selectByCodeQuestion(int code);
 	
 }

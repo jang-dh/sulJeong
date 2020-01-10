@@ -22,4 +22,5 @@ public class FundingQuestion {
 	private Member member;
 	//펀딩 답변 1:1
 	private FundingAnswer fundingAnswer;
+	private Funding funding;
 }

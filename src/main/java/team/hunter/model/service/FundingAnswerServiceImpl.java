@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import team.hunter.model.dao.FundingAnswerDAO;
 import team.hunter.model.dto.FundingAnswer;
+import team.hunter.model.dto.FundingQuestion;
 @Service
 public class FundingAnswerServiceImpl implements FundingAnswerService {
 	@Autowired
@@ -13,8 +14,8 @@ public class FundingAnswerServiceImpl implements FundingAnswerService {
 
 	@Override
 	public int contentInsert(FundingAnswer fundingAnswer) {
-		fundingAnswerDAO.contentInsert(fundingAnswer);
-		return 0;
+		
+		return fundingAnswerDAO.contentInsert(fundingAnswer);
 	}
 
 	@Override
@@ -33,5 +34,10 @@ public class FundingAnswerServiceImpl implements FundingAnswerService {
 			fundingAnswerDAO.updateAnswerCode(fundingAnswer.getQuestionCode());
 		}
 		return result;
+	}
+
+	@Override
+	public FundingQuestion selectByCodeQuestion(int code) {
+		return fundingAnswerDAO.selectByCodeQuestion(code);
 	}
 }

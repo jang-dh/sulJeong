@@ -3,6 +3,7 @@
     
 <script>
 $(function(){
+	$("#loginGoBtn").hide();
 	$("#find").click(function(){
 		if($("#name1").val()==""){
 			alert("성함을 입력해주세요");
@@ -25,7 +26,16 @@ $(function(){
 				 dataType:"json", //서버가 보내온 데이터 타입(text,html,xml,json)
 				 data: allDate ,//서버에게 보내는 parameter 정보
 				 success:function(result){
-				    $("#showId").html(result.name+"님의 아이디는 "+result.id+"입니다.")
+				    //$("#showId").html(result.name+"님의 아이디는 "+result.id+"입니다.")
+				    $("#login-form").hide();
+				    var str="";
+					$.each(result, function(index, item){
+						str+=item.name+"님의 아이디는 "+item.id+"입니다.<br>";
+					});
+					
+					$("#showId").html(str);
+					$("#loginGoBtn").show();
+					
 					
 				 } ,//성공했을대
 				 error:function(err){
@@ -94,10 +104,14 @@ $(function(){
                 <button type="button" class="btn btn-dark btn-sm" id="find" value="Login">찾기</button>
               </div>
               </div>
-              <div id="showId">
-                
-              </div>
+              
             </form>
+            <div id="showId">
+            	
+              </div>
+              </p>
+              </p>
+              <a id="loginGoBtn" href="${pageContext.request.contextPath}/login" class="btn btn-dark btn-circled">로그인</a>
           </div>
         </div>
       </div>

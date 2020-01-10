@@ -2,7 +2,6 @@ package team.hunter.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import team.hunter.model.dto.FundingAnswer;
 import team.hunter.model.dto.Funding;
 import team.hunter.model.dto.FundingAnswer;
 import team.hunter.model.dto.FundingQuestion;
@@ -25,6 +23,7 @@ import team.hunter.model.service.FundingQuestionService;
 import team.hunter.model.service.FundingRequestService;
 import team.hunter.model.service.MemberService;
 import team.hunter.model.service.PersonalQuestionService;
+import team.hunter.util.Constants;
 
 @Controller
 @RequestMapping("mypage")
@@ -51,6 +50,7 @@ public class myPageController {
 	public String personalQuestionInsert(PersonalQuestion personalQuestion) {
 		Member member =(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		personalQuestion.setMemberCode(member.getCode());
+		personalQuestion.setState(Constants.BEFORE_ANSWER);
 		personalQs.personalQuestionInsert(personalQuestion);
 		return "redirect:/mypage/myQuestion";
 	}
@@ -81,21 +81,24 @@ public class myPageController {
 	}
 	
 	@RequestMapping("fundingQuestionDetailPage/{code}")
-	public ModelAndView fundingQuestionDetail(@PathVariable int code) {
-		FundingQuestion fundingQuestion =fundingQs.selectByCode(code);
-		FundingAnswer fundingAnswer = fundingAs.selectByCode(code);
-		ModelAndView mv = new ModelAndView();
-		mv.addObject("detail", fundingQuestion);
-		mv.addObject("answer", fundingAnswer);
-		mv.setViewName("mypage/fundingQuestionDetail");
+	public String fundingQuestionDetail(@PathVariable int code, Model model) {
 		
-		return mv;
+		FundingQuestion question = fundingAs.selectByCodeQuestion(code);
+		System.out.println(question.getMember().getId());
+		System.out.println("question.getPersonalAnswer().getContent()"+question.getFunding().getMdCode());
+		System.out.println("question.getPersonalAnswer().getContent()"+question.getFundingAnswer().getContent());
+		System.out.println("question.getContent()" + question.getContent());
+		
+		
+		model.addAttribute("question", question);
+		
+		return "mypage/fundingQuestionDetail";
 	}
 	
 	@RequestMapping("myInfoMenu")
 	public ModelAndView myInfoMenu() {
 		Member member =(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		member = memberService.selectByPhone(member);
+		member = memberService.selectMemberByCode(member.getCode());
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("member", member);
 		mv.setViewName("mypage/chooseMyInfoMenu");

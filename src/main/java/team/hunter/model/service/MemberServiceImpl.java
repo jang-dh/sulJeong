@@ -1,9 +1,9 @@
 package team.hunter.model.service;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -50,7 +50,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public Member selectByPhone(Member member) {
+	public List<Member> selectByPhone(Member member) {
 		return memberDAO.selectByPhone(member);
 	}
 
@@ -66,7 +66,6 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public Member changeMyInfo(Member member) {
-		//가입 전에 비밀번호 평문을 암호화 해서 저장한다.
 		String pwd = passwordEncoder.encode(member.getPwd());
 		member.setPwd(pwd);
 				
@@ -91,6 +90,11 @@ public class MemberServiceImpl implements MemberService {
 		}
 		
 		return result;
+	}
+
+	@Override
+	public Member selectMemberByCode(int memberCode) {
+		return memberDAO.selectMemberByCode(memberCode);
 	}
 
 }

@@ -1,8 +1,12 @@
 package team.hunter.model.dao;
 
+import java.util.List;
+
 import team.hunter.model.dto.Member;
 
 public interface MemberDAO {
+	
+	Member selectMemberByCode(int memberCode);
 	
 	Member selectMemberById(String id);
 	
@@ -11,7 +15,7 @@ public interface MemberDAO {
 	 * */
 	int memberJoin(Member member);
 	
-	Member selectByPhone(Member member);
+	List<Member> selectByPhone(Member member);
 
 	
 	/**

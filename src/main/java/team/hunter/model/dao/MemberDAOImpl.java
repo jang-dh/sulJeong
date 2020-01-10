@@ -1,5 +1,7 @@
 package team.hunter.model.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -13,8 +15,8 @@ public class MemberDAOImpl implements MemberDAO {
 	private SqlSession session;
 	
 	@Override
-	public Member selectMemberById(String id) {
-		return session.selectOne("memberMapper.selectMemberById", id);
+	public Member selectMemberByCode(int memberCode) {
+		return session.selectOne("memberMapper.selectMemberByCode", memberCode);
 		
 	}
 
@@ -26,8 +28,8 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public Member selectByPhone(Member member) {
-		return session.selectOne("memberMapper.selectByPhone",member);
+	public List<Member> selectByPhone(Member member) {
+		return session.selectList("memberMapper.selectByPhone",member);
 	}
 
 	@Override
@@ -46,5 +48,10 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public int membershipWithdrawal(Member member) {
 		return session.delete("memberMapper.membershipWithdrawal", member);
+	}
+
+	@Override
+	public Member selectMemberById(String id) {
+		return session.selectOne("memberMapper.selectMemberById", id);
 	}
 }
