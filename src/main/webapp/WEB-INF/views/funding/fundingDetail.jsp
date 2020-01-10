@@ -149,7 +149,7 @@ $(function() {
 						<%-- <form action="transfer"> --%>
 						<div class="col-md-7">
 							<div class="product-summary">
-								<h2 class="product-title">${purchaseDate}</h2>
+								<h2 class="product-title">${funding.title}</h2>
 								<div class="product_review">
 									<ul class="review_text list-inline">
 										<li>
