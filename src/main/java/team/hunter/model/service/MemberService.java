@@ -23,5 +23,7 @@ public interface MemberService {
 	Member changeMyInfo(Member member);
 	
 	int membershipWithdrawal(Member member);
+	
+	Member idDuplicateCheck(String id);
 
 }

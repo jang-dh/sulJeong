@@ -26,4 +26,6 @@ public interface MemberDAO {
 	int changeMyInfo(Member member);
 	
 	int membershipWithdrawal(Member member);
+	
+	Member idDuplicateCheck(String id);
 }

@@ -2,15 +2,70 @@
 	pageEncoding="UTF-8"%>
 	 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script type="text/javascript">
+	function goPopup() {
+		//경로는 시스템에 맞게 수정하여 사용
+		//호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를 
+		//호출하게 됩니다. 
+		var pop = window.open("${pageContext.request.contextPath}/juso/jusoPopup", "pop","width=570,height=420, scrollbars=yes, resizable=yes");
+		//** 2017년 5월 모바일용 팝업 API 기능 추가제공 **/ 
+		// 모바일 웹인 경우, 호출된 페이지(jusopopup.jsp)에서 
+		// 실제 주소검색 URL(http://www.juso.go.kr/addrlink/addrMobileLinkUrl.do)를 호출하게 됩니다. 
+		// var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes"); 
+	}
+
+	function jusoCallBack(roadFullAddr, addrDetail, jibunAddr) {
+		// 2017년 2월 제공항목이 추가되었습니다. 원하시는 항목을 추가하여 사용하시면 됩니다. 
+			document.form.addr.value = roadFullAddr +" "+ addrDetail;
+	}
+	
+	
 	$(function() {
-		
 		
 		$("#Authenticate").click(function(){
 
 			window.open("${pageContext.request.contextPath}/identityVerificationForm", "본인 인증", "width=500,height=600");
 		});
 		
+		$("#idDuplicateCheck").click(function(){
+			
+			if($('#id').val()==""){
+				alert("아이디를 입력해주세요");
+				$('#id').focus();
+				return false;
+			}
+			
+			var idVal = $("#id").val()
+			
+			var allDate = "${_csrf.parameterName}=${_csrf.token}"+"&id="+idVal;
+			  $.ajax({
+					 url: "${pageContext.request.contextPath}/idDuplicateCheck", //서버요청주소
+					 type:"post", //요청방식(get|post|put:patch:delete)
+					 dataType:"json", //서버가 보내온 데이터 타입(text,html,xml,json)
+					 data: allDate ,//서버에게 보내는 parameter 정보
+					 success:function(result){
+						 alert("중복된 ID 입니다.");
+						 $("#id").val("");
+						 $("#id").focus();
+					 } ,//성공했을대
+					 error:function(err){
+						 $("#idDuplicateCheck").val("중복체크완료");
+					 }//오류발생했을때
+				 });
+		});
+		
 		$("#register").click(function() {
+			
+			if($('#id').val()==""){
+				alert("아이디를 입력해주세요");
+				$('#id').focus();
+				return false;
+			}
+			if($('#pwd').val()==""){
+				alert("비밀번호를 입력해주세요");
+				$('#pwd').focus();
+				return false;
+			}
+			
 			if($('#name').val()==""){
 				alert("성함을 입력해주세요");
 				$('#name').focus();
@@ -27,22 +82,13 @@
 				$('#phone').focus();
 				return false;
 			}
-			if($('#id').val()==""){
-				alert("아이디를 입력해주세요");
-				$('#id').focus();
-				return false;
-			}
-			if($('#pwd').val()==""){
-				alert("비밀번호를 입력해주세요");
-				$('#pwd').focus();
-				return false;
-			}
 			
 			if($('#addr').val()==""){
 				alert("주소를 입력해주세요");
 				$('#addr').focus();
 				return false;
 			}
+			
 		});
 		
 	});
@@ -62,7 +108,7 @@
 		<div class="col-md-6 col-md-push-3">
 			<br>
 			<br>
-			<form name="reg-form" class="register-form" method="post"
+			<form name="reg-form" id="reg-form" class="register-form" method="post"
 				action="${pageContext.request.contextPath}/memberJoin"
 				onsubmit="return CheckForm(this)">
 				<!-- 스프링 security 4에선 POST 전송시무조건 csrt 를 보내야 한다. (GET은 안보내도 됨)-->
@@ -77,10 +123,29 @@
 						Register Now.</h4>
 				</div>
 				<hr>
-				<p class="text-gray">Lorem ipsum dolor sit amet, consectetur
-					adipisicing elit. Excepturi id perspiciatis facilis nulla possimus
-					quasi, amet qui. Ea rerum officia, aspernatur nulla neque nesciunt
-					alias.</p>
+					
+				<div class="row">
+					<div class="form-group col-md-6">
+						<label for="form_choose_username">Choose UserID</label> <input
+							id="id" name="id" class="form-control" type="text">
+					</div>
+					<div class="form-group col-md-6">
+						<label>아이디 중복 체크</label> <input type="button" value="중복체크"
+							name="idDuplicateCheck" id="idDuplicateCheck" class="form-control">
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="form-group col-md-6">
+						<label for="form_choose_password">Choose Password</label> <input
+							id="pwd" name="pwd" class="form-control" type="password">
+					</div>
+					<div class="form-group col-md-6">
+						<label>Re-enter Password</label> <input id="pwdCheck"
+							name="pwdCheck" class="form-control" type="password">
+					</div>
+				</div>
+				
 				<div class="row">
 					<div class="form-group col-md-6">
 						<label>Name</label> <input name="name" id="name"
@@ -104,34 +169,13 @@
 
 				<div class="row">
 					<div class="form-group col-md-6">
-						<label for="form_choose_username">Choose UserID</label> <input
-							id="id" name="id" class="form-control" type="text">
-					</div>
-					<div class="form-group col-md-6">
-						<label>아이디 중복 체크</label> <input type="button" value="중복체크"
-							name="idDuplicateCheck" class="form-control">
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="form-group col-md-6">
-						<label for="form_choose_password">Choose Password</label> <input
-							id="pwd" name="pwd" class="form-control" type="password">
-					</div>
-					<div class="form-group col-md-6">
-						<label>Re-enter Password</label> <input id="pwdCheck"
-							name="pwdCheck" class="form-control" type="password">
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="form-group col-md-6">
 						<label for="form_choose_password">주소</label> <input id="addr"
 							name="addr" class="form-control" type="text">
 					</div>
 					<div class="form-group col-md-6">
-						<label>주소 찾기</label> <input id="addr" name="addr"
-							class="form-control" type="button" value="나의 주소지 찾기">
+						<label>주소 찾기</label> 
+						<input id="addrBtn" name="addrBtn"
+							class="form-control" type="button" onClick="goPopup();" value="나의 주소지 찾기">
 					</div>
 				</div>
 

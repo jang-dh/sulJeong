@@ -97,4 +97,9 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.selectMemberByCode(memberCode);
 	}
 
+	@Override
+	public Member idDuplicateCheck(String id) {
+		return memberDAO.idDuplicateCheck(id);
+	}
+
 }

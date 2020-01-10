@@ -79,5 +79,10 @@ public class MemberController {
 		return "form/identityVerification/identityVerificationForm";
 	}
 	
+	@RequestMapping("/juso/jusoPopup")
+	public String jusoPopup() {
+		return "form/juso/jusoPopup";
+	}
+	
 
 }

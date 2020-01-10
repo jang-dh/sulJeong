@@ -48,6 +48,11 @@
 	<delete id="membershipWithdrawal" parameterType="member">
 		delete from member where id=#{id}
 	</delete>
+	
+	<select id="idDuplicateCheck" parameterType="String" resultType="member">
+		<include refid="selectMember"></include>
+		where id=#{_parameter}
+	</select>
 
 </mapper>	
 

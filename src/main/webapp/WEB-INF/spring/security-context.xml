@@ -19,6 +19,7 @@
 			default-target-url="/"
 			authentication-failure-handler-ref="memberAuthenticationFailureHandler"
 		/>
+		<security:csrf disabled="true"/>
 		
 		<security:logout
 			logout-url="/logout"

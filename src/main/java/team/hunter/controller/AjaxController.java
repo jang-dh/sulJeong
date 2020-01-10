@@ -90,5 +90,12 @@ public class AjaxController {
 		FundingAnswer fundingAnswer2 = fundingAs.selectByCode(Integer.parseInt(questionCode));
 		return fundingAnswer2;
 	}
+	
+	@PostMapping("/idDuplicateCheck")
+	public Member idDuplicateCheck(String id) {
+		Member result = memberService.idDuplicateCheck(id);
+		return result;
+	};
+	
 
 }
