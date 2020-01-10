@@ -6,6 +6,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import team.hunter.model.dto.Statistics;
+
 @Repository
 public class StatisticsDAOImpl implements StatisticsDAO {
 	
@@ -47,7 +49,7 @@ public class StatisticsDAOImpl implements StatisticsDAO {
 
 
 	@Override
-	public List<StatisticsDAO> selectWeekData() {
+	public List<Statistics> selectWeekData() {
 		
 		return session.selectList("statisticsMapper.selectWeekData");
 	}

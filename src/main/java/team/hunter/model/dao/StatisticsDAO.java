@@ -2,6 +2,8 @@ package team.hunter.model.dao;
 
 import java.util.List;
 
+import team.hunter.model.dto.Statistics;
+
 public interface StatisticsDAO {
 	/**
 	 * 오늘방문자 수 
@@ -32,6 +34,6 @@ public interface StatisticsDAO {
 	 * 당일기준 일주일 전까지의
 	 * 통계정보 출력
 	 * */
-	List<StatisticsDAO> selectWeekData();
+	List<Statistics> selectWeekData();
 
 }

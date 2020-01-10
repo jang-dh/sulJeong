@@ -36,9 +36,20 @@
 <script>
     $(document).ready(function() {
         // Line Chart
+        var regdate=new Array();
+        var visit=new Array();
+ 		<c:forEach var="regdate" items="${weekData}" varStatus="state">
+        	regdate.push('${regdate.regdate}');
+        </c:forEach>
+ 		regdate.sort();
+ 		<c:forEach var="visit" items="${weekData}" varStatus="state">
+    		visit.push('${visit.visit}');
+    	</c:forEach>
+ 		visit.reverse();	
+ 		
         var randomScalingFactor = function(){ return Math.round(Math.random()*100)};
         var lineChartData = {
-          labels : ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+          labels : regdate,
           datasets : [
             {
               label: "My Second dataset",
@@ -49,11 +60,11 @@
               pointHighlightFill : "#fff",
               pointHighlightStroke : "rgba(151,187,205,1)",
 //               data : [randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor()]
-              data : [${data},20,5,40,23,60,45]
+              data : visit
             }
           ]
       
-      };
+      	};
         window.onload = function(){
           var chart_lineChart = document.getElementById("lineChart").getContext("2d");
           window.myLine = new Chart(chart_lineChart).Line(lineChartData, {
