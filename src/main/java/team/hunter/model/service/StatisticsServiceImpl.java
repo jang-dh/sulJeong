@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import team.hunter.model.dao.StatisticsDAO;
+import team.hunter.model.dto.Statistics;
 
 @Service
 public class StatisticsServiceImpl implements StatisticsService {
@@ -42,8 +43,8 @@ public class StatisticsServiceImpl implements StatisticsService {
 	}
 
 	@Override
-	public List<StatisticsDAO> selectWeekData() {
-		List<StatisticsDAO> list = dao.selectWeekData();
+	public List<Statistics> selectWeekData() {
+		List<Statistics> list = dao.selectWeekData();
 		if(list ==null) throw new RuntimeException();
 		return list;
 	}

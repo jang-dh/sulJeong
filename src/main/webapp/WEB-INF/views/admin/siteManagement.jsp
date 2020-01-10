@@ -2,6 +2,45 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>    
 
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		var allDate = "${_csrf.parameterName}=${_csrf.token}";
+		$.ajax({
+			url: "${pageContext.request.contextPath}/selectVisitData", //서버요청주소
+			type : "post", //서버 요청방식(get,put, put, patch)
+			dataType :"text", //서버가 보내온 데이터 타입(text, html, xml, json)
+			data: allDate,
+			success : function (result) {
+				var str ="일일 사이트 방문자 수 : "+result+"명";
+				$("#display").html(str);
+			}, //성공시 
+			error: function (err) {
+				alert(err+"오류발생");
+			}//실패시
+		});
+		setInterval(function () {
+            $.ajax({
+            	url: "${pageContext.request.contextPath}/selectVisitData", //서버요청주소
+    			type : "post", //서버 요청방식(get,put, put, patch)
+    			dataType :"text", //서버가 보내온 데이터 타입(text, html, xml, json)
+    			data: allDate,
+    			success : function (result) {
+    				var str ="일일 사이트 방문자 수 : "+result+"명";
+    				$("#display").html(str);
+    			}, //성공시 
+    			error: function (err) {
+    				alert(err+"오류발생");
+    			}//실패시
+         }, 30000);
+		
+
+	
+		});
+		
+	});
+</script>
+
 <c:set var="data" value="15"/>
     <section>
       <div class="container pt-20 pb-20">
@@ -21,7 +60,7 @@
           </div>
           <div class="col-md-9">
             <div class="tab-content">
-				<h3>일일 방문자 수</h3> 
+				<h3 id="display" class="text-theme-colored text-uppercase m-0"></h3>
 				<div style="width: 90%" class="text-center">
 				  <canvas id="lineChart" height="450" width="600"></canvas>
 				</div>
@@ -51,8 +90,8 @@
 //               data : [randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor()]
               data : [${data},20,5,40,23,60,45]
             }
-          ]
-      
+         ]
+     
       };
         window.onload = function(){
           var chart_lineChart = document.getElementById("lineChart").getContext("2d");

@@ -23,12 +23,13 @@ import team.hunter.model.dto.FundingRequest;
 import team.hunter.model.dto.Notice;
 import team.hunter.model.dto.PersonalAnswer;
 import team.hunter.model.dto.PersonalQuestion;
+import team.hunter.model.dto.Statistics;
 import team.hunter.model.service.NoticeService;
 import team.hunter.model.service.PersonalAnswerService;
+import team.hunter.model.service.StatisticsService;
 
 @Controller
 public class AdminController {
-	
 	
 	
 	@Autowired
@@ -408,5 +409,8 @@ public class AdminController {
 		noticeService.fundingRequestApprove(code);
 		return "redirect:/admin/fundingRequest";
 	}
+	
+	
+	
 
 }
