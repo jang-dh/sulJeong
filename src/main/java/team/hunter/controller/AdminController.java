@@ -31,6 +31,7 @@ import team.hunter.model.service.StatisticsService;
 @Controller
 public class AdminController {
 	
+
 	@Autowired
 	private NoticeService noticeService;
 	@Autowired
@@ -424,5 +425,8 @@ public class AdminController {
 		noticeService.fundingRequestApprove(code);
 		return "redirect:/admin/fundingRequest";
 	}
+	
+	
+	
 
 }

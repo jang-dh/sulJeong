@@ -1,6 +1,8 @@
 package team.hunter.controller;
 
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,14 +14,19 @@ import org.springframework.web.bind.annotation.RestController;
 import team.hunter.model.dto.FundingQuestion;
 import team.hunter.model.dto.Likes;
 import team.hunter.model.dto.Member;
+import team.hunter.model.dto.Statistics;
 import team.hunter.model.service.FundingQuestionService;
 import team.hunter.model.dto.FundingAnswer;
 import team.hunter.model.service.FundingAnswerService;
 import team.hunter.model.service.LikesService;
 import team.hunter.model.service.MemberService;
+import team.hunter.model.service.StatisticsService;
 
 @RestController
 public class AjaxController {
+	@Autowired
+	private StatisticsService statisticsService;
+	
 	@Autowired
 	private MemberService memberService;
 
@@ -85,6 +92,13 @@ public class AjaxController {
 		fundingAs.fundingAnswerinsert(new FundingAnswer(Integer.parseInt(questionCode), content, null));
 		FundingAnswer fundingAnswer2 = fundingAs.selectByCode(Integer.parseInt(questionCode));
 		return fundingAnswer2;
+	}	
+	
+	@PostMapping("/selectVisitData")
+	public String selectWeekData() {
+		List<Statistics> list = statisticsService.selectWeekData();
+		String result = Integer.toString(list.get(0).getVisit());
+		return result;
 	}
 
 }

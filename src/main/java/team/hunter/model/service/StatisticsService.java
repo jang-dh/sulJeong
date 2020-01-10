@@ -2,6 +2,11 @@ package team.hunter.model.service;
 
 import java.util.List;
 
+
+import org.springframework.stereotype.Service;
+
+import team.hunter.model.dao.StatisticsDAO;
+
 import team.hunter.model.dto.Statistics;
 
 public interface StatisticsService {
