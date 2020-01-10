@@ -3,13 +3,13 @@
 <mapper namespace="purchaseMapper">
 
 	<select id="selectPurchaseByMemberCode" resultType="purchase" parameterType="int">
-		select code, member_code, funding_code, price, qty, purchase_state, purchase_date, delivery_code, courier
+		select code, member_code, funding_code, price, qty, purchase_state, purchase_date, delivery_number, courier
 		from purchase
 		where member_code = #{_parameter}
 	</select>
 	
 	<insert id="insert" parameterType="purchase">
-		insert into purchase (code, member_code, funding_code, price, qty, purchase_state, purchase_date, delivery_code, Courier) 
+		insert into purchase (code, member_code, funding_code, price, qty, purchase_state, purchase_date, delivery_number, Courier) 
 		values (seq_no.nextval, #{memberCode}, #{fundingCode}, #{price}, #{qty},
 		 #{purchaseState}, sysdate, #{deliveryNumber}, #{Courier})
 	</insert>
@@ -19,7 +19,7 @@
 	</select>
 	
 	<delete id="delete" parameterType="purchase">
-		delete from purchase where code = #{_parameter}
+		delete from purchase where code = #{code}
 	</delete>
 	
 </mapper>	
