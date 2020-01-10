@@ -27,5 +27,14 @@ public interface PurchaseDAO {
 	public int deleteList(int code);
 	
 
+	/**
+	 * 송장번호, 택배사 입력
+	 * */
+	public int deliveryCodeSave(Purchase purchase);
+	
+//	/**
+//	 * 송장번호, 택배사 조회
+//	 * */
+//	public Purchase deliveryCodeSelect(int fundingCode, int memberCode);
 
 }

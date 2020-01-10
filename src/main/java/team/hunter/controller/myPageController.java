@@ -20,6 +20,7 @@ import team.hunter.model.dto.FundingQuestion;
 import team.hunter.model.dto.Member;
 import team.hunter.model.dto.Paging;
 import team.hunter.model.dto.PersonalQuestion;
+import team.hunter.model.dto.Purchase;
 import team.hunter.model.service.FundingAnswerService;
 import team.hunter.model.service.FundingQuestionService;
 import team.hunter.model.service.FundingRequestService;
@@ -128,24 +129,23 @@ public class myPageController {
 	 * 내가 오픈한 펀딩 상세페이지
 	 * */
 	@RequestMapping("/myOpenFunding/{fundingCode}")
-	public String myOpenDetail(@PathVariable int fundingCode, Model model ) {
+	public String myOpenDetail(@PathVariable int fundingCode, Model model) {
 //		Member member = null;
 //		if(!SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser"))
 //			member =(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		List<FundingQuestion> fundingReqManage = fundingReqService.myFundingOpenDetail(fundingCode);
-//		for(FundingQuestion fq : fundingReqManage) {
-//			if(fq.getState().equals("201")){
-//				fq.setState("답변 완료!");
-//			}else {
-//				fq.setState("답변 대기중");
-//			}
-//			fundingReqManage.add(fq);
-//		}
+		List<Member> fundingOpenPeople = fundingReqService.myFundingOpenDetailSecond(fundingCode);
+
+		//펀딩 코드 보내기
+		model.addAttribute("fundingCode", fundingCode);
+		
 		//펀딩 문의 관리
 		model.addAttribute("fundingReqManage", fundingReqManage);
 		
 		//펀딩 참가한 사용자
-		model.addAttribute("fundingOpenPeople", fundingReqService.myFundingOpenDetailSecond(fundingCode));
+		model.addAttribute("fundingOpenPeople", fundingOpenPeople);
+		
+		
 		return "mypage/myOpenFundingDetail";
 	}
 	
@@ -160,7 +160,6 @@ public class myPageController {
 		model.addAttribute("fundingQuestion", fundingQuestion);
 		model.addAttribute("fundingAnswer", fundingAnswer);
 		
-		//System.out.println(fundingQuestion.getCode()+"짜증나게 하지말고 나와라");
 		
 		return "mypage/myOpenFundingReqManage";
 	}

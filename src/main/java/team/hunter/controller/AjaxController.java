@@ -12,11 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 import team.hunter.model.dto.FundingQuestion;
 import team.hunter.model.dto.Likes;
 import team.hunter.model.dto.Member;
+import team.hunter.model.dto.Purchase;
 import team.hunter.model.service.FundingQuestionService;
 import team.hunter.model.dto.FundingAnswer;
 import team.hunter.model.service.FundingAnswerService;
 import team.hunter.model.service.LikesService;
 import team.hunter.model.service.MemberService;
+import team.hunter.model.service.PurchaseService;
 
 @RestController
 public class AjaxController {
@@ -31,6 +33,9 @@ public class AjaxController {
 	
 	@Autowired
 	private FundingAnswerService fundingAs;
+	
+	@Autowired
+	private PurchaseService purchaseService;
 
 	@PostMapping("/findId")
 	public Member findId(Member member) {
@@ -86,5 +91,5 @@ public class AjaxController {
 		FundingAnswer fundingAnswer2 = fundingAs.selectByCode(Integer.parseInt(questionCode));
 		return fundingAnswer2;
 	}
-
+	
 }

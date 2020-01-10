@@ -24,6 +24,21 @@
 			<result column="id" property="id" />
 		</association>
 	</resultMap>
+	
+	<!-- 수녕 : 내가 만든 펀딩 detail페이지 - 참가한 사용자 관리 -->
+	<resultMap type="member" id="deliveryCodeSelect">
+		<id column="code" property="code" />
+		<result column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="addr" property="addr" />
+		<association property="purchase" javaType="purchase">
+			<result column="courier" property="courier" />
+			<result column="delivery_number" property="deliveryNumber" />
+		</association>
+	</resultMap>
+	
+	
+	
 
 	<!-- 수녕 : 펀딩 신청하기 -->
 	<insert id="fundingInsert" parameterType="fundingRequest">
@@ -55,9 +70,9 @@
 	</select>
 
 	<!-- 수녕 : 내가 만든 펀딩 detail페이지 - 참가한 사용자 관리 -->
-	<select id="myFundingOpenDetailUserManage" resultType="member"
+	<select id="myFundingOpenDetailUserManage" resultMap="deliveryCodeSelect"
 		parameterType="int">
-		select distinct m.id, m.name, m.addr
+		select distinct m.code, m.id, m.name, m.addr, p.courier, p.delivery_number
 		from funding f inner join
 		purchase p
 		on p.funding_code=f.code inner join member m

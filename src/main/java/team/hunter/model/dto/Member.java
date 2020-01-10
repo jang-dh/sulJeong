@@ -1,5 +1,8 @@
 package team.hunter.model.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,4 +24,6 @@ public class Member {
 	
 	private int startIndex;
 	private int cntPerPage;
+	
+	private Purchase purchase;
 }
