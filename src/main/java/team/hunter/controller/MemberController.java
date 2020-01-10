@@ -73,5 +73,11 @@ public class MemberController {
 		fundingRequestService.fundingInsert(fundingRequest);
 		return "redirect:/";
 	}
+	
+	@RequestMapping("/identityVerificationForm")
+	public String Authenticate() {
+		return "form/identityVerification/identityVerificationForm";
+	}
+	
 
 }

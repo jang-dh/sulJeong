@@ -2,6 +2,8 @@ package team.hunter.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -73,4 +75,13 @@ public class AjaxController {
 		fundingAnswer = fundingAs.selectByCode(code);
 		return fundingAnswer;
 	}
+	
+	@PostMapping("/membershipWithdrawal")
+	public int membershipWithdrawal(Member member, HttpSession session) {
+		int result = memberService.membershipWithdrawal(member);
+		session.invalidate();
+		
+		return result;
+	}
+	
 }

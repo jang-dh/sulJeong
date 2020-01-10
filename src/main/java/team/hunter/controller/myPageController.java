@@ -1,31 +1,27 @@
 package team.hunter.controller;
 
-import java.io.PrintWriter;
 import java.util.List;
 
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import team.hunter.model.dto.FundingAnswer;
 import team.hunter.model.dto.Funding;
+import team.hunter.model.dto.FundingAnswer;
 import team.hunter.model.dto.FundingQuestion;
 import team.hunter.model.dto.Member;
+import team.hunter.model.dto.Paging;
 import team.hunter.model.dto.PersonalQuestion;
 import team.hunter.model.service.FundingAnswerService;
 import team.hunter.model.service.FundingQuestionService;
-import team.hunter.model.service.MemberService;
 import team.hunter.model.service.FundingRequestService;
+import team.hunter.model.service.MemberService;
 import team.hunter.model.service.PersonalQuestionService;
 
 @Controller
@@ -59,10 +55,27 @@ public class myPageController {
 
 	
 	@RequestMapping("fundingQuestion")
-	public ModelAndView fundingQuestion() {
+	public ModelAndView fundingQuestion(@RequestParam(defaultValue = "1") int curPage) {
+		ModelAndView mv = new ModelAndView();
 		Member member =(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		List<FundingQuestion> list = fundingQs.fundingQuestionList(member.getCode());
-		return new ModelAndView("mypage/fundingQuestionList", "list", list);
+		int listCnt = fundingQs.listCount(member.getCode());
+		Paging paging = new Paging(listCnt, curPage);
+		System.out.println(paging.getListCnt());
+		System.out.println(paging.getCurPage());
+		System.out.println(paging.getStartIndex());
+		System.out.println(paging.getPageSize());
+		
+		member.setStartIndex(paging.getStartIndex());
+		member.setCntPerPage(paging.getPageSize());
+		List<FundingQuestion> list = fundingQs.fundingQuestionList(member);
+		System.out.println(list);
+		
+		mv.addObject("list", list);
+		mv.addObject("listCnt", listCnt);
+		mv.addObject("paging", paging);
+		mv.setViewName("mypage/fundingQuestionList");
+		
+		return mv;
 	}
 	
 	@RequestMapping("fundingQuestionDetailPage/{code}")
@@ -111,22 +124,6 @@ public class myPageController {
 		return mv;
 	}
 	
-	@PostMapping("/membershipWithdrawal")
-	public ModelAndView membershipWithdrawal(Member member, HttpSession session) {
-		ModelAndView mv = new ModelAndView();
-		try {
-			memberService.membershipWithdrawal(member);
-			session.invalidate();
-			mv.setViewName("redirect:/");
-			
-		}catch (Exception e) {
-			mv.setViewName("mypage/chooseMyInfoMenu");
-			mv.addObject("message", e.getMessage());
-			return mv;
-			
-		}
-		return mv;
-	}
 	/**
 	 * 내가 오픈한 펀딩 상세페이지
 	 * */
