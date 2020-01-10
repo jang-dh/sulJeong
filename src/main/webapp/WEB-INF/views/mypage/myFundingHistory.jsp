@@ -72,6 +72,7 @@
                     	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                     	<input type="hidden" name="code" value="${purchase.code}">
                     	<input type="button" class="remove" value="후원취소">
+                    	
                     </form>
                     </td>
                   </tr>
