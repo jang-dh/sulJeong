@@ -18,7 +18,7 @@
 	<insert id="fundingInsert" parameterType="fundingRequest">
 		insert into
 		funding_request(CODE,MEMBER_CODE,SUBJECT,FILENAME,STATE,REGDATE)
-		values(SEQ_NO.nextval,#{memberCode},#{subject},#{filename},'100',SYSDATE)
+		values(SEQ_NO.nextval,#{memberCode},#{subject},#{filename},'102',SYSDATE)
 	</insert>
 
 	<!-- 수녕 : 내가 만든 펀딩 리스트 -->

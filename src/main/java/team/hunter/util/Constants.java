@@ -15,6 +15,7 @@ public interface Constants {
 	String REJECTED = "100";
 	String APPROVED = "101";
 	String CONSIDERING = "102";
+	String DONE = "103";
 
 	// 문의 답변 question answer state
 	String BEFORE_ANSWER = "200";

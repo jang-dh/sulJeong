@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import team.hunter.model.dao.NoticeDAO;
 import team.hunter.model.dto.Funding;
@@ -61,11 +62,13 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 
 	@Override
-	public int fundInsert(Funding funding) {
+	public int fundInsert(Funding funding, int code) {
 		int result = dao.fundInsert(funding);
+		int result2 = dao.fundingRequestStateChange(code);
 		if(result==0) throw new RuntimeException("펀딩 등록에 실패했습니다.");
 		return result;
 	}
+	
 
 	@Override
 	public FundingRequest selectFundingRequestByCode(int code) {

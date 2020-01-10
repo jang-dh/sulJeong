@@ -45,10 +45,12 @@
     					    <c:forEach items="${list}" var="list">
     					    <c:if test="${list.state eq '101'}">
     					    <option value="${list.memberCode}">${list.subject}</option>
+    					    <!-- fundingRequest.code 넘김 -->
+    					    <c:set value="${list.code}" var="code"/>
     					    </c:if>    					    
    						    </c:forEach>
 						  </select>
-                           
+  
                         </div>
                       </div>
 
@@ -103,6 +105,7 @@
                       <input name="form_botcheck" class="form-control" type="hidden" value="">
                       <button type="submit" class="btn btn-dark btn-theme-colored" data-loading-text="Please wait...">펀딩 등록</button>
                     </div>
+                    <input type="hidden" value="${code}" name="code"/>
                   </form>
 
                 </div>
