@@ -95,10 +95,10 @@ public class AjaxController {
 	}	
 	
 	@PostMapping("/selectVisitData")
-	public String selectWeekData() {
+	public Statistics selectWeekData() {
 		List<Statistics> list = statisticsService.selectWeekData();
-		String result = Integer.toString(list.get(0).getVisit());
-		return result;
+//		String result = Integer.toString(list.get(0).getVisit());
+		return list.get(0);
 	}
 
 }
