@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-  <!-- Start main-content -->
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+  <!-- Start main-content-->
   <div class="main-content">
     <!-- Section: inner-header -->
     <section class="inner-header divider layer-overlay overlay-dark-8" data-bg-img="http://placehold.it/1920x1280">
@@ -29,7 +32,7 @@
               <table class="table table-striped table-bordered tbl-shopping-cart">
                 <thead>
                   <tr>
-                    <th>펀딩상세</th>
+                    <th>펀딩일자</th>
                     <th>펀딩 명칭</th>
                     <th>가격</th>
                     <th>수량</th>
@@ -38,52 +41,25 @@
                   </tr>
                 </thead>
                 <tbody>
+                <c:forEach items="${list}" var="purchase" varStatus="status">
                   <tr class="cart_item">
-                    <td class="product-thumbnail"><a href="#"><img alt="member" src="http://placehold.it/320x360"></a></td>
+                    <td class="product-thumbnail"><a href="#">${purchase.purchaseDate} <img alt="member" src="http://placehold.it/320x360"></a></td>
                     <td class="product-name"><a class="text-theme-colored" href="#">${purchase.code}</a>
                       <ul class="variation">
-                        <li class="variation-size">Color: <span>Black</span></li>
+                        <li class="variation-size">${purchase.code }<span>Black</span></li>
                       </ul></td>
-                    <td class="product-price"><span class="amount">$185.00</span></td>
+                    <td class="product-price"><span class="amount">${purchase.price}</span></td>
                     <td class="product-quantity"><div class="quantity buttons_added">
+                    	<a href="#">펀딩 수량 : ${purchase.qty} 개</a>
                         <input type="button" class="minus" value="-">
                         <input type="number" size="4" class="input-text qty text" title="Qty" value="1" name="quantity" min="1" step="1">
                         <input type="button" class="plus" value="+">
                       </div></td>
-                    <td class="product-subtotal"><span class="amount">$185.00</span></td>
-                    <td class="product-remove"><a title="Remove this item" class="remove" href="#">Ã—</a></td>
+                    <td class="product-subtotal"><span class="amount">${purchase.price }</span></td>
+                    <td class="product-remove"><a title="Remove this item" class="remove" href="#">펀딩 취소</a></td>
                   </tr>
-                  <tr class="cart_item">
-                    <td class="product-remove"><a title="Remove this item" class="remove" href="#">Ã—</a></td>
-                    <td class="product-thumbnail"><a href="#"><img alt="member" src="http://placehold.it/320x360"></a></td>
-                    <td class="product-name"><a class="text-theme-colored" href="#">Saddles</a>
-                      <ul class="variation">
-                        <li class="variation-size">Color: <span>Brown</span></li>
-                      </ul></td>
-                    <td class="product-price"><span class="amount">$55.00</span></td>
-                    <td class="product-quantity"><div class="quantity buttons_added">
-                        <input type="button" class="minus" value="-">
-                        <input type="number" size="4" class="input-text qty text" title="Qty" value="1" name="quantity" min="1" step="1">
-                        <input type="button" class="plus" value="+">
-                      </div></td>
-                    <td class="product-subtotal"><span class="amount">$55.00</span></td>
-                  </tr>
-                  <tr class="cart_item">
-                    <td class="product-remove"><a title="Remove this item" class="remove" href="#">Ã—</a></td>
-                    <td class="product-thumbnail"><a href="#"><img alt="member" src="http://placehold.it/320x360"></a></td>
-                    <td class="product-name"><a class="text-theme-colored" href="#">Horse Rugs</a>
-                      <ul class="variation">
-                        <li class="variation-size">Size: <span>Large</span></li>
-                      </ul></td>
-                    <td class="product-price"><span class="amount">$240.00</span></td>
-                    <td class="product-quantity"><div class="quantity buttons_added">
-                        <input type="button" class="minus" value="-">
-                        <input type="number" size="4" class="input-text qty text" title="Qty" value="1" name="quantity" min="1" step="1">
-                        <input type="button" class="plus" value="+">
-                      </div></td>
-                    <td class="product-subtotal"><span class="amount">$240.00</span></td>
-                  </tr>
-                  <tr class="cart_item">
+                
+                  <!-- <tr class="cart_item">
                     <td colspan="3"><div class="coupon">
                         <label for="cart-coupon">쿠폰: </label>
                         <input id="cart-coupon" type="text" placeholder="Coupon code" value="" name="coupon_code">
@@ -91,7 +67,8 @@
                       </div></td>
                     <td colspan="2">&nbsp;</td>
                     <td><button type="button" class="btn">Update Cart</button></td>
-                  </tr>
+                  </tr> -->
+                </c:forEach>
                 </tbody>
               </table>
             </div>
@@ -112,7 +89,7 @@
                         </tr>
                         <tr>
                           <td><input type="text" class="form-control" placeholder="State/country" value=""></td>
-                        </tr>
+                        </tr>	
                         <tr>
                           <td><input type="text" class="form-control" placeholder="Postcod/zip" value=""></td>
                         </tr>

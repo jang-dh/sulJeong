@@ -9,12 +9,23 @@ public interface PurchaseDAO {
 	/*
 	 * 펀딩하기
 	 */
-	int insert(Purchase purchase);
+	public int insert(Purchase purchase);
 	
 	/*
-	 * 펀딩내역보기
+	 * 후원인원 증가
 	 */
-	List<Purchase> selectAll();
+	public int countFundingCode(int fundingCode);
+	
+	/*
+	 * 펀딩내역 보기
+	 */
+	public List<Purchase> myPurchaseList(int memberCode);
+	 
+	/*
+	 * 후원한 펀딩 삭제
+	 */
+	public int deleteList(int code);
+	
 
 
 }

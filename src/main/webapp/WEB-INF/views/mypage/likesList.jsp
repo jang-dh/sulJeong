@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <script>
 	//fetchList 제어
@@ -120,7 +121,7 @@
 		html += '<div class="causes bg-silver-light maxwidth500 mb-30">';
 		html += '<div class="thumb">';
 		html += '<a href="${pageContext.request.contextPath}/funding/' + item.code + '">';
-		html += '<img src="http://placehold.it/320x240" alt="" class="img-fullwidth">';
+		html += '<img src="${pageContext.request.contextPath}/resources/images/funding/Thumnail_' + item.image + '" alt="" class="img-fullwidth">';
 		html += '</a>';
 		html += '</div>';
 		html += '<div class="causes-details border-1px bg-white clearfix p-15 pb-30">';
@@ -131,11 +132,11 @@
 		html += '<ul class="list-inline font-weight-600 font-14 clearfix mb-5">';
 		html += '<li class="pull-left font-weight-400 text-black-333 pr-0">달성금액:';
 		html += '<span class="text-theme-colored font-weight-700">'
-				+ item.stackPrice + '</span>';
+				+ item.stackPrice.toLocaleString() + '원</span>';
 		html += '</li>';
 		html += '<li class="pull-right font-weight-400 text-black-333 pr-0">목표금액:';
 		html += '<span class="text-theme-colored font-weight-700">'
-				+ item.goalPrice + '</span>';
+				+ item.goalPrice.toLocaleString() + '원</span>';
 		html += '</li>';
 		html += '</ul>';
 		html += '<div class="progress-item mt-5">';
@@ -219,7 +220,7 @@
 							<div class="causes bg-silver-light maxwidth500 mb-30">
 								<div class="thumb">
 									<a href="${pageContext.request.contextPath}/funding/${fundingList.code}">
-										<img src="http://placehold.it/320x240" alt="" class="img-fullwidth">
+										<img src="${pageContext.request.contextPath}/resources/images/funding/Thumnail_${fundingList.image}" alt="" class="img-fullwidth">
 									</a>
 								</div>
 								<div class="causes-details border-1px bg-white clearfix p-15 pb-30">
@@ -228,10 +229,10 @@
 									</h4>
 									<ul class="list-inline font-weight-600 font-14 clearfix mb-5">
 										<li class="pull-left font-weight-400 text-black-333 pr-0">달성금액:
-											<span class="text-theme-colored font-weight-700">${fundingList.stackPrice}</span>
+											<span class="text-theme-colored font-weight-700"><fmt:formatNumber>${fundingList.stackPrice}</fmt:formatNumber>원</span>
 										</li>
 										<li class="pull-right font-weight-400 text-black-333 pr-0">목표금액:
-											<span class="text-theme-colored font-weight-700">${fundingList.goalPrice}</span>
+											<span class="text-theme-colored font-weight-700"><fmt:formatNumber>${fundingList.goalPrice}</fmt:formatNumber>원</span>
 										</li>
 									</ul>
 									<div class="progress-item mt-5">
