@@ -1,20 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>    
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <script type="text/javascript">
    $(document).ready(function () {
       var allDate = "${_csrf.parameterName}=${_csrf.token}";
+      
       $.ajax({
          url: "${pageContext.request.contextPath}/selectVisitData", //서버요청주소
          type : "post", //서버 요청방식(get,put, put, patch)
          dataType :"json", //서버가 보내온 데이터 타입(text, html, xml, json)
          data: allDate,
          success : function (result) {
+        	
+        	
+        	
             var str ="오늘 사이트를 방문한 사람 수 : "+result.visit+"명";
             var str2 ="오늘 등록한 펀딩 수 : "+result.fundingApply+"개";
-            var str3 ="오늘 사람들이 결제한 총 금액 : "+result.purchasePrice+"원";
+            var str3 ="오늘 사람들이 결제한 총 금액 : "+AddComma(result.purchasePrice)+"원";
             var str4 ="오늘 사람들이 펀딩에 참여한 수 : "+result.purchaseCount+"번";
             $("#display").html(str);
             $("#display2").html(str2);
@@ -22,7 +26,7 @@
             $("#display4").html(str4);
          }, //성공시 
          error: function (err) {
-            alert(err+"오류발생");
+            
          }//실패시
       });
       setInterval(function () {
@@ -34,7 +38,7 @@
              success : function (result) {
                 var str ="오늘 사이트를 방문한 사람 수 : "+result.visit+"명";
                  var str2 ="오늘 등록한 펀딩 수 : "+result.fundingApply+"개";
-                 var str3 ="오늘 사람들이 결제한 총 금액 : "+result.purchasePrice+"원";
+                 var str3 ="오늘 사람들이 결제한 총 금액 : "+AddComma(result.purchasePrice)+"원";
                  var str4 ="오늘 사람들이 펀딩에 참여한 수 : "+result.purchaseCount+"번";
                  $("#display").html(str);
                  $("#display2").html(str2);
@@ -42,7 +46,7 @@
                  $("#display4").html(str4);
              }, //성공시 
              error: function (err) {
-                alert(err+"오류발생");
+                
              }//실패시
          }, 30000);
       
@@ -51,6 +55,16 @@
       });
       
    });
+   
+   function AddComma(num)
+   {
+   var regexp = /\B(?=(\d{3})+(?!\d))/g;
+   return num.toString().replace(regexp, ',');
+   }
+
+
+   
+   
 </script>
 
 
@@ -115,6 +129,7 @@
  		<c:forEach var="regdate" items="${weekData}" varStatus="state">
         	regdate.push('${regdate.regdate}');
         </c:forEach>
+        regdate.splice(0,1);
  		regdate.sort();
  		
         //방문자 수
@@ -122,6 +137,7 @@
  		<c:forEach var="visit" items="${weekData}" varStatus="state">
     		visit.push('${visit.visit}');
     	</c:forEach>
+    	visit.splice(0,1);
  		visit.reverse();	
  
  		//펀딩 수
@@ -129,6 +145,7 @@
  		<c:forEach var="purchaseCnt" items="${weekData}" varStatus="state">
 			purchaseCnt.push('${purchaseCnt.purchaseCount}');
 		</c:forEach>
+		purchaseCnt.splice(0,1);
  		purchaseCnt.reverse();
  		
  		//펀딩 금액
@@ -136,6 +153,7 @@
  		<c:forEach var="purchasePrice" items="${weekData}" varStatus="state">
  			purchasePrice.push('${purchasePrice.purchasePrice}');
 		</c:forEach>
+		purchasePrice.splice(0,1);
 		purchasePrice.reverse();
  		
 		//펀딩 등록 수
@@ -143,6 +161,7 @@
  		<c:forEach var="fundingApply" items="${weekData}" varStatus="state">
  			fundingApply.push('${fundingApply.fundingApply}');
 		</c:forEach>
+		fundingApply.splice(0,1);
 		fundingApply.reverse();
  		
         var lineChartData = {
