@@ -35,8 +35,6 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 	
 	@Override
 	public int deleteList(int code) {
-		int deletePurchaseFundingList = session.delete("purchaseMapper.delete", code);
-		return deletePurchaseFundingList;
+		return session.delete("purchaseMapper.delete", code);
 	}
-
 }
