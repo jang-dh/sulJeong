@@ -2,6 +2,56 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+<script>
+	$(function() {
+		$("#deliveryBtn").click(function() {
+			if ($("#courierName").val() == "") {
+				alert("택배사를 입력해주세요");
+				$("#courierName").focus();
+				return false;
+			}
+			if ($("#deliveryCode").val() == "") {
+				alert("송장번호를 입력해주세요");
+				$("#deliveryCode").focus();
+				return false;
+			}
+
+/* 			var courierVal = $("#courierName").val();
+			var delCodeVal = $("#deliveryCode").val();
+			//console.log(${fundingAnswer.questionCode});
+			var allDate = "${_csrf.parameterName}=${_csrf.token}"
+					+ "&courier=" + courierVal + "&deliveryNumber=" + delCodeVal + "&memberCode="+$("#memberCode").val()+"&fundingCode=${fundingCode}"
+			$.ajax({
+				url : "${pageContext.request.contextPath}/deliveryCode", //서버요청주소
+				type : "post", //요청방식(get|post|put:patch:delete)
+				dataType : "json", //서버가 보내온 데이터 타입(text,html,xml,json)
+				data : allDate,//서버에게 보내는 parameter 정보
+				success : function(result){//중복, 사용가능
+	      			alert(result +"성공");
+	      			$("#deliveryCode").hide();
+	      			$("#courierName").hide();
+	      			$("#deliveryBtn").hide();
+	      			
+		      		   var str="";
+		      			
+		      			str+="<td>"
+		      			str+="<input type=text id=deliveryCode value="+result.deliveryNumber+" readonly>"
+		      			str+="</td>"
+		      			str+="<td>"
+		      			str+="<input type=text id=courierName value="+result.Courier+" readonly>"
+		      			str+="<input type=button class=btn btn-dark btn-sm id=deliveryBtn name=deliveryBtn value=수정>"
+		      			str+="</td>"
+		      			
+		      		  $("#showId").html(str); 
+		      		} ,
+					
+				error : function(err) {
+					alert("답변은 한번만 입력 가능합니다.")
+				}//오류발생했을때
+			});//ajax */
+		});//버튼 클릭시
+	});
+</script>
 
 <!-- Section: inner-header -->
 <section class="inner-header divider layer-overlay overlay-dark-8"
@@ -42,6 +92,8 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div data-example-id="hoverable-table" class="bs-example">
+								
+								
 									<table class="table table-hover">
 										<thead>
 											<tr>
@@ -80,6 +132,10 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div data-example-id="hoverable-table" class="bs-example">
+								<form action="${pageContext.request.contextPath}/mypage/deliveryCode" name="userInfo" id="userInfo" method="post">
+								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+								
+									
 									<table class="table table-hover">
 										<thead>
 											<tr>
@@ -100,19 +156,39 @@
 													<td>${fundingOpenPeople.name}</td>
 													<td>${fundingOpenPeople.addr}</td>
 													
+													<c:choose>
+													<c:when test="${fundingOpenPeople.purchase.courier==null}">
 													<td>
-													<input type="text" id="deliveryCode" name="deliveryCode">
+													<input type="text" id="courier" name="courier">
 													</td>
 													<td>
-													<input type="text" id="courierName" name="courierName">
-													<button>입력</button>
+													<input type="text" id="deliveryNumber" name="deliveryNumber">
+													<input type="hidden" id="memberCode" name="memberCode" value="${fundingOpenPeople.code}">
+													<input type="hidden" id="fundingCode" name="fundingCode" value="${fundingCode}">
+													<input type="submit" class="btn btn-dark btn-sm" id="deliveryBtn" name="deliveryBtn" value="입력">
 													</td>
+													</c:when>
+													<c:otherwise>
+													<td>
+													<input type="text" id="courier2" name="courier2" value="${fundingOpenPeople.purchase.courier}" readonly="readonly">
+													</td>
+													<td>
+													<input type="text" id="deliveryNumber2" name="deliveryNumber2" value="${fundingOpenPeople.purchase.deliveryNumber}" readonly="readonly">
+													<input type="hidden" id="memberCode2" name="memberCode2" value="${fundingOpenPeople.code}">
+													<input type="hidden" id="fundingCode2" name="fundingCode2" value="${fundingCode}">
+													<input type="submit" class="btn btn-dark btn-sm" id="deliveryBtn2" name="deliveryBtn2" value="수정">
+													</td>
+													</c:otherwise>
+													</c:choose>
+													
+													
 													
 												</tr>
 											</c:forEach>
 											
 										</tbody>
 									</table>
+									</form>
 								</div>
 							</div>
 						</div>

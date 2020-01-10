@@ -26,5 +26,10 @@ public interface PurchaseService {
 	 */
 	public int deletePurchaseList(int code);
 	
+	/**
+	 * 송장번호, 택배사 입력
+	 * */
+	public int deliveryCodeSave(Purchase purchase);
+	
 
 }

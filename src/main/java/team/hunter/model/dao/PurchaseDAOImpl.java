@@ -1,11 +1,14 @@
 package team.hunter.model.dao;
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
 
 import team.hunter.model.dto.Purchase;
 
@@ -37,6 +40,12 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 	public int deleteList(int code) {
 		int deletePurchaseFundingList = session.delete("purchaseMapper.delete", code);
 		return deletePurchaseFundingList;
+	}
+
+	@Override
+	public int deliveryCodeSave(Purchase purchase) {
+		int result = session.insert("purchaseMapper.deliveryCodeUpdate", purchase);
+		return result;
 	}
 
 }
