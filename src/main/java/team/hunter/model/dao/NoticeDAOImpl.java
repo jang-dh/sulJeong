@@ -85,4 +85,16 @@ public class NoticeDAOImpl implements NoticeDAO {
 		return session.update("noticeMapper.fundingRequestStateChange", code);
 	}
 
+	@Override
+	public int listCount() {
+		
+		return session.selectOne("noticeMapper.listCount");
+	}
+
+	@Override
+	public List<Notice> NoticeList(Notice notice) {
+		
+		return session.selectList("noticeMapper.noticeList", notice);
+	}
+
 }

@@ -95,4 +95,16 @@ public class NoticeServiceImpl implements NoticeService {
 		return result;
 	}
 
+	@Override
+	public int listCount() {
+		
+		return dao.listCount();
+	}
+
+	@Override
+	public List<Notice> NoticeList(Notice notice) {
+		// TODO Auto-generated method stub
+		return dao.NoticeList(notice);
+	}
+
 }

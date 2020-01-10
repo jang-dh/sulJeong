@@ -10,17 +10,22 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import team.hunter.model.dto.Funding;
+import team.hunter.model.dto.FundingQuestion;
 import team.hunter.model.dto.FundingRequest;
+import team.hunter.model.dto.Member;
 import team.hunter.model.dto.Notice;
+import team.hunter.model.dto.Paging;
 import team.hunter.model.dto.PersonalAnswer;
 import team.hunter.model.dto.PersonalQuestion;
 import team.hunter.model.dto.Statistics;
@@ -302,7 +307,7 @@ public class AdminController {
 	@RequestMapping("/down")
 	public ModelAndView down(String fileName, HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		String path = session.getServletContext().getRealPath("/WEB-INF/save");
+		String path = session.getServletContext().getRealPath("/resources/images/save");
 		mv.addObject("fname", new File(path+"/"+fileName));
 		mv.setViewName("downLoadView"); //bean의 아이디를 찾을 수 있도록 해야한다...
 		return mv;
@@ -312,7 +317,7 @@ public class AdminController {
 	public String update(Notice notice, MultipartFile file, HttpSession session) {
 		try{
 			//���� ������ ������ ����
-			String path = session.getServletContext().getRealPath("/WEB-INF/save");
+			String path = session.getServletContext().getRealPath("/resources/images/save");
 			
 			
 			if(file.getSize()>0) {
@@ -427,6 +432,37 @@ public class AdminController {
 	}
 	
 	
+	/**
+	 * 공지사항 페이징 처리
+	 * */
+	@RequestMapping("noticePaging")
+	public ModelAndView fundingQuestion(@RequestParam(defaultValue = "1") int curPage) {
+		ModelAndView mv = new ModelAndView();
+		
+		//count로 갯수가지고오기
+		
+		int listCnt = noticeService.listCount();
+		System.out.println(listCnt);
+		Paging paging = new Paging(listCnt, curPage);
+		
+		Notice notice = new Notice();
+		
+		
+		notice.setStartIndex(paging.getStartIndex());
+		notice.setCntPerPage(paging.getPageSize());
+		System.out.println(notice.getStartIndex());
+		System.out.println(notice.getCntPerPage());
+		
+		List<Notice> list = noticeService.NoticeList(notice);
+		System.out.println(list);
+		
+		mv.addObject("list", list);
+		mv.addObject("listCnt", listCnt);
+		mv.addObject("paging", paging);
+		mv.setViewName("redirect:notice");
+//		
+		return mv;
+	}
 	
 
 }

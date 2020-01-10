@@ -54,6 +54,18 @@
 	<update id="fundingRequestStateChange" parameterType="int">
 		update funding_request set state='103' where code=#{code}
 	</update>
+	
+	<select id="listCount" resultType="int">
+		select count(*) from notice
+	</select>
+	
+	<select id="noticeList" parameterType="notice" resultType="notice">
+	<![CDATA[
+		SELECT code, subject, content, regdate 
+		FROM notice
+		WHERE ROWNUM <= (#{startIndex}*#{cntPerPage})
+	]]>	
+	</select>
 
 </mapper>	
 

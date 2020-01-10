@@ -22,7 +22,7 @@
             $("#display4").html(str4);
          }, //성공시 
          error: function (err) {
-            alert(err+"오류발생");
+            
          }//실패시
       });
       setInterval(function () {
@@ -42,7 +42,7 @@
                  $("#display4").html(str4);
              }, //성공시 
              error: function (err) {
-                alert(err+"오류발생");
+                
              }//실패시
          }, 30000);
       
