@@ -24,17 +24,36 @@ public class PurchaseServiceImpl implements PurchaseService {
 	@Transactional
 	public int insert(Purchase purchase) {
 		int result = purchaseDAO.insert(purchase);
-		System.out.println("price : " + purchase.getPrice());
-		result = result + fundingDAO.updateStackPrice(purchase.getFundingCode(), purchase.getPrice() * purchase.getQty());
-		System.out.println("result : " + result);
+//		System.out.println("price : " + purchase.getPrice());
+//		System.out.println("purchase : " + purchase);
+ 
+		result = fundingDAO.updateStackPrice(purchase.getFundingCode(), purchase.getPrice()*purchase.getQty());
+//		System.out.println("result : " + result);
 		
 		return result;
 	}
 	
 	@Override
-	public List<Purchase> selectAll() {
-		List<Purchase> list = purchaseDAO.selectAll();
+	public List<Purchase> myPurchaseList(int memberCode) {
+		List<Purchase> list = purchaseDAO.myPurchaseList(memberCode);
+		
+		System.out.println("서비스에서 찍은 : " + memberCode);
+		System.out.println("서비스에서 찍은 : " + list);
 		return list;
+	}
+	
+	@Override
+	public int countFundingCode(int fundingCode) {
+		
+		int result = purchaseDAO.countFundingCode(fundingCode);
+		System.out.println("fundingcode service : " + result);
+		return result;
+	}
+	
+	@Override
+	public int deletePurchaseList(int code) {
+		int result = purchaseDAO.deleteList(code);
+		return result;
 	}
 	
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import team.hunter.model.dto.Funding;
+import team.hunter.model.dto.FundingAnswer;
 import team.hunter.model.dto.FundingQuestion;
 import team.hunter.model.dto.FundingRequest;
 import team.hunter.model.dto.Member;
@@ -44,5 +45,11 @@ public class FundingRequestDAOImpl implements FundingRequestDAO {
 	public FundingQuestion myOpenFundingReqManage(int questionCode) {
 		FundingQuestion fundingQuestion = session.selectOne("fundingRequestMapper.myFundingOpenDetailsDetail", questionCode);
 		return fundingQuestion;
+	}
+
+	@Override
+	public FundingAnswer myOpenFundingAnswerManage(int questionCode) {
+		FundingAnswer fundingAnswer = session.selectOne("fundingRequestMapper.myFundingOpenAnswerDetail", questionCode);
+		return fundingAnswer;
 	}
 }

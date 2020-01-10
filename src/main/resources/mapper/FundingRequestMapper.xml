@@ -1,16 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="fundingRequestMapper">
+
+	<!-- 수녕 : 내가 만든 펀딩 detail페이지 - 펀딩 문의 관리 resultMap -->
+	<resultMap type="fundingQuestion"
+		id="fundingQuestionResultMap">
+		<id column="code" property="code" />
+		<result column="subject" property="subject" />
+		<result column="regdate" property="regdate" />
+		<result column="state" property="state" />
+		<association property="member" javaType="member">
+			<id column="id" property="id" />
+		</association>
+	</resultMap>
+
+	<!-- 수녕 : 내가 만든 펀딩 detail페이지 - 펀딩 문의 관리 상세페이지(사용자아이디,문의등록일,제목,내용) -->
 	<resultMap type="fundingQuestion" id="fundingReqManageDetail">
 		<id column="code" property="code" />
-		<result column="id" property="id" /><!-- 이부분 문제야 -->
 		<result column="regdate" property="regdate" />
 		<result column="subject" property="subject" />
 		<result column="content" property="content" />
-		<association property="fundingAnswer" javaType="fundingAnswer">
-			<id column="question_code" property="questionCode" />
-			<result column="content" property="content" />
-			<result column="regdate" property="regdate" />
+		<association property="member" javaType="member">
+			<result column="id" property="id" />
 		</association>
 	</resultMap>
 
@@ -32,11 +43,13 @@
 	</select>
 
 	<!-- 수녕 : 내가 만든 펀딩 detail페이지 - 펀딩 문의 관리 -->
-	<select id="myFundingOpenDetail" resultType="fundingQuestion"
-		parameterType="int">
-		select fq.code, fq.subject, fq.regdate, fq.state , m.id
+	<select id="myFundingOpenDetail"
+		resultMap="fundingQuestionResultMap" parameterType="int">
+		select fq.code,
+		fq.subject, fq.regdate, fq.state , m.id
 		from
-		funding_question fq, member m
+		funding_question fq, member
+		m
 		where fq.member_code=m.code and
 		funding_code=#{_parameter}
 	</select>
@@ -44,26 +57,34 @@
 	<!-- 수녕 : 내가 만든 펀딩 detail페이지 - 참가한 사용자 관리 -->
 	<select id="myFundingOpenDetailUserManage" resultType="member"
 		parameterType="int">
-		select m.id, m.name, m.addr
-		from funding f , member m
-		where f.md_code=m.code and f.code=#{_parameter}
+		select distinct m.id, m.name, m.addr
+		from funding f inner join
+		purchase p
+		on p.funding_code=f.code inner join member m
+		on p.member_code= m.code
+		where f.code=#{_parameter}
 	</select>
 
-	<!-- 수녕 : 내가 만든 펀딩 detail페이지 - 펀딩 문의 관리 상세페이지 -->
+	<!-- 수녕 : 내가 만든 펀딩 detail페이지 - 펀딩 문의 관리 상세페이지(사용자아이디,문의등록일,제목,내용) -->
 	<select id="myFundingOpenDetailsDetail"
 		resultMap="fundingReqManageDetail" parameterType="int">
-		select M.id,
-		fq.regdate, fq.subject, fq.content, FA.content, FA.regdate
+		select M.id,fq.code,
+		fq.regdate, fq.subject, fq.content
 		from
-		Funding_Question FQ inner join Funding_Answer FA
-		ON FQ.code =
-		FA.Question_code
-		inner join Member M
+		Funding_Question FQ inner join
+		Member M
 		ON FQ.Member_code = M.code
 		where
 		FQ.code=#{_parameter}
 	</select>
 
+	<!-- 수녕 : 내가 만든 펀딩 detail페이지 - 펀딩 문의 관리 상세페이지(답변내용, 등록일) -->
+	<select id="myFundingOpenAnswerDetail" resultType="fundingAnswer" parameterType="int">
+		select FA.question_code, FA.content,FA.regdate
+		from Funding_Answer FA inner join Funding_Question FQ
+		on FQ.code=FA.QUESTION_code 
+        where FQ.code=#{_parameter}
+	</select>
 </mapper>	
 
 

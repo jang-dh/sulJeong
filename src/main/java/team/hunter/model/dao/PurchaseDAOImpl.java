@@ -18,14 +18,25 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 	
 	@Override
 	public int insert(Purchase purchase) {
-		
-		System.out.println("Dao : " + purchase);
 		return session.insert("purchaseMapper.insert", purchase);
 	}
 	
 	@Override
-	public List<Purchase> selectAll() {
-		return session.selectList("purchaseMapper.selectAll");
+	public List<Purchase> myPurchaseList(int memberCode) {
+		List<Purchase> list = session.selectList("purchaseMapper.selectPurchaseByMemberCode", memberCode);
+		return list;
+	}
+	
+	@Override
+	public int countFundingCode(int fundingCode) {
+		int fundingSponserCount = session.selectOne("purchaseMapper.countFundingCode", fundingCode);
+		return fundingSponserCount;
+	}
+	
+	@Override
+	public int deleteList(int code) {
+		int deletePurchaseFundingList = session.delete("purchaseMapper.delete", code);
+		return deletePurchaseFundingList;
 	}
 
 }

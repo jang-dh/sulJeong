@@ -20,6 +20,7 @@ public class MemberAuthenticationFailureHandler implements AuthenticationFailure
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException exception) throws IOException, ServletException {
 		request.setAttribute("errorMessage", exception.getMessage());
+		System.out.println(exception.getMessage());
 		//request.getRequestDispatcher("/WEB-INF/views/member/loginForm.jsp").forward(request, response);
 		request.getRequestDispatcher("/login").forward(request, response);
 	}

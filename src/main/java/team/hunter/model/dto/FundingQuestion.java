@@ -19,7 +19,7 @@ public class FundingQuestion {
 	private String state;
 	
 	//memebr ID
-	private String id;
+	private Member member;
 	//펀딩 답변 1:1
 	private FundingAnswer fundingAnswer;
 }

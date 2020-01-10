@@ -115,7 +115,7 @@
 		html += '<div class="causes bg-silver-light maxwidth500 mb-30">';
 		html += '<div class="thumb">';
 		html += '<a href="${pageContext.request.contextPath}/funding/' + item.code + '">';
-		html += '<img src="http://placehold.it/320x240" alt="" class="img-fullwidth">';
+		html += '<img src="${pageContext.request.contextPath}/resources/images/funding/Thumnail_' + item.image +'" alt="" class="img-fullwidth">';
 		html += '</a>';
 		html += '</div>';
 		html += '<div class="causes-details border-1px bg-white clearfix p-15 pb-30">';
@@ -124,10 +124,10 @@
 		html += '</h4>';
 		html += '<ul class="list-inline font-weight-600 font-14 clearfix mb-5">';
 		html += '<li class="pull-left font-weight-400 text-black-333 pr-0">달성금액:';
-		html += '<span class="text-theme-colored font-weight-700">' + item.stackPrice + '</span>';
+		html += '<span class="text-theme-colored font-weight-700">' + item.stackPrice.toLocaleString() + '원</span>';
 		html += '</li>';
 		html += '<li class="pull-right font-weight-400 text-black-333 pr-0">목표금액:';
-		html += '<span class="text-theme-colored font-weight-700">' + item.goalPrice + '</span>';
+		html += '<span class="text-theme-colored font-weight-700">' + item.goalPrice.toLocaleString() + '원</span>';
 		html += '</li>';
 		html += '</ul>';
 		html += '<div class="progress-item mt-5">';
@@ -160,7 +160,7 @@
 <!-- Start main-content -->
 <div class="main-content">
 	<!-- Section: inner-header -->
-	<section class="inner-header divider layer-overlay overlay-dark-8" data-bg-img="${pageContext.request.contextPath}/resources/images/main/slider-main.jpg">
+	<section class="inner-header divider layer-overlay" data-bg-img="${pageContext.request.contextPath}/resources/images/main/slider-main.jpg">
 		<div class="container pt-90 pb-40">
 			<!-- Section Content -->
 			<div class="section-content">
@@ -185,7 +185,7 @@
 				<div class="form-group col-md-1">
 					<div class="media">
 						<a class="flip" href="${pageContext.request.contextPath}/funding/category/">
-							<img class="media-object" width="60" src="http://placehold.it/70x80" alt="">
+							<img class="media-object" width="60" src="${pageContext.request.contextPath}/resources/images/funding/all.jpg" alt="">
 						</a>
 						<div class="media-body">
 							<h5 class="media-heading product-title mb-0">
@@ -197,7 +197,7 @@
 				<div class="form-group col-md-1">
 					<div class="media">
 						<a class="flip" href="${pageContext.request.contextPath}/funding/category/301">
-							<img class="media-object" width="60" src="http://placehold.it/70x80" alt="">
+							<img class="media-object" width="60" src="${pageContext.request.contextPath}/resources/images/funding/takju.jpg" alt="">
 						</a>
 						<div class="media-body">
 							<h5 class="media-heading product-title mb-0">
@@ -209,7 +209,7 @@
 				<div class="form-group col-md-1">
 					<div class="media">
 						<a class="flip" href="${pageContext.request.contextPath}/funding/category/302">
-							<img class="media-object" width="60" src="http://placehold.it/70x80" alt="">
+							<img class="media-object" width="60" src="${pageContext.request.contextPath}/resources/images/funding/ricewine.jpg" alt="">
 						</a>
 						<div class="media-body">
 							<h5 class="media-heading product-title mb-0">
@@ -221,7 +221,7 @@
 				<div class="form-group col-md-1">
 					<div class="media">
 						<a class="flip" href="${pageContext.request.contextPath}/funding/category/303">
-							<img class="media-object" width="60" src="http://placehold.it/70x80" alt="">
+							<img class="media-object" width="60" src="${pageContext.request.contextPath}/resources/images/funding/distill.jpg" alt="">
 						</a>
 						<div class="media-body">
 							<h5 class="media-heading product-title mb-0">
@@ -233,7 +233,7 @@
 				<div class="form-group col-md-1">
 					<div class="media">
 						<a class="flip" href="${pageContext.request.contextPath}/funding/category/304">
-							<img class="media-object" width="60" src="http://placehold.it/70x80" alt="">
+							<img class="media-object" width="60" src="${pageContext.request.contextPath}/resources/images/funding/fruitwine.jpg" alt="">
 						</a>
 						<div class="media-body">
 							<h5 class="media-heading product-title mb-0">
@@ -245,7 +245,7 @@
 				<div class="form-group col-md-1">
 					<div class="media">
 						<a class="flip" href="${pageContext.request.contextPath}/funding/category/305">
-							<img class="media-object" width="60" src="http://placehold.it/70x80" alt="">
+							<img class="media-object" width="60" src="${pageContext.request.contextPath}/resources/images/funding/wine.jpg" alt="">
 						</a>
 						<div class="media-body">
 							<h5 class="media-heading product-title mb-0">
@@ -296,7 +296,7 @@
 							<div class="causes bg-silver-light maxwidth500 mb-30">
 								<div class="thumb">
 									<a href="${pageContext.request.contextPath}/funding/${fundingList.code}">
-									<img src="http://placehold.it/320x240" alt="" class="img-fullwidth"></a>
+									<img src="${pageContext.request.contextPath}/resources/images/funding/Thumnail_${fundingList.image}" alt="" class="img-fullwidth"></a>
 								</div>
 								<div class="causes-details border-1px bg-white clearfix p-15 pb-30">
 									<h4 class="font-16 text-uppercase">
@@ -321,7 +321,7 @@
 									<div class="pull-left font-weight-400 text-black-333 pr-0">
 										<strong>펀딩종료까지 </strong>
 									</div>
-									<div class="bg-light text-center" data-countdown="${fundingList.endDate}"></div>
+									<div class="text-center" data-countdown="${fundingList.endDate}"></div>
 									<script type="text/javascript">
 										$(document).ready(function() {
 											$('[data-countdown]').each(function() {

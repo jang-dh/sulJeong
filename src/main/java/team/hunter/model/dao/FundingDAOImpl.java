@@ -119,7 +119,8 @@ public class FundingDAOImpl implements FundingDAO {
 		
 		System.out.println("DaoCode : " + code);
 		System.out.println("DaoPrice : " + price);
-		return session.update("fundingMapper.updateStackPrice");
+		
+		return session.update("fundingMapper.updateStackPrice", map);
 	}
 	
 }
