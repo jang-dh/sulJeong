@@ -2,18 +2,24 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>    
 
-<c:set var="data" value="15"/>
+
 <script type="text/javascript">
    $(document).ready(function () {
       var allDate = "${_csrf.parameterName}=${_csrf.token}";
       $.ajax({
          url: "${pageContext.request.contextPath}/selectVisitData", //서버요청주소
          type : "post", //서버 요청방식(get,put, put, patch)
-         dataType :"text", //서버가 보내온 데이터 타입(text, html, xml, json)
+         dataType :"json", //서버가 보내온 데이터 타입(text, html, xml, json)
          data: allDate,
          success : function (result) {
-            var str ="일일 사이트 방문자 수 : "+result+"명";
+            var str ="오늘 사이트를 방문한 사람 수 : "+result.visit+"명";
+            var str2 ="오늘 등록한 펀딩 수 : "+result.fundingApply+"개";
+            var str3 ="오늘 사람들이 결제한 총 금액 : "+result.purchasePrice+"원";
+            var str4 ="오늘 사람들이 펀딩에 참여한 수 : "+result.purchaseCount+"번";
             $("#display").html(str);
+            $("#display2").html(str2);
+            $("#display3").html(str3);
+            $("#display4").html(str4);
          }, //성공시 
          error: function (err) {
             alert(err+"오류발생");
@@ -23,11 +29,17 @@
             $.ajax({
                url: "${pageContext.request.contextPath}/selectVisitData", //서버요청주소
              type : "post", //서버 요청방식(get,put, put, patch)
-             dataType :"text", //서버가 보내온 데이터 타입(text, html, xml, json)
+             dataType :"json", //서버가 보내온 데이터 타입(text, html, xml, json)
              data: allDate,
              success : function (result) {
-                var str ="일일 사이트 방문자 수 : "+result+"명";
-                $("#display").html(str);
+                var str ="오늘 사이트를 방문한 사람 수 : "+result.visit+"명";
+                 var str2 ="오늘 등록한 펀딩 수 : "+result.fundingApply+"개";
+                 var str3 ="오늘 사람들이 결제한 총 금액 : "+result.purchasePrice+"원";
+                 var str4 ="오늘 사람들이 펀딩에 참여한 수 : "+result.purchaseCount+"번";
+                 $("#display").html(str);
+                 $("#display2").html(str2);
+                 $("#display3").html(str3);
+                 $("#display4").html(str4);
              }, //성공시 
              error: function (err) {
                 alert(err+"오류발생");
@@ -61,12 +73,32 @@
           </div>
           <div class="col-md-9">
             <div class="tab-content">
-            <h3 id="display" class="text-theme-colored text-uppercase m-0"></h3>
-            <hr/>
+	            <h3 id="display" class="text-theme-colored text-uppercase m-0"></h3>
+	            <h3 id="display2" class="text-theme-colored text-uppercase m-0"></h3>
+	            <h3 id="display3" class="text-theme-colored text-uppercase m-0"></h3>
+	            <h3 id="display4" class="text-theme-colored text-uppercase m-0"></h3>
+	            <hr/>
 				<h3>주간 방문자 수</h3> 
 				<div style="width: 90%" class="text-center">
-				  <canvas id="lineChart" height="450" width="600"></canvas>
+				  <canvas id="lineChart"<%--  height="200" width="500" --%>></canvas>
+				</div><br>
+				
+				
+				<h3>주간 펀딩 수</h3>
+				<div style="width: 90%" class="text-center">
+  					<canvas id="barChart"<%--  width="500" height="200" --%>></canvas>
 				</div>
+				
+				<h3>주간 펀딩 금액</h3>
+				<div style="width: 90%" class="text-center">
+  					<canvas id="lineChart2"<%--  width="500" height="200" --%>></canvas>
+				</div>
+				
+				<h3>주간 펀딩 등록 수</h3>
+				<div style="width: 90%" class="text-center">
+  					<canvas id="barChart2"<%--  width="500" height="200" --%>></canvas>
+				</div>
+				
 
             </div>
           </div>          
@@ -78,18 +110,41 @@
 <script>
     $(document).ready(function() {
         // Line Chart
+        //등록일 가져오기
         var regdate=new Array();
-        var visit=new Array();
  		<c:forEach var="regdate" items="${weekData}" varStatus="state">
         	regdate.push('${regdate.regdate}');
         </c:forEach>
  		regdate.sort();
+ 		
+        //방문자 수
+        var visit=new Array();
  		<c:forEach var="visit" items="${weekData}" varStatus="state">
     		visit.push('${visit.visit}');
     	</c:forEach>
  		visit.reverse();	
+ 
+ 		//펀딩 수
+ 		var purchaseCnt = new Array();
+ 		<c:forEach var="purchaseCnt" items="${weekData}" varStatus="state">
+			purchaseCnt.push('${purchaseCnt.purchaseCount}');
+		</c:forEach>
+ 		purchaseCnt.reverse();
  		
-        var randomScalingFactor = function(){ return Math.round(Math.random()*100)};
+ 		//펀딩 금액
+ 		var purchasePrice = new Array();
+ 		<c:forEach var="purchasePrice" items="${weekData}" varStatus="state">
+ 			purchasePrice.push('${purchasePrice.purchasePrice}');
+		</c:forEach>
+		purchasePrice.reverse();
+ 		
+		//펀딩 등록 수
+		var fundingApply = new Array();
+ 		<c:forEach var="fundingApply" items="${weekData}" varStatus="state">
+ 			fundingApply.push('${fundingApply.fundingApply}');
+		</c:forEach>
+		fundingApply.reverse();
+ 		
         var lineChartData = {
           labels : regdate,
           datasets : [
@@ -107,16 +162,87 @@
           ]
       
       	};
+        
+        var barChartData = {
+                labels : regdate,
+                datasets : [
+                  {
+                    fillColor : "rgba(220,220,220,0.5)",
+                    strokeColor : "rgba(220,220,220,0.8)",
+                    highlightFill: "rgba(220,220,220,0.75)",
+                    highlightStroke: "rgba(220,220,220,1)",
+                    data : purchaseCnt
+                  }
+                 
+                ]
+              
+            };
+        
+        var lineChartData2 = {
+                labels : regdate,
+                datasets : [
+                  {
+                    label: "My Second dataset",
+                    fillColor : "rgba(151,187,205,0.2)",
+                    strokeColor : "rgba(151,187,205,1)",
+                    pointColor : "rgba(151,187,205,1)",
+                    pointStrokeColor : "#fff",
+                    pointHighlightFill : "#fff",
+                    pointHighlightStroke : "rgba(151,187,205,1)",
+//                     data : [randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor()]
+                    data : purchasePrice
+                  }
+                ]
+            
+            	};
+        
+        var barChartData2 = {
+                labels : regdate,
+                datasets : [
+                  {
+                    fillColor : "rgba(220,220,220,0.5)",
+                    strokeColor : "rgba(220,220,220,0.8)",
+                    highlightFill: "rgba(220,220,220,0.75)",
+                    highlightStroke: "rgba(220,220,220,1)",
+                    data : fundingApply
+                  }
+                 
+                ]
+              
+            };
+        
         window.onload = function(){
           var chart_lineChart = document.getElementById("lineChart").getContext("2d");
           window.myLine = new Chart(chart_lineChart).Line(lineChartData, {
             responsive: true
           });
+          
+          var chart_barChart = document.getElementById("barChart").getContext("2d");
+          window.myBar = new Chart(chart_barChart).Bar(barChartData, {
+            responsive : true
+          });
+          
+          var chart_lineChart2 = document.getElementById("lineChart2").getContext("2d");
+          window.myLine = new Chart(chart_lineChart2).Line(lineChartData2, {
+            responsive: true
+          });
+          
+          var chart_barChart2 = document.getElementById("barChart2").getContext("2d");
+          window.myBar = new Chart(chart_barChart2).Bar(barChartData2, {
+            responsive : true
+          });
+          
         };
 
+    
+
+    
+        
+          
+        
     });
-
-
 </script>
+
+
     
 	
