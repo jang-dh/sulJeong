@@ -89,13 +89,24 @@ public class AdminController {
 	}
 	//1:1문의 조회
 	@RequestMapping("/admin/personalQuestion")
-	public ModelAndView personalQuestion() {
-		List<PersonalQuestion> list = personalAnswerService.selectAll();
-		
+	public ModelAndView personalQuestion(@RequestParam(defaultValue = "1") int curPage) {
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("list", list);
-		mv.setViewName("admin/personalQuestion");
+		int listCnt = personalAnswerService.listCount();
+		Paging paging = new Paging(listCnt, curPage);
+		System.out.println(paging.getListCnt());
+		System.out.println(paging.getCurPage());
+		System.out.println(paging.getStartIndex());
+		System.out.println(paging.getPageSize());
 		
+		int startIndex = paging.getStartIndex();
+		int cntPerPage = paging.getPageSize();
+		List<PersonalQuestion> list = personalAnswerService.selectPersonalQuestionPaging(startIndex, cntPerPage);
+		System.out.println(list);
+		
+		mv.addObject("list", list);
+		mv.addObject("listCnt", listCnt);
+		mv.addObject("paging", paging);
+		mv.setViewName("admin/personalQuestion");
 		
 		return mv;
 	}

@@ -1,6 +1,8 @@
 package team.hunter.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +18,9 @@ public class PersonalAnswerDAOImpl implements PersonalAnswerDAO {
 	private SqlSession session;
 	
 	@Override
-	public List<PersonalQuestion> selectAllQuestion() {
+	public int listCount() {
 		
-		return session.selectList("personalAnswerMapper.selectAllQuestion");
+		return session.selectOne("personalAnswerMapper.listCount");
 	}
 	
 	@Override
@@ -36,6 +38,15 @@ public class PersonalAnswerDAOImpl implements PersonalAnswerDAO {
 	public int updatePersonalQuestionState(int code) {
 		
 		return session.update("personalAnswerMapper.updatePersonalQuestionState", code);
+	}
+	
+	@Override
+	public List<PersonalQuestion> selectPersonalQuestionPaging(int startIndex, int cntPerPage) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("startIndex", startIndex);
+		map.put("cntPerPage", cntPerPage);
+		
+		return session.selectList("personalAnswerMapper.selectPersonalQuestionPaging",map);
 	}
 	
 

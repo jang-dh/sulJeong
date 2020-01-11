@@ -18,11 +18,11 @@ public class PersonalAnswerServiceImpl implements PersonalAnswerService {
 	private PersonalAnswerDAO personalAnswerDAO;
 	
 	@Override
-	public List<PersonalQuestion> selectAll() {
+	public int listCount() {
 		
-		List<PersonalQuestion> list = personalAnswerDAO.selectAllQuestion();
+		int count = personalAnswerDAO.listCount();
 		
-		return list;
+		return count;
 	}
 	
 	@Override
@@ -49,5 +49,10 @@ public class PersonalAnswerServiceImpl implements PersonalAnswerService {
 		return result;
 	}
 	
+	@Override
+	public List<PersonalQuestion> selectPersonalQuestionPaging(int startIndex, int cntPerPage) {
+		List<PersonalQuestion> list = personalAnswerDAO.selectPersonalQuestionPaging(startIndex, cntPerPage);
+		return list;
+	}
 
 }

@@ -26,8 +26,8 @@
 
 
 
-	<select id="selectAllQuestion" resultType="personalQuestion">
-		select code, member_code, content, subject, regdate, state from personal_question order by code desc
+	<select id="listCount" resultType="int">
+		select count(*) from personal_question order by code desc
 	</select>
 	
 	<select id="selectByCodeQuestion" resultMap="personalQuestionMap" parameterType="int">
@@ -46,6 +46,14 @@
 	<update id="updatePersonalQuestionState" parameterType="int">
 		update personal_question set state='201' where code=#{_parameter}
 	</update>
+	
+	<select id="selectPersonalQuestionPaging" resultType="personalQuestion" parameterType="map">
+	<![CDATA[
+		select code, member_code, content, subject, regdate, state 
+		FROM (SELECT a.*, ROWNUM rnum FROM (SELECT * FROM personal_question ORDER BY code DESC) a 
+		WHERE ROWNUM <= (#{startIndex}*#{cntPerPage})) WHERE rnum >= ((#{startIndex}-1)*#{cntPerPage}+1)
+	]]>	
+	</select>
 
 
 

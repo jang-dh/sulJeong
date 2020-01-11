@@ -7,11 +7,12 @@ import team.hunter.model.dto.PersonalQuestion;
 
 public interface PersonalAnswerService {
 
-	List<PersonalQuestion> selectAll();
+	int listCount();
 	
 	PersonalQuestion selectByCodeQuestion(int code);
 	
 	int insertPersonalAnswer(PersonalAnswer answer);
 	
+	List<PersonalQuestion> selectPersonalQuestionPaging(int startIndex, int cntPerPage);
 
 }
