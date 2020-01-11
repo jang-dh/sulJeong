@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
 <script>
 	$(function() {
@@ -23,6 +24,7 @@
 				data : allDate,//서버에게 보내는 parameter 정보
 				success : function(result) {
 					$("#showId").html(result.content)
+					$("#showDate").html(result.regdate)
 				},//성공했을대
 				error : function(err) {
 					alert("답변은 한번만 입력 가능합니다.")
@@ -33,78 +35,79 @@
 </script>
 <body>
 
+<!-- Start main-content -->
+  <div class="main-content">
+    <!-- Section: inner-header -->
+    <section class="inner-header divider layer-overlay overlay-dark-8" data-bg-img="http://placehold.it/1920x1280">
+      <div class="container pt-90 pb-40">
+        <!-- Section Content -->
+        <div class="section-content">
+          <div class="row"> 
+            <div class="col-md-6">
+              <h2 class="text-white font-36">1:1 문의</h2>
+              
+            </div>
+          </div>
+        </div>
+      </div>      
+    </section>
 
-	<!-- 글 내용-->
-		<table border="1" summary="">
-			<caption>게시판 상세</caption>
-			<colgroup>
-				<col style="width: 130px;">
-				<col style="width: auto;">
-			</colgroup>
-			<tbody>
-				<tr>
-					<th scope="row">제목</th>
-					<td>${fundingQuestion.subject}</td>
-				</tr>
-				<tr>
-					<th scope="row">작성자</th>
-					<td>${fundingQuestion.member.id}</td>
-				</tr>
-				<tr>
-					<td colspan="2">
-						<ul class="etcArea">
-							<li class=""><strong>작성일</strong> <span class="txtNum">${fundingQuestion.regdate}</span>
-							</li>
-						</ul>
-						<div class="detail">
-							<p></p>
-
-							<p>
-								<br>
-							</p>
-							${fundingQuestion.content}
-							<p>
-								<br>
-							</p>
-						</div>
-					</td>
-				</tr>
-				<c:choose>
-					<c:when test="${not empty fundingAnswer}">
-						<tr>
-							<td colspan="2">
-								<ul class="etcArea">
-									<li class=""><strong>답변 작성일</strong> <span class="txtNum">${fundingAnswer.regdate}</span>
-									</li>
-								</ul>
-								<div class="detail">${fundingAnswer.content}</div>
-							</td>
-						</tr>
-					</c:when>
-
-					<c:otherwise>
-						<tr>
-							<td colspan="2">
-								<div id="showId"></div>
-							</td>
-						</tr>
-					</c:otherwise>
-				</c:choose>
-			</tbody>
-		</table>
+    <section>
+      <div class="container pt-70">
+        <div class="row">
+          
+          <div class="col-md-7">
+            <h3 class="text-theme-colored mt-0 mb-20">제목 : ${fundingQuestion.subject}</h3>
+			<p>작성자 : ${fundingQuestion.member.id}</p>
+            <hr>
+            <p>${fundingQuestion.content}</p>
+            <p>작성일 : ${fundingQuestion.regdate}</p> 
+            <hr>
+            <h3 class="text-theme-colored mt-0 mb-20">답변</h3>
+            <c:choose>
+            	<c:when test="${not empty fundingAnswer}">
+		            <form>
+		            	<input class="form-control" type="text" value="${fundingAnswer.content} " readonly/><br>
+		            	 <ul class="etcArea">
+	                     	<li class=""><strong>답변 작성일</strong> <span class="txtNum">${fundingQuestion.regdate}</span>
+	                     	</li>
+                  		</ul>
+		            	
+		            </form>
+	            </c:when>
+	            <c:otherwise>
+		            <form>
+			           <div class="form-control" id="showId"></div><br>
+			           <ul class="etcArea">
+	                     	<li class=""><strong>답변 작성일</strong> <span class="txtNum" id="showDate"></span>
+	                     	</li>
+                  		</ul>
+			        </form>
+	            </c:otherwise>
+	        </c:choose>
+	            
+	            <c:choose>
+				<c:when test="${fundingAnswer.content!=null}">
+					<input type="hidden">
+				</c:when>
+				<c:otherwise>
+	            		<label>답변하기<small>*</small></label>
+                  		<textarea name="content" id="answerText" class="form-control required" rows="5" placeholder="내용을 입력해 주세요"></textarea><br>
+                  		
+                  		<input type="button" id="answerButton" value="등록" class="btn btn-dark btn-theme-colored btn-circled">
+	            </c:otherwise>
+            </c:choose>
+            <br><br><hr>
+            <a href="${pageContext.request.contextPath}/mypage/myQuestion" class="active">리스트로 돌아가기</a>
+            <p></p>
+          </div>
+        </div>
+      </div>
+    </section>
 
 
-	<c:choose>
-		<c:when test="${fundingAnswer.content!=null}">
-			<input type="hidden">
-		</c:when>
-		<c:otherwise>
-			<input type="text" id="answerText" name="answerText">
-			<button type="button" class="btn btn-dark btn-sm" id="answerButton" name="answerButton">등록</button>
-		</c:otherwise>
-	</c:choose>
-	<br>
-	<br>
-	<a href="${pageContext.request.contextPath}/mypage/???">리스트로 돌아가기</a>
-
-</body>
+    
+    
+  </div>
+  <!-- end main-content -->
+    

@@ -51,7 +51,9 @@ public class PurchaseController {
 	}
 	
 	@RequestMapping("mypage/deliveryCode")
-	public String deliveryCodeSend(Purchase purchase, Model model) {
+	public String deliveryCodeSend(Purchase purchase) {
+		purchase.setDeliveryNumber(purchase.getDeliveryNumber().trim());
+		purchase.setCourier(purchase.getCourier().trim());
 				purchaseService.deliveryCodeSave(purchase);
 		return "redirect:myOpenFunding/"+purchase.getFundingCode();
 	}

@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <script>
-	$(function() {
+	$(function() { 
 		$("#deliveryBtn").click(function() {
 			if ($("#courierName").val() == "") {
 				alert("택배사를 입력해주세요");
@@ -15,40 +15,21 @@
 				$("#deliveryCode").focus();
 				return false;
 			}
-
-/* 			var courierVal = $("#courierName").val();
-			var delCodeVal = $("#deliveryCode").val();
-			//console.log(${fundingAnswer.questionCode});
-			var allDate = "${_csrf.parameterName}=${_csrf.token}"
-					+ "&courier=" + courierVal + "&deliveryNumber=" + delCodeVal + "&memberCode="+$("#memberCode").val()+"&fundingCode=${fundingCode}"
-			$.ajax({
-				url : "${pageContext.request.contextPath}/deliveryCode", //서버요청주소
-				type : "post", //요청방식(get|post|put:patch:delete)
-				dataType : "json", //서버가 보내온 데이터 타입(text,html,xml,json)
-				data : allDate,//서버에게 보내는 parameter 정보
-				success : function(result){//중복, 사용가능
-	      			alert(result +"성공");
-	      			$("#deliveryCode").hide();
-	      			$("#courierName").hide();
-	      			$("#deliveryBtn").hide();
-	      			
-		      		   var str="";
-		      			
-		      			str+="<td>"
-		      			str+="<input type=text id=deliveryCode value="+result.deliveryNumber+" readonly>"
-		      			str+="</td>"
-		      			str+="<td>"
-		      			str+="<input type=text id=courierName value="+result.Courier+" readonly>"
-		      			str+="<input type=button class=btn btn-dark btn-sm id=deliveryBtn name=deliveryBtn value=수정>"
-		      			str+="</td>"
-		      			
-		      		  $("#showId").html(str); 
-		      		} ,
-					
-				error : function(err) {
-					alert("답변은 한번만 입력 가능합니다.")
-				}//오류발생했을때
-			});//ajax */
+		});//버튼 클릭시
+		
+		$("#updateBtn").click(function() {
+			//text 버튼 활성화 시키기
+			$("#courier2").removeAttr("readonly"); 
+			$("#deliveryNumber2").removeAttr("readonly");
+			$("#courier2").focus();
+			
+			//수정 버튼 입력 으로 바꾸기
+			$("#updateBtn").val("입력");
+						
+			var deliveryNumber = $("#deliveryCode2").val();
+			var courier = $("#courierName2").val();
+			deliveryNumber.trim();
+			courier.trim();
 		});//버튼 클릭시
 	});
 </script>
@@ -176,7 +157,7 @@
 													<input type="text" id="deliveryNumber2" name="deliveryNumber2" value="${fundingOpenPeople.purchase.deliveryNumber}" readonly="readonly">
 													<input type="hidden" id="memberCode2" name="memberCode2" value="${fundingOpenPeople.code}">
 													<input type="hidden" id="fundingCode2" name="fundingCode2" value="${fundingCode}">
-													<input type="submit" class="btn btn-dark btn-sm" id="deliveryBtn2" name="deliveryBtn2" value="수정">
+													<input type="button" class="btn btn-dark btn-sm" id="updateBtn" name="updateBtn" value="수정">
 													</td>
 													</c:otherwise>
 													</c:choose>
