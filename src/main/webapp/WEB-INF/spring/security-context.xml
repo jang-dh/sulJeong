@@ -6,20 +6,22 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<security:http auto-config="true" use-expressions="true">
-		<security:intercept-url pattern="/admin/main" access="hasRole('ROLE_ADMIN')"/>
-		<security:intercept-url pattern="/member/main" access="isAuthenticated()"/>
+		<!-- <security:intercept-url pattern="/admin/main" access="hasRole('ROLE_ADMIN')"/>
+		<security:intercept-url pattern="/member/main" access="isAuthenticated()"/> -->
+		<security:intercept-url pattern="/mypage/*" access="isAuthenticated()"/>
+		<security:intercept-url pattern="/admin/*" access="hasRole('ROLE_ADMIN')"/>
 		
 		<security:form-login
-			login-page="/member/loginForm"
+			login-page="/login"
 			username-parameter="id"
-			password-parameter="password"
+			password-parameter="pwd"
 			login-processing-url="/loginCheck"
 			default-target-url="/"
 			authentication-failure-handler-ref="memberAuthenticationFailureHandler"
 		/>
 		
 		<security:logout
-			logout-url="/member/logout"
+			logout-url="/logout"
 			invalidate-session="true"
 			delete-cookies="JSESSIONID"
 			logout-success-url="/"

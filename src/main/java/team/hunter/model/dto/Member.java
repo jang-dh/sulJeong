@@ -18,4 +18,7 @@ public class Member {
 	private String emailAccept;
 	private String name;
 	private String phone;
+	
+	private int startIndex;
+	private int cntPerPage;
 }

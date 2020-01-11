@@ -1,11 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib prefix="sec"  uri="http://www.springframework.org/security/tags"%> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html dir="ltr" lang="en">
+<script src="${pageContext.request.contextPath}/resources/js/jquery-2.2.4.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$("#logout").click(function(){
+			$("#logoutSubmit").submit();
+		});
+	});
+
+</script>
 
 <head>
-
+<sec:authentication var="principal" property="principal" />
     <!-- Meta Tags -->
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
@@ -55,6 +65,7 @@
     <script src="${pageContext.request.contextPath}/resources/js/jquery-2.2.4.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/jquery-ui.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/chart.js"></script>
     <!-- JS | jquery plugin collection for this theme -->
     <script src="${pageContext.request.contextPath}/resources/js/jquery-plugin-collection.js"></script>
 
@@ -96,12 +107,18 @@
                                     <a href="${pageContext.request.contextPath}/introduce">서비스 소개</a>
                                 </li>
                                 <li>
-                                    <a href="${pageContext.request.contextPath}/notice">공지사항</a>
-                                </li>
-                                <li><a href="${pageContext.request.contextPath}/login">로그인</a>
-                                </li>
-                                <li><a href="${pageContext.request.contextPath}/join">회원가입</a>
-                                </li>
+
+                                    <a id="a" href="${pageContext.request.contextPath}/notice">공지사항</a>
+
+                                    <c:if test="${empty pageContext.request.userPrincipal}">
+	                                <li><a href="${pageContext.request.contextPath}/login">로그인</a>
+	                                </li>
+	                                <li><a href="${pageContext.request.contextPath}/join">회원가입</a>
+                                    </li>
+	                                </c:if>
+	                                <c:if test="${not empty pageContext.request.userPrincipal}">
+
+
                                 <li>
                                     <a class="icon icon-dark icon-bordered icon-circled icon-border-effect effect-circled"
                                         href="#">
@@ -109,7 +126,9 @@
                                     </a>
                                     <div class="megamenu" style="width:fit-content; left:auto;">
                                         <div class="megamenu-row">
-                                            <h3><a href="${pageContext.request.contextPath}/mypage/myInfoMenu">회원 이름 ></a></h3>
+
+                                            <h3><a href="${pageContext.request.contextPath}/mypage/myInfoMenu">${principal.name}님 ></a></h3>
+
                                         </div>
                                         <div class="megamenu-row">
                                             <div class="col4">
@@ -154,19 +173,37 @@
                                                     <h5 class="icon-box-title">1:1 문의</h5>
                                                 </div>
                                             </div>
+                                            <!-- 관리자 권한이 있을 때만 보임 -->
+                                            <sec:authorize access="hasRole('ROLE_ADMIN')">
+                                            <div class="col4">
+                                                <div class="icon-box" style="margin-bottom:0px;">
+                                                    <a class="icon" href="${pageContext.request.contextPath}/admin/siteManagement" style="margin-bottom:0px;">
+                                                        <i class="fa fa-cog"></i>
+                                                    </a>
+                                                    <h5 class="icon-box-title">&nbsp;&nbsp;관리자</h5>
+                                                </div>
+                                            </div>
+                                            </sec:authorize>
                                         </div>
+                                        
+    	
+    
                                         <div class="megamenu-row">
-                                            <button class="btn">로그아웃</button>
+                                       	 <form id="logoutSubmit" action="${pageContext.request.contextPath}/logout" method="post">
+                                       	 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                            <input type="button" class="btn" id="logout" value="로그아웃"/>
+                                         </form>
                                         </div>
                                     </div>
                                 </li>
-                                <li><a href="${pageContext.request.contextPath}//fundingOpenRequest" style="padding:0px;"><button
+								</c:if>
+                                <li><a href="${pageContext.request.contextPath}/fundingOpenRequest" style="padding:0px;"><button
                                             class="btn btn-border btn-theme-colored btn-lg">펀딩 오픈 신청하기</button></a>
                                 </li>
-
                             </ul>
                         </nav>
                     </div>
                 </div>
             </div>
+            
         </header>

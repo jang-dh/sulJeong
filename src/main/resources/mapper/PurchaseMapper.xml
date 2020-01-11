@@ -2,6 +2,26 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="purchaseMapper">
 
+	<select id="selectPurchaseByMemberCode" resultType="purchase" parameterType="int">
+		select code, member_code, funding_code, price, qty, purchase_state, purchase_date, delivery_code, courier
+		from purchase
+		where member_code = #{_parameter}
+	</select>
+	
+	<insert id="insert" parameterType="purchase">
+		insert into purchase (code, member_code, funding_code, price, qty, purchase_state, purchase_date, delivery_code, Courier) 
+		values (seq_no.nextval, #{memberCode}, #{fundingCode}, #{price}, #{qty},
+		 #{purchaseState}, sysdate, #{deliveryNumber}, #{Courier})
+	</insert>
+	
+	<select id="countFundingCode" parameterType="int" resultType="int">
+		select count(*) from purchase where funding_code = #{_parameter}
+	</select>
+	
+	<delete id="delete" parameterType="purchase">
+		delete from purchase where code = #{_parameter}
+	</delete>
+	
 </mapper>	
 
 

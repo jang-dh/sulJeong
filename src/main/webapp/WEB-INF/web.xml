@@ -9,14 +9,18 @@
 		<param-value>
 		/WEB-INF/spring/root-context.xml
 		/WEB-INF/spring/mybatis-context.xml
-		<!-- /WEB-INF/spring/security-context.xml -->
+		/WEB-INF/spring/security-context.xml 
 		</param-value>
 	</context-param>
 	
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
 	<listener>
+		<listener-class>team.hunter.listener.SessionListener</listener-class>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
 	</listener>
+
+
 	
 	<!-- Spring Filter 한글처리 등록 -->
 	<filter>
@@ -33,14 +37,14 @@
 	</filter-mapping>
   
  	 <!-- Spring Security 등록 -->
-  	 <!-- <filter>   
+  	  <filter>   
     	<filter-name>springSecurityFilterChain</filter-name>
     	<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
   	</filter>
   	<filter-mapping>
     	<filter-name>springSecurityFilterChain</filter-name>
     	<url-pattern>/*</url-pattern>
- 	 </filter-mapping> -->
+ 	 </filter-mapping> 
 
 	<!-- Processes application requests -->
 	<servlet>
