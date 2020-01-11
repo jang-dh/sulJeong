@@ -15,6 +15,11 @@
 				$("#deliveryCode").focus();
 				return false;
 			}
+			
+			var deliveryNumber = $("#deliveryCode").val();
+			var courier = $("#courierName").val();
+			deliveryNumber.trim();
+			courier.trim();
 		});//버튼 클릭시
 		
 		$("#updateBtn").click(function() {
@@ -26,10 +31,7 @@
 			//수정 버튼 입력 으로 바꾸기
 			$("#updateBtn").val("입력");
 						
-			var deliveryNumber = $("#deliveryCode2").val();
-			var courier = $("#courierName2").val();
-			deliveryNumber.trim();
-			courier.trim();
+			
 		});//버튼 클릭시
 	});
 </script>

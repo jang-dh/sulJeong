@@ -52,9 +52,11 @@ public class PurchaseController {
 	
 	@RequestMapping("mypage/deliveryCode")
 	public String deliveryCodeSend(Purchase purchase) {
+		System.out.println(purchase.getDeliveryNumber()+"트림 전");
 		purchase.setDeliveryNumber(purchase.getDeliveryNumber().trim());
 		purchase.setCourier(purchase.getCourier().trim());
 				purchaseService.deliveryCodeSave(purchase);
+				System.out.println(purchase.getDeliveryNumber()+"트림 후");
 		return "redirect:myOpenFunding/"+purchase.getFundingCode();
 	}
 }
