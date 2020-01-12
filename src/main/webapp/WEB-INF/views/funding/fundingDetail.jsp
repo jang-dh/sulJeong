@@ -6,7 +6,10 @@
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 
 <script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
-<security:authentication var="principal" property="principal"/>
+
+<security:authorize access="isAuthenticated()">
+	<security:authentication var="principal" property="principal"/>
+</security:authorize>
 
 
 <script type="text/javascript">
@@ -128,37 +131,6 @@ $(function() {
 			              customer_uid: customerUid // 카드(빌링키)와 1:1로 대응하는 값
 						}
 					});
-			        
-			        //인증 토큰
-			        /* var getToken = null;
-			        $.ajax({
-				        url: "https://api.iamport.kr/users/getToken",
-				        method: "post", // POST method
-				        headers: {"Content-Type": "application/json"}, // "Content-Type": "application/json"
-				        dataType : "json",
-				        data: {
-				          imp_key: "9641301071926320", // REST API키
-				          imp_secret: "DGvvhuqgbRnvUxwBIwOoU5tDk5AH28ZGPvb7ZCnbtLHnjdZ1JOpETTieYSW11WIRrTYrvmCZ7jnqxnrh" // REST API Secret
-						},
-						success: function (result) {
-							getToken = result.response.access_token;
-							console.log(getToken);
-						},
-						erorr: function (err) {
-							alert(err + "오류 발생");
-						}
-				      }); */
-			        
-			        /*
-			        //결제 예약
-			         $.ajax({
-			            url: "https://api.iamport.kr/subscribe/payments/scheduele", // 서비스 웹서버
-			            method: "POST",
-			            headers: { "Content-Type": "application/json" },
-			            data: {
-			              customer_uid: customerUid // 카드(빌링키)와 1:1로 대응하는 값
-			            }
-			          }); */
 			        
 			        //구매 테이블에 추가
 					$.ajax({
