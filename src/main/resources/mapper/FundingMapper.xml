@@ -103,7 +103,7 @@
 			select code, md_code, title, reward_name, reward_price, goal_price, stack_price, image, category, open_date, end_date, funding_state, name
 			from ( select distinct f.code as code, md_code, title, reward_name, reward_price, goal_price, stack_price, image, category, open_date, end_date, funding_state, count(*)over(PARTITION by funding_code) as cnt, m.name
 					from funding f, likes l, member m
-					where l.funding_code = f.code and f.md_code = m.code
+					where l.funding_code = f.code and f.md_code = m.code and funding_state = '501'
 					order by cnt desc)
 			where rownum < 5
 		]]>

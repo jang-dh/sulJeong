@@ -3,10 +3,17 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
+
+<script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
+<security:authentication var="principal" property="principal"/>
+
 
 <script type="text/javascript">
 //jquery
 $(function() {
+	var IMP = window.IMP;
+	IMP.init('imp72693952');
 	
 	if(${likes != null}){
 		$(".insertLikes").hide();
@@ -16,32 +23,35 @@ $(function() {
 		$(".deleteLikes").hide();
 	}
 	$(".insertLikes").on("click", function() {
-		$.ajax({
-			url : "${pageContext.request.contextPath}/likes/insert", // 서버요청주소
-			type : "post", // 요청방식(get | post | put | patch | delete)
-			data : "fundingCode=" + ${funding.code},
-			dataType : "text", //서버가 보내온 데이터 타입
-			beforeSend : function(xhr)
-            {   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
-                xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
-            },
-			success : function(result) {
-				if(result == '1')
-					alert("좋아요가 등록되었습니다.");
-				$(".insertLikes").hide();
-				$(".deleteLikes").show();
-			}, //성공 시
-			erorr : function(err) {
-				alert(err + " 오류 발생");
-			} //실패 시
-		});
-		//ajax End			
+		if(${principal == null})
+			alert("로그인 후 사용가능합니다.");
+		else
+			$.ajax({
+				url : "${pageContext.request.contextPath}/likes/insert", // 서버요청주소
+				type : "post", // 요청방식(get | post | put | patch | delete)
+				data : "fundingCode=${funding.code}",
+				dataType : "text", //서버가 보내온 데이터 타입
+				beforeSend : function(xhr)
+	            {   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
+	                xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+	            },
+				success : function(result) {
+					if(result == '1')
+						alert("좋아요가 등록되었습니다.");
+					$(".insertLikes").hide();
+					$(".deleteLikes").show();
+				}, //성공 시
+				erorr : function(err) {
+					alert(err + " 오류 발생");
+				} //실패 시
+			});
+			//ajax End			
 	});
 	$(".deleteLikes").on("click", function() {
 		$.ajax({
 			url : "${pageContext.request.contextPath}/likes/delete", // 서버요청주소
 			type : "post", // 요청방식(get | post | put | patch | delete)
-			data : "fundingCode=" + ${funding.code},
+			data : "fundingCode=${funding.code}",
 			dataType : "text", //서버가 보내온 데이터 타입
 			beforeSend : function(xhr)
             {   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
@@ -64,47 +74,119 @@ $(function() {
 		var content = $('input[name="form_content"]').val();
 		var subject = $('input[name="form_subject"]').val();
 		//alert(1);
-		$.ajax({
-			url: "fundingQuestionInsert", // 서버요청주소
-			type: "post", // 요청방식
-			data: {fundingCode : fundingCode, subject : subject, content : content},
-			dataType: "text",
-			beforeSend: function (xhr)
-			{
-				xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
-			},
-			success: function (result) {
-				if(result == '1')
-					alert("문의가 등록되었습니다.");
-			},
-			erorr: function (err) {
-				alert(err + "오류 발생");
-			}
-		});
+		if(${principal == null})
+			alert("로그인 후 사용가능합니다.");
+		else
+			$.ajax({
+				url: "fundingQuestionInsert", // 서버요청주소
+				type: "post", // 요청방식
+				data: {fundingCode : fundingCode, subject : subject, content : content},
+				dataType: "text",
+				beforeSend: function (xhr){
+					xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+				},
+				success: function (result) {
+					if(result == '1')
+						alert("문의가 등록되었습니다.");
+				},
+				erorr: function (err) {
+					alert(err + "오류 발생");
+				}
+			});
 	}); //문의하기
 	
 	$(".addFunding").on("click", function() {
 		var fundingCode = ${funding.code};
 		var price = ${funding.rewardPrice};
 		var qty = $('input[name="quantity"]').val();
-		//alert(1);
-		$.ajax({
-			url: "${pageContext.request.contextPath}/insertPurchase", //서버요청주소
-			type: "post",
-			data: {fundingCode : fundingCode, price : price, qty : qty},
-			dataType: "text",
-			beforeSend: function (xhr) 
-			{
-				xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
-			},
-			success: function (result) {
-				if(result == '1')
-					alert("펀딩이 추가 되었습니다.");
-			},
-			erorr: function (err) {
-				alert(err + "오류 발생");
-			}
-		});
+		var customerUid = '${principal.id}' + new Date().getTime();
+		
+		if(${principal == null})
+			alert("로그인 후 사용가능합니다.");
+		else{
+			//예약 결제를 위한 빌링키 발급
+			IMP.request_pay({
+			    pay_method : 'card',
+			    merchant_uid : 'merchant_' + new Date().getTime(),
+			    customer_uid : customerUid,
+			    name : '${funding.rewardName}',
+			    amount : 0,
+			    buyer_email : '${principal.email}',
+			    buyer_name : '${principal.name}',
+			    buyer_tel : '${principal.phone}',
+			    buyer_addr : '${principal.addr}',
+			}, function(rsp) {
+			    if (rsp.success) {
+			    	//빌링키 발급 성공
+			        var msg = '결제가 완료되었습니다.';
+			        //결제 서버에 빌링키 전달
+			        $.ajax({
+			            url: "https://www.myservice.com/billings/", // 서비스 웹서버
+			            method: "POST",
+			            headers: { "Content-Type": "application/json" },
+			            data: {
+			              customer_uid: customerUid // 카드(빌링키)와 1:1로 대응하는 값
+						}
+					});
+			        
+			        //인증 토큰
+			        /* var getToken = null;
+			        $.ajax({
+				        url: "https://api.iamport.kr/users/getToken",
+				        method: "post", // POST method
+				        headers: {"Content-Type": "application/json"}, // "Content-Type": "application/json"
+				        dataType : "json",
+				        data: {
+				          imp_key: "9641301071926320", // REST API키
+				          imp_secret: "DGvvhuqgbRnvUxwBIwOoU5tDk5AH28ZGPvb7ZCnbtLHnjdZ1JOpETTieYSW11WIRrTYrvmCZ7jnqxnrh" // REST API Secret
+						},
+						success: function (result) {
+							getToken = result.response.access_token;
+							console.log(getToken);
+						},
+						erorr: function (err) {
+							alert(err + "오류 발생");
+						}
+				      }); */
+			        
+			        /*
+			        //결제 예약
+			         $.ajax({
+			            url: "https://api.iamport.kr/subscribe/payments/scheduele", // 서비스 웹서버
+			            method: "POST",
+			            headers: { "Content-Type": "application/json" },
+			            data: {
+			              customer_uid: customerUid // 카드(빌링키)와 1:1로 대응하는 값
+			            }
+			          }); */
+			        
+			        //구매 테이블에 추가
+					$.ajax({
+						url: "${pageContext.request.contextPath}/insertPurchase", //서버요청주소
+						type: "post",
+						data: {fundingCode : fundingCode, price : price, qty : qty},
+						dataType: "text",
+						beforeSend: function (xhr) 
+						{
+							xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+						},
+						success: function (result) {
+							if(result == '1')
+								alert("펀딩이 추가 되었습니다.");
+						},
+						erorr: function (err) {
+							alert(err + "오류 발생");
+						}
+					});
+			    } else {
+			    	alert('빌링키 발급 실패');
+			        var msg = '결제에 실패하였습니다.';
+			        msg += '에러내용 : ' + rsp.error_msg;
+			    }
+			
+			    alert(msg);
+			});
+		}
 	});
 	//펀딩하기
 });
