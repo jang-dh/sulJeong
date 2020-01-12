@@ -15,7 +15,4 @@ public class Notice {
 	private String content;
 	private String regdate;
 	private String filename;
-	
-	private int startIndex;
-	private int cntPerPage;
 }

@@ -59,11 +59,23 @@
 		select count(*) from notice
 	</select>
 	
-	<select id="noticeList" parameterType="notice" resultType="notice">
+	<select id="noticeList" parameterType="map" resultType="notice">
 	<![CDATA[
 		SELECT code, subject, content, regdate 
-		FROM notice
-		WHERE ROWNUM <= (#{startIndex}*#{cntPerPage})
+		FROM (SELECT a.*, ROWNUM rnum FROM (SELECT * FROM notice ORDER BY code DESC) a 
+		WHERE ROWNUM <= (#{startIndex}*#{cntPerPage})) WHERE rnum >= ((#{startIndex}-1)*#{cntPerPage}+1)
+	]]>	
+	</select>
+	
+	<select id="fundingRequestlistCount" resultType="int">
+		select count(*) from funding_request
+	</select>
+	
+	<select id="fundingRequestList" parameterType="map" resultType="fundingRequest">
+	<![CDATA[
+		SELECT code, subject, state, regdate 
+		FROM (SELECT a.*, ROWNUM rnum FROM (SELECT * FROM funding_request ORDER BY code DESC) a 
+		WHERE ROWNUM <= (#{startIndex}*#{cntPerPage})) WHERE rnum >= ((#{startIndex}-1)*#{cntPerPage}+1)
 	]]>	
 	</select>
 

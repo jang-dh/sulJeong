@@ -102,9 +102,21 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 
 	@Override
-	public List<Notice> NoticeList(Notice notice) {
+	public List<Notice> NoticeList(int startIndex, int cntPerPage) {
 		// TODO Auto-generated method stub
-		return dao.NoticeList(notice);
+		return dao.NoticeList(startIndex, cntPerPage);
+	}
+
+	@Override
+	public int fundingRequestlistCount() {
+		
+		return dao.fundingRequestlistCount();
+	}
+
+	@Override
+	public List<FundingRequest> fundingRequestList(int startIndex, int cntPerPage) {
+		
+		return dao.fundingRequestList(startIndex, cntPerPage);
 	}
 
 }

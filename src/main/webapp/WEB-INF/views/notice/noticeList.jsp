@@ -9,7 +9,7 @@
 <script>
 	// 페이지 이동
 	function fn_paging(curPage){
-		location.href="${pageContext.request.contextPath}/noticePaging?curPage="+curPage;
+		location.href="${pageContext.request.contextPath}/notice?curPage="+curPage;
 	}
 	
 	$(function() {

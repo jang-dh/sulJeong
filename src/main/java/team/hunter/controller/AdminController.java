@@ -71,12 +71,34 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/admin/fundingRequest")
-	public ModelAndView fundingRequest() {
-		List<FundingRequest> list = noticeService.selectFundingRequest();
+	public ModelAndView fundingRequest(@RequestParam(defaultValue = "1") int curPage) {
+//		List<FundingRequest> list = noticeService.selectFundingRequest();
+//		ModelAndView mv = new ModelAndView();
+//		mv.addObject("list", list);
+//		mv.setViewName("admin/fundingRequest");
+		
 		ModelAndView mv = new ModelAndView();
+		
+		//count로 갯수가지고오기
+		 
+		int listCnt = noticeService.fundingRequestlistCount();
+		System.out.println(listCnt);
+		Paging paging = new Paging(listCnt, curPage);
+
+		
+		int startIndex = paging.getStartIndex();
+		int cntPerPage = paging.getPageSize();
+		List<FundingRequest> list = noticeService.fundingRequestList(startIndex, cntPerPage);
+
+		
 		mv.addObject("list", list);
+		mv.addObject("listCnt", listCnt);
+		mv.addObject("paging", paging);
 		mv.setViewName("admin/fundingRequest");
+	
 		return mv;
+		
+
 	}
 	
 	@RequestMapping("/admin/fundingInsert")
@@ -93,15 +115,12 @@ public class AdminController {
 		ModelAndView mv = new ModelAndView();
 		int listCnt = personalAnswerService.listCount();
 		Paging paging = new Paging(listCnt, curPage);
-		System.out.println(paging.getListCnt());
-		System.out.println(paging.getCurPage());
-		System.out.println(paging.getStartIndex());
-		System.out.println(paging.getPageSize());
+
 		
 		int startIndex = paging.getStartIndex();
 		int cntPerPage = paging.getPageSize();
 		List<PersonalQuestion> list = personalAnswerService.selectPersonalQuestionPaging(startIndex, cntPerPage);
-		System.out.println(list);
+
 		
 		mv.addObject("list", list);
 		mv.addObject("listCnt", listCnt);
@@ -251,10 +270,36 @@ public class AdminController {
 	 * ������������ ���� ��Ʈ�ѷ� + �������� ��ü ���
 	 * */
 	@RequestMapping("/notice")
-	public String notice(Model m) {
-		List<Notice> list = noticeService.select();
-		m.addAttribute("list", list);
-		return "notice/noticeList";
+	public ModelAndView notice(@RequestParam(defaultValue = "1") int curPage) {
+//		List<Notice> list = noticeService.select();
+//		m.addAttribute("list", list);
+//		return "notice/noticeList";
+		
+		
+		ModelAndView mv = new ModelAndView();
+		
+		//count로 갯수가지고오기
+		
+		int listCnt = noticeService.listCount();
+		System.out.println(listCnt);
+		Paging paging = new Paging(listCnt, curPage);
+		System.out.println(paging.getListCnt());
+		System.out.println(paging.getCurPage());
+		System.out.println(paging.getStartIndex());
+		System.out.println(paging.getPageSize());
+		
+		int startIndex = paging.getStartIndex();
+		int cntPerPage = paging.getPageSize();
+		List<Notice> list = noticeService.NoticeList(startIndex, cntPerPage);
+		
+		System.out.println(list);
+		
+		mv.addObject("list", list);
+		mv.addObject("listCnt", listCnt);
+		mv.addObject("paging", paging);
+		mv.setViewName("notice/noticeList");
+	
+		return mv;
 	}
 
 	/**
@@ -442,38 +487,7 @@ public class AdminController {
 		return "redirect:/admin/fundingRequest";
 	}
 	
-	
-	/**
-	 * 공지사항 페이징 처리
-	 * */
-	@RequestMapping("noticePaging")
-	public ModelAndView fundingQuestion(@RequestParam(defaultValue = "1") int curPage) {
-		ModelAndView mv = new ModelAndView();
-		
-		//count로 갯수가지고오기
-		
-		int listCnt = noticeService.listCount();
-		System.out.println(listCnt);
-		Paging paging = new Paging(listCnt, curPage);
-		
-		Notice notice = new Notice();
-		
-		
-		notice.setStartIndex(paging.getStartIndex());
-		notice.setCntPerPage(paging.getPageSize());
-		System.out.println(notice.getStartIndex());
-		System.out.println(notice.getCntPerPage());
-		
-		List<Notice> list = noticeService.NoticeList(notice);
-		System.out.println(list);
-		
-		mv.addObject("list", list);
-		mv.addObject("listCnt", listCnt);
-		mv.addObject("paging", paging);
-		mv.setViewName("redirect:notice");
-//		
-		return mv;
-	}
+
 	
 
 }
