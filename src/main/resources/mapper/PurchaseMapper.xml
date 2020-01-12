@@ -3,7 +3,7 @@
 <mapper namespace="purchaseMapper">
 
 	<!-- 후원한 펀딩 내역 페이지 - 펀딩 후원 내역 resultMap -->
-	<resultMap type="funding" id="fundingTitleMap">
+	<resultMap type="funding" id="recipientInformationMap">
 		<id column="code" property="code" />
 		<result column="title" property="title" />
 		<association property="member" javaType="member">
@@ -26,8 +26,8 @@
 		 #{purchaseState}, sysdate, #{deliveryNumber}, #{courier})
 	</insert>
 	
-	<select id="fundingTitle"
-		resultMap="fundingTitleMap" parameterType="int">
+	<select id="recipientInformation"
+		resultMap="frecipientInformationMap" parameterType="int">
 		select f.title , m.name, m.addr, m.phone
 		from funding f inner join member m
 		on f.member_code = m.code
