@@ -55,13 +55,14 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public void newPassword(Member member) throws Exception {
+	public int newPassword(Member member) throws Exception {
 		
 		//가입 전에 비밀번호 평문을 암호화 해서 저장한다.
 		String pwd = passwordEncoder.encode(member.getPwd());
 		member.setPwd(pwd);
 				
-		memberDAO.newPassword(member);
+		int result = memberDAO.newPassword(member);
+		return result;
 	}
 
 	@Override

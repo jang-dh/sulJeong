@@ -25,7 +25,7 @@ public class EmailController {
 	// 새로운 비밀번호가 생성된다.
 	@RequestMapping("/pwdCheck")
 	public String newPassword(Member member, HttpSession session) throws Exception {
-		System.out.println("member나오니???"+member.getPhone()+member.getName()+member.getEmail());
+		System.out.println("member나오니???"+member.getPhone()+member.getId()+member.getEmail());
 		Random r = new Random();
 		int num = r.nextInt(89999) + 10000;
 		String npassword = "bapsi" + Integer.toString(num);// 새로운 비밀번호 변경
@@ -38,16 +38,17 @@ public class EmailController {
 
 	// 이메일로 비밀번호가 전송이된다.
 	@RequestMapping("/findPassword")
-	public String findPasswordOK(Member member, HttpSession session) throws Exception {
+	public String findPasswordOK(Member member, HttpSession session, Model model) throws Exception {
 		member = (Member) session.getAttribute("member");
 			email.setContent("새로운 비밀번호 " + member.getPwd() + " 입니다." );
 			email.setReceiver(member.getEmail());
 			email.setSubject("안녕하세요"+member.getEmail() +"님  재설정된 비밀번호를 확인해주세요");
 			emailSender.SendEmail(email);
 			System.out.println(email);
-			memberService.newPassword(member);
+			int result = memberService.newPassword(member);
+			model.addAttribute("result", result);
 			session.invalidate();
-			return "redirect:login";
+			return "forward:searchLoginInfoForm";
 	}
 	
 }

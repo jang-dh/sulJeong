@@ -45,7 +45,7 @@
                   <input type="submit" id="answerButton" value="수정" class="btn btn-dark btn-theme-colored btn-circled">
            		 </form>
             <br><br><hr>
-            <a href="${pageContext.request.contextPath}/mypage//myOpenFunding/${member.purchase.fundingCode}" class="active">리스트로 돌아가기</a>
+            <a href="${pageContext.request.contextPath}/mypage/myOpenFunding/${member.purchase.fundingCode}" class="active">리스트로 돌아가기</a>
             <p></p>
           </div>
         </div>

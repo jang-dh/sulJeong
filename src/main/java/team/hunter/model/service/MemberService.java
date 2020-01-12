@@ -18,7 +18,7 @@ public interface MemberService {
 	/**
 	 * 비밀번호 이메일로 찾기
 	 * */
-	void newPassword(Member member) throws Exception;
+	int newPassword(Member member) throws Exception;
 	
 	Member changeMyInfo(Member member);
 	

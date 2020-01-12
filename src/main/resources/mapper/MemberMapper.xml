@@ -35,7 +35,7 @@
 		update member
 		set
 		pwd = #{pwd}
-		where email=#{email} and name=#{name} and phone=#{phone}
+		where email=#{email} and id=#{id} and phone=#{phone}
 	</update>
 	
 	<update id="changeMyInfo">

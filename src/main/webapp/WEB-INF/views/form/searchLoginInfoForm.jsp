@@ -61,9 +61,17 @@ $(function(){
 			$('#email').focus();
 			return false;
 		}
-	
 		
 	  }); 
+	 
+	 if(${result>0}){
+			alert("임시 비밀번호를 이메일로 전송하였습니다.")
+		}else if(${result==0}){
+			alert("입력 정보를 다시 확인해주세요");
+			$('#name').focus();
+			return false;
+		}
+	
 });
 
 
@@ -130,8 +138,8 @@ $(function(){
             	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" >
               <div class="row">
                 <div class="form-group col-md-12">
-                  <label for="form_username_email">Name</label>
-                  <input id="name" name="name" class="form-control" type="text">
+                  <label for="form_username_email">id</label>
+                  <input id="name" name="id" class="form-control" type="text">
                 </div>
               </div>
               <div class="row">

@@ -33,11 +33,11 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public void newPassword(Member member) throws Exception {
+	public int newPassword(Member member) throws Exception {
 		String password = member.getPwd();
 		member.setPwd(password);
-		session.update("memberMapper.newPassword", member);
-		
+		int result = session.update("memberMapper.newPassword", member);
+		return result;
 	}
 
 	@Override
