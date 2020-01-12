@@ -2,6 +2,7 @@ package team.hunter.model.dao;
 
 import java.util.List;
 
+import team.hunter.model.dto.Funding;
 import team.hunter.model.dto.Purchase;
 
 public interface PurchaseDAO {
@@ -20,6 +21,11 @@ public interface PurchaseDAO {
 	 * 펀딩내역 보기
 	 */
 	public List<Purchase> myPurchaseList(int memberCode);
+	
+	/*
+	 * 펀딩 이름과 받는 사람 정보 표시
+	 */
+	Funding recipientInformation(int fundingCode);
 	 
 	/*
 	 * 후원한 펀딩 삭제

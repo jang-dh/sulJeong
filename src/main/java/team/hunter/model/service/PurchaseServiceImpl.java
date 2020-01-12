@@ -51,6 +51,12 @@ public class PurchaseServiceImpl implements PurchaseService {
 	}
 	
 	@Override
+	public Funding recipientInformation(int fundingCode) {
+		Funding funding = purchaseDAO.recipientInformation(fundingCode);
+		return funding;
+	}
+	
+	@Override
 	public int deletePurchaseList(int code) {
 		System.out.println("서비스를 갔다");
 		int result = purchaseDAO.deleteList(code);
