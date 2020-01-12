@@ -1,7 +1,72 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-<%-- 	<script src="${pageContext.request.contextPath}/resources/js/jquery-2.2.4.min.js"></script> --%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
+<script type="text/javascript">
+   $(document).ready(function () {
+      var allDate = "${_csrf.parameterName}=${_csrf.token}";
+      
+      $.ajax({
+         url: "${pageContext.request.contextPath}/selectVisitData", //서버요청주소
+         type : "post", //서버 요청방식(get,put, put, patch)
+         dataType :"json", //서버가 보내온 데이터 타입(text, html, xml, json)
+         data: allDate,
+         success : function (result) {
+        	
+        	
+        	
+            var str ="오늘 사이트를 방문한 사람 수 : "+result.visit+"명";
+            var str2 ="오늘 등록한 펀딩 수 : "+result.fundingApply+"개";
+            var str3 ="오늘 사람들이 결제한 총 금액 : "+AddComma(result.purchasePrice)+"원";
+            var str4 ="오늘 사람들이 펀딩에 참여한 수 : "+result.purchaseCount+"번";
+            $("#display").html(str);
+            $("#display2").html(str2);
+            $("#display3").html(str3);
+            $("#display4").html(str4);
+         }, //성공시 
+         error: function (err) {
+            
+         }//실패시
+      });
+      setInterval(function () {
+            $.ajax({
+               url: "${pageContext.request.contextPath}/selectVisitData", //서버요청주소
+             type : "post", //서버 요청방식(get,put, put, patch)
+             dataType :"json", //서버가 보내온 데이터 타입(text, html, xml, json)
+             data: allDate,
+             success : function (result) {
+                var str ="오늘 사이트를 방문한 사람 수 : "+result.visit+"명";
+                 var str2 ="오늘 등록한 펀딩 수 : "+result.fundingApply+"개";
+                 var str3 ="오늘 사람들이 결제한 총 금액 : "+AddComma(result.purchasePrice)+"원";
+                 var str4 ="오늘 사람들이 펀딩에 참여한 수 : "+result.purchaseCount+"번";
+                 $("#display").html(str);
+                 $("#display2").html(str2);
+                 $("#display3").html(str3);
+                 $("#display4").html(str4);
+             }, //성공시 
+             error: function (err) {
+                
+             }//실패시
+         }, 30000);
+      
+
+   
+      });
+      
+   });
+   
+   function AddComma(num)
+   {
+   var regexp = /\B(?=(\d{3})+(?!\d))/g;
+   return num.toString().replace(regexp, ',');
+   }
+
+
+   
+   
+</script>
+
 
 
     <section>
@@ -13,51 +78,190 @@
           <div class="col-md-3">
             <div class="vertical-tab">
               <ul class="nav nav-tabs">
-                <li class="active"><a href="#tab16" data-toggle="tab">펀딩 오픈 신청 내역</a></li>
-                <li><a href="#tab17" data-toggle="tab">펀딩 등록</a></li>
-                <li><a href="#tab18" data-toggle="tab">1:1 문의 내역</a></li>
-                <li><a href="#tab19" data-toggle="tab">사이트 통계</a></li>
+                <li class="active"><a href="siteManagement">사이트 통계</a></li>
+                <li><a href="fundingInsert" >펀딩 등록</a></li>
+                <li><a href="personalQuestion" >1:1 문의 내역</a></li>
+                <li><a href="fundingRequest" >펀딩 오픈 신청 내역</a></li>
               </ul>
             </div>
           </div>
           <div class="col-md-9">
             <div class="tab-content">
-              <div class="tab-pane fade in active" id="tab16">
-                <div class="row">
-                  <div class="col-md-12">
-                  
-                    <iframe src="${pageContext.request.contextPath}/admin/fundingRequest" height="400px"></iframe>
-                  </div>
-                </div>
-              </div>
-              <div class="tab-pane fade" id="tab17">
-                <div class="row">
-                  <div class="col-md-12">
-   
-                    <iframe src="${pageContext.request.contextPath}/admin/fundingInsert" height="400px"></iframe>
-                  </div>
-                </div>
-              </div>
-              <div class="tab-pane fade" id="tab18">
-                <div class="row">
-                  <div class="col-md-12">
-                   
-                    <iframe src="${pageContext.request.contextPath}/admin/personalQuestion" height="400px"></iframe>
-                  </div>
-                </div>
-              </div>
-              <div class="tab-pane fade" id="tab19">
-                <div class="row">
-                  <div class="col-md-12">
-                    
-                    <iframe src="${pageContext.request.contextPath}/admin/statistics" height="400px"></iframe>
-                  </div>
-                </div>
-              </div>
+	            <h3 id="display" class="text-theme-colored text-uppercase m-0"></h3>
+	            <h3 id="display2" class="text-theme-colored text-uppercase m-0"></h3>
+	            <h3 id="display3" class="text-theme-colored text-uppercase m-0"></h3>
+	            <h3 id="display4" class="text-theme-colored text-uppercase m-0"></h3>
+	            <hr/>
+				<h3>주간 방문자 수</h3> 
+				<div style="width: 90%" class="text-center">
+				  <canvas id="lineChart"<%--  height="200" width="500" --%>></canvas>
+				</div><br>
+				
+				
+				<h3>주간 펀딩 수</h3>
+				<div style="width: 90%" class="text-center">
+  					<canvas id="barChart"<%--  width="500" height="200" --%>></canvas>
+				</div>
+				
+				<h3>주간 펀딩 금액</h3>
+				<div style="width: 90%" class="text-center">
+  					<canvas id="lineChart2"<%--  width="500" height="200" --%>></canvas>
+				</div>
+				
+				<h3>주간 펀딩 등록 수</h3>
+				<div style="width: 90%" class="text-center">
+  					<canvas id="barChart2"<%--  width="500" height="200" --%>></canvas>
+				</div>
+				
+
             </div>
           </div>          
         </div>
       </div>
+      
     </section>
     
+<script>
+    $(document).ready(function() {
+        // Line Chart
+        //등록일 가져오기
+        var regdate=new Array();
+ 		<c:forEach var="regdate" items="${weekData}" varStatus="state">
+        	regdate.push('${regdate.regdate}');
+        </c:forEach>
+        regdate.splice(0,1);
+ 		regdate.sort();
+ 		
+        //방문자 수
+        var visit=new Array();
+ 		<c:forEach var="visit" items="${weekData}" varStatus="state">
+    		visit.push('${visit.visit}');
+    	</c:forEach>
+    	visit.splice(0,1);
+ 		visit.reverse();	
+ 
+ 		//펀딩 수
+ 		var purchaseCnt = new Array();
+ 		<c:forEach var="purchaseCnt" items="${weekData}" varStatus="state">
+			purchaseCnt.push('${purchaseCnt.purchaseCount}');
+		</c:forEach>
+		purchaseCnt.splice(0,1);
+ 		purchaseCnt.reverse();
+ 		
+ 		//펀딩 금액
+ 		var purchasePrice = new Array();
+ 		<c:forEach var="purchasePrice" items="${weekData}" varStatus="state">
+ 			purchasePrice.push('${purchasePrice.purchasePrice}');
+		</c:forEach>
+		purchasePrice.splice(0,1);
+		purchasePrice.reverse();
+ 		
+		//펀딩 등록 수
+		var fundingApply = new Array();
+ 		<c:forEach var="fundingApply" items="${weekData}" varStatus="state">
+ 			fundingApply.push('${fundingApply.fundingApply}');
+		</c:forEach>
+		fundingApply.splice(0,1);
+		fundingApply.reverse();
+ 		
+        var lineChartData = {
+          labels : regdate,
+          datasets : [
+            {
+              label: "My Second dataset",
+              fillColor : "rgba(151,187,205,0.2)",
+              strokeColor : "rgba(151,187,205,1)",
+              pointColor : "rgba(151,187,205,1)",
+              pointStrokeColor : "#fff",
+              pointHighlightFill : "#fff",
+              pointHighlightStroke : "rgba(151,187,205,1)",
+//               data : [randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor()]
+              data : visit
+            }
+          ]
+      
+      	};
+        
+        var barChartData = {
+                labels : regdate,
+                datasets : [
+                  {
+                    fillColor : "rgba(220,220,220,0.5)",
+                    strokeColor : "rgba(220,220,220,0.8)",
+                    highlightFill: "rgba(220,220,220,0.75)",
+                    highlightStroke: "rgba(220,220,220,1)",
+                    data : purchaseCnt
+                  }
+                 
+                ]
+              
+            };
+        
+        var lineChartData2 = {
+                labels : regdate,
+                datasets : [
+                  {
+                    label: "My Second dataset",
+                    fillColor : "rgba(151,187,205,0.2)",
+                    strokeColor : "rgba(151,187,205,1)",
+                    pointColor : "rgba(151,187,205,1)",
+                    pointStrokeColor : "#fff",
+                    pointHighlightFill : "#fff",
+                    pointHighlightStroke : "rgba(151,187,205,1)",
+//                     data : [randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor()]
+                    data : purchasePrice
+                  }
+                ]
+            
+            	};
+        
+        var barChartData2 = {
+                labels : regdate,
+                datasets : [
+                  {
+                    fillColor : "rgba(220,220,220,0.5)",
+                    strokeColor : "rgba(220,220,220,0.8)",
+                    highlightFill: "rgba(220,220,220,0.75)",
+                    highlightStroke: "rgba(220,220,220,1)",
+                    data : fundingApply
+                  }
+                 
+                ]
+              
+            };
+        
+        window.onload = function(){
+          var chart_lineChart = document.getElementById("lineChart").getContext("2d");
+          window.myLine = new Chart(chart_lineChart).Line(lineChartData, {
+            responsive: true
+          });
+          
+          var chart_barChart = document.getElementById("barChart").getContext("2d");
+          window.myBar = new Chart(chart_barChart).Bar(barChartData, {
+            responsive : true
+          });
+          
+          var chart_lineChart2 = document.getElementById("lineChart2").getContext("2d");
+          window.myLine = new Chart(chart_lineChart2).Line(lineChartData2, {
+            responsive: true
+          });
+          
+          var chart_barChart2 = document.getElementById("barChart2").getContext("2d");
+          window.myBar = new Chart(chart_barChart2).Bar(barChartData2, {
+            responsive : true
+          });
+          
+        };
+
     
+
+    
+        
+          
+        
+    });
+</script>
+
+
+    
+	

@@ -2,6 +2,62 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="personalAnswerMapper">
 
+	<!-- 1 : 1 관계인 경우 mapping하기 -->
+	<resultMap type="personalQuestion" id="personalQuestionMap">
+		<id column="code" property="code"/>
+		<result column="member_code" property="memberCode"/>
+		<result column="subject" property="subject"/>
+		<result column="content" property="content"/>
+		<result column="regdate" property="regdate"/>
+		<result column="state" property="state"/>
+		<association property="member" javaType="member">
+			<id column="code" property="code"/>
+			<result column="id" property="id"/>
+		</association>
+		<association property="personalAnswer" javaType="personalAnswer">
+			<id column="question_code" property="questionCode"/>
+			<result column="answer" property="content" />
+			<result column="regdate" property="regdate"/>
+		</association>		
+	</resultMap>
+	
+
+	
+
+
+
+	<select id="listCount" resultType="int">
+		select count(*) from personal_question order by code desc
+	</select>
+	
+	<select id="selectByCodeQuestion" resultMap="personalQuestionMap" parameterType="int">
+		select q.code, q.subject, q.regdate, q.content, m.id, a.content as answer
+		from personal_question q join member m  
+		on m.code = q.member_code
+		left outer join personal_answer a
+		on a.question_code =q.code
+		where q.code = #{_parameter}
+	</select>
+
+	<insert id="insertPersonalAnswer" parameterType="personalAnswer">
+		insert into personal_answer values(#{questionCode}, #{content}, sysdate)
+	</insert>
+	
+	<update id="updatePersonalQuestionState" parameterType="int">
+		update personal_question set state='201' where code=#{_parameter}
+	</update>
+	
+	<select id="selectPersonalQuestionPaging" resultType="personalQuestion" parameterType="map">
+	<![CDATA[
+		select code, member_code, content, subject, regdate, state 
+		FROM (SELECT a.*, ROWNUM rnum FROM (SELECT * FROM personal_question ORDER BY code DESC) a 
+		WHERE ROWNUM <= (#{startIndex}*#{cntPerPage})) WHERE rnum >= ((#{startIndex}-1)*#{cntPerPage}+1)
+	]]>	
+	</select>
+
+
+
+
 </mapper>	
 
 

@@ -23,7 +23,6 @@
 			p:username="scott" p:password="tiger"  
 			p:maxActive="10"/> -->
 			
-				
 	
 	 <!-- 외부설정문서(properties파일) 가져오기 -->
   <beans:bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
