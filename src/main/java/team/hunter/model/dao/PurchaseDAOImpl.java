@@ -9,7 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-
+import team.hunter.model.dto.Member;
 import team.hunter.model.dto.Purchase;
 
 
@@ -46,6 +46,15 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 	public int deliveryCodeSave(Purchase purchase) {
 		int result = session.insert("purchaseMapper.deliveryCodeUpdate", purchase);
 		return result;
+	}
+
+	@Override
+	public Member deliveryCodeSelect(int fundingCode, int memberCode) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("fundingCode", fundingCode);
+		map.put("memberCode",memberCode);
+		Member member = session.selectOne("purchaseMapper.deliveryCodeSelect", map);
+		return member;
 	}
 
 }

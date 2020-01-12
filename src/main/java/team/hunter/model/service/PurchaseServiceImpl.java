@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import team.hunter.model.dao.FundingDAO;
 import team.hunter.model.dao.PurchaseDAO;
 import team.hunter.model.dto.Funding;
+import team.hunter.model.dto.Member;
 import team.hunter.model.dto.Purchase;
 
 @Service
@@ -55,5 +56,11 @@ public class PurchaseServiceImpl implements PurchaseService {
 	public int deliveryCodeSave(Purchase purchase) {
 		int result = purchaseDAO.deliveryCodeSave(purchase);
 		return result;
+	}
+
+	@Override
+	public Member deliveryCodeSelect(int fundingCode, int memberCode) {
+		Member member = purchaseDAO.deliveryCodeSelect(fundingCode, memberCode);
+		return member;
 	}
 }

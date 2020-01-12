@@ -5,34 +5,28 @@
 <script>
 	$(function() { 
 		$("#deliveryBtn").click(function() {
-			if ($("#courierName").val() == "") {
+			if ($("#courier").val() == "") {
 				alert("택배사를 입력해주세요");
-				$("#courierName").focus();
+				$("#courier").focus();
 				return false;
 			}
-			if ($("#deliveryCode").val() == "") {
+			if ($("#deliveryNumber").val() == "") {
 				alert("송장번호를 입력해주세요");
-				$("#deliveryCode").focus();
+				$("#deliveryNumber").focus();
 				return false;
 			}
 			
-			var deliveryNumber = $("#deliveryCode").val();
-			var courier = $("#courierName").val();
-			deliveryNumber.trim();
-			courier.trim();
+			//공백제거...
+			//$.trim($("#deliveryNumber").val()) 
+			//$.trim($("#courier").val())
+			var deliveryNumber = $("#deliveryNumber").val();
+			var courier = $("#courier").val();
+			var trim1 = deliveryNumber.trim();
+			var trim2 = courier.trim();
+			$("#deliveryNumber").val(trim1);
+			$("#courier").val(trim2);
 		});//버튼 클릭시
 		
-		$("#updateBtn").click(function() {
-			//text 버튼 활성화 시키기
-			$("#courier2").removeAttr("readonly"); 
-			$("#deliveryNumber2").removeAttr("readonly");
-			$("#courier2").focus();
-			
-			//수정 버튼 입력 으로 바꾸기
-			$("#updateBtn").val("입력");
-						
-			
-		});//버튼 클릭시
 	});
 </script>
 
@@ -118,8 +112,9 @@
 								<form action="${pageContext.request.contextPath}/mypage/deliveryCode" name="userInfo" id="userInfo" method="post">
 								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 								
-									
-									<table class="table table-hover">
+								<c:choose>
+								<c:when test="${funding.fundingState==503}">
+								<table class="table table-hover">
 										<thead>
 											<tr>
 												<th>#</th>
@@ -159,7 +154,7 @@
 													<input type="text" id="deliveryNumber2" name="deliveryNumber2" value="${fundingOpenPeople.purchase.deliveryNumber}" readonly="readonly">
 													<input type="hidden" id="memberCode2" name="memberCode2" value="${fundingOpenPeople.code}">
 													<input type="hidden" id="fundingCode2" name="fundingCode2" value="${fundingCode}">
-													<input type="button" class="btn btn-dark btn-sm" id="updateBtn" name="updateBtn" value="수정">
+													<input type="button" class="btn btn-dark btn-sm" id="updateBtn" name="updateBtn" onclick="location.href='${pageContext.request.contextPath}/mypage/deliveryUpdate/${fundingCode}/${fundingOpenPeople.code}'" value="수정">
 													</td>
 													</c:otherwise>
 													</c:choose>
@@ -171,14 +166,22 @@
 											
 										</tbody>
 									</table>
+								</c:when>
+								<c:otherwise>
+								<h3>펀딩이 성공된 후 회원 목록을 볼 수 있습니다.</h3>
+								</c:otherwise>
+								</c:choose>
+									
+									
 									</form>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
+				<a href="${pageContext.request.contextPath}/mypage/myOpenFunding">리스트로 돌아가기</a>
 			</div>
 		</div>
-
 	</div>
 </section>
+

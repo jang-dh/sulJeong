@@ -54,4 +54,10 @@ public class FundingRequestServiceImpl implements FundingRequestService {
 		FundingAnswer fundingAnswer = fundingrequestDAO.myOpenFundingAnswerManage(questionCode);
 		return fundingAnswer;
 	}
+
+	@Override
+	public Funding fundingState(int fundingCode) {
+		Funding funding = fundingrequestDAO.fundingState(fundingCode);
+		return funding;
+	}
 }

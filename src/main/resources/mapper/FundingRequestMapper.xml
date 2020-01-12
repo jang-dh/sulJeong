@@ -17,6 +17,7 @@
 	<!-- 수녕 : 내가 만든 펀딩 detail페이지 - 펀딩 문의 관리 상세페이지(사용자아이디,문의등록일,제목,내용) -->
 	<resultMap type="fundingQuestion" id="fundingReqManageDetail">
 		<id column="code" property="code" />
+		<result column="funding_code" property="fundingCode"/>
 		<result column="regdate" property="regdate" />
 		<result column="subject" property="subject" />
 		<result column="content" property="content" />
@@ -83,7 +84,7 @@
 	<!-- 수녕 : 내가 만든 펀딩 detail페이지 - 펀딩 문의 관리 상세페이지(사용자아이디,문의등록일,제목,내용) -->
 	<select id="myFundingOpenDetailsDetail"
 		resultMap="fundingReqManageDetail" parameterType="int">
-		select M.id,fq.code,
+		select M.id,fq.code,fq.funding_code,
 		fq.regdate, fq.subject, fq.content
 		from
 		Funding_Question FQ inner join
@@ -100,6 +101,14 @@
 		on FQ.code=FA.QUESTION_code 
         where FQ.code=#{_parameter}
 	</select>
+	
+	<!-- 수녕 : 펀딩 상태 보여주는 쿼리 - 상태에 따라 참가 사용자 보여줄지 말지 알아야 하기 때문에  -->
+	<select id="fundingState" resultType="funding" parameterType="int">
+		select funding_state
+		from funding
+		where code = #{_parameter}
+	</select>
+	
 </mapper>	
 
 

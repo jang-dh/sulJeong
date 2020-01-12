@@ -52,4 +52,10 @@ public class FundingRequestDAOImpl implements FundingRequestDAO {
 		FundingAnswer fundingAnswer = session.selectOne("fundingRequestMapper.myFundingOpenAnswerDetail", questionCode);
 		return fundingAnswer;
 	}
+
+	@Override
+	public Funding fundingState(int fundingCode) {
+		Funding funding = session.selectOne("fundingRequestMapper.fundingState",fundingCode);
+		return funding;
+	}
 }

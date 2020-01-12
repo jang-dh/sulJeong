@@ -29,12 +29,26 @@
 		where member_code=#{memberCode} and funding_code=#{fundingCode}
 	</update>
 	
-	<!-- 수녕 : 송장번호, 택배사 입력 후 뿌려주기(조회) -->
-	<!-- <select id="deliveryCodeSelect" resultType="purchase" parameterType="map">
-		select distinct delivery_number, courier
-		from purchase
-		where funding_code=#{fundingCode} and member_code= #{memberCode}
-	</select> -->
+	<!-- 수녕 : 맴버id, name, addr, 송장번호, 택배사 입력 후 뿌려주기(조회) -->
+    <select id="deliveryCodeSelect" resultMap="purchasedeliveryCodeSelect" parameterType="map">
+		select distinct p.delivery_number, p.courier,p.funding_code, m.id, m.name, m.addr, m.code
+		from purchase p inner join member m
+		on m.code=p.member_code
+		where p.funding_code=#{fundingCode} and p.member_code= #{memberCode}
+	</select> 
+	
+	<!-- 수녕 : 맴버id, name, addr, 송장번호, 택배사 입력 후 뿌려주기(조회) resultMap -->
+	<resultMap type="member" id="purchasedeliveryCodeSelect">
+		<id column="code" property="code" />
+		<result column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="addr" property="addr" />
+		<association property="purchase" javaType="purchase">
+			<result column="delivery_number" property="deliveryNumber" />
+			<result column="courier" property="courier" />
+			<result column="funding_code" property="fundingCode"/>
+		</association>
+	</resultMap>
 	
 </mapper>	
 

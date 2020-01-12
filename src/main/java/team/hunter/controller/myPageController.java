@@ -138,7 +138,8 @@ public class myPageController {
 //			member =(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		List<FundingQuestion> fundingReqManage = fundingReqService.myFundingOpenDetail(fundingCode);
 		List<Member> fundingOpenPeople = fundingReqService.myFundingOpenDetailSecond(fundingCode);
-
+		Funding funding = fundingReqService.fundingState(fundingCode);
+		
 		//펀딩 코드 보내기
 		model.addAttribute("fundingCode", fundingCode);
 		
@@ -148,6 +149,8 @@ public class myPageController {
 		//펀딩 참가한 사용자
 		model.addAttribute("fundingOpenPeople", fundingOpenPeople);
 		
+		//펀딩 상태에 따라 사용자 보여줄 지 말지 알아보기 위해 펀딩 상태 가져오기
+		model.addAttribute("funding", funding);
 		
 		return "mypage/myOpenFundingDetail";
 	}

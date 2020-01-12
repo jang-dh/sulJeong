@@ -98,7 +98,7 @@
 	            </c:otherwise>
             </c:choose>
             <br><br><hr>
-            <a href="${pageContext.request.contextPath}/mypage/myQuestion" class="active">리스트로 돌아가기</a>
+            <a href="${pageContext.request.contextPath}/mypage//myOpenFunding/${fundingQuestion.fundingCode}" class="active">리스트로 돌아가기</a>
             <p></p>
           </div>
         </div>
