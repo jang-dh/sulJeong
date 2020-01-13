@@ -63,4 +63,24 @@ public interface NoticeDAO {
 	 * 펀딩등록 신청 승인하기
 	 * */
 	int fundingRequestApprove(int code);
+	
+	/**
+	 * 공지사항 갯수 가지고 오기
+	 * */
+	int listCount();
+	
+	/**
+	 * 공지사항 순서대로 가지고 나오기
+	 * */
+	List<Notice> NoticeList(int startIndex, int cntPerPage);
+	
+	/**
+	 * 펀딩등록신청 갯수 가지고 오기
+	 * */
+	int fundingRequestlistCount();
+	
+	/**
+	 * 펀딩등록신청 순서대로 가지고 나오기
+	 * */
+	List<FundingRequest> fundingRequestList(int startIndex, int cntPerPage);
 }

@@ -8,7 +8,7 @@ import team.hunter.model.dto.PersonalQuestion;
 
 public interface PersonalAnswerDAO {
 
-	List<PersonalQuestion> selectAllQuestion();
+	int listCount();
 	
 
 	PersonalQuestion selectByCodeQuestion(int code);
@@ -16,4 +16,7 @@ public interface PersonalAnswerDAO {
 	int insertPersonalAnswer(PersonalAnswer answer);
 	
 	int updatePersonalQuestionState(int code);
+	
+	List<PersonalQuestion> selectPersonalQuestionPaging(int startIndex, int cntPerPage);
+	
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import team.hunter.model.dao.NoticeDAO;
+import team.hunter.model.dao.StatisticsDAO;
 import team.hunter.model.dto.Funding;
 import team.hunter.model.dto.FundingRequest;
 import team.hunter.model.dto.Notice;
@@ -16,6 +17,8 @@ public class NoticeServiceImpl implements NoticeService {
 	
 	@Autowired
 	private NoticeDAO dao;
+	@Autowired
+	private StatisticsDAO statisticsDAO;
 
 	@Override
 	public Notice selectByCode(int code) {
@@ -65,6 +68,7 @@ public class NoticeServiceImpl implements NoticeService {
 	public int fundInsert(Funding funding, int code) {
 		int result = dao.fundInsert(funding);
 		int result2 = dao.fundingRequestStateChange(code);
+		int result3 = statisticsDAO.updateFundingApply();
 		if(result==0) throw new RuntimeException("펀딩 등록에 실패했습니다.");
 		return result;
 	}
@@ -89,6 +93,30 @@ public class NoticeServiceImpl implements NoticeService {
 		int result = dao.fundingRequestApprove(code);
 		if(result==0) throw new RuntimeException("펀딩등록 승인 실패");
 		return result;
+	}
+
+	@Override
+	public int listCount() {
+		
+		return dao.listCount();
+	}
+
+	@Override
+	public List<Notice> NoticeList(int startIndex, int cntPerPage) {
+		// TODO Auto-generated method stub
+		return dao.NoticeList(startIndex, cntPerPage);
+	}
+
+	@Override
+	public int fundingRequestlistCount() {
+		
+		return dao.fundingRequestlistCount();
+	}
+
+	@Override
+	public List<FundingRequest> fundingRequestList(int startIndex, int cntPerPage) {
+		
+		return dao.fundingRequestList(startIndex, cntPerPage);
 	}
 
 }

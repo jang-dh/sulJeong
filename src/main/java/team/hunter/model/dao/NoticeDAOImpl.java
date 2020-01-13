@@ -85,4 +85,33 @@ public class NoticeDAOImpl implements NoticeDAO {
 		return session.update("noticeMapper.fundingRequestStateChange", code);
 	}
 
+	@Override
+	public int listCount() {
+		
+		return session.selectOne("noticeMapper.listCount");
+	}
+
+	@Override
+	public List<Notice> NoticeList(int startIndex, int cntPerPage) {
+		Map<String , Integer> map = new HashMap<String, Integer>();
+		map.put("startIndex", startIndex);
+		map.put("cntPerPage", cntPerPage);
+		
+		return session.selectList("noticeMapper.noticeList", map);
+	}
+
+	@Override
+	public int fundingRequestlistCount() {
+		
+		return session.selectOne("noticeMapper.fundingRequestlistCount");
+	}
+
+	@Override
+	public List<FundingRequest> fundingRequestList(int startIndex, int cntPerPage) {
+		Map<String , Integer> map = new HashMap<String, Integer>();
+		map.put("startIndex", startIndex);
+		map.put("cntPerPage", cntPerPage);
+		return session.selectList("noticeMapper.fundingRequestList", map);
+	}
+
 }

@@ -22,7 +22,7 @@
 		select regdate, visit, purchase_count, purchase_price, funding_apply 
 		from (select rownum,regdate, visit, purchase_count, purchase_price, funding_apply
         from (select regdate, visit, purchase_count, purchase_price, funding_apply from statistics order by regdate desc))
-        where rownum &lt;= 7
+        where rownum &lt;= 8
 	</select>
 
 </mapper>	

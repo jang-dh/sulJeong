@@ -2,9 +2,12 @@ package team.hunter.model.service;
 
 import java.util.List;
 
+
 import org.springframework.stereotype.Service;
 
 import team.hunter.model.dao.StatisticsDAO;
+
+import team.hunter.model.dto.Statistics;
 
 public interface StatisticsService {
 	/**
@@ -37,6 +40,6 @@ public interface StatisticsService {
 	 * 당일기준 일주일 전까지의
 	 * 통계정보 출력
 	 * */
-	List<StatisticsDAO> selectWeekData();
+	List<Statistics> selectWeekData();
 
 }

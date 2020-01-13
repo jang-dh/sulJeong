@@ -63,6 +63,7 @@
             <p></p>
 			<sec:authorize access="hasRole('ROLE_ADMIN')">
             <form name="requestForm" method="post" id="requestForm">
+           		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" >
 				<input type=hidden name="id" value="${detail.code}">
 				<input type=button value="수정하기" class="btn btn-dark btn-theme-colored btn-circled btn-sm">
 				<input type=button value="삭제하기" class="btn btn-dark btn-theme-colored btn-circled btn-sm" >
