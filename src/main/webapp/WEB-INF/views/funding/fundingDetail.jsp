@@ -95,6 +95,7 @@ $(function() {
 		var price = ${funding.rewardPrice};
 		var qty = $('input[name="quantity"]').val();
 		var customerUid = '${principal.id}' + new Date().getTime();
+		//var merchantUid = 'merchant_' + new Date().getTime();
 		
 		if(!'${principal.code}')
 			alert("로그인 후 사용가능합니다.");
@@ -120,15 +121,15 @@ $(function() {
 			            method: "POST",
 			            headers: { "Content-Type": "application/json" },
 			            data: {
-			              customer_uid: customerUid // 카드(빌링키)와 1:1로 대응하는 값
+			            	customer_uid: customerUid // 카드(빌링키)와 1:1로 대응하는 값
 						}
 					});
-			        
+			        var merchantUid = 'merchant_' + new Date().getTime();
 			        //구매 테이블에 추가
 					$.ajax({
 						url: "${pageContext.request.contextPath}/insertPurchase", //서버요청주소
 						type: "post",
-						data: {fundingCode : fundingCode, price : price, qty : qty},
+						data: {fundingCode : fundingCode, price : price, qty : qty, customerUid : customerUid, merchantUid : merchantUid},
 						dataType: "text",
 						success: function (result) {
 							if(result == '1')
@@ -146,6 +147,20 @@ $(function() {
 			
 			    alert(msg);
 			});
+			/* $.ajax({
+				url: "${pageContext.request.contextPath}/insertPurchase", //서버요청주소
+				type: "post",
+				data: {fundingCode : fundingCode, price : price, qty : qty, customer_uid : },
+				dataType: "text",
+				success: function (result) {
+					if(result == '1')
+						alert("펀딩이 추가 되었습니다.");
+				},
+				erorr: function (err) {
+					alert(err + "오류 발생");
+				}
+			}); */
+			
 		}
 	});
 	//펀딩하기
