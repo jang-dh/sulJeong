@@ -20,8 +20,10 @@
 	}
 
 	function jusoCallBack(roadFullAddr, addrDetail, jibunAddr) {
+		//alert(1)
 		// 2017년 2월 제공항목이 추가되었습니다. 원하시는 항목을 추가하여 사용하시면 됩니다. 
-			document.form.addr.value = roadFullAddr +" "+ addrDetail;
+			//document.form.addr.value = roadFullAddr +" "+ addrDetail;
+		document.form.addr.value = roadFullAddr;
 	}
 	
 	
@@ -135,7 +137,7 @@
 			</c:when>
 			
 			<c:otherwise>
-			<form name="reg-form" id="reg-form" class="register-form" method="post"
+			<form name="form" id="reg-form" class="register-form" method="post"
 				action="${pageContext.request.contextPath}/memberJoin"
 				onsubmit="return CheckForm(this)">
 				<!-- 스프링 security 4에선 POST 전송시무조건 csrt 를 보내야 한다. (GET은 안보내도 됨)-->
@@ -196,7 +198,8 @@
 
 				<div class="row">
 					<div class="form-group col-md-6">
-						<label for="form_choose_password">주소</label> <input id="addr"
+						<label for="form_choose_password">주소</label> 
+						<input id="addr"
 							name="addr" class="form-control" type="text">
 					</div>
 					<div class="form-group col-md-6">
