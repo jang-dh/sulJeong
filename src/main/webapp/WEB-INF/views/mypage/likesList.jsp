@@ -62,18 +62,14 @@
 				type : "post",
 				dataType : "text",
 				data : {fundingCode : $(this).val()},
-				beforeSend : function(xhr) {   
-					/*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
-                    xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
-                },
 				success : function(result) {
 					if(result == 1){
 						alert("내가 좋아한 펀딩에서 삭제됐습니다.");
 						deleted.remove();
 					}
 				},
-				error : function(err) {
-					alert("오류 발생");
+				error : function(request, status, error) {
+					alert(request.status + ": " + request.responseText + " : " + error + "오류 발생");
 				}
 			});
 			//ajax End
