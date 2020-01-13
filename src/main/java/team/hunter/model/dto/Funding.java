@@ -23,5 +23,8 @@ public class Funding {
 	private String endDate;
 	private String fundingState;
 	
+	//좋아요 갯수 때문에 추가
+	private int cnt;
+	
 	private Member member;
 }

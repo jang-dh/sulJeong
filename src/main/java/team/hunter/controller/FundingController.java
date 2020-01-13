@@ -34,7 +34,7 @@ public class FundingController {
 	public String funding() {
 		return "redirect:/funding/category/";
 	}
-
+	
 	//펀딩 상세페이지 이동
 	@RequestMapping("/funding/{code}")
 	public String fundingDetail(@PathVariable int code, Model model) {
