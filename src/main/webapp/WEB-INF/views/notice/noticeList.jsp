@@ -60,7 +60,7 @@
 							<c:set var="length" value="${fn:length(list)}" />
 							<c:forEach items="${list}" var="notice" varStatus="status">
 								<tr>
-									<th scope="row">${length-status.index}</th>
+									<th scope="row">${notice.code}</th>
 									<td><a href="${pageContext.request.contextPath}/noticeDetail/${notice.code}">${notice.subject}</a></td>
 									<td>${notice.regdate}</td>
 								</tr>

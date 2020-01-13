@@ -119,4 +119,10 @@ public class NoticeServiceImpl implements NoticeService {
 		return dao.fundingRequestList(startIndex, cntPerPage);
 	}
 
+	@Override
+	public int insertStatistics() {
+		// TODO Auto-generated method stub
+		return dao.insertStatistics();
+	}
+
 }

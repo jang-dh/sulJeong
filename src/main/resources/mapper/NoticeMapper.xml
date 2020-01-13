@@ -78,6 +78,10 @@
 		WHERE ROWNUM <= (#{startIndex}*#{cntPerPage})) WHERE rnum >= ((#{startIndex}-1)*#{cntPerPage}+1)
 	]]>	
 	</select>
+	
+	<insert id="insertStatistics">
+		insert into statistics values(sysdate, 0,0,0,0)
+	</insert>
 
 </mapper>	
 
