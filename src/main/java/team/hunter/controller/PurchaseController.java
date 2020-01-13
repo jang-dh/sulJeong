@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import team.hunter.model.dto.Funding;
 import team.hunter.model.dto.Member;
 import team.hunter.model.dto.Purchase;
 import team.hunter.model.service.PurchaseService;
@@ -29,7 +30,7 @@ public class PurchaseController {
 	@ResponseBody
 	public int insertPurchase(int fundingCode, int price, int qty) {
 		Member member = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		Purchase purchase = new Purchase(0, member.getCode(), fundingCode, price, qty, null, null, null, null);
+		Purchase purchase = new Purchase(0, member.getCode(), fundingCode, price, qty, null, null, null, null, null, null, null);
 		statisticsService.updateTotalFundingStackPrice(price);
 		statisticsService.updateFundingTotalCount();
 		return purchaseService.insert(purchase);
@@ -38,13 +39,29 @@ public class PurchaseController {
 	@RequestMapping("/mypage/fundingHistory")
 	public ModelAndView fundingHistory() {
 		Member member = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		List<Purchase> list = purchaseService.listDetail(member.getCode());
+		for(Purchase p : list) {
+			System.out.println("택배회사 : " + p.getCourier());
+			System.out.println("송장번호 : " + p.getDeliveryNumber());
+			System.out.println("구매일자 : " + p.getPurchaseDate());
+			System.out.println("금액 : " + p.getPrice());
+			System.out.println("구매상태 :  " + p.getPurchaseState());
+			System.out.println("후원상태 : " + p.getFunding().getFundingState());
+		}
 		
-//		System.out.println("이것은 컨트롤러 " + member.getCode() + "이다.");
-		List<Purchase> list = purchaseService.myPurchaseList(member.getCode());
-//		System.out.println("이것은 컨트롤러 " + list + "이다.");
-		
+		System.out.println("이것은 컨트롤러 " + list + "이다.");
+//		model.addAttribute("listMember", listMember);
 		return new ModelAndView("mypage/myFundingHistory", "list", list);
 	}
+	
+//	@RequestMapping("mypage/myFundingHistory")
+//	public String recipientInformation(int memberCode) {
+//		System.out.println("이것은 정보 컨트롤러 진입이다");
+//		purchaseService.recipientInformation(memberCode);
+//		
+//		System.out.println("구매자 표시를 해라");
+//		return "mypage/myFundingHistory";
+//	}
 	
 	@RequestMapping("/purchase/delete")
 	public String delete(int code) {

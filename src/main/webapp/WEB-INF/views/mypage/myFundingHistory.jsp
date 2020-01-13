@@ -52,21 +52,21 @@
                   </tr>
                 </thead>
                 <tbody>
-                <c:forEach items="${list}" var="purchase" varStatus="status">
+                <c:forEach items="${list}" var="list" varStatus="status">
                   <tr class="cart_item">
-                    <td class="product-thumbnail"><a href="#">${purchase.purchaseDate} <img alt="member" src="http://placehold.it/320x360"></a></td>
-                    <td class="product-name"><a class="text-theme-colored" href="#">${funding_Code}</a>
+                    <td class="product-thumbnail">${list.purchaseDate }<img alt="member" src="http://placehold.it/320x360"></td>
+                    <td class="product-name"><a class="text-theme-colored" href="#">${funding.code}</a>
                       <ul class="variation">
-                        <li class="product-title">${funding.title}<span>${funding.title}</span></li>
+                        <li class="product-title">${funding.title}<span>${list.funding.title}</span></li>
                       </ul></td>
-                    <td class="product-price"><span class="amount"><fmt:formatNumber>${purchase.price}</fmt:formatNumber>원</span></td>
+                    <td class="product-price"><span class="amount"><fmt:formatNumber>${list.funding.rewardPrice}</fmt:formatNumber>원</span></td>
                     <td class="product-quantity"><!-- <div class="quantity buttons_added"> -->
-                    	${purchase.qty}개
+                    	${list.qty}개
                         <!-- <input type="button" class="minus" value="-">
                         <input type="number" size="4" class="input-text qty text" title="Qty" value="1" name="quantity" min="1" step="1">
                         <input type="button" class="plus" value="+"> -->
                       <!-- </div> --></td>
-                    <td class="product-subtotal"><span class="amount"><fmt:formatNumber>${purchase.price * purchase.qty}</fmt:formatNumber>원</span></td>
+                    <td class="product-subtotal"><span class="amount"><fmt:formatNumber>${list.price}</fmt:formatNumber>원</span></td>
                     <td>
 	                    <form name="deleteForm" method="post" id="deleteForm">
 	                    	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
@@ -91,18 +91,13 @@
                     <table class="table no-border">
                       <tbody>
                         <tr>
-                          <td><select class="form-control">
-                              <option>Select Country</option>
-                              <option>Australia</option>
-                              <option>UK</option>
-                              <option>USA</option>
-                            </select></td>
+                          <td class="member-name">${member.name }</td>
                         </tr>
                         <tr>
-                          <td><input type="text" class="form-control" placeholder="State/country" value=""></td>
+                          <td><input type="text" class="form-control" value="${member2.addr }"></td>
                         </tr>	
                         <tr>
-                          <td><input type="text" class="form-control" placeholder="Postcod/zip" value=""></td>
+                          <td><input type="text" class="form-control" value="${memebr2.phone }"></td>
                         </tr>
                         <tr>
                           <td><button type="button" class="btn btn-default">Update Totals</button></td>

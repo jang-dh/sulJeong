@@ -30,33 +30,38 @@ public class PurchaseServiceImpl implements PurchaseService {
 	}
 	
 	@Override
-	public List<Purchase> myPurchaseList(int memberCode) {
-		List<Purchase> list = purchaseDAO.myPurchaseList(memberCode);
+	public List<Purchase> listDetail(int memberCode) {
+		List<Purchase> list = purchaseDAO.listDetail(memberCode);
 		
-//		System.out.println("서비스에서 찍은 : " + memberCode);
-//		System.out.println("서비스에서 찍은 : " + list);
+		System.out.println("서비스에서 나오냐");
 		return list;
 	}
 	
 	@Override
 	public int countFundingCode(int fundingCode) {
-		
 		int result = purchaseDAO.countFundingCode(fundingCode);
-		System.out.println("fundingcode service : " + result);
+		return result;
+	}
+	
+//	@Override
+//	public List<Member> listDetail(int memberCode) {
+//		List<Member> list = purchaseDAO.listDetail(memberCode);
+//		
+//		System.out.println("recipientInformation 를 갖고온다.");
+//		return list;
+//	}
+	
+	@Override
+	public int selectListByMemberCode(int code) {
+		int result = purchaseDAO.selectListByMemberCode(code);
 		return result;
 	}
 	
 	@Override
-	public Funding recipientInformation(int fundingCode) {
-		Funding funding = purchaseDAO.recipientInformation(fundingCode);
-		return funding;
-	}
-	
-	@Override
 	public int deletePurchaseList(int code) {
-		System.out.println("서비스를 갔다");
+//		System.out.println("서비스를 갔다");
 		int result = purchaseDAO.deleteList(code);
-		System.out.println("서비스를 나오니?");
+//		System.out.println("서비스를 나오니?");
 		return result;
 	}
 
