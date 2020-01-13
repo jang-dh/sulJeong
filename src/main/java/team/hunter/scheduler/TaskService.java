@@ -22,7 +22,7 @@ public class TaskService {
 		fundingService.updateFundingState();
 	}
 	
-	@Scheduled(cron = "0 50 10 * * * ")
+	@Scheduled(cron = "0 30 09 * * * ")
 	public void statisticsScheduler() {
 		System.out.println("call statisticsScheduler....");
 		noticeService.insertStatistics();

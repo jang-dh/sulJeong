@@ -95,11 +95,13 @@
                     </div>
 					  <div class="form-group">
 						<label>썸네일 업로드</label>
-					    <input name="file" class="file"	type="file" multiple data-show-upload="false" data-show-caption="true"> 
+					    <input name="file" class="file"	type="file" multiple data-show-upload="false" data-show-caption="true">
+					    <small>이미지 파일을 첨부해 주세요</small> 
 					  </div>
 					  <div class="form-group">
 						<label>상세보기 업로드</label>
-					    <input name="file2" class="file"	type="file" multiple data-show-upload="false" data-show-caption="true"> 
+					    <input name="file2" class="file"	type="file" multiple data-show-upload="false" data-show-caption="true">
+					    <small>이미지 파일을 첨부해 주세요</small> 
 					  </div>
 					<div class="form-group mb-0 mt-20">
                       <input name="form_botcheck" class="form-control" type="hidden" value="">

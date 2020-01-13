@@ -65,6 +65,7 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 
 	@Override
+	@Transactional
 	public int fundInsert(Funding funding, int code) {
 		int result = dao.fundInsert(funding);
 		int result2 = dao.fundingRequestStateChange(code);
