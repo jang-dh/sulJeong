@@ -10,17 +10,17 @@ import java.util.Locale;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.google.api.client.http.HttpHeaders;
 
 import team.hunter.model.dto.Funding;
 import team.hunter.model.dto.Purchase;
 
-@Service
+//@Service
 public class PurchaseSchedule {
 	RestTemplate restTemplate = new RestTemplate(new HttpComponentsClientHttpRequestFactory());
 	
@@ -31,7 +31,7 @@ public class PurchaseSchedule {
 	public String getToken() {
 		String url = "https://api.iamport.kr/users/getToken";
 		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType("application/json");
+		//headers.setContentType("application/json");
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("imp_key", "9641301071926320");
 		map.put("imp_secret", "DGvvhuqgbRnvUxwBIwOoU5tDk5AH28ZGPvb7ZCnbtLHnjdZ1JOpETTieYSW11WIRrTYrvmCZ7jnqxnrh");
@@ -54,7 +54,7 @@ public class PurchaseSchedule {
 		
 		//토큰 세팅
 		//headers.set("Authorization", token);
-		headers.setAuthorization(token);
+		//headers.setAuthorization(token);
 				
 		//데이터 세팅
 		Map<String, Object> data = new HashMap<String, Object>();

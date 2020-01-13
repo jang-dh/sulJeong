@@ -27,7 +27,7 @@
 	</insert>
 	
 	<select id="recipientInformation"
-		resultMap="frecipientInformationMap" parameterType="int">
+		resultMap="recipientInformationMap" parameterType="int">
 		select f.title , m.name, m.addr, m.phone
 		from funding f inner join member m
 		on f.member_code = m.code
