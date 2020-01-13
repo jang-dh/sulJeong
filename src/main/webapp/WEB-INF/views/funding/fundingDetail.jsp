@@ -7,7 +7,7 @@
 
 <script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
 
-<security:authorize access="isAuthenticated()">
+ <security:authorize access="isAuthenticated()">
 	<security:authentication var="principal" property="principal"/>
 </security:authorize>
 
@@ -26,9 +26,9 @@ $(function() {
 		$(".deleteLikes").hide();
 	}
 	$(".insertLikes").on("click", function() {
-		if(${principal == null})
+		 if(${principal == null})
 			alert("로그인 후 사용가능합니다.");
-		else
+		else 
 			$.ajax({
 				url : "${pageContext.request.contextPath}/likes/insert", // 서버요청주소
 				type : "post", // 요청방식(get | post | put | patch | delete)
@@ -77,9 +77,9 @@ $(function() {
 		var content = $('input[name="form_content"]').val();
 		var subject = $('input[name="form_subject"]').val();
 		//alert(1);
-		if(${principal == null})
+		 if(${principal == null})
 			alert("로그인 후 사용가능합니다.");
-		else
+		else 
 			$.ajax({
 				url: "fundingQuestionInsert", // 서버요청주소
 				type: "post", // 요청방식
@@ -104,7 +104,7 @@ $(function() {
 		var qty = $('input[name="quantity"]').val();
 		var customerUid = '${principal.id}' + new Date().getTime();
 		
-		if(${principal == null})
+		 if(${principal == null})
 			alert("로그인 후 사용가능합니다.");
 		else{
 			//예약 결제를 위한 빌링키 발급
@@ -158,7 +158,7 @@ $(function() {
 			
 			    alert(msg);
 			});
-		}
+		//}
 	});
 	//펀딩하기
 });

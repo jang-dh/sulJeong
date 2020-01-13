@@ -334,7 +334,9 @@
 									</script>
 									<a href="${pageContext.request.contextPath}/funding/${fundingList.code}" class="btn btn-default btn-theme-colored mt-10 font-16 btn-sm">펀딩하기
 										<i class="flaticon-charity-make-a-donation font-16 ml-5"></i>
+										
 									</a>
+									<br><i class="fa fa-heart faa-pulse animated"></i> <span class="text-theme-colored font-weight-700">${fundingList.cnt}</span>
 								</div>
 							</div>
 						</div>
