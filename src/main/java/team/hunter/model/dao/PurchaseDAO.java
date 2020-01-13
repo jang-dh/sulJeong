@@ -19,17 +19,12 @@ public interface PurchaseDAO {
 	public int countFundingCode(int fundingCode);
 	
 	/*
-	 * 펀딩내역 보기
-	 */
-//	public List<Purchase> myPurchaseList(int memberCode);
-	
-	/*
 	 * 후원 리스트 상세 정보
 	 */
 	public List<Purchase> listDetail(int memberCode);
 	
 	/*
-	 * 후원자 정보 표시
+	 * 후원자 정보 출력
 	 */
 	public int selectListByMemberCode(int code);
 	 

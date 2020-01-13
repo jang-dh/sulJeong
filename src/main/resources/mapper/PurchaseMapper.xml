@@ -19,22 +19,18 @@
 			</association>
 	</resultMap>
 	
-	<!-- <select id="selectPurchaseByMemberCode" resultType="purchase" parameterType="int">
-		select code, member_code, funding_code, price, qty, purchase_state, purchase_date, delivery_number, courier
-		from purchase
-		where member_code = #{_parameter}
-	</select> -->
-	
 	<insert id="insert" parameterType="purchase">
 		insert into purchase (code, member_code, funding_code, price, qty, purchase_state, purchase_date, delivery_number, courier) 
 		values (seq_no.nextval, #{memberCode}, #{fundingCode}, #{price}, #{qty},
 		 #{purchaseState}, sysdate, #{deliveryNumber}, #{courier})
 	</insert>
 	
+	<!-- 후원자 정보 출력 -->
 	<select id="selectListByMemberCode" resultType="member" parameterType="int">
 	select distinct code, name, addr, phone from member where code = #{_parameter}
 	</select>
 	
+	<!-- 후원 리스트 출력 -->
 	<select id="listDetail"
 		resultMap="listDetailInformationMap" parameterType="int">
 		select p.code, p.purchase_state, p.purchase_date, p.courier, 
@@ -46,10 +42,12 @@
 		where m.code = #{_parameter}
 	</select>
 	
+	<!-- 후원 인원 카운트 -->
 	<select id="countFundingCode" parameterType="int" resultType="int">
 		select count(*) from purchase where funding_code = #{_parameter}
 	</select>
 	
+	<!-- 후원 취소 -->
 	<delete id="delete" parameterType="purchase">
 		delete from purchase where code = #{code}
 	</delete>

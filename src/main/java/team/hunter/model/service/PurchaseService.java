@@ -24,11 +24,6 @@ public interface PurchaseService {
 	public List<Purchase> listDetail(int memberCode);
 	
 	/*
-	 * 후원 리스트 상세 정보
-	 */
-//	public List<Member> listDetail(int memberCode);
-	
-	/*
 	 * 후원자 정보 표시
 	 */
 	public int selectListByMemberCode(int code);

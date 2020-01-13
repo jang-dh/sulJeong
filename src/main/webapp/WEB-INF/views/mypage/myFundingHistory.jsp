@@ -6,13 +6,24 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <script type="text/javascript">
-
 	$(function(){
 		$("input[value=후원취소]").click(function(){
 			$("#deleteForm").attr("action", "${pageContext.request.contextPath}/purchase/delete");
 			$("#deleteForm").submit();
 		})
 	})
+	
+	function fn_paging(curPage){
+		location.href="${pageContext.request.contextPath}/mypage/fundingHistory?curPage="+curPage;
+	}
+	
+	$(function() {
+		var curUrl = location.href;
+		var curPageNum = curUrl.split("=")[1];
+		console.log(curPageNum);
+		
+		$(".numberBtn").eq(curPageNum-1).addClass("active");
+	});
 </script>
   <!-- Start main-content-->
   <div class="main-content">
@@ -54,10 +65,10 @@
                 <tbody>
                 <c:forEach items="${list}" var="list" varStatus="status">
                   <tr class="cart_item">
-                    <td class="product-thumbnail">${list.purchaseDate }<img alt="member" src="http://placehold.it/320x360"></td>
-                    <td class="product-name"><a class="text-theme-colored" href="#">${funding.code}</a>
+                    <td class="product-thumbnail">${list.purchaseDate }<img alt="member" src="http://placehold.it/320x360"> ${list.purchaseState}</td>
+                    <td class="product-name"><a class="text-theme-colored" href="#">${list.funding.title}</a>
                       <ul class="variation">
-                        <li class="product-title">${funding.title}<span>${list.funding.title}</span></li>
+                        <li class="product-title"><span>펀딩 코드 : ${list.funding.code}</span></li>
                       </ul></td>
                     <td class="product-price"><span class="amount"><fmt:formatNumber>${list.funding.rewardPrice}</fmt:formatNumber>원</span></td>
                     <td class="product-quantity"><!-- <div class="quantity buttons_added"> -->
@@ -74,8 +85,8 @@
 	                    	<input type="button" class="remove" value="후원취소">
 	                    </form>
 	                    <ul>
-	                    	<li class="deliver">택배 회사 : ${purchase.deliveryNumber }</li>
-	                    	<li class="courier">송장 번호 : ${purchase.courier }</li>
+	                    	<li class="deliver">송장 번호 : ${list.deliveryNumber }</li>
+	                    	<li class="courier">운송 업체 : ${list.courier }</li>
 	                    </ul>
                     </td>
                   </tr>
@@ -83,6 +94,21 @@
                 </tbody>
               </table>
             </div>
+            <nav style="text-align: center">
+				<ul class="pagination dark">
+					<li>
+						<a href="#" aria-label="Previous" onClick="fn_paging(${paging.prevPage})"> <span aria-hidden="true">&laquo;</span></a>
+					</li>
+					<c:forEach var="pageNum" begin="${paging.startPage}" end="${paging.endPage}">
+						<li class="numberBtn" value="${pageNum}">
+							<a href="#" onClick="fn_paging(${pageNum})" id="pageBtn">${pageNum} <span class="sr-only">(current)</span></a>
+						</li>
+					</c:forEach>
+					<li>
+						<a href="#" aria-label="Next" onClick="fn_paging(${paging.nextPage})"> <span aria-hidden="true">»</span></a>
+					</li>
+				</ul>
+			</nav>
             <div class="col-md-10 col-md-offset-1 mt-30">
               <div class="row">
                 <div class="col-md-6">
@@ -90,18 +116,21 @@
                   <form class="form" action="#">
                     <table class="table no-border">
                       <tbody>
+                        <sec:authorize access="isAuthenticated()">
+                            <sec:authentication var="user" property="principal"/> 
                         <tr>
-                          <td class="member-name">${member.name }</td>
+                          <td class="member-name">받는사람 : ${user.name}</td>
                         </tr>
                         <tr>
-                          <td><input type="text" class="form-control" value="${member2.addr }"></td>
+                          <td class="member-addr">받는주소 : ${user.addr}</td>
                         </tr>	
                         <tr>
-                          <td><input type="text" class="form-control" value="${memebr2.phone }"></td>
+                          <td class="member-phone">연락처 : ${user.phone}</td>
                         </tr>
                         <tr>
                           <td><button type="button" class="btn btn-default">Update Totals</button></td>
                         </tr>
+                        </sec:authorize>
                       </tbody>
                     </table>
                   </form>

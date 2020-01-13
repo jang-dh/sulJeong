@@ -43,14 +43,6 @@ public class PurchaseServiceImpl implements PurchaseService {
 		return result;
 	}
 	
-//	@Override
-//	public List<Member> listDetail(int memberCode) {
-//		List<Member> list = purchaseDAO.listDetail(memberCode);
-//		
-//		System.out.println("recipientInformation 를 갖고온다.");
-//		return list;
-//	}
-	
 	@Override
 	public int selectListByMemberCode(int code) {
 		int result = purchaseDAO.selectListByMemberCode(code);

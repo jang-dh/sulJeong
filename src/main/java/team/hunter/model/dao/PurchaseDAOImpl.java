@@ -41,19 +41,8 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 	@Override
 	public int selectListByMemberCode(int code) {
 		return session.selectOne("purchaseMapper.selectListByMemberCode", code);
-		
 	}
-	
-//	@Override
-//	public List<Member> listDetail(int memberCode) {
-//		
-//		System.out.println("다오는 들어가니?");
-//		List<Member>list = session.selectList("purchaseMapper.listDetail", memberCode);
-//		
-//		System.out.println("dao에서 보여주는 받는 사람 정보");
-//		return list;
-//	}
-	
+
 	@Override
 	public int deleteList(int code) {
 		return session.delete("purchaseMapper.delete", code);

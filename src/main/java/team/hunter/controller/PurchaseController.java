@@ -40,6 +40,7 @@ public class PurchaseController {
 	public ModelAndView fundingHistory() {
 		Member member = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		List<Purchase> list = purchaseService.listDetail(member.getCode());
+		
 		for(Purchase p : list) {
 			System.out.println("택배회사 : " + p.getCourier());
 			System.out.println("송장번호 : " + p.getDeliveryNumber());
@@ -48,20 +49,9 @@ public class PurchaseController {
 			System.out.println("구매상태 :  " + p.getPurchaseState());
 			System.out.println("후원상태 : " + p.getFunding().getFundingState());
 		}
-		
-		System.out.println("이것은 컨트롤러 " + list + "이다.");
-//		model.addAttribute("listMember", listMember);
+		System.out.println();
 		return new ModelAndView("mypage/myFundingHistory", "list", list);
 	}
-	
-//	@RequestMapping("mypage/myFundingHistory")
-//	public String recipientInformation(int memberCode) {
-//		System.out.println("이것은 정보 컨트롤러 진입이다");
-//		purchaseService.recipientInformation(memberCode);
-//		
-//		System.out.println("구매자 표시를 해라");
-//		return "mypage/myFundingHistory";
-//	}
 	
 	@RequestMapping("/purchase/delete")
 	public String delete(int code) {
