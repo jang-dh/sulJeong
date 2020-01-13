@@ -122,5 +122,10 @@ public class FundingDAOImpl implements FundingDAO {
 		
 		return session.update("fundingMapper.updateStackPrice", map);
 	}
+
+	@Override
+	public int fundUpdate(Funding fuding) {
+		return session.update("fundingMapper.fundUpdate", fuding);
+	}
 	
 }

@@ -3,7 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+
 
 <script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
 
@@ -15,6 +16,11 @@
 <script type="text/javascript">
 //jquery
 $(function() {
+	
+	$("#fundingModifyBtn").click(function(){
+		location.href="${pageContext.request.contextPath}/fundingModifyBtn/${funding.code}";
+	});
+	
 	var IMP = window.IMP;
 	IMP.init('imp72693952');
 	
@@ -203,7 +209,17 @@ $(function() {
 						<%-- <form action="transfer"> --%>
 						<div class="col-md-7">
 							<div class="product-summary">
-								<h2 class="product-title">${funding.title}</h2>
+								<h2 class="product-title">${funding.title}
+								
+								 <sec:authorize access="hasRole('ROLE_ADMIN')"> 
+								<span style="float:right">
+									<button style="text-align: right;" class="btn btn-default btn-theme-colored mt-5 font-16 btn-sm" type="button" id="fundingModifyBtn" name="fundingModifyBtn">
+													수정하기 <i class="fa fa-gear"></i>
+												</button>
+												</span>
+								
+								</sec:authorize></h2>
+								
 								<div class="product_review">
 									<ul class="review_text list-inline">
 										<li>

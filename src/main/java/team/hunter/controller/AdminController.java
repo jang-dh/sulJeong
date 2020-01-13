@@ -23,12 +23,14 @@ import org.springframework.web.servlet.ModelAndView;
 import team.hunter.model.dto.Funding;
 import team.hunter.model.dto.FundingQuestion;
 import team.hunter.model.dto.FundingRequest;
+import team.hunter.model.dto.Likes;
 import team.hunter.model.dto.Member;
 import team.hunter.model.dto.Notice;
 import team.hunter.model.dto.Paging;
 import team.hunter.model.dto.PersonalAnswer;
 import team.hunter.model.dto.PersonalQuestion;
 import team.hunter.model.dto.Statistics;
+import team.hunter.model.service.FundingService;
 import team.hunter.model.service.NoticeService;
 import team.hunter.model.service.PersonalAnswerService;
 import team.hunter.model.service.StatisticsService;
@@ -43,6 +45,8 @@ public class AdminController {
 	private PersonalAnswerService personalAnswerService;
 	@Autowired
 	private StatisticsService statisticsService;
+	@Autowired
+	private FundingService fundingService;
 	
 	
 	/**
@@ -159,6 +163,87 @@ public class AdminController {
 	public String statistics() {
 		
 		return "admin/statistics";
+	}
+	
+	
+	/**
+	 * 펀딩 수정하기 폼으로 넘어가기
+	 */
+	@RequestMapping("/fundingModifyBtn/{code}")
+	public ModelAndView fundingModifyBtn(@PathVariable int code) {
+		ModelAndView mv = new ModelAndView();
+		Funding funding = fundingService.selectByCode(code);
+		String[] openDate = funding.getOpenDate().split("/");
+		String[] endDate = funding.getEndDate().split("/");
+		String changeFormOpenDate = openDate[1]+"/"+openDate[2]+"/"+openDate[0];
+		String changeFormEndDate = endDate[1]+"/"+endDate[2]+"/"+endDate[0];
+		funding.setOpenDate(changeFormOpenDate);
+		funding.setEndDate(changeFormEndDate);
+		
+		mv.addObject("funding", funding);
+		mv.setViewName("admin/fundingInsert");
+		return mv;
+	}
+	
+	/**
+	 * 펀딩 수정
+	 */
+	@RequestMapping("/admin/fundUpdate")
+	public String fundUpdate(Funding funding, MultipartFile file,MultipartFile file2, HttpSession session) {
+		System.out.println("들어오긴하니?");
+		String fileName = null;
+		System.out.println(funding.getOpenDate());
+		System.out.println(funding.getEndDate());
+		SimpleDateFormat originFormat = new SimpleDateFormat("MM/dd/yyyy");
+		SimpleDateFormat newFormat = new SimpleDateFormat("yyyy/MM/dd");
+		
+		try {
+			
+			Date originOpenDate = originFormat.parse(funding.getOpenDate());
+			String newOpenDate = newFormat.format(originOpenDate);
+			funding.setOpenDate(newOpenDate);
+			
+			Date originEndDate = originFormat.parse(funding.getEndDate());
+			String newEndDate = newFormat.format(originEndDate);
+			funding.setEndDate(newEndDate);
+			
+			
+			
+		}catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		try{
+
+			
+			String path = session.getServletContext().getRealPath("/resources/images/funding");
+			
+			
+			if(file.getSize()>0) {
+				//÷�ε� �����̸� ������ ����
+				
+				fileName = file.getOriginalFilename();
+				String Thumnail = "Thumnail_"+fileName;
+				funding.setImage(fileName);
+				//notice.setFilename(fileName);
+				file.transferTo(new File(path+"/"+Thumnail));
+			}
+			
+			if(file2.getSize()>0) {
+				//÷�ε� �����̸� ������ ����
+//				String fileName = file2.getOriginalFilename();
+				String Detail = "Detail_"+fileName;
+				//notice.setFilename(fileName);
+				file2.transferTo(new File(path+"/"+Detail));
+			}
+
+			fundingService.fundUpdate(funding);
+			
+		}catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return "redirect:/funding/" + funding.getCode();
 	}
 	
 	
