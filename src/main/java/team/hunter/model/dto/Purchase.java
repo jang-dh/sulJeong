@@ -19,4 +19,7 @@ public class Purchase {
 	private String purchaseDate;
 	private String deliveryNumber;
 	private String courier;
+	
+	private String customerUid;
+	private String marchantUid;
 }

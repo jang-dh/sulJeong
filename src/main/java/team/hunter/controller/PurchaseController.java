@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import team.hunter.model.dto.Member;
 import team.hunter.model.dto.Purchase;
+import team.hunter.model.service.PurchaseSchedule;
 import team.hunter.model.service.PurchaseService;
 import team.hunter.model.service.StatisticsService;
 
@@ -23,13 +24,19 @@ public class PurchaseController {
 	@Autowired
 	private PurchaseService purchaseService;
 	@Autowired
-	private StatisticsService statisticsService; 
+	private StatisticsService statisticsService;
+	
+	@Autowired
+	private PurchaseSchedule purchaseSchedule;
 	
 	@RequestMapping(value = "/insertPurchase", method = RequestMethod.POST)
 	@ResponseBody
-	public int insertPurchase(int fundingCode, int price, int qty) {
+	public int insertPurchase(int fundingCode, int price, int qty, String customerUid, String merchantUid) {
 		Member member = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		Purchase purchase = new Purchase(0, member.getCode(), fundingCode, price, qty, null, null, null, null);
+		Purchase purchase = new Purchase(0, member.getCode(), fundingCode, price, qty, null, null, null, null, customerUid, merchantUid);
+		
+		purchaseSchedule.requestSchedulePusrchase(purchase);
+		
 		statisticsService.updateTotalFundingStackPrice(price);
 		statisticsService.updateFundingTotalCount();
 		return purchaseService.insert(purchase);

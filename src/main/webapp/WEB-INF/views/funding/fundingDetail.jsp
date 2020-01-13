@@ -95,6 +95,7 @@ $(function() {
 		var price = ${funding.rewardPrice};
 		var qty = $('input[name="quantity"]').val();
 		var customerUid = '${principal.id}' + new Date().getTime();
+		var merchantUid = 'merchant_' + new Date().getTime();
 		
 		if(!'${principal.code}')
 			alert("로그인 후 사용가능합니다.");
@@ -102,7 +103,7 @@ $(function() {
 			//예약 결제를 위한 빌링키 발급
 			IMP.request_pay({
 			    pay_method : 'card',
-			    merchant_uid : 'merchant_' + new Date().getTime(),
+			    merchant_uid : merchantUid,
 			    customer_uid : customerUid,
 			    name : '${funding.rewardName}',
 			    amount : 0,
@@ -128,7 +129,7 @@ $(function() {
 					$.ajax({
 						url: "${pageContext.request.contextPath}/insertPurchase", //서버요청주소
 						type: "post",
-						data: {fundingCode : fundingCode, price : price, qty : qty},
+						data: {fundingCode : fundingCode, price : price, qty : qty, customerUid : customerUid, merchantUid : merchantUid},
 						dataType: "text",
 						success: function (result) {
 							if(result == '1')
@@ -146,6 +147,20 @@ $(function() {
 			
 			    alert(msg);
 			});
+			/* $.ajax({
+				url: "${pageContext.request.contextPath}/insertPurchase", //서버요청주소
+				type: "post",
+				data: {fundingCode : fundingCode, price : price, qty : qty, customer_uid : },
+				dataType: "text",
+				success: function (result) {
+					if(result == '1')
+						alert("펀딩이 추가 되었습니다.");
+				},
+				erorr: function (err) {
+					alert(err + "오류 발생");
+				}
+			}); */
+			
 		}
 	});
 	//펀딩하기
