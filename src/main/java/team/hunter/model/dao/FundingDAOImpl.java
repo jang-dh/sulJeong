@@ -87,7 +87,6 @@ public class FundingDAOImpl implements FundingDAO {
 	@Override
 	public List<Funding> selectLikesRankFour() {
 		return session.selectList("fundingMapper.selectLikesRankFour");
-		
 	}
 
 	@Override
