@@ -55,9 +55,7 @@
            if(birth >= 20) {
         	   alert("인증성공");
         	   var result = true;                 // 전송 파라미터 값
-        	   var theURL = "${pageContext.request.contextPath}/join/"+result; // 전송 URL
-        	    // 호출 한 부모 페이지에서 URL 호출
-        	    opener.window.location = theURL;
+        	   opener.document.getElementById("hidden").value = result
         	    // 호출 한 뒤 현재 팝업 창 닫기 이벤트
         	    close();
         	   
@@ -84,5 +82,7 @@
 	<input type="text" placeholder="ex) 19960716" id="birthday" class="form-control" maxlength="8"><br>
 	<input type="button" value="성인인증" name="Authenticate" id="Authenticate"  class="form-control">
 </div>
+
+
 
 </body>

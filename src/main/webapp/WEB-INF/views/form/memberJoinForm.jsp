@@ -16,7 +16,7 @@
 	}
 	
 	function goAuthPopup() {
-		var pop = window.open("${pageContext.request.contextPath}/identity/identityAuth", "pop","width=570,height=420, scrollbars=yes, resizable=yes");
+		var popAuth = window.open("${pageContext.request.contextPath}/identity/identityAuth", "pop","width=570,height=420, scrollbars=yes, resizable=yes");
 	}
 
 	function jusoCallBack(roadFullAddr, addrDetail, jibunAddr) {
@@ -29,7 +29,8 @@
 	
 	$(function() {
 		
-		var status = '0';
+		var status = '0'; //아이디 중복체크 상태변수
+		var authStatus = '3';//성인인증 상태변수
 		
 		
 		/* $("#Authenticate").click(function(){
@@ -65,12 +66,6 @@
 					 }//오류발생했을때
 				 });
 			  
-			  if(status == '0'){
-				  alert("아이디 중복체크를 해주세요");
-				  
-			  }else if(status == '1'){
-				  alert("회원가입에 성공하였습니다.")
-			  }
 		});
 		
 		$("#register").click(function() {
@@ -109,8 +104,27 @@
 				return false;
 			}
 			
+			 if(status == '0'){
+				  alert("아이디 중복체크를 해주세요");
+				  return false;
+			  }else if(status == '3'){
+				  alert("성인인증을 해주시기 바랍니다.");
+				  return false;
+			  }
+			
 		});
 		
+		//popAuth.document.getElementById("Authenticate").click(function() {
+		popAuth.document.on("click", "#Authenticate", function() {
+			alert($("#hidden").val());
+			if($("#hidden").val()==true){
+				$("#Authenticate").val("성인인증 완료");
+				authStatus == '4';
+			}else if($("#hidden").val()==false){
+				authStatus == '3';
+			}
+		});
+
 	});
 
 	function CheckForm(join) {
@@ -220,6 +234,8 @@
 						id="register" name="register">Register Now</button>
 				</div>
 			</form>
+			
+			<input type=hidden id="hidden" name="hidden">
 			</c:otherwise>
 			</c:choose>
 			
