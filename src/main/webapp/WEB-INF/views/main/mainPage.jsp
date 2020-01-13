@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <!-- Revolution Slider 5.x CSS settings -->
 <link href="${pageContext.request.contextPath}/resources/js/revolution-slider/css/settings.css" rel="stylesheet" type="text/css" />
@@ -16,7 +17,7 @@
 		$('[data-countdown]').each(function() {
 			var $this = $(this), finalDate = $(this).data('countdown');
 			$this.countdown(finalDate,function(event) {
-				$this.html(event.strftime('%D 일'));
+				$this.html(event.strftime('%D 일 %H:%M:%S'));
 			});
 		});
 	});
@@ -428,10 +429,10 @@
 									${list.member.name}
 									<ul class="list-inline font-weight-600 font-14 clearfix mb-5">
 										<li class="pull-left font-weight-400 text-black-333 pr-0">달성금액:
-											<span class="text-theme-colored font-weight-700">${list.stackPrice}</span>
+											<span class="text-theme-colored font-weight-700"><fmt:formatNumber>${list.stackPrice}</fmt:formatNumber>원</span>
 										</li>
 										<li class="pull-right font-weight-400 text-black-333 pr-0">목표금액:
-											<span class="text-theme-colored font-weight-700">${list.goalPrice}</span>
+											<span class="text-theme-colored font-weight-700"><fmt:formatNumber>${list.goalPrice}</fmt:formatNumber>원</span>
 										</li>
 									</ul>
 									<div class="progress-item mt-5">
@@ -440,7 +441,7 @@
 												data-percent="${list.stackPrice/list.goalPrice *100}"
 												class="progress-bar appeared"
 												style="width: ${list.stackPrice/list.goalPrice *100}%;">
-												<span class="percent">0</span><span class="percent">${list.stackPrice/list.goalPrice *100}%</span>
+												<span class="percent">0</span><span class="percent"><fmt:formatNumber value="${list.stackPrice/list.goalPrice}" type="percent"/></span>
 											</div>
 										</div>
 									</div>
@@ -475,10 +476,10 @@
 									${list.member.name}
 									<ul class="list-inline font-weight-600 font-14 clearfix mb-5">
 										<li class="pull-left font-weight-400 text-black-333 pr-0">달성금액:
-											<span class="text-theme-colored font-weight-700">${list.stackPrice}</span>
+											<span class="text-theme-colored font-weight-700"><fmt:formatNumber>${list.stackPrice}</fmt:formatNumber>원</span>
 										</li>
 										<li class="pull-right font-weight-400 text-black-333 pr-0">목표금액:
-											<span class="text-theme-colored font-weight-700">${list.goalPrice}</span>
+											<span class="text-theme-colored font-weight-700"><fmt:formatNumber>${list.goalPrice}</fmt:formatNumber>원</span>
 										</li>
 									</ul>
 									<div class="progress-item mt-5">
@@ -487,7 +488,7 @@
 												data-percent="${list.stackPrice/list.goalPrice *100}"
 												class="progress-bar appeared"
 												style="width: ${list.stackPrice/list.goalPrice *100}%;">
-												<span class="percent">0</span><span class="percent">${list.stackPrice/list.goalPrice *100}%</span>
+												<span class="percent">0</span><span class="percent"><fmt:formatNumber value="${list.stackPrice/list.goalPrice}" type="percent"/></span>
 											</div>
 										</div>
 									</div>
@@ -521,10 +522,10 @@
 									${list.member.name}
 									<ul class="list-inline font-weight-600 font-14 clearfix mb-5">
 										<li class="pull-left font-weight-400 text-black-333 pr-0">달성금액:
-											<span class="text-theme-colored font-weight-700">${list.stackPrice}</span>
+											<span class="text-theme-colored font-weight-700"><fmt:formatNumber>${list.stackPrice}</fmt:formatNumber>원</span>
 										</li>
 										<li class="pull-right font-weight-400 text-black-333 pr-0">목표금액:
-											<span class="text-theme-colored font-weight-700">${list.goalPrice}</span>
+											<span class="text-theme-colored font-weight-700"><fmt:formatNumber>${list.goalPrice}</fmt:formatNumber>원</span>
 										</li>
 									</ul>
 									<div class="progress-item mt-5">
@@ -533,7 +534,7 @@
 												data-percent="${list.stackPrice/list.goalPrice *100}"
 												class="progress-bar appeared"
 												style="width: ${list.stackPrice/list.goalPrice *100}%;">
-												<span class="percent">0</span><span class="percent">${list.stackPrice/list.goalPrice *100}%</span>
+												<span class="percent">0</span><span class="percent"><fmt:formatNumber value="${list.stackPrice/list.goalPrice}" type="percent"/></span>
 											</div>
 										</div>
 									</div>

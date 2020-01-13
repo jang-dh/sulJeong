@@ -2,6 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="purchaseMapper">
 
+	<!-- 후원한 펀딩 내역 페이지 - 펀딩 후원 내역 resultMap -->
+	<resultMap type="funding" id="recipientInformationMap">
+		<id column="code" property="code" />
+		<result column="title" property="title" />
+		<association property="member" javaType="member">
+			<id column="code" property="code" />
+			<result column="name" property="name" />
+			<result column="addr" property="addr" />
+			<result column="phone" property="phone" />
+		</association>
+	</resultMap>
+
 	<select id="selectPurchaseByMemberCode" resultType="purchase" parameterType="int">
 		select code, member_code, funding_code, price, qty, purchase_state, purchase_date, delivery_number, courier
 		from purchase
@@ -14,12 +26,20 @@
 		 #{purchaseState}, sysdate, #{deliveryNumber}, #{courier})
 	</insert>
 	
+	<select id="recipientInformation"
+		resultMap="frecipientInformationMap" parameterType="int">
+		select f.title , m.name, m.addr, m.phone
+		from funding f inner join member m
+		on f.member_code = m.code
+		where m.code = #{_parameter}
+	</select>
+	
 	<select id="countFundingCode" parameterType="int" resultType="int">
 		select count(*) from purchase where funding_code = #{_parameter}
 	</select>
 	
 	<delete id="delete" parameterType="purchase">
-		delete from purchase where code = #{_parameter}
+		delete from purchase where code = #{code}
 	</delete>
 	
 	<!-- 수녕 : 송장번호, 택배사 입력,수정 -->

@@ -33,8 +33,8 @@ public class PurchaseServiceImpl implements PurchaseService {
 	public List<Purchase> myPurchaseList(int memberCode) {
 		List<Purchase> list = purchaseDAO.myPurchaseList(memberCode);
 		
-		System.out.println("서비스에서 찍은 : " + memberCode);
-		System.out.println("서비스에서 찍은 : " + list);
+//		System.out.println("서비스에서 찍은 : " + memberCode);
+//		System.out.println("서비스에서 찍은 : " + list);
 		return list;
 	}
 	
@@ -47,8 +47,16 @@ public class PurchaseServiceImpl implements PurchaseService {
 	}
 	
 	@Override
+	public Funding recipientInformation(int fundingCode) {
+		Funding funding = purchaseDAO.recipientInformation(fundingCode);
+		return funding;
+	}
+	
+	@Override
 	public int deletePurchaseList(int code) {
+		System.out.println("서비스를 갔다");
 		int result = purchaseDAO.deleteList(code);
+		System.out.println("서비스를 나오니?");
 		return result;
 	}
 

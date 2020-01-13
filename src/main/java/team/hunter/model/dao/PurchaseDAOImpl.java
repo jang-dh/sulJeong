@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import team.hunter.model.dto.Funding;
 import team.hunter.model.dto.Member;
 import team.hunter.model.dto.Purchase;
 
@@ -37,9 +38,14 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 	}
 	
 	@Override
+	public Funding recipientInformation(int fundingCode) {
+		Funding funding = session.selectOne("purchaseMapper.recipientInformation", fundingCode);
+		return funding;
+	}
+	
+	@Override
 	public int deleteList(int code) {
-		int deletePurchaseFundingList = session.delete("purchaseMapper.delete", code);
-		return deletePurchaseFundingList;
+		return session.delete("purchaseMapper.delete", code);
 	}
 
 	@Override
@@ -56,5 +62,4 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 		Member member = session.selectOne("purchaseMapper.deliveryCodeSelect", map);
 		return member;
 	}
-
 }

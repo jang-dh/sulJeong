@@ -3,10 +3,20 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
+
+<script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
+
+<security:authorize access="isAuthenticated()">
+	<security:authentication var="principal" property="principal"/>
+</security:authorize>
+
 
 <script type="text/javascript">
 //jquery
 $(function() {
+	var IMP = window.IMP;
+	IMP.init('imp72693952');
 	
 	if(${likes != null}){
 		$(".insertLikes").hide();
@@ -16,32 +26,35 @@ $(function() {
 		$(".deleteLikes").hide();
 	}
 	$(".insertLikes").on("click", function() {
-		$.ajax({
-			url : "${pageContext.request.contextPath}/likes/insert", // 서버요청주소
-			type : "post", // 요청방식(get | post | put | patch | delete)
-			data : "fundingCode=" + ${funding.code},
-			dataType : "text", //서버가 보내온 데이터 타입
-			beforeSend : function(xhr)
-            {   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
-                xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
-            },
-			success : function(result) {
-				if(result == '1')
-					alert("좋아요가 등록되었습니다.");
-				$(".insertLikes").hide();
-				$(".deleteLikes").show();
-			}, //성공 시
-			erorr : function(err) {
-				alert(err + " 오류 발생");
-			} //실패 시
-		});
-		//ajax End			
+		if(${principal == null})
+			alert("로그인 후 사용가능합니다.");
+		else
+			$.ajax({
+				url : "${pageContext.request.contextPath}/likes/insert", // 서버요청주소
+				type : "post", // 요청방식(get | post | put | patch | delete)
+				data : "fundingCode=${funding.code}",
+				dataType : "text", //서버가 보내온 데이터 타입
+				beforeSend : function(xhr)
+	            {   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
+	                xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+	            },
+				success : function(result) {
+					if(result == '1')
+						alert("좋아요가 등록되었습니다.");
+					$(".insertLikes").hide();
+					$(".deleteLikes").show();
+				}, //성공 시
+				erorr : function(err) {
+					alert(err + " 오류 발생");
+				} //실패 시
+			});
+			//ajax End			
 	});
 	$(".deleteLikes").on("click", function() {
 		$.ajax({
 			url : "${pageContext.request.contextPath}/likes/delete", // 서버요청주소
 			type : "post", // 요청방식(get | post | put | patch | delete)
-			data : "fundingCode=" + ${funding.code},
+			data : "fundingCode=${funding.code}",
 			dataType : "text", //서버가 보내온 데이터 타입
 			beforeSend : function(xhr)
             {   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
@@ -64,47 +77,88 @@ $(function() {
 		var content = $('input[name="form_content"]').val();
 		var subject = $('input[name="form_subject"]').val();
 		//alert(1);
-		$.ajax({
-			url: "fundingQuestionInsert", // 서버요청주소
-			type: "post", // 요청방식
-			data: {fundingCode : fundingCode, subject : subject, content : content},
-			dataType: "text",
-			beforeSend: function (xhr)
-			{
-				xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
-			},
-			success: function (result) {
-				if(result == '1')
-					alert("문의가 등록되었습니다.");
-			},
-			erorr: function (err) {
-				alert(err + "오류 발생");
-			}
-		});
+		if(${principal == null})
+			alert("로그인 후 사용가능합니다.");
+		else
+			$.ajax({
+				url: "fundingQuestionInsert", // 서버요청주소
+				type: "post", // 요청방식
+				data: {fundingCode : fundingCode, subject : subject, content : content},
+				dataType: "text",
+				beforeSend: function (xhr){
+					xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+				},
+				success: function (result) {
+					if(result == '1')
+						alert("문의가 등록되었습니다.");
+				},
+				erorr: function (err) {
+					alert(err + "오류 발생");
+				}
+			});
 	}); //문의하기
 	
 	$(".addFunding").on("click", function() {
 		var fundingCode = ${funding.code};
 		var price = ${funding.rewardPrice};
 		var qty = $('input[name="quantity"]').val();
-		//alert(1);
-		$.ajax({
-			url: "${pageContext.request.contextPath}/insertPurchase", //서버요청주소
-			type: "post",
-			data: {fundingCode : fundingCode, price : price, qty : qty},
-			dataType: "text",
-			beforeSend: function (xhr) 
-			{
-				xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
-			},
-			success: function (result) {
-				if(result == '1')
-					alert("펀딩이 추가 되었습니다.");
-			},
-			erorr: function (err) {
-				alert(err + "오류 발생");
-			}
-		});
+		var customerUid = '${principal.id}' + new Date().getTime();
+		
+		if(${principal == null})
+			alert("로그인 후 사용가능합니다.");
+		else{
+			//예약 결제를 위한 빌링키 발급
+			IMP.request_pay({
+			    pay_method : 'card',
+			    merchant_uid : 'merchant_' + new Date().getTime(),
+			    customer_uid : customerUid,
+			    name : '${funding.rewardName}',
+			    amount : 0,
+			    buyer_email : '${principal.email}',
+			    buyer_name : '${principal.name}',
+			    buyer_tel : '${principal.phone}',
+			    buyer_addr : '${principal.addr}',
+			}, function(rsp) {
+			    if (rsp.success) {
+			    	//빌링키 발급 성공
+			        var msg = '결제가 완료되었습니다.';
+			        //결제 서버에 빌링키 전달
+			        $.ajax({
+			            url: "https://www.myservice.com/billings/", // 서비스 웹서버
+			            method: "POST",
+			            headers: { "Content-Type": "application/json" },
+			            data: {
+			              customer_uid: customerUid // 카드(빌링키)와 1:1로 대응하는 값
+						}
+					});
+			        
+			        //구매 테이블에 추가
+					$.ajax({
+						url: "${pageContext.request.contextPath}/insertPurchase", //서버요청주소
+						type: "post",
+						data: {fundingCode : fundingCode, price : price, qty : qty},
+						dataType: "text",
+						beforeSend: function (xhr) 
+						{
+							xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+						},
+						success: function (result) {
+							if(result == '1')
+								alert("펀딩이 추가 되었습니다.");
+						},
+						erorr: function (err) {
+							alert(err + "오류 발생");
+						}
+					});
+			    } else {
+			    	alert('빌링키 발급 실패');
+			        var msg = '결제에 실패하였습니다.';
+			        msg += '에러내용 : ' + rsp.error_msg;
+			    }
+			
+			    alert(msg);
+			});
+		}
 	});
 	//펀딩하기
 });
@@ -121,11 +175,11 @@ $(function() {
 				<div class="row">
 					<div class="col-md-6">
 						<h2 class="text-white font-36">펀딩 상세 페이지</h2>
-						<ol class="breadcrumb text-left mt-10 white">
+						<!-- <ol class="breadcrumb text-left mt-10 white">
 							<li><a href="#">Home</a></li>
 							<li><a href="#">Pages</a></li>
 							<li class="active">Product Details</li>
-						</ol>
+						</ol> -->
 					</div>
 				</div>
 			</div>
@@ -162,7 +216,7 @@ $(function() {
 									</ul>
 								</div>
 								<div class="price">
-									<span class="amount">${funding.rewardPrice}원</span>
+									<span class="amount"><fmt:formatNumber>${funding.rewardPrice}</fmt:formatNumber>원</span>
 								</div>
 								<div class="short-description">
 									<p>Donec volutpat purus tempor sem molestie, sed blandit
@@ -170,7 +224,7 @@ $(function() {
 										adipiscing elit. Ut posuere mollis nulla ut consectetur.</p>
 								</div>
 								<div class="tags">
-									<strong>SKU:</strong> EA34
+									<strong>판매자:</strong> ${funding.member.name}
 								</div>
 								<div class="category">
 									<strong>Category:</strong>
@@ -197,7 +251,7 @@ $(function() {
 										$('[data-countdown]').each(function() {
 											var $this = $(this), finalDate = $(this).data('countdown');
 											$this.countdown(finalDate,function(event) {
-												$this.html(event.strftime('%D 일'));
+												$this.html(event.strftime('%D 일 %H:%M:%S'));
 											});
 										});
 									});
@@ -219,9 +273,10 @@ $(function() {
 							<div class="progress-item mt-15">
 								<div class="progress mb-0">
 									<div
-										data-percent="${fundingList.stackPrice/fundingList.goalPrice *100}"
-										class="progress-bar">
-										<span class="percent">${fundingList.stackPrice/fundingList.goalPrice *100}%</span>
+										data-percent="${funding.stackPrice/funding.goalPrice *100}"
+										class="progress-bar appeared"
+										style="width: ${funding.stackPrice/funding.goalPrice *100}%;">
+										<span class="percent"><fmt:formatNumber value="${funding.stackPrice/funding.goalPrice}" type="percent"/></span>
 									</div>
 								</div>
 							</div>
@@ -238,36 +293,29 @@ $(function() {
 						</div>
 						<%-- </form> --%>
 						<div class="cart-form-wrapper mt-30">
-							<form id="frm" enctype="multipart/form-data" method="post"
-								class="cart"
-								action="${pageContext.request.contextPath}/funding/purchase">
-								<input type="hidden" name="${_csrf.parameterName}"
-									value="${_csrf.token}" />
-								<!-- <input type="hidden" value="productID" name="add-to-cart"> -->
-								<table class="table variations no-border">
-									<tbody>
-										<tr>
-											<td class="name"><div class="mt-10">수량</div></td>
-											<td class="value mt-10">
-												<div class="quantity buttons_added mt-10">
-													<input type="button" class="minus" value="-"> 
-													<input type="number" size="4" class="input-text qty text"
-														title="Qty" value="1" name="quantity" min="1" step="1">
-													<input type="button" class="plus" value="+">
-												</div>
-											</td>
-											<td>
-												<div class="pull-right font-weight-400 text-black-333 pr-0">
-													<button class="btn btn-default btn-theme-colored mt-5 font-16 btn-sm addFunding"
-													type="button">
-														펀딩하기<i class="flaticon-charity-make-a-donation font-16 ml-5"></i>
-													</button>
-												</div>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-							</form>
+							<!-- <input type="hidden" value="productID" name="add-to-cart"> -->
+							<table class="table variations no-border">
+								<tbody>
+									<tr>
+										<td class="col-md-5"></td>
+										<td class="name col-md-1"><div class="mt-10">수량</div></td>
+										<td class="value mt-10 col-md-4">
+											<div class="quantity buttons_added mt-10">
+												<input type="button" class="minus" value="-"> 
+												<input type="number" size="4" class="input-text qty text" title="Qty" value="1" name="quantity" min="1" step="1">
+												<input type="button" class="plus" value="+">
+											</div>
+										</td>
+										<td class="col-md-2">
+											<div class="pull-right font-weight-400 text-black-333 pr-0">
+												<button class="btn btn-default btn-theme-colored mt-5 font-16 btn-sm addFunding" type="button">
+													펀딩하기<i class="flaticon-charity-make-a-donation font-16 ml-5"></i>
+												</button>
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
 						</div>
 					</div>
 				</div>
@@ -283,7 +331,7 @@ $(function() {
 							</ul>
 							<div class="tab-content">
 								<div class="tab-pane fade in active" id="tab1">
-									<h3>Product Description</h3>
+									<!-- <h3>Product Description</h3>
 									<p>One Lorem ipsum dolor sit amet, consectetur adipisicing
 										elit. Quaerat, iste, architecto ullam tenetur quia nemo
 										ratione tempora consectetur quos minus voluptates nisi hic
@@ -298,8 +346,9 @@ $(function() {
 										elit. Quaerat, iste, architecto ullam tenetur quia nemo
 										ratione tempora consectetur quos minus voluptates nisi hic
 										alias libero explicabo reiciendis sint ut quo nulla ipsa
-										aliquid neque molestias et qui sunt. Odit, molestiae.</p>
-									<table class="table table-striped">
+										aliquid neque molestias et qui sunt. Odit, molestiae.</p> -->
+										<img src="${pageContext.request.contextPath}/resources/images/funding/Detail_${funding.image}" alt="">
+									<!-- <table class="table table-striped">
 										<tbody>
 											<tr>
 												<th>Brand</th>
@@ -322,7 +371,7 @@ $(function() {
 												<td>16 x 22 x 123 cm</td>
 											</tr>
 										</tbody>
-									</table>
+									</table> -->
 								</div>
 									<div class="tab-pane fade" id="tab2">
 									<!-- <div class="col-sm-6"> -->
@@ -377,10 +426,8 @@ $(function() {
 														<li class="prod-delivery-period-contents etc-pdd-info">
 															ㆍ<span>주문 및 결제 완료 후, 2-3일 이내 도착</span>
 														</li>
-														<li class="prod-delivery-period-contents">ㆍ도서 산간 지역등은
-															하루가 더 소요될 수 있습니다.
-															<p class="prod-delivery-period__notice">ㆍ천재지변, 물량 수급
-																변동 등 예외적인 사유 발생 시, 다소 지연될 수 있는 점 양해 부탁드립니다.</p>
+														<li class="prod-delivery-period-contents">ㆍ도서 산간 지역등은 
+															<p class="prod-delivery-period__notice">ㆍ천재지변, 물량 수급 변동 등 예외적인 사유 발생 시, 다소 지연될 수 있는 점 양해 부탁드립니다.</p>
 														</li>
 													</ul>
 												</td>
@@ -400,11 +447,11 @@ $(function() {
 												<td>
 													<p>ㆍ[단순변심/ 주문 오류의 경우] 신선식품인 술이 포함되어 단순변심 교환/반품을 받지
 														않습니다.</p>
-													<p>
-														ㆍ상품의 내용이 표시·광고의 내용과 다른 경우에는 상품을 수령한 날부터 3개월 이내, 그 사실을 안 날
-														또는 알 수 있었던 날부터<br> <span
-															class="prod-delivery-return-policy__limit-list__indent">
-															30일 이내에 청약철회 가능</span>
+													<p>ㆍ상품의 내용이 표시·광고의 내용과 다른 경우에는 상품을 수령한 날부터 3개월 이내, 그 사실을 안 날
+														또는 알 수 있었던 날부터<br> 
+														<span class="prod-delivery-return-policy__limit-list__indent">
+															30일 이내에 청약철회 가능
+														</span>
 													</p>
 												</td>
 											</tr>
@@ -412,7 +459,6 @@ $(function() {
 									</table>
 
 									<div class="product-item__table product-seller">
-
 										<p class="prod-minor-notice">미성년자가 체결한 계약은 법정대리인이 동의하지 않는
 											경우 본인 또는 법정대리인이 취소할 수 있습니다.</p>
 									</div>
@@ -424,7 +470,7 @@ $(function() {
 			</div>
 			<div>
 				<div class="col-md-12">
-					<!-- 아래 네모 네개 시작 -->
+					<!-- 아래 네모 네개 시작
 					<h3 class="line-bottom">Related Products</h3>
 					<div class="row multi-row-clearfix">
 						<div class="products related">
@@ -563,7 +609,7 @@ $(function() {
 						</div>
 					</div>
 				</div>
-				<!-- 아래 네모 네개 -->
+				아래 네모 네개 -->
 			</div>
 		</div>
 	</section>
