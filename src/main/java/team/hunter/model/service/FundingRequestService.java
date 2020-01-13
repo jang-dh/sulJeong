@@ -39,4 +39,9 @@ public interface FundingRequestService {
 	 * 펀딩 디테일 페이지 - 펀딩 문의 관리 상세페이지(답변내용)
 	 * */
 	FundingAnswer myOpenFundingAnswerManage(int questionCode);
+	
+	/**
+	 * 펀딩 상태 조회
+	 * */
+	Funding fundingState(int fundingCode);
 }

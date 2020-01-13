@@ -3,6 +3,7 @@
     
 <script>
 $(function(){
+	$("#loginGoBtn").hide();
 	$("#find").click(function(){
 		if($("#name1").val()==""){
 			alert("성함을 입력해주세요");
@@ -25,7 +26,16 @@ $(function(){
 				 dataType:"json", //서버가 보내온 데이터 타입(text,html,xml,json)
 				 data: allDate ,//서버에게 보내는 parameter 정보
 				 success:function(result){
-				    $("#showId").html(result.name+"님의 아이디는 "+result.id+"입니다.")
+				    //$("#showId").html(result.name+"님의 아이디는 "+result.id+"입니다.")
+				    $("#login-form").hide();
+				    var str="";
+					$.each(result, function(index, item){
+						str+=item.name+"님의 아이디는 "+item.id+"입니다.<br>";
+					});
+					
+					$("#showId").html(str);
+					$("#loginGoBtn").show();
+					
 					
 				 } ,//성공했을대
 				 error:function(err){
@@ -51,9 +61,17 @@ $(function(){
 			$('#email').focus();
 			return false;
 		}
-	
 		
 	  }); 
+	 
+	 if(${result>0}){
+			alert("임시 비밀번호를 이메일로 전송하였습니다.")
+		}else if(${result==0}){
+			alert("입력 정보를 다시 확인해주세요");
+			$('#name').focus();
+			return false;
+		}
+	
 });
 
 
@@ -94,10 +112,14 @@ $(function(){
                 <button type="button" class="btn btn-dark btn-sm" id="find" value="Login">찾기</button>
               </div>
               </div>
-              <div id="showId">
-                
-              </div>
+              
             </form>
+            <div id="showId">
+            	
+              </div>
+              </p>
+              </p>
+              <a id="loginGoBtn" href="${pageContext.request.contextPath}/login" class="btn btn-dark btn-circled">로그인</a>
           </div>
         </div>
       </div>
@@ -116,8 +138,8 @@ $(function(){
             	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" >
               <div class="row">
                 <div class="form-group col-md-12">
-                  <label for="form_username_email">Name</label>
-                  <input id="name" name="name" class="form-control" type="text">
+                  <label for="form_username_email">id</label>
+                  <input id="name" name="id" class="form-control" type="text">
                 </div>
               </div>
               <div class="row">

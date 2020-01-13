@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import team.hunter.model.dto.FundingAnswer;
+import team.hunter.model.dto.FundingQuestion;
 @Repository
 public class FundingAnswerDAOImpl implements FundingAnswerDAO {
 	@Autowired
@@ -30,6 +31,11 @@ public class FundingAnswerDAOImpl implements FundingAnswerDAO {
 	public int updateAnswerCode(int code) {
 		int result = session.update("fundingAnswerMapper.fundingAnswerState", code);
 		return result;
+	}
+
+	@Override
+	public FundingQuestion selectByCodeQuestion(int code) {
+		return session.selectOne("fundingAnswerMapper.selectByCodeQuestion",code);
 	}
 
 }

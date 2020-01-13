@@ -5,6 +5,12 @@
 		select code,id,pwd,addr,email,email_accept,name,phone from member
 	</sql>
 
+	<select id="selectMemberByCode" parameterType="int"
+		resultType="member">
+		<include refid="selectMember"></include>
+		where code=#{_parameter}
+	</select>
+	
 	<select id="selectMemberById" parameterType="String"
 		resultType="member">
 		<include refid="selectMember"></include>
@@ -29,7 +35,7 @@
 		update member
 		set
 		pwd = #{pwd}
-		where email=#{email} and name=#{name} and phone=#{phone}
+		where email=#{email} and id=#{id} and phone=#{phone}
 	</update>
 	
 	<update id="changeMyInfo">
@@ -42,6 +48,11 @@
 	<delete id="membershipWithdrawal" parameterType="member">
 		delete from member where id=#{id}
 	</delete>
+	
+	<select id="idDuplicateCheck" parameterType="String" resultType="member">
+		<include refid="selectMember"></include>
+		where id=#{_parameter}
+	</select>
 
 </mapper>	
 

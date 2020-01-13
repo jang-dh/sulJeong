@@ -2,7 +2,6 @@ package team.hunter.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -13,18 +12,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import team.hunter.model.dto.FundingAnswer;
 import team.hunter.model.dto.Funding;
 import team.hunter.model.dto.FundingAnswer;
 import team.hunter.model.dto.FundingQuestion;
 import team.hunter.model.dto.Member;
 import team.hunter.model.dto.Paging;
 import team.hunter.model.dto.PersonalQuestion;
+import team.hunter.model.dto.Purchase;
 import team.hunter.model.service.FundingAnswerService;
 import team.hunter.model.service.FundingQuestionService;
 import team.hunter.model.service.FundingRequestService;
 import team.hunter.model.service.MemberService;
 import team.hunter.model.service.PersonalQuestionService;
+import team.hunter.util.Constants;
 
 @Controller
 @RequestMapping("mypage")
@@ -51,6 +51,7 @@ public class myPageController {
 	public String personalQuestionInsert(PersonalQuestion personalQuestion) {
 		Member member =(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		personalQuestion.setMemberCode(member.getCode());
+		personalQuestion.setState(Constants.BEFORE_ANSWER);
 		personalQs.personalQuestionInsert(personalQuestion);
 		return "redirect:/mypage/myQuestion";
 	}
@@ -81,21 +82,24 @@ public class myPageController {
 	}
 	
 	@RequestMapping("fundingQuestionDetailPage/{code}")
-	public ModelAndView fundingQuestionDetail(@PathVariable int code) {
-		FundingQuestion fundingQuestion =fundingQs.selectByCode(code);
-		FundingAnswer fundingAnswer = fundingAs.selectByCode(code);
-		ModelAndView mv = new ModelAndView();
-		mv.addObject("detail", fundingQuestion);
-		mv.addObject("answer", fundingAnswer);
-		mv.setViewName("mypage/fundingQuestionDetail");
+	public String fundingQuestionDetail(@PathVariable int code, Model model) {
 		
-		return mv;
+		FundingQuestion question = fundingAs.selectByCodeQuestion(code);
+		System.out.println(question.getMember().getId());
+		System.out.println("question.getPersonalAnswer().getContent()"+question.getFunding().getMdCode());
+		System.out.println("question.getPersonalAnswer().getContent()"+question.getFundingAnswer().getContent());
+		System.out.println("question.getContent()" + question.getContent());
+		
+		
+		model.addAttribute("question", question);
+		
+		return "mypage/fundingQuestionDetail";
 	}
 	
 	@RequestMapping("myInfoMenu")
 	public ModelAndView myInfoMenu() {
 		Member member =(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		member = memberService.selectByPhone(member);
+		member = memberService.selectMemberByCode(member.getCode());
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("member", member);
 		mv.setViewName("mypage/chooseMyInfoMenu");
@@ -128,24 +132,26 @@ public class myPageController {
 	 * 내가 오픈한 펀딩 상세페이지
 	 * */
 	@RequestMapping("/myOpenFunding/{fundingCode}")
-	public String myOpenDetail(@PathVariable int fundingCode, Model model ) {
+	public String myOpenDetail(@PathVariable int fundingCode, Model model) {
 //		Member member = null;
 //		if(!SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser"))
 //			member =(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		List<FundingQuestion> fundingReqManage = fundingReqService.myFundingOpenDetail(fundingCode);
-//		for(FundingQuestion fq : fundingReqManage) {
-//			if(fq.getState().equals("201")){
-//				fq.setState("답변 완료!");
-//			}else {
-//				fq.setState("답변 대기중");
-//			}
-//			fundingReqManage.add(fq);
-//		}
+		List<Member> fundingOpenPeople = fundingReqService.myFundingOpenDetailSecond(fundingCode);
+		Funding funding = fundingReqService.fundingState(fundingCode);
+		
+		//펀딩 코드 보내기
+		model.addAttribute("fundingCode", fundingCode);
+		
 		//펀딩 문의 관리
 		model.addAttribute("fundingReqManage", fundingReqManage);
 		
 		//펀딩 참가한 사용자
-		model.addAttribute("fundingOpenPeople", fundingReqService.myFundingOpenDetailSecond(fundingCode));
+		model.addAttribute("fundingOpenPeople", fundingOpenPeople);
+		
+		//펀딩 상태에 따라 사용자 보여줄 지 말지 알아보기 위해 펀딩 상태 가져오기
+		model.addAttribute("funding", funding);
+		
 		return "mypage/myOpenFundingDetail";
 	}
 	
@@ -160,7 +166,6 @@ public class myPageController {
 		model.addAttribute("fundingQuestion", fundingQuestion);
 		model.addAttribute("fundingAnswer", fundingAnswer);
 		
-		//System.out.println(fundingQuestion.getCode()+"짜증나게 하지말고 나와라");
 		
 		return "mypage/myOpenFundingReqManage";
 	}

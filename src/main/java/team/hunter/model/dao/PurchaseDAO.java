@@ -2,6 +2,7 @@ package team.hunter.model.dao;
 
 import java.util.List;
 
+import team.hunter.model.dto.Member;
 import team.hunter.model.dto.Purchase;
 
 public interface PurchaseDAO {
@@ -27,5 +28,14 @@ public interface PurchaseDAO {
 	public int deleteList(int code);
 	
 
+	/**
+	 * 송장번호, 택배사 입력
+	 * */
+	public int deliveryCodeSave(Purchase purchase);
+	
+	/**
+	 * 송장번호, 택배사, 맴버정보 조회
+	 * */
+	public Member deliveryCodeSelect(int fundingCode, int memberCode);
 
 }

@@ -2,6 +2,7 @@ package team.hunter.model.service;
 
 import java.util.List;
 
+import team.hunter.model.dto.Member;
 import team.hunter.model.dto.Purchase;
 
 public interface PurchaseService {
@@ -25,6 +26,16 @@ public interface PurchaseService {
 	 * 후원한 펀딩 삭제
 	 */
 	public int deletePurchaseList(int code);
+	
+	/**
+	 * 송장번호, 택배사 입력
+	 * */
+	public int deliveryCodeSave(Purchase purchase);
+	
+	/**
+	 * 송장번호, 택배사, 맴버정보 조회
+	 * */
+	public Member deliveryCodeSelect(int fundingCode, int memberCode);
 	
 
 }

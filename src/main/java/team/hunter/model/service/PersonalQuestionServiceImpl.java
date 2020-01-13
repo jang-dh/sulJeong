@@ -20,7 +20,7 @@ public class PersonalQuestionServiceImpl implements PersonalQuestionService {
 
 	@Override
 	public int personalQuestionInsert(PersonalQuestion personalQuestion) {
-		personalqDAO.personalQuestionInsert(personalQuestion);
-		return 0;
+		
+		return personalqDAO.personalQuestionInsert(personalQuestion);
 	}
 }

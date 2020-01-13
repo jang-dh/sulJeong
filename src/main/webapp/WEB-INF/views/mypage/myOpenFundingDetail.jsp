@@ -2,6 +2,33 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+<script>
+	$(function() { 
+		$("#deliveryBtn").click(function() {
+			if ($("#courier").val() == "") {
+				alert("택배사를 입력해주세요");
+				$("#courier").focus();
+				return false;
+			}
+			if ($("#deliveryNumber").val() == "") {
+				alert("송장번호를 입력해주세요");
+				$("#deliveryNumber").focus();
+				return false;
+			}
+			
+			//공백제거...
+			//$.trim($("#deliveryNumber").val()) 
+			//$.trim($("#courier").val())
+			var deliveryNumber = $("#deliveryNumber").val();
+			var courier = $("#courier").val();
+			var trim1 = deliveryNumber.trim();
+			var trim2 = courier.trim();
+			$("#deliveryNumber").val(trim1);
+			$("#courier").val(trim2);
+		});//버튼 클릭시
+		
+	});
+</script>
 
 <!-- Section: inner-header -->
 <section class="inner-header divider layer-overlay overlay-dark-8"
@@ -42,6 +69,8 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div data-example-id="hoverable-table" class="bs-example">
+								
+								
 									<table class="table table-hover">
 										<thead>
 											<tr>
@@ -80,7 +109,12 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div data-example-id="hoverable-table" class="bs-example">
-									<table class="table table-hover">
+								<form action="${pageContext.request.contextPath}/mypage/deliveryCode" name="userInfo" id="userInfo" method="post">
+								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+								
+								<c:choose>
+								<c:when test="${funding.fundingState==503}">
+								<table class="table table-hover">
 										<thead>
 											<tr>
 												<th>#</th>
@@ -100,26 +134,54 @@
 													<td>${fundingOpenPeople.name}</td>
 													<td>${fundingOpenPeople.addr}</td>
 													
+													<c:choose>
+													<c:when test="${fundingOpenPeople.purchase.courier==null}">
 													<td>
-													<input type="text" id="deliveryCode" name="deliveryCode">
+													<input type="text" id="courier" name="courier">
 													</td>
 													<td>
-													<input type="text" id="courierName" name="courierName">
-													<button>입력</button>
+													<input type="text" id="deliveryNumber" name="deliveryNumber">
+													<input type="hidden" id="memberCode" name="memberCode" value="${fundingOpenPeople.code}">
+													<input type="hidden" id="fundingCode" name="fundingCode" value="${fundingCode}">
+													<input type="submit" class="btn btn-dark btn-sm" id="deliveryBtn" name="deliveryBtn" value="입력">
 													</td>
+													</c:when>
+													<c:otherwise>
+													<td>
+													<input type="text" id="courier2" name="courier2" value="${fundingOpenPeople.purchase.courier}" readonly="readonly">
+													</td>
+													<td>
+													<input type="text" id="deliveryNumber2" name="deliveryNumber2" value="${fundingOpenPeople.purchase.deliveryNumber}" readonly="readonly">
+													<input type="hidden" id="memberCode2" name="memberCode2" value="${fundingOpenPeople.code}">
+													<input type="hidden" id="fundingCode2" name="fundingCode2" value="${fundingCode}">
+													<input type="button" class="btn btn-dark btn-sm" id="updateBtn" name="updateBtn" onclick="location.href='${pageContext.request.contextPath}/mypage/deliveryUpdate/${fundingCode}/${fundingOpenPeople.code}'" value="수정">
+													</td>
+													</c:otherwise>
+													</c:choose>
+													
+													
 													
 												</tr>
 											</c:forEach>
 											
 										</tbody>
 									</table>
+								</c:when>
+								<c:otherwise>
+								<h3>펀딩이 성공된 후 회원 목록을 볼 수 있습니다.</h3>
+								</c:otherwise>
+								</c:choose>
+									
+									
+									</form>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
+				<a href="${pageContext.request.contextPath}/mypage/myOpenFunding">리스트로 돌아가기</a>
 			</div>
 		</div>
-
 	</div>
 </section>
+
