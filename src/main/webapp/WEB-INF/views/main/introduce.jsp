@@ -3,6 +3,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 
+<!-- 카카오 지도 -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c4c64b0fa5dfd1841cf29f48be1a0d91&libraries=services"></script>
+
+
+<!-- 카카오 지도 -->
+
       <!-- Start main-content -->
   <div class="main-content">
   
@@ -74,6 +80,9 @@
             	하지만 수많은 종류에도 불구하고 전통주는 아직 우리에게 친숙하지 않은 것이 현실입니다. 술에 대한 이해가 부족하면 선뜻 접근하기 힘든 우리술, 
             	그렇다 해서 모르고 놓치기엔 너무나도 맛있고, 의미 있는 술입니다. 우리나라 전통주, 이젠 술:정(井)과 함께 알아가봐요!</p>
           </div>
+          <h3 class="line-bottom">술:정(井) 찾아오시는 길</h3>
+          <div class="col-md-6" id="map" style="width:100%;height:350px;"></div>
+          
         </div>
       </div>
     </section>
@@ -125,6 +134,45 @@
         </div>
       </div>
     </section>  
+    
+<script>
+         var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+             mapOption = {
+                 center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+                 level: 3 // 지도의 확대 레벨
+             };  
+         
+         // 지도를 생성합니다    
+         var map = new kakao.maps.Map(mapContainer, mapOption); 
+         
+         // 주소-좌표 변환 객체를 생성합니다
+         var geocoder = new kakao.maps.services.Geocoder();
+         
+         // 주소로 좌표를 검색합니다 ${requestScope.gym.addr}
+         geocoder.addressSearch('삼평동 대왕판교로 670', function(result, status) {
+         
+             // 정상적으로 검색이 완료됐으면 
+              if (status === kakao.maps.services.Status.OK) {
+         
+                 var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+         
+                 // 결과값으로 받은 위치를 마커로 표시합니다
+                 var marker = new kakao.maps.Marker({
+                     map: map,
+                     position: coords
+                 });
+         
+                 // 인포윈도우로 장소에 대한 설명을 표시합니다
+                 var infowindow = new kakao.maps.InfoWindow({
+                     content: '<div style="width:150px;text-align:center;padding:6px 0;">술:정(井)</div>'
+                 });
+                 infowindow.open(map, marker);
+         
+                 // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+                 map.setCenter(coords);
+             } 
+         });    
+</script>
 
   </div>
   <!-- end main-content -->
