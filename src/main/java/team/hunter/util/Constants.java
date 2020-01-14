@@ -30,5 +30,6 @@ public interface Constants {
 	//후원 상태 purchase state
 	String PURCHASE_SUCCESSED = "601";
 	String PURCHASE_FAILED = "602";
+	String PURCHASE_BEFORE = "603";
 
 }

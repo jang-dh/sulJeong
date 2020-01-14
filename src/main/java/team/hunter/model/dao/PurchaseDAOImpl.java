@@ -62,4 +62,12 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 		Member member = session.selectOne("purchaseMapper.deliveryCodeSelect", map);
 		return member;
 	}
+
+	@Override
+	public int updatePurchaseState() {
+		
+		return session.update("purchaseMapper.updatePurchaseState");
+	}
+
+	
 }
