@@ -60,4 +60,9 @@ public interface FundingDAO {
 	 * funding의 code를 참조해서 funding Stack price를 업데이트 한다.	
 	 * */
 	public int updateStackPrice(int code, int price);
+	
+	/**
+	 * 펀딩 수정
+	 */
+	public int fundUpdate(Funding fuding);
 }

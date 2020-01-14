@@ -87,7 +87,6 @@ public class FundingDAOImpl implements FundingDAO {
 	@Override
 	public List<Funding> selectLikesRankFour() {
 		return session.selectList("fundingMapper.selectLikesRankFour");
-		
 	}
 
 	@Override
@@ -121,6 +120,11 @@ public class FundingDAOImpl implements FundingDAO {
 		System.out.println("DaoPrice : " + price);
 		
 		return session.update("fundingMapper.updateStackPrice", map);
+	}
+
+	@Override
+	public int fundUpdate(Funding fuding) {
+		return session.update("fundingMapper.fundUpdate", fuding);
 	}
 	
 }

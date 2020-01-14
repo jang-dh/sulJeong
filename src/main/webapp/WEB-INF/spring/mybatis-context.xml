@@ -13,7 +13,6 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
 		
-
  
 <!-- 
 <beans:bean	id="dataSource" 

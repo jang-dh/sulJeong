@@ -4,28 +4,39 @@
 
 <script>
 	$(function() { 
-		$("#deliveryBtn").click(function() {
-			if ($("#courier").val() == "") {
-				alert("택배사를 입력해주세요");
-				$("#courier").focus();
-				return false;
-			}
-			if ($("#deliveryNumber").val() == "") {
-				alert("송장번호를 입력해주세요");
-				$("#deliveryNumber").focus();
-				return false;
-			}
+		$(document).on("click", "#deliveryBtn", function() {
 			
-			//공백제거...
-			//$.trim($("#deliveryNumber").val()) 
-			//$.trim($("#courier").val())
-			var deliveryNumber = $("#deliveryNumber").val();
-			var courier = $("#courier").val();
-			var trim1 = deliveryNumber.trim();
-			var trim2 = courier.trim();
-			$("#deliveryNumber").val(trim1);
-			$("#courier").val(trim2);
+		 var num = $(this).prev().prev().prev().val();
+		 var cour = $(this).parent().prev().find(":first").val()
+		 
+		 if(cour==""){
+			alert("택배사를 입력해주세요");
+			$(this).parent().prev().find(":first").focus();
+			return;
+		 }
+		 
+		 if(num==""){
+			 alert("송장번호를 입력해주세요");
+			 $(this).prev().prev().prev().focus();
+			 return;
+		 }
+		
+		 
+		 $("#fundingCode").val($(this).prev().val())
+		 $("#memberCode").val($(this).prev().prev().val())
+		 
+		 $("#deliveryNumber").val(num)
+		 $("#courier").val(cour)
+		 
+		 
+		 //전송하기
+		 $("#userInfo").submit();			
+			 
+			 
+			
 		});//버튼 클릭시
+		
+		
 		
 	});
 </script>
@@ -109,7 +120,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div data-example-id="hoverable-table" class="bs-example">
-								<form action="${pageContext.request.contextPath}/mypage/deliveryCode" name="userInfo" id="userInfo" method="post">
+								
 								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 								
 								<c:choose>
@@ -137,32 +148,33 @@
 													<c:choose>
 													<c:when test="${fundingOpenPeople.purchase.courier==null}">
 													<td>
-													<input type="text" id="courier" name="courier">
+													<input type="text" > <!--  courier-->
 													</td>
 													<td>
-													<input type="text" id="deliveryNumber" name="deliveryNumber">
-													<input type="hidden" id="memberCode" name="memberCode" value="${fundingOpenPeople.code}">
-													<input type="hidden" id="fundingCode" name="fundingCode" value="${fundingCode}">
-													<input type="submit" class="btn btn-dark btn-sm" id="deliveryBtn" name="deliveryBtn" value="입력">
+													<input type="text" ><!--  deliveryNumber-->
+													
+													<input type="hidden"  value="${fundingOpenPeople.code}"> <!-- memberCode -->
+													<input type="hidden"  value="${fundingCode}"><!-- fundingCode -->
+													<input type="button"  id="deliveryBtn" class="btn btn-dark btn-sm" name="deliveryBtn" value="입력">
 													</td>
 													</c:when>
 													<c:otherwise>
-													<td>
-													<input type="text" id="courier2" name="courier2" value="${fundingOpenPeople.purchase.courier}" readonly="readonly">
-													</td>
-													<td>
-													<input type="text" id="deliveryNumber2" name="deliveryNumber2" value="${fundingOpenPeople.purchase.deliveryNumber}" readonly="readonly">
-													<input type="hidden" id="memberCode2" name="memberCode2" value="${fundingOpenPeople.code}">
-													<input type="hidden" id="fundingCode2" name="fundingCode2" value="${fundingCode}">
-													<input type="button" class="btn btn-dark btn-sm" id="updateBtn" name="updateBtn" onclick="location.href='${pageContext.request.contextPath}/mypage/deliveryUpdate/${fundingCode}/${fundingOpenPeople.code}'" value="수정">
+														<td>
+														<input type="text" id="courier2" name="courier2" value="${fundingOpenPeople.purchase.courier}" readonly="readonly">
+														</td>
+														<td>
+														<input type="text" id="deliveryNumber2" name="deliveryNumber2" value="${fundingOpenPeople.purchase.deliveryNumber}" readonly="readonly">
+														<input type="hidden" id="memberCode2" name="memberCode2" value="${fundingOpenPeople.code}">
+														<input type="hidden" id="fundingCode2" name="fundingCode2" value="${fundingCode}">
+														<input type="button" class="btn btn-dark btn-sm" id="updateBtn" name="updateBtn" onclick="location.href='${pageContext.request.contextPath}/mypage/deliveryUpdate/${fundingCode}/${fundingOpenPeople.code}'" value="수정">
 													</td>
 													</c:otherwise>
 													</c:choose>
 													
-													
-													
 												</tr>
 											</c:forEach>
+											
+										
 											
 										</tbody>
 									</table>
@@ -171,9 +183,14 @@
 								<h3>펀딩이 성공된 후 회원 목록을 볼 수 있습니다.</h3>
 								</c:otherwise>
 								</c:choose>
-									
-									
-									</form>
+								
+								<form action="${pageContext.request.contextPath}/mypage/deliveryCode" name="userInfo" id="userInfo" method="post">
+								 <input type="hidden" id="courier" name="courier">
+								   <input type="hidden" id="deliveryNumber" name="deliveryNumber"/>
+								  <input type="hidden" id="memberCode" name="memberCode" >
+								  <input type="hidden" id="fundingCode" name="fundingCode" >
+								</form>
+								
 								</div>
 							</div>
 						</div>

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+
 	 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script type="text/javascript">
 	function goPopup() {
@@ -12,19 +14,29 @@
 		// 실제 주소검색 URL(http://www.juso.go.kr/addrlink/addrMobileLinkUrl.do)를 호출하게 됩니다. 
 		// var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes"); 
 	}
+	
+	function goAuthPopup() {
+		var popAuth = window.open("${pageContext.request.contextPath}/identity/identityAuth", "pop","width=570,height=420, scrollbars=yes, resizable=yes");
+	}
 
 	function jusoCallBack(roadFullAddr, addrDetail, jibunAddr) {
+		//alert(1)
 		// 2017년 2월 제공항목이 추가되었습니다. 원하시는 항목을 추가하여 사용하시면 됩니다. 
-			document.form.addr.value = roadFullAddr +" "+ addrDetail;
+			//document.form.addr.value = roadFullAddr +" "+ addrDetail;
+		document.form.addr.value = roadFullAddr;
 	}
 	
 	
 	$(function() {
 		
-		$("#Authenticate").click(function(){
+		var status = '0'; //아이디 중복체크 상태변수
+		var authStatus = '3';//성인인증 상태변수
+		
+		
+		/* $("#Authenticate").click(function(){
 
 			window.open("${pageContext.request.contextPath}/identityVerificationForm", "본인 인증", "width=500,height=600");
-		});
+		}); */
 		
 		$("#idDuplicateCheck").click(function(){
 			
@@ -46,11 +58,14 @@
 						 alert("중복된 ID 입니다.");
 						 $("#id").val("");
 						 $("#id").focus();
+						 status = '0';
 					 } ,//성공했을대
 					 error:function(err){
 						 $("#idDuplicateCheck").val("중복체크완료");
+						 status = '1';
 					 }//오류발생했을때
 				 });
+			  
 		});
 		
 		$("#register").click(function() {
@@ -89,8 +104,27 @@
 				return false;
 			}
 			
+			 if(status == '0'){
+				  alert("아이디 중복체크를 해주세요");
+				  return false;
+			  }else if(status == '3'){
+				  alert("성인인증을 해주시기 바랍니다.");
+				  return false;
+			  }
+			
 		});
 		
+		//popAuth.document.getElementById("Authenticate").click(function() {
+		popAuth.document.on("click", "#Authenticate", function() {
+			alert($("#hidden").val());
+			if($("#hidden").val()==true){
+				$("#Authenticate").val("성인인증 완료");
+				authStatus == '4';
+			}else if($("#hidden").val()==false){
+				authStatus == '3';
+			}
+		});
+
 	});
 
 	function CheckForm(join) {
@@ -108,7 +142,16 @@
 		<div class="col-md-6 col-md-push-3">
 			<br>
 			<br>
-			<form name="reg-form" id="reg-form" class="register-form" method="post"
+			<c:choose>
+			<c:when test="${result==false}">
+				<h3>성인인증 실패로 회원가입을 할 수 없습니다.</h3>
+				<div class="form-group">
+					<button class="btn btn-dark btn-lg btn-block mt-15" type="submit" id="register" name="register" onclick="location.href='${pageContext.request.contextPath}/'">메인 페이지로 가기</button>
+				</div>
+			</c:when>
+			
+			<c:otherwise>
+			<form name="form" id="reg-form" class="register-form" method="post"
 				action="${pageContext.request.contextPath}/memberJoin"
 				onsubmit="return CheckForm(this)">
 				<!-- 스프링 security 4에선 POST 전송시무조건 csrt 를 보내야 한다. (GET은 안보내도 됨)-->
@@ -131,7 +174,7 @@
 					</div>
 					<div class="form-group col-md-6">
 						<label>아이디 중복 체크</label> <input type="button" value="중복체크"
-							name="idDuplicateCheck" id="idDuplicateCheck" class="form-control">
+							name="idDuplicateCheck" id="idDuplicateCheck" class="form-control" required="required">
 					</div>
 				</div>
 
@@ -162,20 +205,20 @@
 							class="form-control" type="text">
 					</div>
 					<div class="form-group col-md-6">
-						<label>휴대폰 성인인증</label> <input type="button" value="본인인증"
-							name="Authenticate" id="Authenticate" class="form-control">
+						<label>생년월일 성인인증</label> 
+						<input type="button" value="성인인증" name="Authenticate" id="Authenticate" onClick="goAuthPopup();" class="form-control" required="required">
 					</div>
 				</div>
 
 				<div class="row">
 					<div class="form-group col-md-6">
-						<label for="form_choose_password">주소</label> <input id="addr"
+						<label for="form_choose_password">주소</label> 
+						<input id="addr"
 							name="addr" class="form-control" type="text">
 					</div>
 					<div class="form-group col-md-6">
 						<label>주소 찾기</label> 
-						<input id="addrBtn" name="addrBtn"
-							class="form-control" type="button" onClick="goPopup();" value="나의 주소지 찾기">
+						<input id="addrBtn" name="addrBtn" class="form-control" type="button" onClick="goPopup();" value="나의 주소지 찾기">
 					</div>
 				</div>
 
@@ -191,6 +234,11 @@
 						id="register" name="register">Register Now</button>
 				</div>
 			</form>
+			
+			<input type=hidden id="hidden" name="hidden">
+			</c:otherwise>
+			</c:choose>
+			
 		</div>
 	</div>
 </body>

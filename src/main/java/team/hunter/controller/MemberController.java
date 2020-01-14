@@ -8,7 +8,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -35,7 +36,12 @@ public class MemberController {
 	
 	@RequestMapping("/join")
 	public String join() {
-		
+		return "form/memberJoinForm";
+	}
+	
+	@RequestMapping("/join/{result}")
+	public String join(@PathVariable boolean result, Model model) {
+		model.addAttribute("result", result);
 		return "form/memberJoinForm";
 	}
 	
@@ -82,6 +88,11 @@ public class MemberController {
 	@RequestMapping("/juso/jusoPopup")
 	public String jusoPopup() {
 		return "form/juso/jusoPopup";
+	}
+	
+	@RequestMapping("/identity/identityAuth")
+	public String identityPopup() {
+		return "form/identity/identityAuth";
 	}
 	
 
