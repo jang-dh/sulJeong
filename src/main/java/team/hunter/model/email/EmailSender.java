@@ -6,6 +6,9 @@ import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.transaction.annotation.Transactional;
+
+import team.hunter.model.dto.Member;
 
 
 
@@ -31,6 +34,8 @@ public class EmailSender  {
             e.printStackTrace();
         }
     }
+    
+    
 }
 
 

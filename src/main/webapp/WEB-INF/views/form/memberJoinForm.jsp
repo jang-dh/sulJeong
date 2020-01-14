@@ -214,11 +214,20 @@
 						<label>Name</label> <input name="name" id="name"
 							class="form-control" type="text">
 					</div>
+				</div>
+				
+				<div class="row">
 					<div class="form-group col-md-6">
 						<label>Email Address</label> <input name="email" id="email"
 							class="form-control" type="email">
 					</div>
+					<div class="form-group col-md-6">
+						<label>Email Address 인증</label> <input name="emailCheck" id="emailCheck"
+							class="form-control" type="button" value="Email Address 인증">
+					</div>
 				</div>
+				
+				
 				<div class="row">
 					<div class="form-group col-md-6">
 						<label>휴대폰</label> <input name="phone" id="phone"
