@@ -31,12 +31,7 @@
 		
 		var status = '0'; //아이디 중복체크 상태변수
 		var authStatus = '3';//성인인증 상태변수
-		
-		
-		/* $("#Authenticate").click(function(){
-
-			window.open("${pageContext.request.contextPath}/identityVerificationForm", "본인 인증", "width=500,height=600");
-		}); */
+		var flage = false; // 비밀번호 일치 여부
 		
 		$("#idDuplicateCheck").click(function(){
 			
@@ -66,6 +61,18 @@
 					 }//오류발생했을때
 				 });
 			  
+		});
+		
+		$('#pwdCheck').keyup(function(){
+			  if($('#pwdCheck').val()!=$('#pwd').val()){
+			    $('#pwdEqualCheck').text('');
+			    $('#pwdEqualCheck').html("암호가 일치하지 않습니다. 다시 확인해주세요.").css("color","red"); 
+			    flage = false;
+			  }else{
+			    $('#pwdEqualCheck').text('');
+			    $('#pwdEqualCheck').html("암호가 일치합니다.").css("color","blue");
+			    flage = true;
+			  }
 		});
 		
 		$("#register").click(function() {
@@ -104,35 +111,40 @@
 				return false;
 			}
 			
+			
+			//alert($('#hidden').val());
+			if($('#hidden').val()=='true'){
+				//alert("인증성공!!!")
+				//alert($('#hidden').val());
+			    authStatus = '4';
+			   // return false;
+			}
+			
 			 if(status == '0'){
 				  alert("아이디 중복체크를 해주세요");
 				  return false;
-			  }else if(status == '3'){
+			  }else if(authStatus == '3'){
 				  alert("성인인증을 해주시기 바랍니다.");
 				  return false;
+			  }else if(flage == false){
+				  alert("비밀번호 일치 여부 확인해주세요");
+				  return false;
 			  }
+			  
+			 
+			/* if($("#hidden").val()==false){
+				alert("성인인증에 실패하였으므로 회원가입 하실 수 없습니다.");
+				return false;
+			} */
 			
 		});
 		
-		//popAuth.document.getElementById("Authenticate").click(function() {
+		  
 		
 		
-		function completeCallback(result){
-			alert(result);
-			
-			popAuth.document.on("click", "#Authenticate", function() {
-				alert(1);
-				alert($("#hidden").val());
-				if($("#hidden").val()==true){
-					$("#Authenticate").val("성인인증 완료");
-					authStatus == '4';
-				}else if($("#hidden").val()==false){
-					authStatus == '3';
-				}
-			});
-		}
-
+		 
 	});
+		
 
 	function CheckForm(join) {
 		if ($('input:checkbox[id=emailAccept]').is(':checked') == false) {
@@ -194,6 +206,7 @@
 						<label>Re-enter Password</label> <input id="pwdCheck"
 							name="pwdCheck" class="form-control" type="password">
 					</div>
+					<div class="form-group col-md-6" id="pwdEqualCheck">비밀번호 확인</div>
 				</div>
 				
 				<div class="row">
@@ -242,7 +255,7 @@
 				</div>
 			</form>
 			
-			<input type=hidden id="hidden" name="hidden">
+			<input type="hidden" id="hidden" name="hidden">
 			</c:otherwise>
 			</c:choose>
 			
