@@ -171,9 +171,7 @@
 												<!-- <h5 class="sub-title">Sub Title Here</h5> -->
 												<h2 class="title">아직 좋아한 펀딩이 없습니다.</h2>
 												<p>다양한 전통주가 회원님의 후원을 기다립니다!</p>
-												<a href="${pageContext.request.contextPath}/funding"
-													class="btn btn-dark btn-theme-colored btn-lg mt-20">펀딩
-													보러가기 <i class="fa fa-arrow-circle-right"></i>
+												<a href="${pageContext.request.contextPath}/funding" class="btn btn-dark btn-theme-colored btn-lg mt-20">펀딩 보러가기 <i class="fa fa-arrow-circle-right"></i>
 												</a>
 											</div>
 										</div>
@@ -216,7 +214,13 @@
 									</ul>
 									<div class="progress-item mt-5">
 										<div class="progress mb-0">
-											<div data-percent="${fundingList.stackPrice/fundingList.goalPrice *100}" class="progress-bar appeared" style="width: ${fundingList.stackPrice/fundingList.goalPrice *100}%;">
+											<c:set var="per" value="${fundingList.stackPrice/fundingList.goalPrice *100}"/>
+											<c:if test="${per} > 100">
+												<c:set var="per" value="100"/>
+											
+											</c:if>
+									
+											<div data-percent="${fundingList.stackPrice/fundingList.goalPrice *100}" class="progress-bar appeared" style="width: ${per}%;">
 												<span class="percent">0</span><span class="percent"><fmt:formatNumber value="${fundingList.stackPrice / fundingList.goalPrice}" type="percent" /></span>
 											</div>
 										</div>
