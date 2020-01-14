@@ -17,13 +17,13 @@ import team.hunter.model.dto.FundingQuestion;
 import team.hunter.model.dto.Likes;
 import team.hunter.model.dto.Member;
 import team.hunter.model.dto.Statistics;
-import team.hunter.model.service.FundingQuestionService;
 import team.hunter.model.service.FundingAnswerService;
+import team.hunter.model.service.FundingQuestionService;
 import team.hunter.model.service.LikesService;
 import team.hunter.model.service.MemberService;
+import team.hunter.model.service.PurchaseService;
 import team.hunter.model.service.StatisticsService;
 import team.hunter.util.Constants;
-import team.hunter.model.service.PurchaseService;
 
 @RestController
 public class AjaxController {

@@ -56,4 +56,10 @@ public class FundingServiceImpl implements FundingService {
 		result += fundingDAO.updateFundingStateOpen();
 		return result;
 	}
+
+	@Override
+	public int fundUpdate(Funding funding) {
+		int result = fundingDAO.fundUpdate(funding);
+		return result;
+	}
 }

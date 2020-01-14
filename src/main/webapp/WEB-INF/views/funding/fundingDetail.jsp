@@ -3,41 +3,47 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+
 
 <script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
 
- <security:authorize access="isAuthenticated()">
-	<security:authentication var="principal" property="principal"/>
-</security:authorize>
+ <sec:authorize access="isAuthenticated()">
+	<sec:authentication var="principal" property="principal"/>
+</sec:authorize>
 
 
 <script type="text/javascript">
 //jquery
 $(function() {
+	
+	$("#fundingModifyBtn").click(function(){
+		location.href="${pageContext.request.contextPath}/fundingModifyBtn/${funding.code}";
+	});
+	
 	var IMP = window.IMP;
 	IMP.init('imp72693952');
 	
-	if(${likes != null}){
-		$(".insertLikes").hide();
-		$(".deleteLikes").show();
-	}else{
+	if(!'${likes.fundingCode}'){
 		$(".insertLikes").show();
 		$(".deleteLikes").hide();
+	}else{
+		$(".insertLikes").hide();
+		$(".deleteLikes").show();
 	}
 	$(".insertLikes").on("click", function() {
-		 if(${principal == null})
+		if(!'${principal.code}')
 			alert("로그인 후 사용가능합니다.");
-		else 
+		else
 			$.ajax({
 				url : "${pageContext.request.contextPath}/likes/insert", // 서버요청주소
 				type : "post", // 요청방식(get | post | put | patch | delete)
 				data : "fundingCode=${funding.code}",
 				dataType : "text", //서버가 보내온 데이터 타입
-				beforeSend : function(xhr)
-	            {   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
+				/* beforeSend : function(xhr)
+	            {   //데이터를 전송하기 전에 헤더에 csrf값을 설정한다
 	                xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
-	            },
+	            }, */
 				success : function(result) {
 					if(result == '1')
 						alert("좋아요가 등록되었습니다.");
@@ -56,10 +62,6 @@ $(function() {
 			type : "post", // 요청방식(get | post | put | patch | delete)
 			data : "fundingCode=${funding.code}",
 			dataType : "text", //서버가 보내온 데이터 타입
-			beforeSend : function(xhr)
-            {   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
-                xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
-            },
 			success : function(result) {
 				if(result == '1')
 					alert("좋아요가 취소되었습니다.");
@@ -76,18 +78,14 @@ $(function() {
 		var fundingCode = ${funding.code};
 		var content = $('input[name="form_content"]').val();
 		var subject = $('input[name="form_subject"]').val();
-		//alert(1);
-		 if(${principal == null})
+		if(!'${principal.code}')
 			alert("로그인 후 사용가능합니다.");
-		else 
+		else
 			$.ajax({
 				url: "fundingQuestionInsert", // 서버요청주소
 				type: "post", // 요청방식
 				data: {fundingCode : fundingCode, subject : subject, content : content},
 				dataType: "text",
-				beforeSend: function (xhr){
-					xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
-				},
 				success: function (result) {
 					if(result == '1')
 						alert("문의가 등록되었습니다.");
@@ -104,7 +102,7 @@ $(function() {
 		var qty = $('input[name="quantity"]').val();
 		var customerUid = '${principal.id}' + new Date().getTime();
 		
-		 if(${principal == null})
+		if(!'${principal.code}')
 			alert("로그인 후 사용가능합니다.");
 		else{
 			//예약 결제를 위한 빌링키 발급
@@ -138,10 +136,6 @@ $(function() {
 						type: "post",
 						data: {fundingCode : fundingCode, price : price, qty : qty},
 						dataType: "text",
-						beforeSend: function (xhr) 
-						{
-							xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
-						},
 						success: function (result) {
 							if(result == '1')
 								alert("펀딩이 추가 되었습니다.");
@@ -158,8 +152,9 @@ $(function() {
 			
 			    alert(msg);
 			});
-		//}
+		}
 	});
+	//펀딩하기
 	//펀딩하기
 });
 //jquery End
@@ -203,7 +198,17 @@ $(function() {
 						<%-- <form action="transfer"> --%>
 						<div class="col-md-7">
 							<div class="product-summary">
-								<h2 class="product-title">${funding.title}</h2>
+								<h2 class="product-title">${funding.title}
+								
+								 <sec:authorize access="hasRole('ROLE_ADMIN')"> 
+								<span style="float:right">
+									<button style="text-align: right;" class="btn btn-default btn-theme-colored mt-5 font-16 btn-sm" type="button" id="fundingModifyBtn" name="fundingModifyBtn">
+													수정하기 <i class="fa fa-gear"></i>
+												</button>
+												</span>
+								
+								</sec:authorize></h2>
+								
 								<div class="product_review">
 									<ul class="review_text list-inline">
 										<li>
