@@ -16,6 +16,7 @@ import team.hunter.model.dto.Likes;
 import team.hunter.model.dto.Member;
 import team.hunter.model.service.FundingService;
 import team.hunter.model.service.LikesService;
+import team.hunter.model.service.MemberService;
 import team.hunter.model.service.PurchaseService;
 
 @Controller
@@ -28,6 +29,9 @@ public class FundingController {
 	
 	@Autowired
 	private PurchaseService purchaseService;
+	
+	@Autowired
+	private MemberService memberService;
 
 	//목록 페이지 진입
 	@RequestMapping("/funding")
@@ -44,7 +48,7 @@ public class FundingController {
 		
 		model.addAttribute("funding", service.selectByCode(code));
 		model.addAttribute("fundingSponser", purchaseService.countFundingCode(code));
-		
+		model.addAttribute("juso", memberService.selectMemberByCode(service.selectByCode(code).getMdCode()));
 		if(member != null)
 			model.addAttribute("likes", likesService.select(new Likes(member.getCode(), code)));	
 		
