@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.siot.IamportRestClient.IamportClient;
-import com.siot.IamportRestClient.request.ScheduleData;
-import com.siot.IamportRestClient.request.ScheduleEntry;
-import com.siot.IamportRestClient.response.IamportResponse;
-import com.siot.IamportRestClient.response.Schedule;
+//import com.siot.IamportRestClient.IamportClient;
+//import com.siot.IamportRestClient.request.ScheduleData;
+//import com.siot.IamportRestClient.request.ScheduleEntry;
+//import com.siot.IamportRestClient.response.IamportResponse;
+//import com.siot.IamportRestClient.response.Schedule;
 import com.sun.xml.internal.ws.wsdl.writer.document.Import;
 
 import team.hunter.model.dto.Funding;
@@ -41,7 +41,7 @@ public class PurchaseController {
 	@Autowired
 	private FundingService fundingService;
 	
-	private IamportClient iamportClient;
+	//private IamportClient iamportClient;
 	
 //	@Autowired
 //	private PurchaseSchedule purchaseSchedule;
@@ -51,7 +51,7 @@ public class PurchaseController {
 	public int insertPurchase(int fundingCode, int price, int qty, String customerUid, String merchantUid) {
 		Member member = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Purchase purchase = new Purchase(0, member.getCode(), fundingCode, price, qty, null, null, null, null, customerUid, merchantUid, null);
-		iamportClient = new IamportClient("9641301071926320", "DGvvhuqgbRnvUxwBIwOoU5tDk5AH28ZGPvb7ZCnbtLHnjdZ1JOpETTieYSW11WIRrTYrvmCZ7jnqxnrh");
+		//iamportClient = new IamportClient("9641301071926320", "DGvvhuqgbRnvUxwBIwOoU5tDk5AH28ZGPvb7ZCnbtLHnjdZ1JOpETTieYSW11WIRrTYrvmCZ7jnqxnrh");
 		
 		//purchaseSchedule.requestSchedulePusrchase(purchase);
 		//결제 시도 시각 설정
@@ -67,19 +67,19 @@ public class PurchaseController {
 			date = dateformat.parse(fundingEndDate);
 			System.out.println("date : " + date);
 			//long unixTime = (long)date.getTime()/1000;
-			ScheduleData data = new ScheduleData(customerUid);
-			ScheduleEntry entry = new ScheduleEntry(merchantUid, date, new BigDecimal(price*qty));
-			data.addSchedule(entry);
-			System.out.println("token : " + iamportClient.getAuth().getResponse().getToken());
-			System.out.println("customerUid : " + customerUid);
-			System.out.println("data.getSchedules().get(0).getMerchantUid() : " + data.getSchedules().get(0).getMerchantUid());
-			System.out.println("data.getSchedules().get(0).getScheduleAt() : " + data.getSchedules().get(0).getScheduleAt());
-			System.out.println("data.getSchedules().get(0).getAmount() : " + data.getSchedules().get(0).getAmount());
-			
-			IamportResponse<List<Schedule>> iamportResponse = iamportClient.subscribeSchedule(data);
-			System.out.println("iamportResponse.getCode() : " + iamportResponse.getCode());
-			System.out.println("iamportResponse.getMessage() "+ iamportResponse.getMessage());
-			System.out.println("iamportResponse.getResponse() : "+ iamportResponse.getResponse().get(0).toString());
+			//ScheduleData data = new ScheduleData(customerUid);
+			//ScheduleEntry entry = new ScheduleEntry(merchantUid, date, new BigDecimal(price*qty));
+//			data.addSchedule(entry);
+//			System.out.println("token : " + iamportClient.getAuth().getResponse().getToken());
+//			System.out.println("customerUid : " + customerUid);
+//			System.out.println("data.getSchedules().get(0).getMerchantUid() : " + data.getSchedules().get(0).getMerchantUid());
+//			System.out.println("data.getSchedules().get(0).getScheduleAt() : " + data.getSchedules().get(0).getScheduleAt());
+//			System.out.println("data.getSchedules().get(0).getAmount() : " + data.getSchedules().get(0).getAmount());
+//			
+//			IamportResponse<List<Schedule>> iamportResponse = iamportClient.subscribeSchedule(data);
+//			System.out.println("iamportResponse.getCode() : " + iamportResponse.getCode());
+//			System.out.println("iamportResponse.getMessage() "+ iamportResponse.getMessage());
+//			System.out.println("iamportResponse.getResponse() : "+ iamportResponse.getResponse().get(0).toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
