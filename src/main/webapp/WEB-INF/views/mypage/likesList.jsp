@@ -90,6 +90,9 @@
 
 	let renderList = function(mode, item) {
 		var per = Math.floor(item.stackPrice / item.goalPrice * 100);
+		var perStyle = per;
+		if(per > 100)
+			perStyle = 100;
 		let html = '<div class="col-sm-6 col-md-3 wow fadeIn">';
 		html += '<div class="causes bg-silver-light maxwidth500 mb-30">';
 		html += '<div class="thumb">';
@@ -117,7 +120,7 @@
 		html += '</ul>';
 		html += '<div class="progress-item mt-5">';
 		html += '<div class="progress mb-0">';
-		html += '<div data-percent="' + per + '" class="progress-bar appeared" style="width: ' + per + '%;">';
+		html += '<div data-percent="' + per + '" class="progress-bar appeared" style="width: ' + perStyle + '%;">';
 		html += '<span class="percent">0</span><span class="percent">' + per + '%</span>';
 		html += '</div>';
 		html += '</div>';
@@ -215,11 +218,9 @@
 									<div class="progress-item mt-5">
 										<div class="progress mb-0">
 											<c:set var="per" value="${fundingList.stackPrice/fundingList.goalPrice *100}"/>
-											<c:if test="${per} > 100">
+											<c:if test="${per > 100}">
 												<c:set var="per" value="100"/>
-											
 											</c:if>
-									
 											<div data-percent="${fundingList.stackPrice/fundingList.goalPrice *100}" class="progress-bar appeared" style="width: ${per}%;">
 												<span class="percent">0</span><span class="percent"><fmt:formatNumber value="${fundingList.stackPrice / fundingList.goalPrice}" type="percent" /></span>
 											</div>

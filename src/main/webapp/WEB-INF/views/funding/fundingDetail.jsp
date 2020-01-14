@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
@@ -16,7 +15,6 @@
 <script type="text/javascript">
 //jquery
 $(function() {
-	
 	$("#fundingModifyBtn").click(function(){
 		location.href="${pageContext.request.contextPath}/fundingModifyBtn/${funding.code}";
 	});
@@ -166,10 +164,9 @@ $(function() {
 					alert(err + "오류 발생");
 				}
 			}); */
-			
+			//펀딩하기
 		}
 	});
-	//펀딩하기
 	//펀딩하기
 });
 //jquery End
@@ -292,15 +289,19 @@ $(function() {
 							</div>
 							<div class="progress-item mt-15">
 								<div class="progress mb-0">
+									<c:set var="per" value="${funding.stackPrice/funding.goalPrice *100}"/>
+									<c:if test="${per > 100}">
+										<c:set var="per" value="100"/>
+									</c:if>
 									<div
 										data-percent="${funding.stackPrice/funding.goalPrice *100}"
 										class="progress-bar appeared"
-										style="width: ${funding.stackPrice/funding.goalPrice *100}%;">
+										style="width: ${per}%;">
 										<span class="percent"><fmt:formatNumber value="${funding.stackPrice/funding.goalPrice}" type="percent"/></span>
 									</div>
 								</div>
 							</div>
-							<div class="pull-right font-weight-400 text-black-333 pr-0 mt-15 mb-15">
+							<div class="pull-right font-weight-400 text-black-333 mt-15 mb-15">
 								<button class="single_add_to_cart_button btn btn-theme-colored deleteLikes" type="button">
 									좋아요 취소 <i class="fa fa-thumbs-down text-white mr-10"></i>
 								</button>
@@ -311,36 +312,36 @@ $(function() {
 								<div class="font-icon-list col-md-2 col-sm-3 col-xs-6 col-xs-6"></div>
 							</div>
 						</div>
-						<%-- </form> --%>
-						<div class="cart-form-wrapper mt-30">
-							<!-- <input type="hidden" value="productID" name="add-to-cart"> -->
-							<table class="table variations no-border">
-								<tbody>
-									<tr>
-										<td class="col-md-5"></td>
-										<td class="name col-md-1"><div class="mt-10">수량</div></td>
-										<td class="value mt-10 col-md-4">
-											<div class="quantity buttons_added mt-10">
-												<input type="button" class="minus" value="-"> 
-												<input type="number" size="4" class="input-text qty text" title="Qty" value="1" name="quantity" min="1" step="1">
-												<input type="button" class="plus" value="+">
-											</div>
-										</td>
-										<td class="col-md-2">
-											<div class="pull-right font-weight-400 text-black-333 pr-0">
-												<button class="btn btn-default btn-theme-colored mt-5 font-16 btn-sm addFunding" type="button">
-													펀딩하기<i class="flaticon-charity-make-a-donation font-16 ml-5"></i>
-												</button>
-											</div>
-										</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
+						<c:if test="${funding.fundingState == 501}">
+							<div class="cart-form-wrapper mt-30">
+								<!-- <input type="hidden" value="productID" name="add-to-cart"> -->
+								<table class="table variations no-border">
+									<tbody>
+										<tr>
+											<td class="col-md-5"></td>
+											<td class="name col-md-1"><div class="mt-10">수량</div></td>
+											<td class="value mt-10 col-md-4">
+												<div class="quantity buttons_added mt-10">
+													<input type="button" class="minus" value="-"> 
+													<input type="number" size="4" class="input-text qty text" title="Qty" value="1" name="quantity" min="1" step="1">
+													<input type="button" class="plus" value="+">
+												</div>
+											</td>
+											<td class="col-md-2">
+												<div class="pull-right font-weight-400 text-black-333 pr-0">
+													<button class="btn btn-default btn-theme-colored mt-5 font-16 btn-sm addFunding" type="button">
+														펀딩하기<i class="flaticon-charity-make-a-donation font-16 ml-5"></i>
+													</button>
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</c:if>
 					</div>
 				</div>
-				<form id="product_form" name="product_form" action="${pageContext.request.contextPath}/funding/fundingQuestionInsert"
-				method="post">
+				<form id="product_form" name="product_form" action="${pageContext.request.contextPath}/funding/fundingQuestionInsert" method="post">
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 					<div class="col-md-12">
 						<div class="horizontal-tab product-tab">
@@ -351,70 +352,16 @@ $(function() {
 							</ul>
 							<div class="tab-content">
 								<div class="tab-pane fade in active" id="tab1">
-									<!-- <h3>Product Description</h3>
-									<p>One Lorem ipsum dolor sit amet, consectetur adipisicing
-										elit. Quaerat, iste, architecto ullam tenetur quia nemo
-										ratione tempora consectetur quos minus voluptates nisi hic
-										alias libero explicabo reiciendis sint ut quo nulla ipsa
-										aliquid neque molestias et qui sunt. Odit, molestiae. One
-										Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-										Quaerat, iste, architecto ullam tenetur quia nemo ratione
-										tempora consectetur quos minus voluptates nisi hic alias
-										libero explicabo reiciendis sint ut quo nulla ipsa aliquid
-										neque molestias et qui sunt. Odit, molestiae.</p>
-									<p>One Lorem ipsum dolor sit amet, consectetur adipisicing
-										elit. Quaerat, iste, architecto ullam tenetur quia nemo
-										ratione tempora consectetur quos minus voluptates nisi hic
-										alias libero explicabo reiciendis sint ut quo nulla ipsa
-										aliquid neque molestias et qui sunt. Odit, molestiae.</p> -->
 										<img src="${pageContext.request.contextPath}/resources/images/funding/Detail_${funding.image}" alt="">
-									<!-- <table class="table table-striped">
-										<tbody>
-											<tr>
-												<th>Brand</th>
-												<td><p>Envato</p></td>
-											</tr>
-											<tr>
-												<th>Color</th>
-												<td><p>Brown</p></td>
-											</tr>
-											<tr>
-												<th>Size</th>
-												<td><p>Large, Medium</p></td>
-											</tr>
-											<tr>
-												<th>Weight</th>
-												<td>27 kg</td>
-											</tr>
-											<tr>
-												<th>Dimensions</th>
-												<td>16 x 22 x 123 cm</td>
-											</tr>
-										</tbody>
-									</table> -->
 								</div>
 									<div class="tab-pane fade" id="tab2">
-									<!-- <div class="col-sm-6"> -->
 									<div class="funding_question">
 										<label>제목 <small>*</small></label> 
 										<input name="form_subject" type="text" placeholder="제목을 입력해 주세요." class="form-control">
 										<label>문의내용 <small>*</small></label>
-										<input name="form_content" type="text" 
-											class="form-control required" rows="5"
-											placeholder="내용을 입력해 주세요.">
-										
-										<button type="button" class="btn btn-dark btn-flat question"
-											data-toggle="modal" data-target=".bs-example-modal-sm">문의하기</button>
-
-										<!-- <div class="modal fade bs-example-modal-sm" tabindex="-1"
-											role="dialog" aria-labelledby="mySmallModalLabel">
-											<div class="modal-dialog modal-sm">
-												<div class="modal-content">문의가 등록 되었습니다.</div>
-											</div>
-										</div> -->
-										<!-- </div> -->
+										<input name="form_content" type="text"  class="form-control required" rows="5" placeholder="내용을 입력해 주세요.">
+										<button type="button" class="btn btn-dark btn-flat question" data-toggle="modal" data-target=".bs-example-modal-sm">문의하기</button>
 									</div>
-									<!-- </div> -->
 								</div>
 								<div class="tab-pane fade" id="tab3">
 									<!-- <div class="col-sm-6"> -->
