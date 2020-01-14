@@ -437,10 +437,14 @@
 									</ul>
 									<div class="progress-item mt-5">
 										<div class="progress mb-0">
+											<c:set var="per" value="${list.stackPrice/list.goalPrice*100}"/>
+											<c:if test="${per > 100}">
+												<c:set var="per" value="100"/>
+											</c:if>
 											<div
 												data-percent="${list.stackPrice/list.goalPrice *100}"
 												class="progress-bar appeared"
-												style="width: ${list.stackPrice/list.goalPrice *100}%;">
+												style="width: ${per}%;">
 												<span class="percent">0</span><span class="percent"><fmt:formatNumber value="${list.stackPrice/list.goalPrice}" type="percent"/></span>
 											</div>
 										</div>
@@ -485,10 +489,14 @@
 									</ul>
 									<div class="progress-item mt-5">
 										<div class="progress mb-0">
+											<c:set var="per" value="${list.stackPrice/list.goalPrice}"/>
+												<c:if test="${per > 100}">
+													<c:set var="per" value="100"/>
+											</c:if>
 											<div
 												data-percent="${list.stackPrice/list.goalPrice *100}"
 												class="progress-bar appeared"
-												style="width: ${list.stackPrice/list.goalPrice *100}%;">
+												style="width: ${per}"%;">
 												<span class="percent">0</span><span class="percent"><fmt:formatNumber value="${list.stackPrice/list.goalPrice}" type="percent"/></span>
 											</div>
 										</div>
@@ -532,10 +540,14 @@
 									</ul>
 									<div class="progress-item mt-5">
 										<div class="progress mb-0">
+											<c:set var="per" value="${list.stackPrice/list.goalPrice}"/>
+												<c:if test="${per > 100}">
+													<c:set var="per" value="100"/>
+												</c:if>
 											<div
 												data-percent="${list.stackPrice/list.goalPrice *100}"
 												class="progress-bar appeared"
-												style="width: ${list.stackPrice/list.goalPrice *100}%;">
+												style="width: ${per}%;">
 												<span class="percent">0</span><span class="percent"><fmt:formatNumber value="${list.stackPrice/list.goalPrice}" type="percent"/></span>
 											</div>
 										</div>
