@@ -36,10 +36,22 @@ public class myPageController {
 	@Autowired private FundingRequestService fundingReqService;
 	
 	@RequestMapping("myQuestion")
-	public ModelAndView personalQuestionList() {
+	public ModelAndView personalQuestionList(@RequestParam(defaultValue = "1") int curPage) {
+		ModelAndView mv = new ModelAndView();
 		Member member =(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		List<PersonalQuestion> list = personalQs.personalQuestionList(member.getCode());
-		return new ModelAndView("mypage/personalQuestionList", "list", list);
+		int listCnt = personalQs.listCount(member.getCode());
+		Paging paging = new Paging(listCnt, curPage);
+		
+		member.setStartIndex(paging.getStartIndex());
+		member.setCntPerPage(paging.getPageSize());
+		List<PersonalQuestion> list = personalQs.personalQuestionList(member);
+		
+		mv.addObject("list", list);
+		mv.addObject("listCnt", listCnt);
+		mv.addObject("paging", paging);
+		mv.setViewName("mypage/personalQuestionList");
+		
+		return mv;
 	}
 	
 	@RequestMapping("personalQuestionForm")

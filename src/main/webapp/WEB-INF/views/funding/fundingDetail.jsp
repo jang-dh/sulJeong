@@ -264,7 +264,7 @@ $(function() {
 									<strong>펀딩종료 </strong>
 								</div>
 								<div class="col-md-3">
-									<div class="text-center" data-countdown="2020/03/01"></div>
+									<div class="text-center" data-countdown="${funding.endDate}"></div>
 								</div>
 								<script type="text/javascript">
 									$(document).ready(function() {
