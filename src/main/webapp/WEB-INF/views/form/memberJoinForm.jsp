@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 
-	 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script type="text/javascript">
 	function goPopup() {
 		//경로는 시스템에 맞게 수정하여 사용
@@ -115,15 +115,22 @@
 		});
 		
 		//popAuth.document.getElementById("Authenticate").click(function() {
-		popAuth.document.on("click", "#Authenticate", function() {
-			alert($("#hidden").val());
-			if($("#hidden").val()==true){
-				$("#Authenticate").val("성인인증 완료");
-				authStatus == '4';
-			}else if($("#hidden").val()==false){
-				authStatus == '3';
-			}
-		});
+		
+		
+		function completeCallback(result){
+			alert(result);
+			
+			popAuth.document.on("click", "#Authenticate", function() {
+				alert(1);
+				alert($("#hidden").val());
+				if($("#hidden").val()==true){
+					$("#Authenticate").val("성인인증 완료");
+					authStatus == '4';
+				}else if($("#hidden").val()==false){
+					authStatus == '3';
+				}
+			});
+		}
 
 	});
 

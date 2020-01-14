@@ -55,6 +55,7 @@
            if(birth >= 20) {
         	   alert("인증성공");
         	   var result = true;                 // 전송 파라미터 값
+        	   //opener.parent.completeCallback(result);
         	   opener.document.getElementById("hidden").value = result
         	    // 호출 한 뒤 현재 팝업 창 닫기 이벤트
         	    close();
