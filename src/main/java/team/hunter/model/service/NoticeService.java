@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import team.hunter.model.dto.Funding;
 import team.hunter.model.dto.FundingRequest;
+import team.hunter.model.dto.Member;
 import team.hunter.model.dto.Notice;
 
 public interface NoticeService {
@@ -80,6 +81,12 @@ public interface NoticeService {
 	 * 펀딩등록신청 순서대로 가지고 나오기
 	 * */
 	List<FundingRequest> fundingRequestList(int startIndex, int cntPerPage);
+	
+	
+	/**
+	 * 매일 통계 테이블 insert해주기
+	 * */
+	int insertStatistics();
 	
 	
 	

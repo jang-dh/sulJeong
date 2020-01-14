@@ -65,6 +65,7 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 
 	@Override
+	@Transactional
 	public int fundInsert(Funding funding, int code) {
 		int result = dao.fundInsert(funding);
 		int result2 = dao.fundingRequestStateChange(code);
@@ -117,6 +118,12 @@ public class NoticeServiceImpl implements NoticeService {
 	public List<FundingRequest> fundingRequestList(int startIndex, int cntPerPage) {
 		
 		return dao.fundingRequestList(startIndex, cntPerPage);
+	}
+
+	@Override
+	public int insertStatistics() {
+		// TODO Auto-generated method stub
+		return dao.insertStatistics();
 	}
 
 }

@@ -61,7 +61,7 @@
 											<c:set var="length" value="${fn:length(list)}" />
 											<c:forEach items="${list}" var="request" varStatus="status">
 												<tr>
-													<th scope="row">${length-status.index}</th>
+													<th scope="row">${request.code}</th>
 													<td><a
 														href="${pageContext.request.contextPath}/admin/fundingRequestDetail?code=${request.code}">${request.subject}</a></td>
 													<td>${request.regdate}</td>

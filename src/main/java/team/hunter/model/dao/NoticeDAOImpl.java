@@ -114,4 +114,10 @@ public class NoticeDAOImpl implements NoticeDAO {
 		return session.selectList("noticeMapper.fundingRequestList", map);
 	}
 
+	@Override
+	public int insertStatistics() {
+		
+		return session.insert("noticeMapper.insertStatistics");
+	}
+
 }

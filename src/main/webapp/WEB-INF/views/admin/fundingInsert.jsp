@@ -170,11 +170,13 @@
                         <c:when test="${empty funding}">
                        	  <div class="form-group">
 						<label>썸네일 업로드</label>
-					    <input id="file" name="file" class="file"	type="file" multiple data-show-upload="false" data-show-caption="true"> 
+					    <input name="file" class="file"	type="file" multiple data-show-upload="false" data-show-caption="true">
+					    <small>이미지 파일을 첨부해 주세요</small> 
 					  </div>
 					  <div class="form-group">
 						<label>상세보기 업로드</label>
-					    <input id="file2" name="file2" class="file"	type="file" multiple data-show-upload="false" data-show-caption="true"> 
+					    <input name="file2" class="file"	type="file" multiple data-show-upload="false" data-show-caption="true">
+					    <small>이미지 파일을 첨부해 주세요</small> 
 					  </div>
                         </c:when>
                         <c:otherwise>
@@ -182,6 +184,7 @@
                          <label>썸네일 업로드</label>
                           </div>
                           <input id="file3" name="file" class="file" 	type="file" multiple data-show-upload="false" data-show-caption="true" visbility="hidden" > 
+                          <small>이미지 파일을 첨부해 주세요</small> 
                          <button type="button" id="selectFileBtn1">파일 선택</button>
                          <span id="Thumnail">${funding.image}</span>
                         
@@ -189,6 +192,7 @@
 						<label>상세보기 업로드</label>
 						 </div>
 						 <input id="file4" name="file2" class="file"	type="file" multiple data-show-upload="false" data-show-caption="true" visbility="hidden"> 
+                          <small>이미지 파일을 첨부해 주세요</small> 
 						 <button type="button" id="selectFileBtn2">파일 선택</button>
 					    <span id="Detail">${funding.image}</span>
                          </c:otherwise>

@@ -3,41 +3,51 @@
 <mapper namespace="purchaseMapper">
 
 	<!-- 후원한 펀딩 내역 페이지 - 펀딩 후원 내역 resultMap -->
-	<resultMap type="funding" id="recipientInformationMap">
+	<resultMap type="purchase" id="listDetailInformationMap">
 		<id column="code" property="code" />
-		<result column="title" property="title" />
-		<association property="member" javaType="member">
-			<id column="code" property="code" />
-			<result column="name" property="name" />
-			<result column="addr" property="addr" />
-			<result column="phone" property="phone" />
-		</association>
+		<result column="purchase_state" property="purchaseState" />
+		<result column="purchase_date" property="purchaseDate"/>
+		<result column="courier" property="courier"/>
+		<result column="delivery_number" property="deliveryNumber"/>
+		<result column="price" property="price"/>
+		<result column="qty" property="qty"/>
+			<association property="funding" javaType="funding">
+				<id column="code" property="code"/>
+				<result column="funding_state" property="fundingState"/>
+				<result column="title" property="title"/>
+				<result column="reward_price" property="rewardPrice"/>
+			</association>
 	</resultMap>
-
-	<select id="selectPurchaseByMemberCode" resultType="purchase" parameterType="int">
-		select code, member_code, funding_code, price, qty, purchase_state, purchase_date, delivery_number, courier
-		from purchase
-		where member_code = #{_parameter}
-	</select>
 	
 	<insert id="insert" parameterType="purchase">
-		insert into purchase (code, member_code, funding_code, price, qty, purchase_state, purchase_date, delivery_number, Courier) 
+		insert into purchase (code, member_code, funding_code, price, qty, purchase_state, purchase_date, delivery_number, courier) 
 		values (seq_no.nextval, #{memberCode}, #{fundingCode}, #{price}, #{qty},
 		 #{purchaseState}, sysdate, #{deliveryNumber}, #{courier})
 	</insert>
 	
-	<select id="recipientInformation"
-		resultMap="recipientInformationMap" parameterType="int">
-		select f.title , m.name, m.addr, m.phone
-		from funding f inner join member m
-		on f.member_code = m.code
+	<!-- 후원자 정보 출력 -->
+	<select id="selectListByMemberCode" resultType="member" parameterType="int">
+	select distinct code, name, addr, phone from member where code = #{_parameter}
+	</select>
+	
+	<!-- 후원 리스트 출력 -->
+	<select id="listDetail"
+		resultMap="listDetailInformationMap" parameterType="int">
+		select p.code, p.purchase_state, p.purchase_date, p.courier, 
+			p.delivery_number, p.price, p.qty, f.funding_state, f.title, f.reward_price
+		from member m inner join purchase p
+		on m.code = p.member_code
+		inner join funding f
+		on f.code = p.funding_code
 		where m.code = #{_parameter}
 	</select>
 	
+	<!-- 후원 인원 카운트 -->
 	<select id="countFundingCode" parameterType="int" resultType="int">
 		select count(*) from purchase where funding_code = #{_parameter}
 	</select>
 	
+	<!-- 후원 취소 -->
 	<delete id="delete" parameterType="purchase">
 		delete from purchase where code = #{code}
 	</delete>

@@ -24,9 +24,23 @@
 	
 $(function(){
 	
+	var flage = false; // 비밀번호 일치 여부
+	
 	if("${member.emailAccept}"=="1"){
 		$("#emailAccept").attr("checked", true);
 	}
+	
+	$('#pwdCheck').keyup(function(){
+		  if($('#pwdCheck').val()!=$('#pwd').val()){
+		    $('#pwdEqualCheck').text('');
+		    $('#pwdEqualCheck').html("암호가 일치하지 않습니다. 다시 확인해주세요.").css("color","red"); 
+		    flage = false;
+		  }else{
+		    $('#pwdEqualCheck').text('');
+		    $('#pwdEqualCheck').html("암호가 일치합니다.").css("color","blue");
+		    flage = true;
+		  }
+	});
 	
 	$("#reg-form").submit(function() {
 		if($('#pwd').val()==""){
@@ -56,6 +70,11 @@ $(function(){
 			alert("주소를 입력해주세요");
 			$('#addr').focus();
 			return false;
+		}
+		
+		if(flage == false){
+			  alert("비밀번호 일치 여부 확인해주세요");
+			  return false;
 		}
 		
 		if($('input:checkbox[id=emailAccept]').is(':checked') == true){
@@ -149,6 +168,7 @@ $(function(){
 								<label>Re-enter Password</label> <input id="pwdCheck"
 									name="pwdCheck" class="form-control" type="password">
 							</div>
+							<div class="form-group col-md-6" id="pwdEqualCheck">비밀번호 확인</div>
 						</div>
 
 						<div class="row">

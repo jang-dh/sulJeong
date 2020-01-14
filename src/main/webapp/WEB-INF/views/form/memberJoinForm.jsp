@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 
-	 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script type="text/javascript">
 	function goPopup() {
 		//경로는 시스템에 맞게 수정하여 사용
@@ -16,7 +16,7 @@
 	}
 	
 	function goAuthPopup() {
-		var pop = window.open("${pageContext.request.contextPath}/identity/identityAuth", "pop","width=570,height=420, scrollbars=yes, resizable=yes");
+		var popAuth = window.open("${pageContext.request.contextPath}/identity/identityAuth", "pop","width=570,height=420, scrollbars=yes, resizable=yes");
 	}
 
 	function jusoCallBack(roadFullAddr, addrDetail, jibunAddr) {
@@ -29,13 +29,9 @@
 	
 	$(function() {
 		
-		var status = '0';
-		
-		
-		/* $("#Authenticate").click(function(){
-
-			window.open("${pageContext.request.contextPath}/identityVerificationForm", "본인 인증", "width=500,height=600");
-		}); */
+		var status = '0'; //아이디 중복체크 상태변수
+		var authStatus = '3';//성인인증 상태변수
+		var flage = false; // 비밀번호 일치 여부
 		
 		$("#idDuplicateCheck").click(function(){
 			
@@ -65,11 +61,17 @@
 					 }//오류발생했을때
 				 });
 			  
-			  if(status == '0'){
-				  alert("아이디 중복체크를 해주세요");
-				  
-			  }else if(status == '1'){
-				  alert("회원가입에 성공하였습니다.")
+		});
+		
+		$('#pwdCheck').keyup(function(){
+			  if($('#pwdCheck').val()!=$('#pwd').val()){
+			    $('#pwdEqualCheck').text('');
+			    $('#pwdEqualCheck').html("암호가 일치하지 않습니다. 다시 확인해주세요.").css("color","red"); 
+			    flage = false;
+			  }else{
+			    $('#pwdEqualCheck').text('');
+			    $('#pwdEqualCheck').html("암호가 일치합니다.").css("color","blue");
+			    flage = true;
 			  }
 		});
 		
@@ -109,9 +111,40 @@
 				return false;
 			}
 			
+			
+			//alert($('#hidden').val());
+			if($('#hidden').val()=='true'){
+				//alert("인증성공!!!")
+				//alert($('#hidden').val());
+			    authStatus = '4';
+			   // return false;
+			}
+			
+			 if(status == '0'){
+				  alert("아이디 중복체크를 해주세요");
+				  return false;
+			  }else if(authStatus == '3'){
+				  alert("성인인증을 해주시기 바랍니다.");
+				  return false;
+			  }else if(flage == false){
+				  alert("비밀번호 일치 여부 확인해주세요");
+				  return false;
+			  }
+			  
+			 
+			/* if($("#hidden").val()==false){
+				alert("성인인증에 실패하였으므로 회원가입 하실 수 없습니다.");
+				return false;
+			} */
+			
 		});
 		
+		  
+		
+		
+		 
 	});
+		
 
 	function CheckForm(join) {
 		if ($('input:checkbox[id=emailAccept]').is(':checked') == false) {
@@ -173,6 +206,7 @@
 						<label>Re-enter Password</label> <input id="pwdCheck"
 							name="pwdCheck" class="form-control" type="password">
 					</div>
+					<div class="form-group col-md-6" id="pwdEqualCheck">비밀번호 확인</div>
 				</div>
 				
 				<div class="row">
@@ -180,11 +214,20 @@
 						<label>Name</label> <input name="name" id="name"
 							class="form-control" type="text">
 					</div>
+				</div>
+				
+				<div class="row">
 					<div class="form-group col-md-6">
 						<label>Email Address</label> <input name="email" id="email"
 							class="form-control" type="email">
 					</div>
+					<div class="form-group col-md-6">
+						<label>Email Address 인증</label> <input name="emailCheck" id="emailCheck"
+							class="form-control" type="button" value="Email Address 인증">
+					</div>
 				</div>
+				
+				
 				<div class="row">
 					<div class="form-group col-md-6">
 						<label>휴대폰</label> <input name="phone" id="phone"
@@ -220,6 +263,8 @@
 						id="register" name="register">Register Now</button>
 				</div>
 			</form>
+			
+			<input type="hidden" id="hidden" name="hidden">
 			</c:otherwise>
 			</c:choose>
 			
