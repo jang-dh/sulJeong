@@ -26,4 +26,9 @@ public interface Constants {
 	String FUNDING_PRE = "502";
 	String FUNDING_SUCCESSED = "503";
 	String FUNDING_FAILED = "504";
+	
+	//후원 상태 purchase state
+	String PURCHASE_SUCCESSED = "601";
+	String PURCHASE_FAILED = "602";
+
 }

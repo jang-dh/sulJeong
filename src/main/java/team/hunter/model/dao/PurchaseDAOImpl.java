@@ -26,8 +26,9 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 	}
 	
 	@Override
-	public List<Purchase> myPurchaseList(int memberCode) {
-		List<Purchase> list = session.selectList("purchaseMapper.selectPurchaseByMemberCode", memberCode);
+	public List<Purchase> listDetail(int memberCode) {
+		List<Purchase> list = session.selectList("purchaseMapper.listDetail", memberCode);
+		System.out.println("다오에서 리스트 나오냐");
 		return list;
 	}
 	
@@ -38,11 +39,10 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 	}
 	
 	@Override
-	public Funding recipientInformation(int fundingCode) {
-		Funding funding = session.selectOne("purchaseMapper.recipientInformation", fundingCode);
-		return funding;
+	public int selectListByMemberCode(int code) {
+		return session.selectOne("purchaseMapper.selectListByMemberCode", code);
 	}
-	
+
 	@Override
 	public int deleteList(int code) {
 		return session.delete("purchaseMapper.delete", code);
