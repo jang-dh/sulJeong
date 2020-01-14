@@ -43,5 +43,14 @@ public interface PurchaseService {
 	 * */
 	public Member deliveryCodeSelect(int fundingCode, int memberCode);
 	
+	/*
+	 * 펀딩 후원 신청 갯수 가지고 오기
+	 */
+	public int purchaseListCount(int memberCode);
+	
+	/*
+	 * 펀딩등록신청 순서대로 가지고 나오기
+	 */
+	public List<Purchase> purchaseList(int memberCode, int startIndex, int cntPerPage);
 
 }

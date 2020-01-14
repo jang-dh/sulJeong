@@ -135,7 +135,7 @@ $(function() {
 					$.ajax({
 						url: "${pageContext.request.contextPath}/insertPurchase", //서버요청주소
 						type: "post",
-						data: {fundingCode : fundingCode, price : price, qty : qty, customerUid : customerUid, merchantUid : merchantUid},
+						data: {fundingCode : fundingCode, price : price*qty, qty : qty, customerUid : customerUid, merchantUid : merchantUid},
 						dataType: "text",
 						success: function (result) {
 							if(result == '1')

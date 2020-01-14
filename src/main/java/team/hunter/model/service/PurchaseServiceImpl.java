@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import team.hunter.model.dao.FundingDAO;
 import team.hunter.model.dao.PurchaseDAO;
 import team.hunter.model.dto.Funding;
+import team.hunter.model.dto.FundingRequest;
 import team.hunter.model.dto.Member;
 import team.hunter.model.dto.Purchase;
 
@@ -32,8 +33,6 @@ public class PurchaseServiceImpl implements PurchaseService {
 	@Override
 	public List<Purchase> listDetail(int memberCode) {
 		List<Purchase> list = purchaseDAO.listDetail(memberCode);
-		
-		System.out.println("서비스에서 나오냐");
 		return list;
 	}
 	
@@ -67,5 +66,17 @@ public class PurchaseServiceImpl implements PurchaseService {
 	public Member deliveryCodeSelect(int fundingCode, int memberCode) {
 		Member member = purchaseDAO.deliveryCodeSelect(fundingCode, memberCode);
 		return member;
+	}
+	
+	@Override
+	public int purchaseListCount(int memberCode) {
+		return purchaseDAO.purchaseListCount(memberCode);
+	}
+	
+	@Override
+	public List<Purchase> purchaseList(int memberCode, int startIndex, int cntPerPage) {
+		System.out.println("서비스를 가느냐?");
+		System.out.println("서비스를 나오느냐?");
+		return purchaseDAO.purchaseList(memberCode, startIndex, cntPerPage);
 	}
 }

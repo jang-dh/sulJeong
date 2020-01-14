@@ -80,12 +80,22 @@
 		</association>
 	</resultMap>
 	
+	<!-- 페이징 처리 -->
+	<select id="purchaseListCount" resultType="int" parameterType="int">
+		select count(code) from purchase where member_code=#{_parameter}
+	</select>
+	
+	<select id="purchaseList" parameterType="map" resultMap="listDetailInformationMap">
+	<![CDATA[
+		SELECT * 
+		FROM (SELECT a.*, ROWNUM rnum FROM (select p.code, p.purchase_state, p.purchase_date, p.courier, 
+			p.delivery_number, p.price, p.qty, f.funding_state, f.title, f.reward_price
+		from member m inner join purchase p
+		on m.code = p.member_code
+		inner join funding f
+		on f.code = p.funding_code
+		where m.code = #{memberCode} ORDER BY code DESC) a 
+		WHERE ROWNUM <= (#{startIndex}*#{cntPerPage})) WHERE rnum >= ((#{startIndex}-1)*#{cntPerPage}+1)
+	]]>		
+	</select>
 </mapper>	
-
-
-
-
-
-
-
-

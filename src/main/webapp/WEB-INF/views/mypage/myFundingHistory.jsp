@@ -59,13 +59,29 @@
                     <th>가격</th>
                     <th>수량</th>
                     <th>합계</th>
-                    <th>주문상세</th>
+                    <th>후원상세</th>
                   </tr>
                 </thead>
                 <tbody>
                 <c:forEach items="${list}" var="list" varStatus="status">
                   <tr class="cart_item">
-                    <td class="product-thumbnail">${list.purchaseDate }<img alt="member" src="http://placehold.it/320x360"> ${list.purchaseState}</td>
+                    <td class="product-thumbnail" >
+	                    ${list.purchaseDate } <br> 
+						<c:choose>
+							<c:when test="${list.funding.fundingState == 501}">
+								<span class="label label-primary">진행 중</span>
+							</c:when>
+							<c:when test="${list.funding.fundingState == 502}">
+								<span class="label label-default">오픈 전</span>
+							</c:when>
+							<c:when test="${list.funding.fundingState == 503}">
+								<span class="label label-success">달성 성공</span>
+							</c:when>
+							<c:when test="${list.funding.fundingState == 504}">
+								<span class="label label-warning">달성 실패</span>
+							</c:when>
+						</c:choose>
+                    </td>
                     <td class="product-name"><a class="text-theme-colored" href="#">${list.funding.title}</a>
                       <ul class="variation">
                         <li class="product-title"><span>펀딩 코드 : ${list.funding.code}</span></li>
@@ -77,39 +93,51 @@
                         <input type="number" size="4" class="input-text qty text" title="Qty" value="1" name="quantity" min="1" step="1">
                         <input type="button" class="plus" value="+"> -->
                       <!-- </div> --></td>
-                    <td class="product-subtotal"><span class="amount"><fmt:formatNumber>${list.price}</fmt:formatNumber>원</span></td>
+                    <td class="product-subtotal"><span class="amount"><fmt:formatNumber>${list.funding.rewardPrice * list.qty}</fmt:formatNumber>원</span></td>
                     <td>
-	                    <form name="deleteForm" method="post" id="deleteForm">
-	                    	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-	                    	<input type="hidden" name="code" value="${purchase.code}">
-	                    	<input type="button" class="remove" value="후원취소">
-	                    </form>
-	                    <ul>
-	                    	<li class="deliver">송장 번호 : ${list.deliveryNumber }</li>
-	                    	<li class="courier">운송 업체 : ${list.courier }</li>
-	                    </ul>
+                  	 <c:choose>
+					   <c:when test="${list.purchaseState=='603'}">
+							<span class="label label-default">펀딩 결제 예정</span>
+					   </c:when>
+					   <c:when test="${list.purchaseState=='601'}">
+							<span class="label label-info">펀딩 결제 완료</span>
+					   </c:when>
+					   <c:otherwise>
+							<span class="label label-danger">펀딩 결제 취소</span>
+					   </c:otherwise>
+					 </c:choose>
+	                   <form name="deleteForm" method="post" id="deleteForm">
+		                   <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+		                   <input type="hidden" name="code" value="${purchase.code}"/>
+		                   <input type="button" class="btn btn-default btn-xs pull-right" value="후원취소"/>
+	                   </form>
+	                   <ul>
+	                    <li class="deliver"> 송장 번호 : ${list.deliveryNumber}</li>
+	                    <li class="courier"> 운송 업체 : ${list.courier}</li>
+	                   </ul>
                     </td>
                   </tr>
                 </c:forEach>
                 </tbody>
               </table>
             </div>
-            <nav style="text-align: center">
-				<ul class="pagination dark">
-					<li>
-						<a href="#" aria-label="Previous" onClick="fn_paging(${paging.prevPage})"> <span aria-hidden="true">&laquo;</span></a>
-					</li>
-					<c:forEach var="pageNum" begin="${paging.startPage}" end="${paging.endPage}">
-						<li class="numberBtn" value="${pageNum}">
-							<a href="#" onClick="fn_paging(${pageNum})" id="pageBtn">${pageNum} <span class="sr-only">(current)</span></a>
-						</li>
-					</c:forEach>
-					<li>
-						<a href="#" aria-label="Next" onClick="fn_paging(${paging.nextPage})"> <span aria-hidden="true">»</span></a>
-					</li>
-				</ul>
-			</nav>
-            <div class="col-md-10 col-md-offset-1 mt-30">
+					<nav style="text-align: center">
+						<ul class="pagination dark">
+							<li><a href="#" aria-label="Previous"
+								onClick="fn_paging(${paging.prevPage})"> <span
+									aria-hidden="true">&laquo;</span></a></li>
+							<c:forEach var="pageNum" begin="${paging.startPage}"
+								end="${paging.endPage}">
+								<li class="numberBtn" value="${pageNum}"><a href="#"
+									onClick="fn_paging(${pageNum})" id="pageBtn">${pageNum} <span
+										class="sr-only">(current)</span></a></li>
+							</c:forEach>
+							<li><a href="#" aria-label="Next"
+								onClick="fn_paging(${paging.nextPage})"> <span
+									aria-hidden="true">»</span></a></li>
+						</ul>
+					</nav>
+					<div class="col-md-10 col-md-offset-1 mt-30">
               <div class="row">
                 <div class="col-md-6">
                   <h4>받는사람 정보</h4>
@@ -126,9 +154,6 @@
                         </tr>	
                         <tr>
                           <td class="member-phone">연락처 : ${user.phone}</td>
-                        </tr>
-                        <tr>
-                          <td><button type="button" class="btn btn-default">Update Totals</button></td>
                         </tr>
                         </sec:authorize>
                       </tbody>
@@ -153,11 +178,14 @@
                       </tr>
                     </tbody>
                   </table>
-                  <a class="btn btn-default">Proceed to Checkout</a> </div>
+                 </div>
               </div>
             </div>
           </div>
+          
         </div>
+        
+        
       </div>
     </section>
   <!-- end main-content -->

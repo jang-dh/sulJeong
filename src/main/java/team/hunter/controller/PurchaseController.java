@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -21,15 +22,17 @@ import org.springframework.web.servlet.ModelAndView;
 //import com.siot.IamportRestClient.request.ScheduleEntry;
 //import com.siot.IamportRestClient.response.IamportResponse;
 //import com.siot.IamportRestClient.response.Schedule;
-import com.sun.xml.internal.ws.wsdl.writer.document.Import;
+//import com.sun.xml.internal.ws.wsdl.writer.document.Import;
 
 import team.hunter.model.dto.Funding;
 import team.hunter.model.dto.Member;
+import team.hunter.model.dto.Paging;
 import team.hunter.model.dto.Purchase;
 import team.hunter.model.service.FundingService;
 import team.hunter.model.service.PurchaseSchedule;
 import team.hunter.model.service.PurchaseService;
 import team.hunter.model.service.StatisticsService;
+import team.hunter.util.Constants;
 
 @Controller
 public class PurchaseController {
@@ -50,7 +53,7 @@ public class PurchaseController {
 	@ResponseBody
 	public int insertPurchase(int fundingCode, int price, int qty, String customerUid, String merchantUid) {
 		Member member = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		Purchase purchase = new Purchase(0, member.getCode(), fundingCode, price, qty, null, null, null, null, customerUid, merchantUid, null);
+		Purchase purchase = new Purchase(0, member.getCode(), fundingCode, price, qty, Constants.PURCHASE_BEFORE, null, null, null, customerUid, merchantUid, null);
 		//iamportClient = new IamportClient("9641301071926320", "DGvvhuqgbRnvUxwBIwOoU5tDk5AH28ZGPvb7ZCnbtLHnjdZ1JOpETTieYSW11WIRrTYrvmCZ7jnqxnrh");
 		
 		//purchaseSchedule.requestSchedulePusrchase(purchase);
@@ -83,26 +86,31 @@ public class PurchaseController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		statisticsService.updateTotalFundingStackPrice(price);
+		statisticsService.updateTotalFundingStackPrice(price*qty);
 		statisticsService.updateFundingTotalCount();
 		return purchaseService.insert(purchase);
 	}
 	
 	@RequestMapping("/mypage/fundingHistory")
-	public ModelAndView fundingHistory() {
+	public ModelAndView fundingHistory(@RequestParam(defaultValue = "1") int curPage) {
+		System.out.println("나는 페이징 컨트롤 입니다.");
+		ModelAndView mv = new ModelAndView();
 		Member member = (Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		List<Purchase> list = purchaseService.listDetail(member.getCode());
+		int listCnt = purchaseService.purchaseListCount(member.getCode());
+		System.out.println(listCnt);
+		Paging paging = new Paging(listCnt, curPage);
 		
-		for(Purchase p : list) {
-			System.out.println("택배회사 : " + p.getCourier());
-			System.out.println("송장번호 : " + p.getDeliveryNumber());
-			System.out.println("구매일자 : " + p.getPurchaseDate());
-			System.out.println("금액 : " + p.getPrice());
-			System.out.println("구매상태 :  " + p.getPurchaseState());
-			System.out.println("후원상태 : " + p.getFunding().getFundingState());
-		}
-		System.out.println();
-		return new ModelAndView("mypage/myFundingHistory", "list", list);
+		int startIndex = paging.getStartIndex();
+		int cntPerPage = paging.getPageSize();
+		List<Purchase> list = purchaseService.purchaseList(member.getCode(), startIndex, cntPerPage);
+		
+		mv.addObject("list", list);
+		mv.addObject("listCnt", listCnt);
+		mv.addObject("paging", paging);
+		mv.setViewName("mypage/myFundingHistory");
+		System.out.println("나는 페이징 컨트롤을 나왔소");
+		return mv;
+
 	}
 	
 	@RequestMapping("/purchase/delete")
@@ -130,4 +138,24 @@ public class PurchaseController {
 			return "mypage/deliveryUpdateForm";
 		}
 		
+//	@RequestMapping("/mypage/myFundingHistory")
+//	public ModelAndView purchaseList(@RequestParam(defaultValue = "1") int curPage) {
+//		System.out.println("나는 페이징 컨트롤 입니다.");
+//		ModelAndView mv = new ModelAndView();
+//		
+//		int listCnt = purchaseService.purchaseListCount();
+//		Paging paging = new Paging(listCnt, curPage);
+//		
+//		int startIndex = paging.getStartIndex();
+//		int cntPerPage = paging.getPageSize();
+//		List<Purchase> list = purchaseService.purchaseList(startIndex, cntPerPage);
+//		
+//		mv.addObject("list", list);
+//		mv.addObject("listCnt", listCnt);
+//		mv.addObject("paging", paging);
+//		mv.addObject("mypage/myFundingHistory");
+//		System.out.println();
+//		return mv;
+//	}
+	
 }
