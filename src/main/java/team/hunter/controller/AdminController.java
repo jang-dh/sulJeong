@@ -169,7 +169,7 @@ public class AdminController {
 	/**
 	 * 펀딩 수정하기 폼으로 넘어가기
 	 */
-	@RequestMapping("/fundingModify/{code}")
+	@RequestMapping("/admin/fundingModify/{code}")
 	public ModelAndView fundingModifyBtn(@PathVariable int code) {
 		ModelAndView mv = new ModelAndView();
 		Funding funding = fundingService.selectByCode(code);

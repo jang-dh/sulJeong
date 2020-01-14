@@ -156,7 +156,7 @@
 				<div class="row">
 					<div class="form-group col-md-6">
 						<label for="form_choose_username">Choose UserID</label> <input
-							id="id" name="id" class="form-control" type="text">
+							id="id" name="id" class="form-control" type="text" >
 					</div>
 					<div class="form-group col-md-6">
 						<label>아이디 중복 체크</label> <input type="button" value="중복체크"

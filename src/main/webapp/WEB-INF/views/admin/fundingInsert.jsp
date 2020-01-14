@@ -82,7 +82,15 @@
     <section id="home" class="divider bg-lighter">
 
 <div class="bg-lightest border-1px p-25">
-                  <h4 class="text-theme-colored text-uppercase m-0">펀딩 등록</h4>
+					<c:choose>
+						<c:when test="${!empty funding}">
+							 <h4 class="text-theme-colored text-uppercase m-0">펀딩 수정</h4>
+						</c:when>
+						<c:otherwise>
+							<h4 class="text-theme-colored text-uppercase m-0">펀딩 등록</h4>
+						</c:otherwise>
+					</c:choose>
+                 
                   <div class="line-bottom mb-30"></div>
                   <p>다음 항목을 모두 작성해주세요.</p>
                   <form id="appointment_form" name="appointment_form" class="mt-30" method="post" action="${pageContext.request.contextPath}/admin/fundInsert?${_csrf.parameterName}=${_csrf.token}" enctype="multipart/form-data">
@@ -190,7 +198,16 @@
 					 
 					<div class="form-group mb-0 mt-20">
                       <input name="form_botcheck" class="form-control" type="hidden" value="">
-                      <button type="submit" class="btn btn-dark btn-theme-colored" data-loading-text="Please wait...">펀딩 등록</button>
+                      <c:choose>
+						<c:when test="${!empty funding}">
+							  <button type="submit" class="btn btn-dark btn-theme-colored" data-loading-text="Please wait...">펀딩 수정</button>
+						</c:when>
+						<c:otherwise>
+							 <button type="submit" class="btn btn-dark btn-theme-colored" data-loading-text="Please wait...">펀딩 등록</button>
+						</c:otherwise>
+					</c:choose>
+					
+                     
                     </div>
                     <input type="hidden" value="${code}" name="code"/>
                   </form>

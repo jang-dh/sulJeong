@@ -18,7 +18,7 @@
 $(function() {
 	
 	$("#fundingModifyBtn").click(function(){
-		location.href="${pageContext.request.contextPath}/fundingModify/${funding.code}";
+		location.href="${pageContext.request.contextPath}/admin/fundingModify/${funding.code}";
 	});
 	
 	var IMP = window.IMP;
