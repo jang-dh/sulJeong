@@ -77,4 +77,9 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 		System.out.println("다오를 나오느냐?");
 		return session.selectList("purchaseMapper.purchaseList", map);
 	}
+
+	@Override
+	public List<Purchase> selectCanceled() {
+		return session.selectList("purchaseMapper.canceled");
+	}
 }
