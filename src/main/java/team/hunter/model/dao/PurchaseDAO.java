@@ -1,6 +1,7 @@
 package team.hunter.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import team.hunter.model.dto.Member;
 import team.hunter.model.dto.Funding;
@@ -43,5 +44,9 @@ public interface PurchaseDAO {
 	 * 송장번호, 택배사, 맴버정보 조회
 	 * */
 	public Member deliveryCodeSelect(int fundingCode, int memberCode);
-
+	
+	/**
+	 * 우석 : 구매테이블에서 PurchaseState update
+	 * */
+	int updatePurchaseState();
 }
