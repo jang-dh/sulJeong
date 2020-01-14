@@ -20,9 +20,9 @@
 	</resultMap>
 	
 	<insert id="insert" parameterType="purchase">
-		insert into purchase (code, member_code, funding_code, price, qty, purchase_state, purchase_date, delivery_number, courier) 
+		insert into purchase (code, member_code, funding_code, price, qty, purchase_state, purchase_date, delivery_number, courier, customer_uid, merchant_uid) 
 		values (seq_no.nextval, #{memberCode}, #{fundingCode}, #{price}, #{qty},
-		 #{purchaseState}, sysdate, #{deliveryNumber}, #{courier})
+		 #{purchaseState}, sysdate, #{deliveryNumber}, #{courier}, #{customerUid}, #{merchantUid})
 	</insert>
 	
 	<!-- 후원자 정보 출력 -->
@@ -97,5 +97,14 @@
 		where m.code = #{memberCode} ORDER BY code DESC) a 
 		WHERE ROWNUM <= (#{startIndex}*#{cntPerPage})) WHERE rnum >= ((#{startIndex}-1)*#{cntPerPage}+1)
 	]]>		
+	</select>
+	
+	<select id="canceled" resultType="purchase">
+		select code, member_code, funding_code, price, qty, purchase_state, purchase_date, delivery_number, courier, customer_uid, merchant_uid
+		from purchase 
+		where funding_code in (select code
+								from funding
+								where funding_state = '504')
+		and purchase_state = '603'
 	</select>
 </mapper>	

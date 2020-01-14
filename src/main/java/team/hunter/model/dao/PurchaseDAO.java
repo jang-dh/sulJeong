@@ -53,4 +53,9 @@ public interface PurchaseDAO {
 	 * 펀딩등록신청 순서대로 가지고 나오기
 	 */
 	public List<Purchase> purchaseList(int memberCode, int startIndex, int cntPerPage);
+	
+	/**
+	 * 펀딩 달성 실패로 결제 취소할 결제 내역
+	 * */
+	public List<Purchase> selectCanceled();
 }

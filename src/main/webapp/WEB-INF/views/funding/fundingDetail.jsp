@@ -4,13 +4,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
-
 <script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
 
  <sec:authorize access="isAuthenticated()">
 	<sec:authentication var="principal" property="principal"/>
 </sec:authorize>
-
 
 <script type="text/javascript">
 //jquery
@@ -99,7 +97,7 @@ $(function() {
 		var price = ${funding.rewardPrice};
 		var qty = $('input[name="quantity"]').val();
 		var customerUid = '${principal.id}' + new Date().getTime();
-		//var merchantUid = 'merchant_' + new Date().getTime();
+		var merchantUid = 'merchant_' + new Date().getTime();
 		
 		if(!'${principal.code}')
 			alert("로그인 후 사용가능합니다.");
@@ -107,10 +105,10 @@ $(function() {
 			//예약 결제를 위한 빌링키 발급
 			IMP.request_pay({
 			    pay_method : 'card',
-			    merchant_uid : 'merchant_' + new Date().getTime(),
-			    customer_uid : customerUid,
+			    merchant_uid : merchantUid,
+			    //customer_uid : customerUid,
 			    name : '${funding.rewardName}',
-			    amount : 0,
+			    amount : price*qty,
 			    buyer_email : '${principal.email}',
 			    buyer_name : '${principal.name}',
 			    buyer_tel : '${principal.phone}',
@@ -120,15 +118,15 @@ $(function() {
 			    	//빌링키 발급 성공
 			        var msg = '결제가 완료되었습니다.';
 			        //결제 서버에 빌링키 전달
-			        $.ajax({
+			        /* $.ajax({
 			            url: "https://www.myservice.com/billings/", // 서비스 웹서버
 			            method: "POST",
 			            headers: { "Content-Type": "application/json" },
 			            data: {
 			            	customer_uid: customerUid // 카드(빌링키)와 1:1로 대응하는 값
 						}
-					});
-			        var merchantUid = 'merchant_' + new Date().getTime();
+					}); */
+			        //var merchantUid = 'merchant_' + new Date().getTime();
 			        //구매 테이블에 추가
 					$.ajax({
 						url: "${pageContext.request.contextPath}/insertPurchase", //서버요청주소
@@ -211,15 +209,14 @@ $(function() {
 						<div class="col-md-7">
 							<div class="product-summary">
 								<h2 class="product-title">${funding.title}
-								
-								 <sec:authorize access="hasRole('ROLE_ADMIN')"> 
-								<span style="float:right">
-									<button style="text-align: right;" class="btn btn-default btn-theme-colored mt-5 font-16 btn-sm" type="button" id="fundingModifyBtn" name="fundingModifyBtn">
-													수정하기 <i class="fa fa-gear"></i>
-												</button>
-												</span>
-								
-								</sec:authorize></h2>
+									<sec:authorize access="hasRole('ROLE_ADMIN')"> 
+										<span style="float:right">
+											<button style="text-align: right;" class="btn btn-default btn-theme-colored mt-5 font-16 btn-sm" type="button" id="fundingModifyBtn" name="fundingModifyBtn">
+												수정하기 <i class="fa fa-gear"></i>
+											</button>
+										</span>
+									</sec:authorize>
+								</h2>
 								
 								<div class="product_review">
 									<ul class="review_text list-inline">
@@ -244,7 +241,7 @@ $(function() {
 									<strong>판매자:</strong> ${funding.member.name}
 								</div>
 								<div class="category">
-									<strong>Category:</strong>
+									<strong>카테고리:</strong>
 									<c:choose>
 										<c:when test="${funding.category == 301}">탁주</c:when>
 										<c:when test="${funding.category == 302}">청주</c:when>
@@ -393,7 +390,8 @@ $(function() {
 														<li class="prod-delivery-period-contents etc-pdd-info">
 															ㆍ<span>주문 및 결제 완료 후, 2-3일 이내 도착</span>
 														</li>
-														<li class="prod-delivery-period-contents">ㆍ도서 산간 지역등은 
+														<li class="prod-delivery-period-contents">
+															ㆍ도서 산간 지역등은 
 															<p class="prod-delivery-period__notice">ㆍ천재지변, 물량 수급 변동 등 예외적인 사유 발생 시, 다소 지연될 수 있는 점 양해 부탁드립니다.</p>
 														</li>
 													</ul>

@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import team.hunter.model.dao.FundingDAO;
+import team.hunter.model.dao.StatisticsDAO;
 import team.hunter.model.service.FundingService;
 import team.hunter.model.service.NoticeService;
 
@@ -14,6 +16,12 @@ public class TaskService {
 	
 	@Autowired
 	private NoticeService noticeService;
+	
+	@Autowired
+	private FundingDAO fundingDAO;
+	
+	@Autowired
+	private StatisticsDAO statisticsDAO;
 	
 	//@Scheduled(cron = "0 0/30 0 * * *")
 	// @Scheduled(cron="1 0 0 * * *")//매일 0시 0분 1초에 실행
