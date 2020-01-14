@@ -45,7 +45,7 @@
 
 								<h4 class="title">1:1 문의내역</h4>
 
-								<div data-example-id="hoverable-table" class="bs-example">
+								<div data-example-id="hoverable-table" class="bs-example" style="width:70%">
 									<table class="table table-hover">
 										<c:choose>
 											<c:when test="${not empty list}">
