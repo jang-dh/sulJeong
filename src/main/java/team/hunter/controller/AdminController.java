@@ -454,6 +454,15 @@ public class AdminController {
 		return mv;
 	}
 	
+	@RequestMapping("/down2")
+	public ModelAndView down2(String fileName, HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		String path = "C:\\Edu\\springFileSave";
+		mv.addObject("fname", new File(path+"/"+fileName));
+		mv.setViewName("downLoadView"); //bean의 아이디를 찾을 수 있도록 해야한다...
+		return mv;
+	}
+	
 	@RequestMapping("/update")
 	public String update(Notice notice, MultipartFile file, HttpSession session) {
 		try{
@@ -491,6 +500,10 @@ public class AdminController {
 	@RequestMapping("/admin/fundInsert")
 	public String fundInsert(Funding funding, MultipartFile file,MultipartFile file2, HttpSession session, int code) {
 		String fileName = null;
+		String hwak1 = null;
+		String onlyName1 =null;
+		String hwak2 = null;
+		String onlyName2 =null;
 		System.out.println(funding.getOpenDate());
 		System.out.println(funding.getEndDate());
 		SimpleDateFormat originFormat = new SimpleDateFormat("MM/dd/yyyy");
@@ -522,6 +535,12 @@ public class AdminController {
 				//÷�ε� �����̸� ������ ����
 				
 				fileName = file.getOriginalFilename();
+				
+				//파일 이름만 구하기
+				int pos = fileName.lastIndexOf( "." );
+				onlyName1 = fileName.substring(0, pos);
+				//확장자 명 구하기
+				hwak1 = fileName.substring(fileName.lastIndexOf(".")+1,fileName.length());
 				String Thumnail = "Thumnail_"+fileName;
 				funding.setImage(fileName);
 				//notice.setFilename(fileName);
@@ -530,11 +549,16 @@ public class AdminController {
 			
 			if(file2.getSize()>0) {
 				//÷�ε� �����̸� ������ ����
-//				String fileName = file2.getOriginalFilename();
-				String Detail = "Detail_"+fileName;
+				String secondfileName = file2.getOriginalFilename();
+				//확장자 명 구하기
+				hwak2 = secondfileName.substring(secondfileName.lastIndexOf(".")+1,secondfileName.length());
+
+				
+				String Detail = "Detail_"+onlyName1+"."+hwak1;
 				//notice.setFilename(fileName);
 				file2.transferTo(new File(path+"/"+Detail));
 			}
+			
 
 			noticeService.fundInsert(funding, code);
 

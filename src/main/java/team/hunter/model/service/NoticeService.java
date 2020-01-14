@@ -82,5 +82,9 @@ public interface NoticeService {
 	List<FundingRequest> fundingRequestList(int startIndex, int cntPerPage);
 	
 	
+	/**
+	 * 매일 통계 테이블 insert해주기
+	 * */
+	int insertStatistics();
 	
 }
