@@ -173,7 +173,7 @@ $(function(){
 							</div>
 						</div>
 						<div class="form-group">
-							<button class="btn btn-dark btn-lg btn-block mt-15" type="submit" id="register">Register Now</button>
+							<button class="btn btn-border btn-theme-colored btn-lg btn-block mt-15" type="submit" id="register">Register Now</button>
 						</div>
 					</form>
 				</div>
@@ -212,7 +212,7 @@ $(function(){
 						</div>
 
 						<div class="form-group">
-							<button class="btn btn-dark btn-lg btn-block mt-15" type="button" id="membership_withdrawal">membership withdrawal</button>
+							<button class="btn btn-border btn-theme-colored btn-lg btn-block mt-15" type="button" id="membership_withdrawal">membership withdrawal</button>
 						</div>
 				</div>
 			</div>

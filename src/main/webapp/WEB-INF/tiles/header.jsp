@@ -58,7 +58,7 @@
     <!-- <link href="css/style.css" rel="stylesheet" type="text/css"> -->
 
     <!-- CSS | Theme Color -->
-    <link href="${pageContext.request.contextPath}/resources/css/colors/theme-skin-orange.css" rel="stylesheet"
+    <link href="${pageContext.request.contextPath}/resources/css/colors/theme-skin-red.css" rel="stylesheet"
         type="text/css">
 
     <!-- external javascripts -->
@@ -142,7 +142,7 @@
                                             <div class="col4">
                                                 <div class="icon-box" style="margin-bottom:0px;">
                                                     <a class="icon" href="${pageContext.request.contextPath}/mypage/likes" style="margin-bottom:0px;">
-                                                        <i class="fa fa-heart"></i>
+                                                        <i class="fa fa-heart faa-pulse animated-hover"></i>
                                                     </a>
                                                     <h5 class="icon-box-title">좋아요</h5>
                                                 </div>
@@ -168,9 +168,9 @@
                                             <div class="col4">
                                                 <div class="icon-box" style="margin-bottom:0px;">
                                                     <a class="icon" href="${pageContext.request.contextPath}/mypage/myQuestion" style="margin-bottom:0px;">
-                                                        <i class="fa fa-envelope"></i>
+                                                        <i class="fa fa-envelope faa-horizontal animated-hover"></i>
                                                     </a>
-                                                    <h5 class="icon-box-title">1:1 문의</h5>
+                                                    <h5 class="icon-box-title"> 1:1 문의</h5>
                                                 </div>
                                             </div>
                                             <!-- 관리자 권한이 있을 때만 보임 -->

@@ -66,10 +66,10 @@
           <div class="col-md-3">
             <div class="vertical-tab">
               <ul class="nav nav-tabs">
-                <li><a href="siteManagement">사이트 통계</a></li>
-                <li class="active"><a href="fundingInsert" >펀딩 등록</a></li>
-                <li><a href="personalQuestion" >1:1 문의 내역</a></li>
-                <li><a href="fundingRequest" >펀딩 오픈 신청 내역</a></li>
+                <li><a href="${pageContext.request.contextPath}/admin/siteManagement">사이트 통계</a></li>
+                <li class="active"><a href="${pageContext.request.contextPath}/admin/fundingInsert" >펀딩 등록</a></li>
+                <li><a href="${pageContext.request.contextPath}/admin/personalQuestion" >1:1 문의 내역</a></li>
+                <li><a href="${pageContext.request.contextPath}/admin/fundingRequest" >펀딩 오픈 신청 내역</a></li>
               </ul>
             </div>
           </div>
@@ -175,14 +175,14 @@
                           </div>
                           <input id="file3" name="file" class="file" 	type="file" multiple data-show-upload="false" data-show-caption="true" visbility="hidden" > 
                          <button type="button" id="selectFileBtn1">파일 선택</button>
-                         <span id="Thumnail">Thumnail_${funding.image}</span>
+                         <span id="Thumnail">${funding.image}</span>
                         
                          <div >
 						<label>상세보기 업로드</label>
 						 </div>
 						 <input id="file4" name="file2" class="file"	type="file" multiple data-show-upload="false" data-show-caption="true" visbility="hidden"> 
 						 <button type="button" id="selectFileBtn2">파일 선택</button>
-					    <span id="Detail">Detail_${funding.image}</span>
+					    <span id="Detail">${funding.image}</span>
                          </c:otherwise>
 						</c:choose>
 						

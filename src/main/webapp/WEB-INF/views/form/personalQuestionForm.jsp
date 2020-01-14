@@ -28,7 +28,7 @@
         <div class="row">
           <div class="col-md-6 col-md-push-3">
             <div class="border-1px p-30 mb-0">
-              <h3 class="text-theme-colored mt-0 pt-5">1:1문의 등록</h3>
+              <h3 class="text-theme-colored mt-0 mb-20">1:1문의 등록</h3>
               <hr>
               <p>다음 사항을 작성해주세요</p>
               <form id="job_apply_form" name="job_apply_form" action="${pageContext.request.contextPath}/mypage/personalQuestionInsert" method="post">
@@ -44,12 +44,11 @@
 
                 <div class="form-group">
                   <label>내용 <small>*</small></label>
-                  <textarea name="content" class="form-control required" rows="5" placeholder="내용을 입력해 주세요"></textarea>
+                  <textarea name="content" class="form-control required" rows="5" required="" placeholder="내용을 입력해 주세요"></textarea>
                 </div>
                 <div class="form-group">
-                  <input name="form_botcheck" class="form-control" type="hidden" value="" />
-                  <button type="submit" class="btn btn-block btn-dark btn-theme-colored btn-sm mt-20 pt-10 pb-10" data-loading-text="Please wait...">등록하기</button>
-                </div>
+					<button class="btn btn-border btn-theme-colored btn-lg btn-block mt-20" type="submit" id="register">등록하기</button>
+				</div>
               </form>
               <!-- Job Form Validation-->
 
