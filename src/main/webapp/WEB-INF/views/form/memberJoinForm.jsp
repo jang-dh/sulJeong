@@ -115,15 +115,22 @@
 		});
 		
 		//popAuth.document.getElementById("Authenticate").click(function() {
-		popAuth.document.on("click", "#Authenticate", function() {
-			alert($("#hidden").val());
-			if($("#hidden").val()==true){
-				$("#Authenticate").val("성인인증 완료");
-				authStatus == '4';
-			}else if($("#hidden").val()==false){
-				authStatus == '3';
-			}
-		});
+		
+		
+		function completeCallback(result){
+			alert(result);
+			
+			popAuth.document.on("click", "#Authenticate", function() {
+				alert(1);
+				alert($("#hidden").val());
+				if($("#hidden").val()==true){
+					$("#Authenticate").val("성인인증 완료");
+					authStatus == '4';
+				}else if($("#hidden").val()==false){
+					authStatus == '3';
+				}
+			});
+		}
 
 	});
 
