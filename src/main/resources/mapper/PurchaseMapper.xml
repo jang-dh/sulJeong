@@ -25,11 +25,6 @@
 		 #{purchaseState}, sysdate, #{deliveryNumber}, #{courier}, #{customerUid}, #{merchantUid})
 	</insert>
 	
-	<!-- 후원자 정보 출력 -->
-	<select id="selectListByMemberCode" resultType="member" parameterType="int">
-	select distinct code, name, addr, phone from member where code = #{_parameter}
-	</select>
-	
 	<!-- 후원 리스트 출력 -->
 	<select id="listDetail"
 		resultMap="listDetailInformationMap" parameterType="int">
@@ -47,10 +42,10 @@
 		select count(*) from purchase where funding_code = #{_parameter}
 	</select>
 	
-	<!-- 후원 취소 -->
-	<delete id="delete" parameterType="purchase">
-		delete from purchase where code = #{code}
-	</delete>
+	<!-- 후원 취소 상태 번경 -->
+	<update id="purchaseFailedUpdate" parameterType="int">
+		update purchase set purchase_state = '602' where code = #{_parameter}
+	</update>
 	
 	<!-- 수녕 : 송장번호, 택배사 입력,수정 -->
 	<update id="deliveryCodeUpdate" parameterType="purchase">

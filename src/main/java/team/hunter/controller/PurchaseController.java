@@ -27,11 +27,11 @@ import com.siot.IamportRestClient.response.IamportResponse;
 import com.siot.IamportRestClient.response.Payment;
 import com.siot.IamportRestClient.response.Schedule;
 
-//import com.siot.IamportRestClient.IamportClient;
-//import com.siot.IamportRestClient.request.ScheduleData;
-//import com.siot.IamportRestClient.request.ScheduleEntry;
-//import com.siot.IamportRestClient.response.IamportResponse;
-//import com.siot.IamportRestClient.response.Schedule;
+import com.siot.IamportRestClient.IamportClient;
+import com.siot.IamportRestClient.request.ScheduleData;
+import com.siot.IamportRestClient.request.ScheduleEntry;
+import com.siot.IamportRestClient.response.IamportResponse;
+import com.siot.IamportRestClient.response.Schedule;
 //import com.sun.xml.internal.ws.wsdl.writer.document.Import;
 
 import team.hunter.model.dto.Funding;
@@ -62,10 +62,10 @@ public class PurchaseController {
 		Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Purchase purchase = new Purchase(0, member.getCode(), fundingCode, price, qty, Constants.PURCHASE_BEFORE, null,
 				null, null, customerUid, merchantUid, null);
-//		iamportClient = new IamportClient("9641301071926320", "DGvvhuqgbRnvUxwBIwOoU5tDk5AH28ZGPvb7ZCnbtLHnjdZ1JOpETTieYSW11WIRrTYrvmCZ7jnqxnrh");
-//		
-//		//purchaseSchedule.requestSchedulePusrchase(purchase);
-//		//결제 시도 시각 설정
+		iamportClient = new IamportClient("9641301071926320", "DGvvhuqgbRnvUxwBIwOoU5tDk5AH28ZGPvb7ZCnbtLHnjdZ1JOpETTieYSW11WIRrTYrvmCZ7jnqxnrh");
+		
+		//purchaseSchedule.requestSchedulePusrchase(purchase);
+		//결제 시도 시각 설정
 //		Funding funding = fundingService.selectByCode(fundingCode);
 //		String fundingEndDate = funding.getEndDate();
 //		String dates[] = fundingEndDate.split("/");
@@ -112,7 +112,7 @@ public class PurchaseController {
 //				//서버 연결 실패
 //				e.printStackTrace();
 //			}
-
+//
 //			System.out.println("iamportResponse.getCode() : " + iamportResponse.getCode());
 //			System.out.println("iamportResponse.getMessage() "+ iamportResponse.getMessage());
 //			System.out.println("iamportResponse.getResponse() : "+ iamportResponse.getResponse().get(0).toString());
@@ -128,7 +128,6 @@ public class PurchaseController {
 
 	@RequestMapping("/mypage/fundingHistory")
 	public ModelAndView fundingHistory(@RequestParam(defaultValue = "1") int curPage) {
-		System.out.println("나는 페이징 컨트롤 입니다.");
 		ModelAndView mv = new ModelAndView();
 		Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		int listCnt = purchaseService.purchaseListCount(member.getCode());
@@ -143,16 +142,15 @@ public class PurchaseController {
 		mv.addObject("listCnt", listCnt);
 		mv.addObject("paging", paging);
 		mv.setViewName("mypage/myFundingHistory");
-		System.out.println("나는 페이징 컨트롤을 나왔소");
 		return mv;
 
 	}
 
-	@RequestMapping("/purchase/delete")
-	public String delete(int code) {
-		purchaseService.deletePurchaseList(code);
-		System.out.println("code : " + code);
-		System.out.println("나는 삭제기능 이다.");
+	@RequestMapping("/purchase/update")
+	public String update(int code) {
+		System.out.println("나는 업데이트를 할 것이다.");
+		purchaseService.updatePurchase(code);
+		System.out.println("나는 업데이트기능 이다.");
 		return "redirect:/mypage/fundingHistory";
 	}
 
@@ -172,26 +170,6 @@ public class PurchaseController {
 		model.addAttribute("member", member);
 		return "mypage/deliveryUpdateForm";
 	}
-
-//	@RequestMapping("/mypage/myFundingHistory")
-//	public ModelAndView purchaseList(@RequestParam(defaultValue = "1") int curPage) {
-//		System.out.println("나는 페이징 컨트롤 입니다.");
-//		ModelAndView mv = new ModelAndView();
-//		
-//		int listCnt = purchaseService.purchaseListCount();
-//		Paging paging = new Paging(listCnt, curPage);
-//		
-//		int startIndex = paging.getStartIndex();
-//		int cntPerPage = paging.getPageSize();
-//		List<Purchase> list = purchaseService.purchaseList(startIndex, cntPerPage);
-//		
-//		mv.addObject("list", list);
-//		mv.addObject("listCnt", listCnt);
-//		mv.addObject("paging", paging);
-//		mv.addObject("mypage/myFundingHistory");
-//		System.out.println();
-//		return mv;
-//	}
 
 	public void cancelPurchase(Purchase purchase) {
 		iamportClient = new IamportClient("9641301071926320",
