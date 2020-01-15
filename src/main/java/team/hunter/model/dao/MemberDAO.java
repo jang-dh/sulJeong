@@ -29,18 +29,18 @@ public interface MemberDAO {
 	
 	Member idDuplicateCheck(String id);
 	
-	/**
-	 * 회원가입 메일 인증
-	 * */
-	void create(Member member) throws Exception;
-	
-	/**
-	 * 회원가입 메일 인증 - 권한 키 업데이트
-	 * */
-	void updateAuthkey(Member member);
-	
-	/**
-	 * 회원가입 메일 인증 - 권한 상태 업데이트
-	 * */
-	void updateAuthstatus(Member member);
+//	/**
+//	 * 회원가입 메일 인증
+//	 * */
+//	void create(Member member) throws Exception;
+//	
+//	/**
+//	 * 회원가입 메일 인증 - 권한 키 업데이트
+//	 * */
+//	void updateAuthkey(Member member);
+//	
+//	/**
+//	 * 회원가입 메일 인증 - 권한 상태 업데이트
+//	 * */
+//	void updateAuthstatus(Member member);
 }

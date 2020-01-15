@@ -54,30 +54,30 @@ public class EmailController {
 			return "forward:searchLoginInfoForm";
 	}
 	
-	/**
-	 * 회원가입 시 이메일 인증
-	 * */
-	@RequestMapping(value="joinPost", method=RequestMethod.POST)
-	public String joinPost(@ModelAttribute("member") Member member) throws Exception {
-		System.out.println("currnent join member: " + member.toString());
-		memberService.create(member);
-		
-		return "/user/joinPost";
-	}
-	
-	/**
-	 * 회원가입 시 이메일 인증
-	 * */
-    @RequestMapping(value="joinConfirm", method=RequestMethod.GET)
-	public String emailConfirm(@ModelAttribute("member") Member member, Model model) throws Exception {
-		//logger.info(member.getEmail() + ": auth confirmed");
-    	System.out.println(member.getEmail() + ": auth confirmed");
-		member.setAuthstatus(1);	// authstatus를 1로,, 권한 업데이트
-		memberService.updateAuthstatus(member);
-		
-		model.addAttribute("auth_check", 1);
-		
-		return "/user/joinPost";
-	}
+//	/**
+//	 * 회원가입 시 이메일 인증
+//	 * */
+//	@RequestMapping(value="joinPost", method=RequestMethod.POST)
+//	public String joinPost(@ModelAttribute("member") Member member) throws Exception {
+//		System.out.println("currnent join member: " + member.toString());
+//		memberService.create(member);
+//		
+//		return "/user/joinPost";
+//	}
+//	
+//	/**
+//	 * 회원가입 시 이메일 인증
+//	 * */
+//    @RequestMapping(value="joinConfirm", method=RequestMethod.GET)
+//	public String emailConfirm(@ModelAttribute("member") Member member, Model model) throws Exception {
+//		//logger.info(member.getEmail() + ": auth confirmed");
+//    	System.out.println(member.getEmail() + ": auth confirmed");
+//		member.setAuthstatus(1);	// authstatus를 1로,, 권한 업데이트
+//		memberService.updateAuthstatus(member);
+//		
+//		model.addAttribute("auth_check", 1);
+//		
+//		return "/user/joinPost";
+//	}
 	
 }

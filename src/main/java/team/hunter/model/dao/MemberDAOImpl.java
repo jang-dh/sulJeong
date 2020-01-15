@@ -60,25 +60,25 @@ public class MemberDAOImpl implements MemberDAO {
 		return session.selectOne("memberMapper.idDuplicateCheck", id);
 	}
 
-	@Override
-	public void create(Member member) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-
-	
-	@Override
-	public void updateAuthkey(Member member) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	
-	@Override
-	public void updateAuthstatus(Member member) {
-		// TODO Auto-generated method stub
-		
-	}
+//	@Override
+//	public void create(Member member) throws Exception {
+//		// TODO Auto-generated method stub
+//		
+//	}
+//
+//	
+//	@Override
+//	public void updateAuthkey(Member member) {
+//		// TODO Auto-generated method stub
+//		
+//	}
+//	
+//	
+//	@Override
+//	public void updateAuthstatus(Member member) {
+//		// TODO Auto-generated method stub
+//		
+//	}
 
 	
 }
