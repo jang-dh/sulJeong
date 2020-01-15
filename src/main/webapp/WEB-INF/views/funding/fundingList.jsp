@@ -31,6 +31,8 @@
 	$(function() {
 		//현재 url
 		var curUrl = location.href;
+		if(curUrl.includes("commingsoon"))
+			$("#mailchimp-subscription-form").hide();
 		
 		//정렬 조건 변경 시
 		$("[name=order]").on("change", function() {
@@ -63,8 +65,6 @@
 		
 		//현재 요소 개수
 		var listCnt = $(".thumb").length;
-
-		//현재 url
 		var curUrl = location.href;
 		var curParams = curUrl.split('category/')[1];
 
@@ -84,11 +84,12 @@
 			where = params[1].split('where=')[1];
 			val = params[2].split('val=')[1];
 		}
+		
 		$.ajax({
 			url : getContextPath() + "/funding/fetchList",
 			type : "get",
 			dataType : "json",
-			data : {categoryCode : categoryCode, order : order, where : where, val : val, listCnt : listCnt},
+			data : {categoryCode : categoryCode, order : order, where : where, val : val, listCnt : listCnt, isComming : curUrl.includes("commingsoon")},
 			success : function(result) {
 				setTimeout(function() {
 					flag = true;
@@ -143,12 +144,21 @@
 		html += '</div>';
 		html += '</div>';
 		html += '<div class="pull-left font-weight-400 text-black-333 pr-0">';
-		html += '<strong>펀딩종료까지 </strong>';
-		html += '</div>';
-		html += '<div class="text-center" data-countdown="' + item.endDate + '"></div>';
-		html += '<a href="' + item.code + '" class="btn btn-default btn-theme-colored mt-10 font-16 btn-sm">펀딩하기 <i class="flaticon-charity-make-a-donation font-16 ml-5"></i>';
-		html += '</a>';
-		html += '<br><i class="fa fa-heart faa-pulse animated"></i> <span class="text-theme-colored font-weight-700">' + item.cnt + '</span>';
+		if(item.fundingState == '501'){
+			html += '<strong>펀딩종료까지 </strong>';
+			html += '</div>';
+			html += '<div class="text-center" data-countdown="' + item.endDate + '"></div>';
+			html += '<a href="' + item.code + '" class="btn btn-default btn-theme-colored mt-10 font-16 btn-sm">펀딩하기 <i class="flaticon-charity-make-a-donation font-16 ml-5"></i>';
+			html += '</a>';
+			html += '<br><i class="fa fa-heart faa-pulse animated"></i> <span class="text-theme-colored font-weight-700">' + item.cnt + '</span>';
+		}
+		else if(item.fundingState == '502'){
+			html += '<strong>펀딩시작까지 </strong>';
+			html += '</div>';
+			html += '<div class="text-center" data-countdown="' + item.openDate + '"></div>';
+			html += '<a href="' + item.code + '" class="btn btn-default btn-theme-colored mt-10 font-16 btn-sm">보러가기 <i class="fa fa-arrow-circle-right font-16 ml-5"></i>';
+			html += '</a>';
+		}
 		html += '</div>';
 		html += '</div>';
 		html += '</div>';
@@ -195,12 +205,23 @@
 						</a>
 						<div class="media-body">
 							<h5 class="media-heading product-title mb-0">
-								<a href="${pageContext.request.contextPath}/funding/category/">전체보기</a>
+								<a href="${pageContext.request.contextPath}/funding/category/">전체</a>
 							</h5>
 						</div>
 					</div>
 				</div>
-				
+				<div class="form-group col-md-1">
+					<div class="media">
+						<a class="flip" href="${pageContext.request.contextPath}/funding/commingsoon">
+							<img class="media-object" width="60" src="${pageContext.request.contextPath}/resources/images/funding/wine.jpg" alt="">
+						</a>
+						<div class="media-body">
+							<h5 class="media-heading product-title mb-0">
+								<a href="${pageContext.request.contextPath}/funding/commingsoon">예정</a>
+							</h5>
+						</div>
+					</div>
+				</div>
 				<div class="form-group col-md-1">
 					<div class="media">
 						<a class="flip" href="${pageContext.request.contextPath}/funding/category/301">
@@ -249,18 +270,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="form-group col-md-1">
-					<div class="media">
-						<a class="flip" href="${pageContext.request.contextPath}/funding/category/305">
-							<img class="media-object" width="60" src="${pageContext.request.contextPath}/resources/images/funding/wine.jpg" alt="">
-						</a>
-						<div class="media-body">
-							<h5 class="media-heading product-title mb-0">
-								<a href="${pageContext.request.contextPath}/funding/category/305">와인</a>
-							</h5>
-						</div>
-					</div>
-				</div>
+				
 			</div>
 			<div class="container pt-30 pb-0">
 				<div class="col-md-5"></div>
@@ -330,10 +340,27 @@
 											</div>
 										</div>
 									</div>
-									<div class="pull-left font-weight-400 text-black-333 pr-0">
-										<strong>펀딩종료까지 </strong>
-									</div>
-									<div class="text-center" data-countdown="${fundingList.endDate}"></div>
+									<c:choose>
+										<c:when test="${fundingList.fundingState == 501}">
+										<div class="pull-left font-weight-400 text-black-333 pr-0">
+											<strong>펀딩종료까지 </strong>
+										</div>
+										<div class="text-center" data-countdown="${fundingList.endDate}"></div>
+										<a href="${pageContext.request.contextPath}/funding/${fundingList.code}" class="btn btn-default btn-theme-colored mt-10 font-16 btn-sm">펀딩하기
+											<i class="flaticon-charity-make-a-donation font-16 ml-5"></i>
+										</a>
+										<br><i class="fa fa-heart faa-pulse animated"></i> <span class="text-theme-colored font-weight-700">${fundingList.cnt}</span>
+										</c:when>
+										<c:when test="${fundingList.fundingState == 502}">
+											<div class="pull-left font-weight-400 text-black-333 pr-0">
+											<strong>펀딩시작까지 </strong>
+										</div>
+										<div class="text-center" data-countdown="${fundingList.openDate}"></div>
+										<a href="${pageContext.request.contextPath}/funding/${fundingList.code}" class="btn btn-default btn-theme-colored mt-10 font-16 btn-sm">보러가기
+											<i class="fa fa-arrow-circle-right font-16 ml-5"></i>
+										</a>
+										</c:when>
+									</c:choose>
 									<script type="text/javascript">
 										$(document).ready(function() {
 											$('[data-countdown]').each(function() {
@@ -344,10 +371,7 @@
 											});
 										});
 									</script>
-									<a href="${pageContext.request.contextPath}/funding/${fundingList.code}" class="btn btn-default btn-theme-colored mt-10 font-16 btn-sm">펀딩하기
-										<i class="flaticon-charity-make-a-donation font-16 ml-5"></i>
-									</a>
-									<br><i class="fa fa-heart faa-pulse animated"></i> <span class="text-theme-colored font-weight-700">${fundingList.cnt}</span>
+									
 								</div>
 							</div>
 						</div>

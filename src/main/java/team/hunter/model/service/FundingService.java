@@ -39,4 +39,9 @@ public interface FundingService {
 	 * 펀딩 수정
 	 */
 	public int fundUpdate(Funding funding);
+	
+	/**
+	 * 오픈 예정 펀딩 목록
+	 * */
+	public List<Funding> selectStatePre();
 }
