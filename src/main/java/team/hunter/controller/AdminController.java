@@ -10,21 +10,16 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import team.hunter.model.dto.Funding;
-import team.hunter.model.dto.FundingQuestion;
 import team.hunter.model.dto.FundingRequest;
-import team.hunter.model.dto.Likes;
-import team.hunter.model.dto.Member;
 import team.hunter.model.dto.Notice;
 import team.hunter.model.dto.Paging;
 import team.hunter.model.dto.PersonalAnswer;
@@ -34,6 +29,7 @@ import team.hunter.model.service.FundingService;
 import team.hunter.model.service.NoticeService;
 import team.hunter.model.service.PersonalAnswerService;
 import team.hunter.model.service.StatisticsService;
+import team.hunter.util.Constants;
 
 @Controller
 public class AdminController {
@@ -191,8 +187,6 @@ public class AdminController {
 	@RequestMapping("/admin/fundUpdate")
 	public String fundUpdate(Funding funding, MultipartFile file,MultipartFile file2, HttpSession session) {
 		String fileName = null;
-		System.out.println(funding.getOpenDate());
-		System.out.println(funding.getEndDate());
 		SimpleDateFormat originFormat = new SimpleDateFormat("MM/dd/yyyy");
 		SimpleDateFormat newFormat = new SimpleDateFormat("yyyy/MM/dd");
 		
@@ -206,7 +200,13 @@ public class AdminController {
 			String newEndDate = newFormat.format(originEndDate);
 			funding.setEndDate(newEndDate);
 			
+			Date currentDate = new Date();
 			
+			if(originOpenDate.getTime() > currentDate.getTime()) {
+				funding.setFundingState(Constants.FUNDING_PRE);
+			}else {
+				funding.setFundingState(Constants.FUNDING_ING);
+			}
 			
 		}catch (ParseException e) {
 			e.printStackTrace();

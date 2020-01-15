@@ -8,12 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-<<<<<<< HEAD
 import team.hunter.model.dto.Funding;
-=======
 import team.hunter.model.dao.FundingDAO;
 import team.hunter.model.dao.StatisticsDAO;
->>>>>>> origin/funding
 import team.hunter.model.service.FundingService;
 import team.hunter.model.service.NoticeService;
 import team.hunter.model.service.PurchaseService;
