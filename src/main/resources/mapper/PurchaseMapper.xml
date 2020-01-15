@@ -80,6 +80,21 @@
 		</association>
 	</resultMap>
 	
+	
+	
+	
+	<update id="updatePurchaseState">
+		update purchase A
+		set A.purchase_state=
+		case
+   			when A.funding_code
+    		in (select B.code from funding B where B.funding_state='503') then '601'
+   			when A.funding_code
+    		in (select B.code from funding B where B.funding_state='504') then '602'
+    	end
+		where A.purchase_state='603'
+	</update>
+	
 </mapper>	
 
 

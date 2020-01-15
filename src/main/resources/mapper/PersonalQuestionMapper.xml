@@ -2,15 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="personalQuestionMapper">
 
-	<select id="personalQuestionList" parameterType="int" resultType="personalQuestion">
-		select code, member_code, content, subject, regdate, state from personal_question
-		where member_code=#{_parameter}
+	<select id="personalQuestionList" parameterType="member" resultType="fundingQuestion">
+	<![CDATA[
+		SELECT code, member_code, content, subject, regdate, state 
+		FROM (SELECT a.*, ROWNUM rnum FROM (SELECT * FROM personal_question WHERE MEMBER_CODE=#{code} ORDER BY code DESC) a 
+		WHERE ROWNUM <= (#{startIndex}*#{cntPerPage})) WHERE rnum >= ((#{startIndex}-1)*#{cntPerPage}+1)
+	]]>	
 	</select>
 	
 	<insert id="personalQuestionInsert" parameterType="personalQuestion">
 		insert into personal_question(code, member_code, content, subject, regdate, state) 
 		values(seq_no.nextval, #{memberCode}, #{content}, #{subject}, sysdate, #{state})
 	</insert>
+	
+	<select id="listCount" parameterType="int" resultType="Integer">
+		select count(*) from personal_question where member_code=#{_parameter}
+	</select>
+
 </mapper>	
 
 

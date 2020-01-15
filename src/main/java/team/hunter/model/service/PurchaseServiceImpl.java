@@ -1,6 +1,7 @@
 package team.hunter.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -68,4 +69,12 @@ public class PurchaseServiceImpl implements PurchaseService {
 		Member member = purchaseDAO.deliveryCodeSelect(fundingCode, memberCode);
 		return member;
 	}
+
+	@Override
+	public int updatePurchaseState() {
+		
+		return purchaseDAO.updatePurchaseState();
+	}
+
+	
 }
