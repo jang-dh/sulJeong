@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import team.hunter.model.dto.Purchase;
+import team.hunter.model.service.PurchaseService;
 import team.hunter.model.service.PurchaseServiceImpl;
 import team.hunter.model.dao.FundingDAO;
 import team.hunter.model.dao.NoticeDAO;
@@ -24,7 +25,8 @@ public class TaskService {
 	@Autowired
 	private PurchaseDAO purchaseDAO;
 	
-	@Autowired PurchaseServiceImpl purchaseServiceImpl;
+	@Autowired
+	private PurchaseService purchaseService;
 	
 	//@Scheduled(cron = "0 0/30 0 * * *")
 	@Scheduled(cron="1 0 0 * * *")//매일 0시 0분 1초에 실행
@@ -36,7 +38,7 @@ public class TaskService {
 		
 		//결제 취소
 		for(Purchase purchase : canceledList) {
-			purchaseServiceImpl.cancelPurchase(purchase);
+			purchaseService.cancelPurchase(purchase);
 		}
 			
 	}

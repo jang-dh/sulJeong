@@ -91,6 +91,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 		return purchaseDAO.purchaseList(memberCode, startIndex, cntPerPage);
 	}
 	
+	@Override
 	public void cancelPurchase(Purchase purchase) {
 		IamportClient iamportClient = new IamportClient("9641301071926320",
 				"DGvvhuqgbRnvUxwBIwOoU5tDk5AH28ZGPvb7ZCnbtLHnjdZ1JOpETTieYSW11WIRrTYrvmCZ7jnqxnrh");
