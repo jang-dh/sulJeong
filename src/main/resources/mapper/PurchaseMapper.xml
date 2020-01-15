@@ -114,4 +114,10 @@
 								where funding_state = '504')
 		and purchase_state = '603'
 	</select>
+	
+	<select id="selectByCode" parameterType="int" resultType="purchase">
+		select code, member_code, funding_code, price, qty, purchase_state, purchase_date, delivery_number, courier, customer_uid, merchant_uid
+		from purchase 
+		where code = #{_parameter}
+	</select>
 </mapper>	

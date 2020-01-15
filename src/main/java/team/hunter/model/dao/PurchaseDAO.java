@@ -57,4 +57,9 @@ public interface PurchaseDAO {
 	 * 펀딩 달성 실패로 결제 취소할 결제 내역
 	 * */
 	public List<Purchase> selectCanceled();
+	
+	/**
+	 * 
+	 * */
+	public Purchase selectByCode(int code);
 }

@@ -51,7 +51,8 @@ public class PurchaseServiceImpl implements PurchaseService {
 	@Transactional
 	public int updatePurchase(int code) {
 		int result = purchaseDAO.updatePurchase(code);
-		
+		Purchase purchase = purchaseDAO.selectByCode(code);
+		cancelPurchase(purchase);
 		return result;
 	}
 

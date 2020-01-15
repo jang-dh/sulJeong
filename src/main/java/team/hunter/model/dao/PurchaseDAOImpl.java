@@ -78,4 +78,9 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 	public List<Purchase> selectCanceled() {
 		return session.selectList("purchaseMapper.canceled");
 	}
+
+	@Override
+	public Purchase selectByCode(int code) {
+		return session.selectOne("purchaseMapper.selectByCode", code);
+	}
 }
