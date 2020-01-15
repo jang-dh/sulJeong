@@ -111,6 +111,9 @@
 	
 	let renderList = function(mode, item) {
 		var per = Math.floor(item.stackPrice / item.goalPrice * 100);
+		var perStyle = per;
+		if(per > 100)
+			perStyle = 100; 
 		let html = '<div class="col-sm-7 col-md-4 wow fadeIn">';
 		html += '<div class="causes bg-silver-light maxwidth500 mb-30">';
 		html += '<div class="thumb">';
@@ -125,14 +128,14 @@
 		html += '<ul class="list-inline font-weight-600 font-14 clearfix mb-5">';
 		html += '<li class="pull-left font-weight-400 text-black-333 pr-0">달성금액:';
 		html += '<span class="text-theme-colored font-weight-700">' + item.stackPrice.toLocaleString() + '원</span>';
-		html += '</li>';
+		html += '</li><br>';
 		html += '<li class="pull-right font-weight-400 text-black-333 pr-0">목표금액:';
 		html += '<span class="text-theme-colored font-weight-700">' + item.goalPrice.toLocaleString() + '원</span>';
 		html += '</li>';
 		html += '</ul>';
 		html += '<div class="progress-item mt-5">';
 		html += '<div class="progress mb-0">';
-		html += '<div data-percent="' + per + '" class="progress-bar appeared" style="width: ' + per + '%;">';
+		html += '<div data-percent="' + per + '" class="progress-bar appeared" style="width: ' + perStyle + '%;">';
 		html += '<span class="percent">0</span><span class="percent">' + per + '%</span>';
 		html += '</div>';
 		html += '</div>';
@@ -308,13 +311,18 @@
 										<li class="pull-left font-weight-400 text-black-333 pr-0">달성금액:
 											<span class="text-theme-colored font-weight-700"><fmt:formatNumber>${fundingList.stackPrice}</fmt:formatNumber>원</span>
 										</li>
+										<br>
 										<li class="pull-right font-weight-400 text-black-333 pr-0">목표금액:
 											<span class="text-theme-colored font-weight-700"><fmt:formatNumber>${fundingList.goalPrice}</fmt:formatNumber>원</span>
 										</li>
 									</ul>
 									<div class="progress-item mt-5">
 										<div class="progress mb-0">
-											<div data-percent="${fundingList.stackPrice/fundingList.goalPrice *100}" class="progress-bar appeared" style="width: ${fundingList.stackPrice/fundingList.goalPrice *100}%;">
+											<c:set var="per" value="${fundingList.stackPrice/fundingList.goalPrice *100}"/>
+												<c:if test="${per > 100}">
+													<c:set var="per" value="100"/>
+												</c:if>
+											<div data-percent="${fundingList.stackPrice/fundingList.goalPrice *100}" class="progress-bar appeared" style="width: ${per}%;">
 												<span class="percent">0</span><span class="percent"><fmt:formatNumber value="${fundingList.stackPrice / fundingList.goalPrice}" type="percent"/></span>
 											</div>
 										</div>
@@ -335,7 +343,6 @@
 									</script>
 									<a href="${pageContext.request.contextPath}/funding/${fundingList.code}" class="btn btn-default btn-theme-colored mt-10 font-16 btn-sm">펀딩하기
 										<i class="flaticon-charity-make-a-donation font-16 ml-5"></i>
-										
 									</a>
 									<br><i class="fa fa-heart faa-pulse animated"></i> <span class="text-theme-colored font-weight-700">${fundingList.cnt}</span>
 								</div>

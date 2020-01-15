@@ -1,7 +1,7 @@
 package team.hunter.model.dto;
 
 public class Paging {
-	/** 한 페이지당 게시글 수 **/
+   /** 한 페이지당 게시글 수 **/
     private int pageSize = 8;
     
     /** 한 블럭(range)당 페이지 수 **/
@@ -63,59 +63,59 @@ public class Paging {
         setStartIndex(curPage);
     }
 
-	public int getPageSize() {
-		return pageSize;
-	}
+   public int getPageSize() {
+      return pageSize;
+   }
 
-	public int getRangeSize() {
-		return rangeSize;
-	}
-	public int getCurPage() {
-		return curPage;
-	}
+   public int getRangeSize() {
+      return rangeSize;
+   }
+   public int getCurPage() {
+      return curPage;
+   }
 
-	public int getCurRange() {
-		return curRange;
-	}
+   public int getCurRange() {
+      return curRange;
+   }
 
-	public int getListCnt() {
-		return listCnt;
-	}
+   public int getListCnt() {
+      return listCnt;
+   }
 
-	public int getPageCnt() {
-		return pageCnt;
-	}
+   public int getPageCnt() {
+      return pageCnt;
+   }
 
-	public int getRangeCnt() {
-		return rangeCnt;
-	}
-	public int getStartPage() {
-		return startPage;
-	}
+   public int getRangeCnt() {
+      return rangeCnt;
+   }
+   public int getStartPage() {
+      return startPage;
+   }
 
-	public int getEndPage() {
-		return endPage;
-	}
+   public int getEndPage() {
+      return endPage;
+   }
 
-	public int getStartIndex() {
-		return startIndex;
-	}
+   public int getStartIndex() {
+      return startIndex;
+   }
 
-	public int getPrevPage() {
-		return prevPage;
-	}
+   public int getPrevPage() {
+      return prevPage;
+   }
 
-	public int getNextPage() {
-		return nextPage;
-	}
+   public int getNextPage() {
+      return nextPage;
+   }
 
-	public void setCurPage(int curPage) {
-		this.curPage = curPage;
-	}
+   public void setCurPage(int curPage) {
+      this.curPage = curPage;
+   }
     
     public void setListCnt(int listCnt) {
-		this.listCnt = listCnt;
-	}
+      this.listCnt = listCnt;
+   }
  
     public void setPageCnt(int listCnt) {
         this.pageCnt = (int) Math.ceil(listCnt*1.0/pageSize);

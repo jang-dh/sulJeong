@@ -1,22 +1,20 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
-
+<!-- 카카오 지도 -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c4c64b0fa5dfd1841cf29f48be1a0d91&libraries=services"></script>
 <script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
 
  <sec:authorize access="isAuthenticated()">
 	<sec:authentication var="principal" property="principal"/>
 </sec:authorize>
 
-
 <script type="text/javascript">
 //jquery
 $(function() {
-	
 	$("#fundingModifyBtn").click(function(){
 		location.href="${pageContext.request.contextPath}/admin/fundingModify/${funding.code}";
 	});
@@ -101,7 +99,7 @@ $(function() {
 		var price = ${funding.rewardPrice};
 		var qty = $('input[name="quantity"]').val();
 		var customerUid = '${principal.id}' + new Date().getTime();
-		//var merchantUid = 'merchant_' + new Date().getTime();
+		var merchantUid = 'merchant_' + new Date().getTime();
 		
 		if(!'${principal.code}')
 			alert("로그인 후 사용가능합니다.");
@@ -109,10 +107,10 @@ $(function() {
 			//예약 결제를 위한 빌링키 발급
 			IMP.request_pay({
 			    pay_method : 'card',
-			    merchant_uid : 'merchant_' + new Date().getTime(),
-			    customer_uid : customerUid,
+			    merchant_uid : merchantUid,
+			    //customer_uid : customerUid,
 			    name : '${funding.rewardName}',
-			    amount : 0,
+			    amount : price*qty,
 			    buyer_email : '${principal.email}',
 			    buyer_name : '${principal.name}',
 			    buyer_tel : '${principal.phone}',
@@ -122,20 +120,20 @@ $(function() {
 			    	//빌링키 발급 성공
 			        var msg = '결제가 완료되었습니다.';
 			        //결제 서버에 빌링키 전달
-			        $.ajax({
+			        /* $.ajax({
 			            url: "https://www.myservice.com/billings/", // 서비스 웹서버
 			            method: "POST",
 			            headers: { "Content-Type": "application/json" },
 			            data: {
 			            	customer_uid: customerUid // 카드(빌링키)와 1:1로 대응하는 값
 						}
-					});
-			        var merchantUid = 'merchant_' + new Date().getTime();
+					}); */
+			        //var merchantUid = 'merchant_' + new Date().getTime();
 			        //구매 테이블에 추가
 					$.ajax({
 						url: "${pageContext.request.contextPath}/insertPurchase", //서버요청주소
 						type: "post",
-						data: {fundingCode : fundingCode, price : price, qty : qty, customerUid : customerUid, merchantUid : merchantUid},
+						data: {fundingCode : fundingCode, price : price*qty, qty : qty, customerUid : customerUid, merchantUid : merchantUid},
 						dataType: "text",
 						success: function (result) {
 							if(result == '1')
@@ -166,10 +164,9 @@ $(function() {
 					alert(err + "오류 발생");
 				}
 			}); */
-			
+			//펀딩하기
 		}
 	});
-	//펀딩하기
 	//펀딩하기
 });
 //jquery End
@@ -214,15 +211,14 @@ $(function() {
 						<div class="col-md-7">
 							<div class="product-summary">
 								<h2 class="product-title">${funding.title}
-								
-								 <sec:authorize access="hasRole('ROLE_ADMIN')"> 
-								<span style="float:right">
-									<button style="text-align: right;" class="btn btn-default btn-theme-colored mt-5 font-16 btn-sm" type="button" id="fundingModifyBtn" name="fundingModifyBtn">
-													수정하기 <i class="fa fa-gear"></i>
-												</button>
-												</span>
-								
-								</sec:authorize></h2>
+									<sec:authorize access="hasRole('ROLE_ADMIN')"> 
+										<span style="float:right">
+											<button style="text-align: right;" class="btn btn-default btn-theme-colored mt-5 font-16 btn-sm" type="button" id="fundingModifyBtn" name="fundingModifyBtn">
+												수정하기 <i class="fa fa-gear"></i>
+											</button>
+										</span>
+									</sec:authorize>
+								</h2>
 								
 								<div class="product_review">
 									<ul class="review_text list-inline">
@@ -247,7 +243,7 @@ $(function() {
 									<strong>판매자:</strong> ${funding.member.name}
 								</div>
 								<div class="category">
-									<strong>Category:</strong>
+									<strong>카테고리:</strong>
 									<c:choose>
 										<c:when test="${funding.category == 301}">탁주</c:when>
 										<c:when test="${funding.category == 302}">청주</c:when>
@@ -264,7 +260,7 @@ $(function() {
 									<strong>펀딩종료 </strong>
 								</div>
 								<div class="col-md-3">
-									<div class="text-center" data-countdown="2020/03/01"></div>
+									<div class="text-center" data-countdown="${funding.endDate}"></div>
 								</div>
 								<script type="text/javascript">
 									$(document).ready(function() {
@@ -292,15 +288,19 @@ $(function() {
 							</div>
 							<div class="progress-item mt-15">
 								<div class="progress mb-0">
+									<c:set var="per" value="${funding.stackPrice/funding.goalPrice *100}"/>
+									<c:if test="${per > 100}">
+										<c:set var="per" value="100"/>
+									</c:if>
 									<div
 										data-percent="${funding.stackPrice/funding.goalPrice *100}"
 										class="progress-bar appeared"
-										style="width: ${funding.stackPrice/funding.goalPrice *100}%;">
+										style="width: ${per}%;">
 										<span class="percent"><fmt:formatNumber value="${funding.stackPrice/funding.goalPrice}" type="percent"/></span>
 									</div>
 								</div>
 							</div>
-							<div class="pull-right font-weight-400 text-black-333 pr-0 mt-15 mb-15">
+							<div class="pull-right font-weight-400 text-black-333 mt-15 mb-15">
 								<button class="single_add_to_cart_button btn btn-theme-colored deleteLikes" type="button">
 									좋아요 취소 <i class="fa fa-thumbs-down text-white mr-10"></i>
 								</button>
@@ -311,36 +311,36 @@ $(function() {
 								<div class="font-icon-list col-md-2 col-sm-3 col-xs-6 col-xs-6"></div>
 							</div>
 						</div>
-						<%-- </form> --%>
-						<div class="cart-form-wrapper mt-30">
-							<!-- <input type="hidden" value="productID" name="add-to-cart"> -->
-							<table class="table variations no-border">
-								<tbody>
-									<tr>
-										<td class="col-md-5"></td>
-										<td class="name col-md-1"><div class="mt-10">수량</div></td>
-										<td class="value mt-10 col-md-4">
-											<div class="quantity buttons_added mt-10">
-												<input type="button" class="minus" value="-"> 
-												<input type="number" size="4" class="input-text qty text" title="Qty" value="1" name="quantity" min="1" step="1">
-												<input type="button" class="plus" value="+">
-											</div>
-										</td>
-										<td class="col-md-2">
-											<div class="pull-right font-weight-400 text-black-333 pr-0">
-												<button class="btn btn-default btn-theme-colored mt-5 font-16 btn-sm addFunding" type="button">
-													펀딩하기<i class="flaticon-charity-make-a-donation font-16 ml-5"></i>
-												</button>
-											</div>
-										</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
+						<c:if test="${funding.fundingState == 501}">
+							<div class="cart-form-wrapper mt-30">
+								<!-- <input type="hidden" value="productID" name="add-to-cart"> -->
+								<table class="table variations no-border">
+									<tbody>
+										<tr>
+											<td class="col-md-5"></td>
+											<td class="name col-md-1"><div class="mt-10">수량</div></td>
+											<td class="value mt-10 col-md-4">
+												<div class="quantity buttons_added mt-10">
+													<input type="button" class="minus" value="-"> 
+													<input type="number" size="4" class="input-text qty text" title="Qty" value="1" name="quantity" min="1" step="1">
+													<input type="button" class="plus" value="+">
+												</div>
+											</td>
+											<td class="col-md-2">
+												<div class="pull-right font-weight-400 text-black-333 pr-0">
+													<button class="btn btn-default btn-theme-colored mt-5 font-16 btn-sm addFunding" type="button">
+														펀딩하기<i class="flaticon-charity-make-a-donation font-16 ml-5"></i>
+													</button>
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</c:if>
 					</div>
 				</div>
-				<form id="product_form" name="product_form" action="${pageContext.request.contextPath}/funding/fundingQuestionInsert"
-				method="post">
+				<form id="product_form" name="product_form" action="${pageContext.request.contextPath}/funding/fundingQuestionInsert" method="post">
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 					<div class="col-md-12">
 						<div class="horizontal-tab product-tab">
@@ -351,22 +351,6 @@ $(function() {
 							</ul>
 							<div class="tab-content">
 								<div class="tab-pane fade in active" id="tab1">
-									<!-- <h3>Product Description</h3>
-									<p>One Lorem ipsum dolor sit amet, consectetur adipisicing
-										elit. Quaerat, iste, architecto ullam tenetur quia nemo
-										ratione tempora consectetur quos minus voluptates nisi hic
-										alias libero explicabo reiciendis sint ut quo nulla ipsa
-										aliquid neque molestias et qui sunt. Odit, molestiae. One
-										Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-										Quaerat, iste, architecto ullam tenetur quia nemo ratione
-										tempora consectetur quos minus voluptates nisi hic alias
-										libero explicabo reiciendis sint ut quo nulla ipsa aliquid
-										neque molestias et qui sunt. Odit, molestiae.</p>
-									<p>One Lorem ipsum dolor sit amet, consectetur adipisicing
-										elit. Quaerat, iste, architecto ullam tenetur quia nemo
-										ratione tempora consectetur quos minus voluptates nisi hic
-										alias libero explicabo reiciendis sint ut quo nulla ipsa
-										aliquid neque molestias et qui sunt. Odit, molestiae.</p> -->
 										<img src="${pageContext.request.contextPath}/resources/images/funding/Detail_${funding.image}" alt="">
 									<!-- <table class="table table-striped">
 										<tbody>
@@ -392,29 +376,17 @@ $(function() {
 											</tr>
 										</tbody>
 									</table> -->
+									<h3 class="line-bottom">저희 양조장은 여기 있어요!</h3>
+									<div id="map" style="width:100%;height:350px;"></div>
 								</div>
 									<div class="tab-pane fade" id="tab2">
-									<!-- <div class="col-sm-6"> -->
 									<div class="funding_question">
 										<label>제목 <small>*</small></label> 
 										<input name="form_subject" type="text" placeholder="제목을 입력해 주세요." class="form-control">
 										<label>문의내용 <small>*</small></label>
-										<input name="form_content" type="text" 
-											class="form-control required" rows="5"
-											placeholder="내용을 입력해 주세요.">
-										
-										<button type="button" class="btn btn-dark btn-flat question"
-											data-toggle="modal" data-target=".bs-example-modal-sm">문의하기</button>
-
-										<!-- <div class="modal fade bs-example-modal-sm" tabindex="-1"
-											role="dialog" aria-labelledby="mySmallModalLabel">
-											<div class="modal-dialog modal-sm">
-												<div class="modal-content">문의가 등록 되었습니다.</div>
-											</div>
-										</div> -->
-										<!-- </div> -->
+										<input name="form_content" type="text"  class="form-control required" rows="5" placeholder="내용을 입력해 주세요.">
+										<button type="button" class="btn btn-dark btn-flat question" data-toggle="modal" data-target=".bs-example-modal-sm">문의하기</button>
 									</div>
-									<!-- </div> -->
 								</div>
 								<div class="tab-pane fade" id="tab3">
 									<!-- <div class="col-sm-6"> -->
@@ -446,7 +418,8 @@ $(function() {
 														<li class="prod-delivery-period-contents etc-pdd-info">
 															ㆍ<span>주문 및 결제 완료 후, 2-3일 이내 도착</span>
 														</li>
-														<li class="prod-delivery-period-contents">ㆍ도서 산간 지역등은 
+														<li class="prod-delivery-period-contents">
+															ㆍ도서 산간 지역등은 
 															<p class="prod-delivery-period__notice">ㆍ천재지변, 물량 수급 변동 등 예외적인 사유 발생 시, 다소 지연될 수 있는 점 양해 부탁드립니다.</p>
 														</li>
 													</ul>
@@ -632,6 +605,44 @@ $(function() {
 				아래 네모 네개 -->
 			</div>
 		</div>
+		<script>
+         var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+             mapOption = {
+                 center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+                 level: 3 // 지도의 확대 레벨
+             };  
+         
+         // 지도를 생성합니다    
+         var map = new kakao.maps.Map(mapContainer, mapOption); 
+         
+         // 주소-좌표 변환 객체를 생성합니다
+         var geocoder = new kakao.maps.services.Geocoder();
+         
+         // 주소로 좌표를 검색합니다 ${requestScope.gym.addr}
+         geocoder.addressSearch('${juso.addr}', function(result, status) {
+         
+             // 정상적으로 검색이 완료됐으면 
+              if (status === kakao.maps.services.Status.OK) {
+         
+                 var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+         
+                 // 결과값으로 받은 위치를 마커로 표시합니다
+                 var marker = new kakao.maps.Marker({
+                     map: map,
+                     position: coords
+                 });
+         
+                 // 인포윈도우로 장소에 대한 설명을 표시합니다
+                 var infowindow = new kakao.maps.InfoWindow({
+                     content: '<div style="width:150px;text-align:center;padding:6px 0;">${juso.addr}</div>'
+                 });
+                 infowindow.open(map, marker);
+         
+                 // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+                 map.setCenter(coords);
+             } 
+         });    
+</script>
 	</section>
 	<!-- end main-content -->
 </div>
