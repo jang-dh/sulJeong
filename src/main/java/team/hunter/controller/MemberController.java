@@ -91,8 +91,13 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/identity/identityAuth")
-	public String identityPopup() {
+	public String goAuthPopup() {
 		return "form/identity/identityAuth";
+	}
+	
+	@RequestMapping("/identity/emailAuth")
+	public String emailAuthPopup() {
+		return "form/identity/emailAuth";
 	}
 	
 	@RequestMapping("/kakaoLogin")

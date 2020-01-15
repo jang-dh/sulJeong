@@ -18,6 +18,10 @@
 	function goAuthPopup() {
 		var popAuth = window.open("${pageContext.request.contextPath}/identity/identityAuth", "pop","width=570,height=420, scrollbars=yes, resizable=yes");
 	}
+	
+	function emailAuthPopup() {
+		var popAuth = window.open("${pageContext.request.contextPath}/identity/emailAuth", "pop","width=570,height=420, scrollbars=yes, resizable=yes");
+	}
 
 	function jusoCallBack(roadFullAddr, addrDetail, jibunAddr) {
 		//alert(1)
@@ -222,8 +226,8 @@
 							class="form-control" type="email">
 					</div>
 					<div class="form-group col-md-6">
-						<label>Email Address 인증</label> <input name="emailCheck" id="emailCheck"
-							class="form-control" type="button" value="Email Address 인증">
+						<label>인증하기</label> 
+						<input name="emailCheck" id="emailCheck" class="form-control" type="button" value="Email Address 인증" onClick="emailAuthPopup();">
 					</div>
 				</div>
 				
