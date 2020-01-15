@@ -1,11 +1,6 @@
 package team.hunter.controller;
 
-import java.io.IOException;
-import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,28 +13,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.siot.IamportRestClient.IamportClient;
-import com.siot.IamportRestClient.exception.IamportResponseException;
-import com.siot.IamportRestClient.request.CancelData;
-import com.siot.IamportRestClient.request.ScheduleData;
-import com.siot.IamportRestClient.request.ScheduleEntry;
-import com.siot.IamportRestClient.response.IamportResponse;
-import com.siot.IamportRestClient.response.Payment;
-import com.siot.IamportRestClient.response.Schedule;
-
-//import com.siot.IamportRestClient.IamportClient;
-//import com.siot.IamportRestClient.request.ScheduleData;
-//import com.siot.IamportRestClient.request.ScheduleEntry;
-//import com.siot.IamportRestClient.response.IamportResponse;
-//import com.siot.IamportRestClient.response.Schedule;
-//import com.sun.xml.internal.ws.wsdl.writer.document.Import;
-
-import team.hunter.model.dto.Funding;
 import team.hunter.model.dto.Member;
 import team.hunter.model.dto.Paging;
 import team.hunter.model.dto.Purchase;
 import team.hunter.model.service.FundingService;
-import team.hunter.model.service.PurchaseSchedule;
 import team.hunter.model.service.PurchaseService;
 import team.hunter.model.service.StatisticsService;
 import team.hunter.util.Constants;
@@ -54,17 +31,16 @@ public class PurchaseController {
 	@Autowired
 	private FundingService fundingService;
 
-	private IamportClient iamportClient;
+	
 
 	@RequestMapping(value = "/insertPurchase", method = RequestMethod.POST)
 	@ResponseBody
 	public int insertPurchase(int fundingCode, int price, int qty, String customerUid, String merchantUid) {
 		Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		Purchase purchase = new Purchase(0, member.getCode(), fundingCode, price, qty, Constants.PURCHASE_BEFORE, null,
-				null, null, customerUid, merchantUid, null);
+		Purchase purchase = new Purchase(0, member.getCode(), fundingCode, price, qty, Constants.PURCHASE_BEFORE, null, null, null, customerUid, merchantUid, null);
 //		iamportClient = new IamportClient("9641301071926320", "DGvvhuqgbRnvUxwBIwOoU5tDk5AH28ZGPvb7ZCnbtLHnjdZ1JOpETTieYSW11WIRrTYrvmCZ7jnqxnrh");
 //		
-//		//purchaseSchedule.requestSchedulePusrchase(purchase);
+//		purchaseSchedule.requestSchedulePusrchase(purchase);
 //		//결제 시도 시각 설정
 //		Funding funding = fundingService.selectByCode(fundingCode);
 //		String fundingEndDate = funding.getEndDate();
@@ -122,7 +98,7 @@ public class PurchaseController {
 		statisticsService.updateTotalFundingStackPrice(price * qty);
 		statisticsService.updateFundingTotalCount();
 
-		// cancelPurchase(purchase);
+		//cancelPurchase(purchase);
 		return purchaseService.insert(purchase);
 	}
 
@@ -192,39 +168,4 @@ public class PurchaseController {
 //		System.out.println();
 //		return mv;
 //	}
-
-	public void cancelPurchase(Purchase purchase) {
-		iamportClient = new IamportClient("9641301071926320",
-				"DGvvhuqgbRnvUxwBIwOoU5tDk5AH28ZGPvb7ZCnbtLHnjdZ1JOpETTieYSW11WIRrTYrvmCZ7jnqxnrh");
-		CancelData cancelData = new CancelData(purchase.getMerchantUid(), false);
-
-		try {
-			IamportResponse<Payment> response = iamportClient.cancelPaymentByImpUid(cancelData);
-			System.out.println("response.getCode() :" + response.getCode());
-			System.out.println("response.getMessage() :" + response.getMessage());
-			// System.out.println("response.getResponse().getAmount() :" +
-			// response.getResponse().getAmount());
-			// TODO : 처리 로직
-		} catch (IamportResponseException e) {
-			System.out.println(e.getMessage());
-
-			switch (e.getHttpStatusCode()) {
-			case 401:
-				// TODO : 401 Unauthorized
-				System.out.println(e.getMessage());
-				break;
-			case 404:
-				// TODO : imp_123412341234 에 해당되는 거래내역이 존재하지 않음
-				System.out.println(e.getMessage());
-				break;
-			case 500:
-				// TODO : 서버 응답 오류
-				System.out.println(e.getMessage());
-				break;
-			}
-		} catch (IOException e) {
-			// 서버 연결 실패
-			e.printStackTrace();
-		}
-	}
 }

@@ -60,8 +60,8 @@ public class FundingController {
 	public String allCategory(Model model, String order, String where, String val) {
 		List<Funding> list = service.selectList("0", order, where, val);
 		
-		if(list.size() > 8)
-			list = list.subList(0, 8);
+		if(list.size() > 6)
+			list = list.subList(0, 6);
 		
 		model.addAttribute("list", list);
 
@@ -72,8 +72,8 @@ public class FundingController {
 	@RequestMapping("/funding/category/{categoryCode}")
 	public ModelAndView eachCategory(@PathVariable String categoryCode, String order, String where, String val) {
 		List<Funding> list = service.selectList(categoryCode, order, where, val);
-		if(list.size() > 8)
-			list = list.subList(0, 8);
+		if(list.size() > 6)
+			list = list.subList(0, 6);
 		return new ModelAndView("funding/fundingList", "list", list);
 	}
 	
@@ -82,14 +82,13 @@ public class FundingController {
 	public @ResponseBody List<Funding> fetchList(String categoryCode, String order, String where, String val, int listCnt){
 		List<Funding> list = service.selectList(categoryCode, order, where, val);
 		
-		if(list.size() > listCnt + 4)
-			list = list.subList(listCnt, listCnt + 4);
+		if(list.size() > listCnt + 3)
+			list = list.subList(listCnt, listCnt + 3);
 		else
 			list = list.subList(listCnt, list.size());
 		
 		return list;
 	}
-	
 	
 }
 

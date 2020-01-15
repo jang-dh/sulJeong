@@ -66,17 +66,17 @@
 			<div class="col-md-3">
 				<div class="vertical-tab">
 					<ul class="nav nav-tabs">
-						<li class=""><a href="#tab18" data-toggle="tab"
-							aria-expanded="false">펀딩 문의 관리</a></li>
-						<li class="active"><a href="#tab19" data-toggle="tab"
-							aria-expanded="true">참가한 사용자</a></li>
+						<li class="active"><a href="#tab18" data-toggle="tab"
+							aria-expanded="true">펀딩 문의 관리</a></li>
+						<li class=""><a href="#tab19" data-toggle="tab"
+							aria-expanded="false">참가한 사용자</a></li>
 					</ul>
 				</div>
 			</div>
 			<div class="col-md-9">
 				<div class="tab-content">
 
-					<div class="tab-pane fade" id="tab18">
+					<div class="tab-pane fade active in" id="tab18">
 						<div class="row">
 							<div class="col-md-12">
 								<div data-example-id="hoverable-table" class="bs-example">
@@ -116,7 +116,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="tab-pane fade active in" id="tab19">
+					<div class="tab-pane fade" id="tab19">
 						<div class="row">
 							<div class="col-md-12">
 								<div data-example-id="hoverable-table" class="bs-example">

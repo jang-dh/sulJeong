@@ -7,11 +7,14 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import team.hunter.model.dto.Funding;
 import team.hunter.model.dto.FundingAnswer;
 import team.hunter.model.dto.FundingQuestion;
 import team.hunter.model.dto.Likes;
@@ -19,6 +22,7 @@ import team.hunter.model.dto.Member;
 import team.hunter.model.dto.Statistics;
 import team.hunter.model.service.FundingAnswerService;
 import team.hunter.model.service.FundingQuestionService;
+import team.hunter.model.service.FundingRequestService;
 import team.hunter.model.service.LikesService;
 import team.hunter.model.service.MemberService;
 import team.hunter.model.service.PurchaseService;
@@ -44,6 +48,9 @@ public class AjaxController {
 	
 	@Autowired
 	private PurchaseService purchaseService;
+	
+	@Autowired
+	private FundingRequestService fundingReqService;
 
 	@PostMapping("/findId")
 	public List<Member> findId(Member member) {
@@ -112,6 +119,20 @@ public class AjaxController {
 		Member result = memberService.idDuplicateCheck(id);
 		return result;
 	};
+	
+	//리스트 추가
+	@GetMapping("/myOpenFunding/fetchList")
+	public @ResponseBody List<Funding> fetchList(int code, int listCnt){
+		System.out.println(code);
+		List<Funding> myOpenFundingList = fundingReqService.myFundingOpenList(code);
+			
+		if(myOpenFundingList.size() > listCnt + 3)
+			myOpenFundingList = myOpenFundingList.subList(listCnt, listCnt + 3);
+		else
+			myOpenFundingList = myOpenFundingList.subList(listCnt, myOpenFundingList.size());
+			
+		return myOpenFundingList;
+	}
 	
 
 }

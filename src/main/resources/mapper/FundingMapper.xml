@@ -106,7 +106,7 @@
 					from funding f, likes l, member m
 					where l.funding_code = f.code and f.md_code = m.code and funding_state = '501'
 					order by cnt desc)
-			where rownum < 5
+			where rownum < 4
 		]]>
 	</select>
 		
@@ -117,7 +117,7 @@
 	        		from funding f, member m, likes l
 	        		where funding_state = '501' and f.md_code = m.code and l.funding_code = f.code
 	        		order by end_date)
-			where rownum < 5
+			where rownum < 4
 		]]>
 	</select>
 	
@@ -128,7 +128,7 @@
         			from funding f, member m
         			where funding_state = '502' and f.md_code = m.code
         			order by open_date)
-			where rownum < 5
+			where rownum < 4
 		]]>
 	</select>
 	
@@ -163,7 +163,7 @@
 	<update id="fundUpdate" parameterType="funding">
 		update funding
 		<trim prefix="SET" prefixOverrides=",">
-		, title=#{title}, reward_name=#{rewardName}, reward_price=#{rewardPrice}, goal_price=#{goalPrice}, open_date=#{openDate}, end_date=#{endDate}, category=#{category}
+		, title=#{title}, reward_name=#{rewardName}, reward_price=#{rewardPrice}, goal_price=#{goalPrice}, open_date=#{openDate}, end_date=#{endDate}, category=#{category}, funding_state=#{fundingState}
 		<if test="image!=null">
 		, image=#{image}
 		</if>

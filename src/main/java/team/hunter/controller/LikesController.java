@@ -24,8 +24,8 @@ public class LikesController {
 	public String likesList(Model model) {
 		Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		List<Funding> list = likesService.selectFundingByMemberCode(member.getCode());
-		if (list.size() > 4)
-			list = list.subList(0, 4);
+		if (list.size() > 3)
+			list = list.subList(0, 3);
 	
 		model.addAttribute("list", list);
 
@@ -37,8 +37,8 @@ public class LikesController {
 		Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		List<Funding> list = likesService.selectFundingByMemberCode(member.getCode());
 
-		if (list.size() > listCnt + 4)
-			list = list.subList(listCnt, listCnt + 4);
+		if (list.size() > listCnt + 3)
+			list = list.subList(listCnt, listCnt + 3);
 		else
 			list = list.subList(listCnt, list.size());
 
