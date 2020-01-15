@@ -35,4 +35,9 @@ public class LikesDAOImpl implements LikesDAO {
 		return session.selectOne("likesMapper.select", likes);
 	}
 
+	@Override
+	public int cntByFundingCode(int fundingCode) {
+		return session.selectOne("likesMapper.cntByFundingCode", fundingCode);
+	}
+
 }

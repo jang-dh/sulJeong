@@ -56,11 +56,12 @@ public class PurchaseServiceImpl implements PurchaseService {
 	public int updatePurchase(int code, int price) {
 		
 		int result = purchaseDAO.updatePurchase(code);
+		Purchase purchase = purchaseDAO.selectByCode(code);
+		cancelPurchase(purchase);
 		statisticsDAO.updateFurchaseFailed(price);
-		//여기서 그거 통계 업데이트 불러
 		return result;
 	}
-
+		
 	@Override
 	public int deliveryCodeSave(Purchase purchase) {
 		int result = purchaseDAO.deliveryCodeSave(purchase);
@@ -75,7 +76,6 @@ public class PurchaseServiceImpl implements PurchaseService {
 
 	@Override
 	public int updatePurchaseState() {
-
 		return purchaseDAO.updatePurchaseState();
 	}
 

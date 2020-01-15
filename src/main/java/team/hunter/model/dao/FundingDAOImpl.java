@@ -22,7 +22,7 @@ public class FundingDAOImpl implements FundingDAO {
 		map.put("order", order);
 		map.put("where", where);
 		map.put("val", val);
-		
+		System.out.println("select");
 		return session.selectList("fundingMapper.select", map);
 	}
 
@@ -33,7 +33,7 @@ public class FundingDAOImpl implements FundingDAO {
 		map.put("order", order);
 		map.put("where", where);
 		map.put("val", val);
-		
+		System.out.println("selectByMdName");
 		return session.selectList("fundingMapper.selectByMdName", map);
 	}
 
@@ -44,6 +44,7 @@ public class FundingDAOImpl implements FundingDAO {
 		map.put("order", order);
 		map.put("where", where);
 		map.put("val", val);
+		System.out.println("selectLikesOrder");
 		
 		return session.selectList("fundingMapper.selectLikesOrder", map);
 	}
@@ -55,7 +56,7 @@ public class FundingDAOImpl implements FundingDAO {
 		map.put("order", order);
 		map.put("where", where);
 		map.put("val", val);
-		
+		System.out.println("selectByMdNameLikesOrder");
 		return session.selectList("fundingMapper.selectByMdNameLikesOrder", map);
 	}
 

@@ -25,4 +25,9 @@ public interface LikesDAO {
 	 * 특정 좋아요 찾기
 	 * */
 	Likes select(Likes likes);
+	
+	/**
+	 * 특정 펀딩의 좋아요 수
+	 * */
+	int cntByFundingCode(int fundingCode);
 }

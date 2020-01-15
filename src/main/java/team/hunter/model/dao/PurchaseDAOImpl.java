@@ -66,7 +66,7 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 	}
 
 	@Override
-	public List<Purchase> purchaseList(int memberCode, int startIndex, int cntPerPage) {
+	public List<Purchase> purchaseList(int memberCode, int startIndex, int cntPerPage){
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("memberCode", memberCode);
 		map.put("startIndex", startIndex);
@@ -77,5 +77,10 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 	@Override
 	public List<Purchase> selectCanceled() {
 		return session.selectList("purchaseMapper.canceled");
+	}
+
+	@Override
+	public Purchase selectByCode(int code) {
+		return session.selectOne("purchaseMapper.selectByCode", code);
 	}
 }
