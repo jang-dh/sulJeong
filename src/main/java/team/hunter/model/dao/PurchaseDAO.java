@@ -49,4 +49,18 @@ public interface PurchaseDAO {
 	 * 우석 : 구매테이블에서 PurchaseState update
 	 * */
 	int updatePurchaseState();
+	/*
+	 * 펀딩 후원 신청 갯수 가지고 오기
+	 */
+	public int purchaseListCount(int memberCode);
+
+	/*
+	 * 펀딩등록신청 순서대로 가지고 나오기
+	 */
+	public List<Purchase> purchaseList(int memberCode, int startIndex, int cntPerPage);
+	
+	/**
+	 * 펀딩 달성 실패로 결제 취소할 결제 내역
+	 * */
+	public List<Purchase> selectCanceled();
 }

@@ -10,15 +10,16 @@ import org.springframework.transaction.annotation.Transactional;
 import team.hunter.model.dao.FundingDAO;
 import team.hunter.model.dao.PurchaseDAO;
 import team.hunter.model.dto.Funding;
+import team.hunter.model.dto.FundingRequest;
 import team.hunter.model.dto.Member;
 import team.hunter.model.dto.Purchase;
 
 @Service
 public class PurchaseServiceImpl implements PurchaseService {
-	
+
 	@Autowired
 	private PurchaseDAO purchaseDAO;
-	
+
 	@Autowired
 	private FundingDAO fundingDAO;
 
@@ -26,30 +27,28 @@ public class PurchaseServiceImpl implements PurchaseService {
 	@Transactional
 	public int insert(Purchase purchase) {
 		int result = purchaseDAO.insert(purchase);
-		result = fundingDAO.updateStackPrice(purchase.getFundingCode(), purchase.getPrice()*purchase.getQty());
+		result = fundingDAO.updateStackPrice(purchase.getFundingCode(), purchase.getPrice() * purchase.getQty());
 		return result;
 	}
-	
+
 	@Override
 	public List<Purchase> listDetail(int memberCode) {
 		List<Purchase> list = purchaseDAO.listDetail(memberCode);
-		
-		System.out.println("서비스에서 나오냐");
 		return list;
 	}
-	
+
 	@Override
 	public int countFundingCode(int fundingCode) {
 		int result = purchaseDAO.countFundingCode(fundingCode);
 		return result;
 	}
-	
+
 	@Override
 	public int selectListByMemberCode(int code) {
 		int result = purchaseDAO.selectListByMemberCode(code);
 		return result;
 	}
-	
+
 	@Override
 	public int deletePurchaseList(int code) {
 //		System.out.println("서비스를 갔다");
@@ -72,9 +71,19 @@ public class PurchaseServiceImpl implements PurchaseService {
 
 	@Override
 	public int updatePurchaseState() {
-		
+
 		return purchaseDAO.updatePurchaseState();
 	}
 
-	
+	@Override
+	public int purchaseListCount(int memberCode) {
+		return purchaseDAO.purchaseListCount(memberCode);
+	}
+
+	@Override
+	public List<Purchase> purchaseList(int memberCode, int startIndex, int cntPerPage) {
+		System.out.println("서비스를 가느냐?");
+		System.out.println("서비스를 나오느냐?");
+		return purchaseDAO.purchaseList(memberCode, startIndex, cntPerPage);
+	}
 }
