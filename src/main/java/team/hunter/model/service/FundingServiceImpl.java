@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import team.hunter.model.dao.FundingDAO;
+import team.hunter.model.dao.LikesDAO;
 import team.hunter.model.dto.Funding;
 
 @Service
@@ -14,19 +15,29 @@ public class FundingServiceImpl implements FundingService {
 	@Autowired
 	private FundingDAO fundingDAO;
 	
+	@Autowired
+	private LikesDAO likesDAO;
+	
 	@Override
 	public List<Funding> selectList(String categoryCode, String order, String where, String val) {
+		List<Funding> list = null;
+		
 		//판매자 이름으로 펀딩 검색하고  좋아요순으로 정렬
 		if(where != null && where.equals("md_name") && order != null && order.equals("likes"))
-			return fundingDAO.selectByMdNameLikesOrder(categoryCode, order, where, val);
+			list = fundingDAO.selectByMdNameLikesOrder(categoryCode, order, where, val);
 		//판매자 이름으로 펀딩 검색
-		if(where != null && where.equals("md_name"))
-			return fundingDAO.selectByMdName(categoryCode, order, where, val);
+		else if(where != null && where.equals("md_name"))
+			list = fundingDAO.selectByMdName(categoryCode, order, where, val);
 		//좋아요 순으로 정렬
-		if(order != null && order.equals("likes"))
-			return fundingDAO.selectLikesOrder(categoryCode, order, where, val);
+		else if(order != null && order.equals("likes"))
+			list = fundingDAO.selectLikesOrder(categoryCode, order, where, val);
+		else
+			list = fundingDAO.select(categoryCode, order, where, val);
 		
-		return fundingDAO.select(categoryCode, order, where, val);
+		for(Funding funding : list)
+			funding.setCnt(likesDAO.cntByFundingCode(funding.getCode()));
+		
+		return list;
 	}
 
 	@Override
@@ -36,17 +47,26 @@ public class FundingServiceImpl implements FundingService {
 
 	@Override
 	public List<Funding> selectLikesRankFour() {
-		return fundingDAO.selectLikesRankFour();
+		List<Funding> list = fundingDAO.selectLikesRankFour();
+		for(Funding funding : list)
+			funding.setCnt(likesDAO.cntByFundingCode(funding.getCode()));
+		return list;
 	}
 
 	@Override
 	public List<Funding> selectLastestFour() {
-		return fundingDAO.selectLastestFour();
+		List<Funding> list = fundingDAO.selectLastestFour();
+		for(Funding funding : list)
+			funding.setCnt(likesDAO.cntByFundingCode(funding.getCode()));
+		return list;
 	}
 
 	@Override
 	public List<Funding> selectNewestFour() {
-		return fundingDAO.selectNewestFour();
+		List<Funding> list = fundingDAO.selectNewestFour();
+		for(Funding funding : list)
+			funding.setCnt(likesDAO.cntByFundingCode(funding.getCode()));
+		return list;
 	}
 
 	@Override
