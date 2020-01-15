@@ -25,8 +25,12 @@ public interface PurchaseService {
 	public List<Purchase> listDetail(int memberCode);
 
 	/*
-	 * 후원자 정보 표시
+	 * 후원 취소 상태 번경
 	 */
+<<<<<<< HEAD
+	public int updatePurchase(int code);
+	
+=======
 	public int selectListByMemberCode(int code);
 
 	/*
@@ -34,6 +38,7 @@ public interface PurchaseService {
 	 */
 	public int deletePurchaseList(int code);
 
+>>>>>>> 7f0057dac8cacb4da1653cb4b6884972aedf13ac
 	/**
 	 * 송장번호, 택배사 입력
 	 */

@@ -23,17 +23,11 @@ public interface PurchaseDAO {
 	 * 후원 리스트 상세 정보
 	 */
 	public List<Purchase> listDetail(int memberCode);
-	
-	/*
-	 * 후원자 정보 출력
-	 */
-	public int selectListByMemberCode(int code);
 	 
 	/*
-	 * 후원한 펀딩 삭제
+	 * 후원 취소 상태 번경
 	 */
-	public int deleteList(int code);
-	
+	public int updatePurchase(int code);
 
 	/**
 	 * 송장번호, 택배사 입력

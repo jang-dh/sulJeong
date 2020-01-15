@@ -48,6 +48,10 @@ public class PurchaseServiceImpl implements PurchaseService {
 	}
 
 	@Override
+<<<<<<< HEAD
+	public int updatePurchase(int code) {
+		int result = purchaseDAO.updatePurchase(code);
+=======
 	public int selectListByMemberCode(int code) {
 		int result = purchaseDAO.selectListByMemberCode(code);
 		return result;
@@ -58,6 +62,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 //		System.out.println("서비스를 갔다");
 		int result = purchaseDAO.deleteList(code);
 //		System.out.println("서비스를 나오니?");
+>>>>>>> 7f0057dac8cacb4da1653cb4b6884972aedf13ac
 		return result;
 	}
 
@@ -86,8 +91,6 @@ public class PurchaseServiceImpl implements PurchaseService {
 
 	@Override
 	public List<Purchase> purchaseList(int memberCode, int startIndex, int cntPerPage) {
-		System.out.println("서비스를 가느냐?");
-		System.out.println("서비스를 나오느냐?");
 		return purchaseDAO.purchaseList(memberCode, startIndex, cntPerPage);
 	}
 	
