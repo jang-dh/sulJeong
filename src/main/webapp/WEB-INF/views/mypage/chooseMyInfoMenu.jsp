@@ -22,9 +22,15 @@
 		document.form.addr.value = roadFullAddr;
 	}
 	
+	function emailAuthPopup() {
+		popAuthEmail = window.open("${pageContext.request.contextPath}/identity/emailAuth", "pop","width=570,height=420, scrollbars=yes, resizable=yes");
+		//popAuthEmail.document.getElementById("childEmailAuth").value = document.getElementById('childEmailAuth').value;
+	}
+	
 $(function(){
 	
 	var flage = false; // 비밀번호 일치 여부
+	var emailStatus = 'false'; //이메일 수신 동의 여부
 	
 	if("${member.emailAccept}"=="1"){
 		$("#emailAccept").attr("checked", true);
@@ -77,11 +83,24 @@ $(function(){
 			  return false;
 		}
 		
+		if($('#emailCheckStatus').val()=='true'){
+		    emailStatus = 'true';
+		}
+		
 		if($('input:checkbox[id=emailAccept]').is(':checked') == true){
 			$("#emailAccept").val("1");
 		}else{
 			$("#emailAccept").val("0");
 		}
+		
+		if(flage == false){
+			alert("비밀번호 일치 여부 확인해주세요.");
+			return false;
+		}else if(emailStatus == 'false'){
+		    alert("이메일 인증 후 회원가입 가능");
+			return false;
+		}
+		
 	});
 	
 	$("#membership_withdrawal").click(function() {
@@ -123,6 +142,28 @@ $(function(){
 			return false;
 		}
 	});
+	
+	$("#emailCheck").click(function() {
+		
+		var emailVal = $("#email").val()
+		var allDate = "${_csrf.parameterName}=${_csrf.token}"+"&email="+emailVal;
+		
+		  $.ajax({
+				 url: "${pageContext.request.contextPath}/member/auth", //서버요청주소
+				 type:"post", //요청방식(get|post|put:patch:delete)
+				 dataType:"text", //서버가 보내온 데이터 타입(text,html,xml,json)
+				 data: allDate ,//서버에게 보내는 parameter 정보
+				 success:function(result){
+					 //alert(result);
+					 $("#hidden2").val(result);
+					 emailAuthPopup();
+				 } ,//성공했을대
+				 error:function(err){
+					alert("실패")
+					emailStatus = 'false';
+				 }//오류발생했을때
+			 });
+	})
 	
 	
 });	
@@ -187,9 +228,13 @@ $(function(){
 						</div>
 
 						<div class="row">
-							<div class="form-group col-md-12">
-								<label>Email Address</label> <input name="email" id="email"
-									class="form-control" type="email" value="${member.email}">
+							<div class="form-group col-md-6">
+								<label>Email Address</label> 
+								<input name="email" id="email" class="form-control" type="email">
+							</div>
+							<div class="form-group col-md-6">
+								<label>인증하기</label> 
+								<input name="emailCheck" id="emailCheck" class="form-control" type="button" value="Email Address 인증">
 							</div>
 						</div>
 
@@ -217,6 +262,9 @@ $(function(){
 						</div>
 					</form>
 				</div>
+				<input type="hidden" id="hidden2" name="hidden2">
+			
+				<input type="hidden" id="emailCheckStatus" name="emailCheckStatus">
 			</div>
 		</div>
 	</div>
@@ -254,6 +302,8 @@ $(function(){
 						<div class="form-group">
 							<button class="btn btn-border btn-theme-colored btn-lg btn-block mt-15" type="button" id="membership_withdrawal">membership withdrawal</button>
 						</div>
+						
+						
 				</div>
 			</div>
 		</div>

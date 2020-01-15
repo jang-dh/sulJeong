@@ -4,6 +4,10 @@
 
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script type="text/javascript">
+
+	var popAuthEmail = null;
+	var emailAuthResult=null;
+	
 	function goPopup() {
 		//경로는 시스템에 맞게 수정하여 사용
 		//호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(http://www.juso.go.kr/addrlink/addrLinkUrl.do)를 
@@ -17,6 +21,11 @@
 	
 	function goAuthPopup() {
 		var popAuth = window.open("${pageContext.request.contextPath}/identity/identityAuth", "pop","width=570,height=420, scrollbars=yes, resizable=yes");
+	}
+	
+	function emailAuthPopup() {
+		popAuthEmail = window.open("${pageContext.request.contextPath}/identity/emailAuth", "pop","width=570,height=420, scrollbars=yes, resizable=yes");
+		//popAuthEmail.document.getElementById("childEmailAuth").value = document.getElementById('childEmailAuth').value;
 	}
 
 	function jusoCallBack(roadFullAddr, addrDetail, jibunAddr) {
@@ -32,6 +41,7 @@
 		var status = '0'; //아이디 중복체크 상태변수
 		var authStatus = '3';//성인인증 상태변수
 		var flage = false; // 비밀번호 일치 여부
+		var emailStatus = 'false'; //이메일 수신 동의 여부
 		
 		$("#idDuplicateCheck").click(function(){
 			
@@ -76,6 +86,11 @@
 		});
 		
 		$("#register").click(function() {
+			if($('#name').val()==""){
+				alert("성함을 입력해주세요");
+				$('#name').focus();
+				return false;
+			}
 			
 			if($('#id').val()==""){
 				alert("아이디를 입력해주세요");
@@ -88,11 +103,7 @@
 				return false;
 			}
 			
-			if($('#name').val()==""){
-				alert("성함을 입력해주세요");
-				$('#name').focus();
-				return false;
-			}
+			
 			if($('#email').val()==""){
 				alert("이메일을 입력해주세요");
 				$('#email').focus();
@@ -112,37 +123,52 @@
 			}
 			
 			
-			//alert($('#hidden').val());
 			if($('#hidden').val()=='true'){
-				//alert("인증성공!!!")
-				//alert($('#hidden').val());
 			    authStatus = '4';
-			   // return false;
 			}
+			
+			if($('#emailCheckStatus').val()=='true'){
+			    emailStatus = 'true';
+			}
+			
 			
 			 if(status == '0'){
 				  alert("아이디 중복체크를 해주세요");
 				  return false;
+			  }else if(flage == false){
+				  alert("비밀번호 일치 여부 확인해주세요.");
+				  return false;
+			  }else if(emailStatus == 'false'){
+				  alert("이메일 인증 후 회원가입 가능");
+				  return false;
 			  }else if(authStatus == '3'){
 				  alert("성인인증을 해주시기 바랍니다.");
 				  return false;
-			  }else if(flage == false){
-				  alert("비밀번호 일치 여부 확인해주세요");
-				  return false;
 			  }
 			  
-			 
-			/* if($("#hidden").val()==false){
-				alert("성인인증에 실패하였으므로 회원가입 하실 수 없습니다.");
-				return false;
-			} */
-			
 		});
 		
-		  
-		
-		
-		 
+		$("#emailCheck").click(function() {
+			
+			var emailVal = $("#email").val()
+			var allDate = "${_csrf.parameterName}=${_csrf.token}"+"&email="+emailVal;
+			
+			  $.ajax({
+					 url: "${pageContext.request.contextPath}/member/auth", //서버요청주소
+					 type:"post", //요청방식(get|post|put:patch:delete)
+					 dataType:"text", //서버가 보내온 데이터 타입(text,html,xml,json)
+					 data: allDate ,//서버에게 보내는 parameter 정보
+					 success:function(result){
+						 //alert(result);
+						 $("#hidden2").val(result);
+						 emailAuthPopup();
+					 } ,//성공했을대
+					 error:function(err){
+						alert("실패")
+						emailStatus = 'false';
+					 }//오류발생했을때
+				 });
+		})
 	});
 		
 
@@ -185,6 +211,13 @@
 						Register Now.</h4>
 				</div>
 				<hr>
+				
+				<div class="row">
+					<div class="form-group col-md-6">
+						<label>Name</label> <input name="name" id="name"
+							class="form-control" type="text">
+					</div>
+				</div>
 					
 				<div class="row">
 					<div class="form-group col-md-6">
@@ -209,21 +242,16 @@
 					<div class="form-group col-md-6" id="pwdEqualCheck">비밀번호 확인</div>
 				</div>
 				
-				<div class="row">
-					<div class="form-group col-md-6">
-						<label>Name</label> <input name="name" id="name"
-							class="form-control" type="text">
-					</div>
-				</div>
+				
 				
 				<div class="row">
 					<div class="form-group col-md-6">
-						<label>Email Address</label> <input name="email" id="email"
-							class="form-control" type="email">
+						<label>Email Address</label> 
+						<input name="email" id="email" class="form-control" type="email">
 					</div>
 					<div class="form-group col-md-6">
-						<label>Email Address 인증</label> <input name="emailCheck" id="emailCheck"
-							class="form-control" type="button" value="Email Address 인증">
+						<label>인증하기</label> 
+						<input name="emailCheck" id="emailCheck" class="form-control" type="button" value="Email Address 인증">
 					</div>
 				</div>
 				
@@ -265,9 +293,16 @@
 			</form>
 			
 			<input type="hidden" id="hidden" name="hidden">
+			
+			<input type="hidden" id="hidden2" name="hidden2">
+			
+			<input type="hidden" id="emailCheckStatus" name="emailCheckStatus">
 			</c:otherwise>
 			</c:choose>
 			
 		</div>
 	</div>
+	
+	
+	
 </body>

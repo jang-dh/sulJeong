@@ -91,9 +91,10 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/identity/identityAuth")
-	public String identityPopup() {
+	public String goAuthPopup() {
 		return "form/identity/identityAuth";
 	}
+	
 	
 	@RequestMapping("/kakaoLogin")
 	public String kakaoLogin() {
@@ -104,5 +105,11 @@ public class MemberController {
 	public String googleLogin() {
 		return "form/google/googleLogin";
 	}
+	
+	@RequestMapping("/identity/emailAuth")
+	public String emailAuthPopup() {
+		return "form/identity/emailAuth";
+	}
+	
 
 }

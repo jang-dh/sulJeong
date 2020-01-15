@@ -26,8 +26,4 @@ public class Member {
 	private int cntPerPage;
 	
 	private Purchase purchase;
-	
-	//이메일 인증으로 속성값 2개 추가
-	private String authkey; //권한키
-	private int authstatus; //권한상태
 }

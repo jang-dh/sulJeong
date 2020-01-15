@@ -114,7 +114,7 @@
 		var perStyle = per;
 		if(per > 100)
 			perStyle = 100; 
-
+		
 		let html = '<div class="col-sm-7 col-md-4 wow fadeIn">';
 		html += '<div class="causes bg-silver-light maxwidth500 mb-30">';
 		html += '<div class="thumb">';
