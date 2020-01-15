@@ -30,6 +30,14 @@ public interface StatisticsDAO {
 	 * */
 	int updateTotalFundingStackPrice(int price);
 	
+	/*
+	 * 근딘 :
+	 * 후원한 펀딩 내역에서
+	 * 후원 취소 했을 때
+	 * 결제한 누적 금액 양에서 차감
+	 */
+	int updateFurchaseFailed(int price);
+	
 	/**
 	 * 당일기준 일주일 전까지의
 	 * 통계정보 출력

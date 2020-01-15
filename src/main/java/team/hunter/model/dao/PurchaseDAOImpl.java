@@ -35,13 +35,8 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 	}
 
 	@Override
-	public int selectListByMemberCode(int code) {
-		return session.selectOne("purchaseMapper.selectListByMemberCode", code);
-	}
-
-	@Override
-	public int deleteList(int code) {
-		return session.delete("purchaseMapper.delete", code);
+	public int updatePurchase(int code) {
+		return session.update("purchaseMapper.purchaseFailedUpdate", code);
 	}
 
 	@Override
@@ -71,18 +66,21 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 	}
 
 	@Override
-	public List<Purchase> purchaseList(int memberCode, int startIndex, int cntPerPage) {
-		System.out.println("다오를 가느냐?");
+	public List<Purchase> purchaseList(int memberCode, int startIndex, int cntPerPage){
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("memberCode", memberCode);
 		map.put("startIndex", startIndex);
 		map.put("cntPerPage", cntPerPage);
-		System.out.println("다오를 나오느냐?");
 		return session.selectList("purchaseMapper.purchaseList", map);
 	}
 
 	@Override
 	public List<Purchase> selectCanceled() {
 		return session.selectList("purchaseMapper.canceled");
+	}
+
+	@Override
+	public Purchase selectByCode(int code) {
+		return session.selectOne("purchaseMapper.selectByCode", code);
 	}
 }

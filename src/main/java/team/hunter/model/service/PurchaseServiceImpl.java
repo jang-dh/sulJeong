@@ -15,6 +15,7 @@ import com.siot.IamportRestClient.response.Payment;
 
 import team.hunter.model.dao.FundingDAO;
 import team.hunter.model.dao.PurchaseDAO;
+import team.hunter.model.dao.StatisticsDAO;
 import team.hunter.model.dto.Member;
 import team.hunter.model.dto.Purchase;
 
@@ -26,6 +27,9 @@ public class PurchaseServiceImpl implements PurchaseService {
 
 	@Autowired
 	private FundingDAO fundingDAO;
+	
+	@Autowired
+	private StatisticsDAO statisticsDAO;
 	
 	@Override
 	@Transactional
@@ -48,19 +52,17 @@ public class PurchaseServiceImpl implements PurchaseService {
 	}
 
 	@Override
-	public int selectListByMemberCode(int code) {
-		int result = purchaseDAO.selectListByMemberCode(code);
+	@Transactional
+	public int updatePurchase(int code, int price) {
+		
+		int result = purchaseDAO.updatePurchase(code);
+		Purchase purchase = purchaseDAO.selectByCode(code);
+		cancelPurchase(purchase);
+		statisticsDAO.updateFurchaseFailed(price);
+		fundingDAO.updateStackPrice(purchase.getFundingCode(), -1 * price);
 		return result;
 	}
-
-	@Override
-	public int deletePurchaseList(int code) {
-//		System.out.println("서비스를 갔다");
-		int result = purchaseDAO.deleteList(code);
-//		System.out.println("서비스를 나오니?");
-		return result;
-	}
-
+		
 	@Override
 	public int deliveryCodeSave(Purchase purchase) {
 		int result = purchaseDAO.deliveryCodeSave(purchase);
@@ -75,7 +77,6 @@ public class PurchaseServiceImpl implements PurchaseService {
 
 	@Override
 	public int updatePurchaseState() {
-
 		return purchaseDAO.updatePurchaseState();
 	}
 
@@ -86,8 +87,6 @@ public class PurchaseServiceImpl implements PurchaseService {
 
 	@Override
 	public List<Purchase> purchaseList(int memberCode, int startIndex, int cntPerPage) {
-		System.out.println("서비스를 가느냐?");
-		System.out.println("서비스를 나오느냐?");
 		return purchaseDAO.purchaseList(memberCode, startIndex, cntPerPage);
 	}
 	

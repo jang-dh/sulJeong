@@ -23,17 +23,11 @@ public interface PurchaseDAO {
 	 * 후원 리스트 상세 정보
 	 */
 	public List<Purchase> listDetail(int memberCode);
-	
-	/*
-	 * 후원자 정보 출력
-	 */
-	public int selectListByMemberCode(int code);
 	 
 	/*
-	 * 후원한 펀딩 삭제
+	 * 후원 취소 상태 번경
 	 */
-	public int deleteList(int code);
-	
+	public int updatePurchase(int code);
 
 	/**
 	 * 송장번호, 택배사 입력
@@ -49,6 +43,7 @@ public interface PurchaseDAO {
 	 * 우석 : 구매테이블에서 PurchaseState update
 	 * */
 	int updatePurchaseState();
+	
 	/*
 	 * 펀딩 후원 신청 갯수 가지고 오기
 	 */
@@ -63,4 +58,9 @@ public interface PurchaseDAO {
 	 * 펀딩 달성 실패로 결제 취소할 결제 내역
 	 * */
 	public List<Purchase> selectCanceled();
+	
+	/**
+	 * 
+	 * */
+	public Purchase selectByCode(int code);
 }

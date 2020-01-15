@@ -25,14 +25,9 @@ public interface PurchaseService {
 	public List<Purchase> listDetail(int memberCode);
 
 	/*
-	 * 후원자 정보 표시
+	 * 후원 취소 상태 번경
 	 */
-	public int selectListByMemberCode(int code);
-
-	/*
-	 * 후원한 펀딩 삭제
-	 */
-	public int deletePurchaseList(int code);
+	public int updatePurchase(int code, int price);
 
 	/**
 	 * 송장번호, 택배사 입력

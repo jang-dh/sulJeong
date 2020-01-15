@@ -3,7 +3,7 @@
 <mapper namespace="fundingMapper">
 	<resultMap type="funding" id="fundingMap">
 		<id column="code" property="code"/>
-		<result column="cnt" property="cnt"/>
+		<!-- <result column="cnt" property="cnt"/> -->
 		<result column="md_code" property="mdCode"/>
 		<result column="title" property="title"/>
 		<result column="reward_name" property="rewardName"/>
@@ -23,10 +23,10 @@
 	</resultMap>
 
 	<select id="select" resultMap="fundingMap" parameterType="map">
-		select f.code, md_code, title, reward_name, reward_price, goal_price, stack_price, image, category, open_date, end_date, funding_state, name, count(*)over(PARTITION by funding_code) as cnt
-		from funding f, member m, likes l
+		select f.code, md_code, title, reward_name, reward_price, goal_price, stack_price, image, category, open_date, end_date, funding_state, name
+		from funding f, member m
 		<where>
-			f.md_code = m.code and f.funding_state = '501' and l.funding_code(+) = f.code
+			f.md_code = m.code and f.funding_state = '501'
 			<if test="category!=0">
 				and f.category = #{category}
 			</if>
@@ -43,7 +43,7 @@
 	</select>
 
 	<select id="selectLikesOrder" resultMap="fundingMap" parameterType="map">
-		select distinct f.code as code, md_code, title, reward_name, goal_price, stack_price, image, category, open_date, end_date, funding_state, count(*)over(PARTITION by funding_code) as cnt, m.name
+		select distinct f.code as code, md_code, title, reward_name, goal_price, stack_price, image, category, open_date, end_date, funding_state, count(l.member_code)over(PARTITION by l.funding_code) as cnt, m.name
 		from funding f, likes l, member m
 		<where>
 			l.funding_code(+) = f.code and f.md_code = m.code
@@ -77,7 +77,7 @@
 	</select>
 	
 	<select id="selectByMdNameLikesOrder" resultMap="fundingMap" parameterType="map">
-		select distinct f.code as code, md_code, title, reward_name, reward_price, goal_price, stack_price, image, category, open_date, end_date, funding_state, count(*)over(PARTITION by funding_code) as cnt, name
+		select distinct f.code as code, md_code, title, reward_name, reward_price, goal_price, stack_price, image, category, open_date, end_date, funding_state, count(l.funding_code)over(PARTITION by funding_code) as cnt, name
 		from funding f, likes l, member m
 		<where>
 			f.code = l.funding_code and f.md_code = m.code
@@ -102,7 +102,7 @@
 	<select id="selectLikesRankFour" resultMap="fundingMap">
 		<![CDATA[
 			select code, md_code, title, reward_name, reward_price, goal_price, stack_price, image, category, open_date, end_date, funding_state, name, cnt
-			from ( select distinct f.code as code, md_code, title, reward_name, reward_price, goal_price, stack_price, image, category, open_date, end_date, funding_state, count(*)over(PARTITION by funding_code) as cnt, m.name
+			from ( select distinct f.code as code, md_code, title, reward_name, reward_price, goal_price, stack_price, image, category, open_date, end_date, funding_state, count(l.funding_code)over(PARTITION by funding_code) as cnt, m.name
 					from funding f, likes l, member m
 					where l.funding_code = f.code and f.md_code = m.code and funding_state = '501'
 					order by cnt desc)
@@ -113,7 +113,7 @@
 	<select id="selectLastestFour" resultMap="fundingMap">
 		<![CDATA[
 			select code, md_code, title, reward_name, reward_price, goal_price, stack_price, image, category, open_date, end_date, funding_state, name , cnt
-			from ( select f.code, md_code, title, reward_name, reward_price, goal_price, stack_price, image, category, open_date, end_date, funding_state, m.name , count(*)over(PARTITION by funding_code) as cnt
+			from ( select f.code, md_code, title, reward_name, reward_price, goal_price, stack_price, image, category, open_date, end_date, funding_state, m.name , count(l.funding_code)over(PARTITION by funding_code) as cnt
 	        		from funding f, member m, likes l
 	        		where funding_state = '501' and f.md_code = m.code and l.funding_code = f.code
 	        		order by end_date)

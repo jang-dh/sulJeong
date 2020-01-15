@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="purchaseMapper">
 
-	<!-- 후원한 펀딩 내역 페이지 - 펀딩 후원 내역 resultMap -->
+	<!-- 근딘 :  후원한 펀딩 내역 페이지 - 펀딩 후원 내역 resultMap -->
 	<resultMap type="purchase" id="listDetailInformationMap">
 		<id column="code" property="code" />
 		<result column="purchase_state" property="purchaseState" />
@@ -19,18 +19,14 @@
 			</association>
 	</resultMap>
 	
+	<!-- 근딘 : 후원한 펀딩 입력 -->
 	<insert id="insert" parameterType="purchase">
 		insert into purchase (code, member_code, funding_code, price, qty, purchase_state, purchase_date, delivery_number, courier, customer_uid, merchant_uid) 
 		values (seq_no.nextval, #{memberCode}, #{fundingCode}, #{price}, #{qty},
 		 #{purchaseState}, sysdate, #{deliveryNumber}, #{courier}, #{customerUid}, #{merchantUid})
 	</insert>
 	
-	<!-- 후원자 정보 출력 -->
-	<select id="selectListByMemberCode" resultType="member" parameterType="int">
-	select distinct code, name, addr, phone from member where code = #{_parameter}
-	</select>
-	
-	<!-- 후원 리스트 출력 -->
+	<!-- 근딘 : 후원 리스트 출력 -->
 	<select id="listDetail"
 		resultMap="listDetailInformationMap" parameterType="int">
 		select p.code, p.purchase_state, p.purchase_date, p.courier, 
@@ -42,15 +38,15 @@
 		where m.code = #{_parameter}
 	</select>
 	
-	<!-- 후원 인원 카운트 -->
+	<!-- 근딘 : 후원 인원 카운트 -->
 	<select id="countFundingCode" parameterType="int" resultType="int">
 		select count(*) from purchase where funding_code = #{_parameter}
 	</select>
 	
-	<!-- 후원 취소 -->
-	<delete id="delete" parameterType="purchase">
-		delete from purchase where code = #{code}
-	</delete>
+	<!-- 근딘 : 후원 취소 상태 변경 -->
+	<update id="purchaseFailedUpdate" parameterType="int">
+		update purchase set purchase_state = '602' where code = #{_parameter}
+	</update>
 	
 	<!-- 수녕 : 송장번호, 택배사 입력,수정 -->
 	<update id="deliveryCodeUpdate" parameterType="purchase">
@@ -92,7 +88,7 @@
 		where A.purchase_state='603'
 	</update>
 	
-	<!-- 페이징 처리 -->
+	<!-- 근딘 : 후원한 내역 페이징 처리 -->
 	<select id="purchaseListCount" resultType="int" parameterType="int">
 		select count(code) from purchase where member_code=#{_parameter}
 	</select>
@@ -118,5 +114,11 @@
 								from funding
 								where funding_state = '504')
 		and purchase_state = '603'
+	</select>
+	
+	<select id="selectByCode" parameterType="int" resultType="purchase">
+		select code, member_code, funding_code, price, qty, purchase_state, purchase_date, delivery_number, courier, customer_uid, merchant_uid
+		from purchase 
+		where code = #{_parameter}
 	</select>
 </mapper>	

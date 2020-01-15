@@ -29,6 +29,12 @@
 			</if>
 		</where>
 	</select>
+	
+	<select id="cntByFundingCode" parameterType="int" resultType="integer">
+		select count(*)
+		from likes
+		where funding_code = #{_parameter}
+	</select>
 </mapper>	
 
 
