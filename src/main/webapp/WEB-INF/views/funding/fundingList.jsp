@@ -95,7 +95,7 @@
 				}, 500);
 				
 				let resultLength = result.length;
-				if(resultLength < 4)
+				if(resultLength < 3)
 					isEnd = true;
 				$.each(result, function(index, item) {
 					renderList(false, item);
@@ -126,6 +126,7 @@
 		html += '<h4 class="font-16 text-uppercase">';
 		html += '<a href="${pageContext.request.contextPath}/funding/' + item.code + '">' + item.title + '</a>';
 		html += '</h4>';
+		html += item.member.name;
 		html += '<ul class="list-inline font-weight-600 font-14 clearfix mb-5">';
 		html += '<li class="pull-left font-weight-400 text-black-333 pr-0">달성금액:';
 		html += '<span class="text-theme-colored font-weight-700">' + item.stackPrice.toLocaleString() + '원</span>';
