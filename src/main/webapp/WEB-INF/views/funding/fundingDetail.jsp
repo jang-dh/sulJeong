@@ -4,6 +4,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
+<!-- 카카오 지도 -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c4c64b0fa5dfd1841cf29f48be1a0d91&libraries=services"></script>
 <script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
 
  <sec:authorize access="isAuthenticated()">
@@ -14,7 +16,7 @@
 //jquery
 $(function() {
 	$("#fundingModifyBtn").click(function(){
-		location.href="${pageContext.request.contextPath}/fundingModifyBtn/${funding.code}";
+		location.href="${pageContext.request.contextPath}/admin/fundingModify/${funding.code}";
 	});
 	
 	var IMP = window.IMP;
@@ -258,7 +260,7 @@ $(function() {
 									<strong>펀딩종료 </strong>
 								</div>
 								<div class="col-md-3">
-									<div class="text-center" data-countdown="2020/03/01"></div>
+									<div class="text-center" data-countdown="${funding.endDate}"></div>
 								</div>
 								<script type="text/javascript">
 									$(document).ready(function() {
@@ -350,6 +352,32 @@ $(function() {
 							<div class="tab-content">
 								<div class="tab-pane fade in active" id="tab1">
 										<img src="${pageContext.request.contextPath}/resources/images/funding/Detail_${funding.image}" alt="">
+									<!-- <table class="table table-striped">
+										<tbody>
+											<tr>
+												<th>Brand</th>
+												<td><p>Envato</p></td>
+											</tr>
+											<tr>
+												<th>Color</th>
+												<td><p>Brown</p></td>
+											</tr>
+											<tr>
+												<th>Size</th>
+												<td><p>Large, Medium</p></td>
+											</tr>
+											<tr>
+												<th>Weight</th>
+												<td>27 kg</td>
+											</tr>
+											<tr>
+												<th>Dimensions</th>
+												<td>16 x 22 x 123 cm</td>
+											</tr>
+										</tbody>
+									</table> -->
+									<h3 class="line-bottom">저희 양조장은 여기 있어요!</h3>
+									<div id="map" style="width:100%;height:350px;"></div>
 								</div>
 									<div class="tab-pane fade" id="tab2">
 									<div class="funding_question">
@@ -577,6 +605,44 @@ $(function() {
 				아래 네모 네개 -->
 			</div>
 		</div>
+		<script>
+         var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+             mapOption = {
+                 center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+                 level: 3 // 지도의 확대 레벨
+             };  
+         
+         // 지도를 생성합니다    
+         var map = new kakao.maps.Map(mapContainer, mapOption); 
+         
+         // 주소-좌표 변환 객체를 생성합니다
+         var geocoder = new kakao.maps.services.Geocoder();
+         
+         // 주소로 좌표를 검색합니다 ${requestScope.gym.addr}
+         geocoder.addressSearch('${juso.addr}', function(result, status) {
+         
+             // 정상적으로 검색이 완료됐으면 
+              if (status === kakao.maps.services.Status.OK) {
+         
+                 var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+         
+                 // 결과값으로 받은 위치를 마커로 표시합니다
+                 var marker = new kakao.maps.Marker({
+                     map: map,
+                     position: coords
+                 });
+         
+                 // 인포윈도우로 장소에 대한 설명을 표시합니다
+                 var infowindow = new kakao.maps.InfoWindow({
+                     content: '<div style="width:150px;text-align:center;padding:6px 0;">${juso.addr}</div>'
+                 });
+                 infowindow.open(map, marker);
+         
+                 // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+                 map.setCenter(coords);
+             } 
+         });    
+</script>
 	</section>
 	<!-- end main-content -->
 </div>

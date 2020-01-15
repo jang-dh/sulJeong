@@ -16,6 +16,7 @@ import team.hunter.model.dto.Likes;
 import team.hunter.model.dto.Member;
 import team.hunter.model.service.FundingService;
 import team.hunter.model.service.LikesService;
+import team.hunter.model.service.MemberService;
 import team.hunter.model.service.PurchaseService;
 
 @Controller
@@ -28,6 +29,9 @@ public class FundingController {
 	
 	@Autowired
 	private PurchaseService purchaseService;
+	
+	@Autowired
+	private MemberService memberService;
 
 	//목록 페이지 진입
 	@RequestMapping("/funding")
@@ -44,7 +48,7 @@ public class FundingController {
 		
 		model.addAttribute("funding", service.selectByCode(code));
 		model.addAttribute("fundingSponser", purchaseService.countFundingCode(code));
-		
+		model.addAttribute("juso", memberService.selectMemberByCode(service.selectByCode(code).getMdCode()));
 		if(member != null)
 			model.addAttribute("likes", likesService.select(new Likes(member.getCode(), code)));	
 		
@@ -56,8 +60,8 @@ public class FundingController {
 	public String allCategory(Model model, String order, String where, String val) {
 		List<Funding> list = service.selectList("0", order, where, val);
 		
-		if(list.size() > 8)
-			list = list.subList(0, 8);
+		if(list.size() > 6)
+			list = list.subList(0, 6);
 		
 		model.addAttribute("list", list);
 
@@ -68,8 +72,8 @@ public class FundingController {
 	@RequestMapping("/funding/category/{categoryCode}")
 	public ModelAndView eachCategory(@PathVariable String categoryCode, String order, String where, String val) {
 		List<Funding> list = service.selectList(categoryCode, order, where, val);
-		if(list.size() > 8)
-			list = list.subList(0, 8);
+		if(list.size() > 6)
+			list = list.subList(0, 6);
 		return new ModelAndView("funding/fundingList", "list", list);
 	}
 	
@@ -78,8 +82,8 @@ public class FundingController {
 	public @ResponseBody List<Funding> fetchList(String categoryCode, String order, String where, String val, int listCnt){
 		List<Funding> list = service.selectList(categoryCode, order, where, val);
 		
-		if(list.size() > listCnt + 4)
-			list = list.subList(listCnt, listCnt + 4);
+		if(list.size() > listCnt + 3)
+			list = list.subList(listCnt, listCnt + 3);
 		else
 			list = list.subList(listCnt, list.size());
 		

@@ -1,11 +1,6 @@
 package team.hunter.controller;
 
-import java.io.IOException;
-import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+<<<<<<< HEAD
 import com.siot.IamportRestClient.IamportClient;
 import com.siot.IamportRestClient.exception.IamportResponseException;
 import com.siot.IamportRestClient.request.CancelData;
@@ -35,11 +31,12 @@ import com.siot.IamportRestClient.response.Schedule;
 //import com.sun.xml.internal.ws.wsdl.writer.document.Import;
 
 import team.hunter.model.dto.Funding;
+=======
+>>>>>>> 7f0057dac8cacb4da1653cb4b6884972aedf13ac
 import team.hunter.model.dto.Member;
 import team.hunter.model.dto.Paging;
 import team.hunter.model.dto.Purchase;
 import team.hunter.model.service.FundingService;
-import team.hunter.model.service.PurchaseSchedule;
 import team.hunter.model.service.PurchaseService;
 import team.hunter.model.service.StatisticsService;
 import team.hunter.util.Constants;
@@ -54,18 +51,26 @@ public class PurchaseController {
 	@Autowired
 	private FundingService fundingService;
 
-	private IamportClient iamportClient;
+	
 
 	@RequestMapping(value = "/insertPurchase", method = RequestMethod.POST)
 	@ResponseBody
 	public int insertPurchase(int fundingCode, int price, int qty, String customerUid, String merchantUid) {
 		Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+<<<<<<< HEAD
 		Purchase purchase = new Purchase(0, member.getCode(), fundingCode, price, qty, Constants.PURCHASE_BEFORE, null,
 				null, null, customerUid, merchantUid, null);
 		iamportClient = new IamportClient("9641301071926320", "DGvvhuqgbRnvUxwBIwOoU5tDk5AH28ZGPvb7ZCnbtLHnjdZ1JOpETTieYSW11WIRrTYrvmCZ7jnqxnrh");
 		
 		//purchaseSchedule.requestSchedulePusrchase(purchase);
 		//결제 시도 시각 설정
+=======
+		Purchase purchase = new Purchase(0, member.getCode(), fundingCode, price, qty, Constants.PURCHASE_BEFORE, null, null, null, customerUid, merchantUid, null);
+//		iamportClient = new IamportClient("9641301071926320", "DGvvhuqgbRnvUxwBIwOoU5tDk5AH28ZGPvb7ZCnbtLHnjdZ1JOpETTieYSW11WIRrTYrvmCZ7jnqxnrh");
+//		
+//		purchaseSchedule.requestSchedulePusrchase(purchase);
+//		//결제 시도 시각 설정
+>>>>>>> 7f0057dac8cacb4da1653cb4b6884972aedf13ac
 //		Funding funding = fundingService.selectByCode(fundingCode);
 //		String fundingEndDate = funding.getEndDate();
 //		String dates[] = fundingEndDate.split("/");
@@ -122,7 +127,7 @@ public class PurchaseController {
 		statisticsService.updateTotalFundingStackPrice(price * qty);
 		statisticsService.updateFundingTotalCount();
 
-		// cancelPurchase(purchase);
+		//cancelPurchase(purchase);
 		return purchaseService.insert(purchase);
 	}
 
@@ -171,6 +176,7 @@ public class PurchaseController {
 		return "mypage/deliveryUpdateForm";
 	}
 
+<<<<<<< HEAD
 	public void cancelPurchase(Purchase purchase) {
 		iamportClient = new IamportClient("9641301071926320",
 				"DGvvhuqgbRnvUxwBIwOoU5tDk5AH28ZGPvb7ZCnbtLHnjdZ1JOpETTieYSW11WIRrTYrvmCZ7jnqxnrh");
@@ -205,4 +211,25 @@ public class PurchaseController {
 			e.printStackTrace();
 		}
 	}
+=======
+//	@RequestMapping("/mypage/myFundingHistory")
+//	public ModelAndView purchaseList(@RequestParam(defaultValue = "1") int curPage) {
+//		System.out.println("나는 페이징 컨트롤 입니다.");
+//		ModelAndView mv = new ModelAndView();
+//		
+//		int listCnt = purchaseService.purchaseListCount();
+//		Paging paging = new Paging(listCnt, curPage);
+//		
+//		int startIndex = paging.getStartIndex();
+//		int cntPerPage = paging.getPageSize();
+//		List<Purchase> list = purchaseService.purchaseList(startIndex, cntPerPage);
+//		
+//		mv.addObject("list", list);
+//		mv.addObject("listCnt", listCnt);
+//		mv.addObject("paging", paging);
+//		mv.addObject("mypage/myFundingHistory");
+//		System.out.println();
+//		return mv;
+//	}
+>>>>>>> 7f0057dac8cacb4da1653cb4b6884972aedf13ac
 }

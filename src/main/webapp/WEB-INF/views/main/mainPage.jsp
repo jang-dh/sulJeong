@@ -102,8 +102,8 @@
 								data-start="1400" data-splitin="none" data-splitout="none"
 								data-responsive_offset="on"
 								style="z-index: 5; white-space: nowrap; letter-spacing: 0px; font-weight: 400;">
-								Every day we bring hope to millions of children in the world's<br>
-								hardest places as a sign of God's unconditional love.
+								한 번도 안마신 사람은 있어도<br>
+								한 번만 마신 사람은 없다.
 							</div> <!-- LAYER NR. 5 -->
 							<div class="tp-caption tp-resizeme" id="rs-1-layer-5"
 								data-x="['left']" data-hoffset="['35']" data-y="['middle']"
@@ -117,8 +117,7 @@
 								data-start="1400" data-splitin="none" data-splitout="none"
 								data-responsive_offset="on"
 								style="z-index: 5; white-space: nowrap; letter-spacing: 1px;">
-								<a class="btn btn-colored btn-lg btn-theme-colored pl-20 pr-20"
-									href="#">Donate Now</a>
+								
 							</div>
 						</li>
 
@@ -162,7 +161,7 @@
 								data-start="1000" data-splitin="none" data-splitout="none"
 								data-responsive_offset="on"
 								style="z-index: 7; white-space: nowrap; font-weight: 600;">
-								<span class="">Help</span> The Poor
+								<span class="">야!</span> 마셔!
 							</div> <!-- LAYER NR. 3 -->
 							<div
 								class="tp-caption tp-resizeme text-uppercase text-white font-roboto-slab"
@@ -177,8 +176,7 @@
 								data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
 								data-start="1000" data-splitin="none" data-splitout="none"
 								data-responsive_offset="on"
-								style="z-index: 7; white-space: nowrap; font-weight: 600;">For
-								Their Better Future</div> <!-- LAYER NR. 4 -->
+								style="z-index: 7; white-space: nowrap; font-weight: 600;">찾아오는 인생술</div> <!-- LAYER NR. 4 -->
 							<div class="tp-caption tp-resizeme text-white text-right"
 								id="rs-2-layer-4" data-x="['right']" data-hoffset="['35']"
 								data-y="['middle']" data-voffset="['30']"
@@ -192,8 +190,8 @@
 								data-start="1400" data-splitin="none" data-splitout="none"
 								data-responsive_offset="on"
 								style="z-index: 5; white-space: nowrap; letter-spacing: 0px; font-weight: 400;">
-								Every day we bring hope to millions of children in the world's<br>
-								hardest places as a sign of God's unconditional love.
+								감성이 이성을 지배하는 시간<br>
+								23:00 ~ 03:00
 							</div> <!-- LAYER NR. 5 -->
 							<div class="tp-caption tp-resizeme" id="rs-2-layer-5"
 								data-x="['right']" data-hoffset="['35']" data-y="['middle']"
@@ -206,9 +204,7 @@
 								data-start="1400" data-splitin="none" data-splitout="none"
 								data-responsive_offset="on"
 								style="z-index: 5; white-space: nowrap; letter-spacing: 1px;">
-								<a
-									class="btn btn-colored btn-lg btn-flat btn-theme-colored pl-20 pr-20"
-									href="#">Donate Now</a>
+								
 							</div>
 						</li>
 
@@ -251,7 +247,7 @@
 								data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
 								data-start="1000" data-splitin="none" data-splitout="none"
 								data-responsive_offset="on"
-								style="z-index: 7; white-space: nowrap; font-weight: 700;">Charity
+								style="z-index: 7; white-space: nowrap; font-weight: 700;">술:정(井)
 							</div> <!-- LAYER NR. 3 -->
 							<div
 								class="tp-caption tp-resizeme text-uppercase text-white font-roboto-slab bg-theme-colored-transparent pl-20 pr-20"
@@ -266,8 +262,7 @@
 								data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
 								data-start="1000" data-splitin="none" data-splitout="none"
 								data-responsive_offset="on"
-								style="z-index: 7; white-space: nowrap; font-weight: 600;">is
-								the best social work</div> <!-- LAYER NR. 4 -->
+								style="z-index: 7; white-space: nowrap; font-weight: 600;">니가 사는거라면 나도 끼지</div> <!-- LAYER NR. 4 -->
 							<div class="tp-caption tp-resizeme text-white" id="rs-3-layer-4"
 								data-x="['left']" data-hoffset="['35']" data-y="['middle']"
 								data-voffset="['35','35','40']" data-fontsize="['16','18',24']"
@@ -280,8 +275,8 @@
 								data-start="1400" data-splitin="none" data-splitout="none"
 								data-responsive_offset="on"
 								style="z-index: 5; white-space: nowrap; letter-spacing: 0px; font-weight: 400;">
-								Every day we bring hope to millions of children in the world's<br>
-								hardest places as a sign of God's unconditional love.
+								나는 술을 잘 마시진 못하지만<br>
+								포기하지 않을거야 !
 							</div> <!-- LAYER NR. 5 -->
 							<div class="tp-caption tp-resizeme" id="rs-3-layer-5"
 								data-x="['left']" data-hoffset="['35']" data-y="['middle']"
@@ -295,8 +290,7 @@
 								data-start="1400" data-splitin="none" data-splitout="none"
 								data-responsive_offset="on"
 								style="z-index: 5; white-space: nowrap; letter-spacing: 1px;">
-								<a class="btn btn-colored btn-lg btn-theme-colored pl-20 pr-20"
-									href="#">Donate Now</a>
+								
 							</div>
 						</li>
 
@@ -416,7 +410,7 @@
 						<span class="text-theme-colored">인기</span> 펀딩
 					</h2>
 					<c:forEach items="${likesFour}" var="list">
-						<div class="col-sm-6 col-md-3">
+						<div class="col-sm-7 col-md-4">
 							<div class="causes bg-silver-light maxwidth500 mb-30">
 								<div class="thumb">
 									<a href="funding/${list.code}"><img src="${pageContext.request.contextPath}/resources/images/funding/Thumnail_${list.image}" alt="" class="img-fullwidth"></a>
@@ -468,7 +462,7 @@
 						<span class="text-theme-colored">마감임박</span> 펀딩
 					</h2>
 					<c:forEach items="${endFour}" var="list">
-						<div class="col-sm-6 col-md-3">
+						<div class="col-sm-7 col-md-4">
 							<div class="causes bg-silver-light maxwidth500 mb-30">
 								<div class="thumb">
 									<a href="funding/${list.code}"><img src="${pageContext.request.contextPath}/resources/images/funding/Thumnail_${list.image}" alt="" class="img-fullwidth"></a>
@@ -519,7 +513,7 @@
 						<span class="text-theme-colored">오픈임박</span> 펀딩
 					</h2>
 					<c:forEach items="${openFour}" var="list">
-						<div class="col-sm-6 col-md-3">
+						<div class="col-sm-7 col-md-4">
 							<div class="causes bg-silver-light maxwidth500 mb-30">
 								<div class="thumb">
 									<a href="funding/${list.code}"><img src="${pageContext.request.contextPath}/resources/images/funding/Thumnail_${list.image}" alt="" class="img-fullwidth"></a>

@@ -95,5 +95,14 @@ public class MemberController {
 		return "form/identity/identityAuth";
 	}
 	
+	@RequestMapping("/kakaoLogin")
+	public String kakaoLogin() {
+		return "form/juso/kakaoLogin";
+	}
+	
+	@RequestMapping("/googleLogin")
+	public String googleLogin() {
+		return "form/google/googleLogin";
+	}
 
 }

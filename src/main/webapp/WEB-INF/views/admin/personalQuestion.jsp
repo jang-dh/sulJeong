@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <script>
 	// 페이지 이동
@@ -29,10 +28,10 @@
 			<div class="col-md-3">
 				<div class="vertical-tab">
 					<ul class="nav nav-tabs">
-						<li><a href="siteManagement">사이트 통계</a></li>
-						<li><a href="fundingInsert">펀딩 등록</a></li>
-						<li class="active"><a href="personalQuestion">1:1 문의 내역</a></li>
-						<li><a href="fundingRequest">펀딩 오픈 신청 내역</a></li>
+						<li><a href="${pageContext.request.contextPath}/admin/nsiteManagement">사이트 통계</a></li>
+						<li><a href="${pageContext.request.contextPath}/admin/fundingInsert">펀딩 등록</a></li>
+						<li class="active"><a href="${pageContext.request.contextPath}/admin/personalQuestion">1:1 문의 내역</a></li>
+						<li><a href="${pageContext.request.contextPath}/admin/fundingRequest">펀딩 오픈 신청 내역</a></li>
 					</ul>
 				</div>
 			</div>
@@ -46,8 +45,7 @@
 
 								<h4 class="title">1:1 문의내역</h4>
 
-								<div data-example-id="hoverable-table" class="bs-example"
-									style="width: 70%">
+								<div data-example-id="hoverable-table" class="bs-example" style="width:70%">
 									<table class="table table-hover">
 										<c:choose>
 											<c:when test="${not empty list}">
@@ -60,14 +58,13 @@
 													</tr>
 												</thead>
 												<tbody>
-													<c:set var="listSize" value="${fn:length(list)}"/>
 													<c:forEach items="${list}" var="question" varStatus="status" >
 														<tr>
 															<th scope="row">${question.code}</th>
 															<td><a href="${pageContext.request.contextPath}/personalQuestionDetail/${question.code}">${question.subject}</a></td>
 															<td>${question.regdate}</td>
 															<c:choose>
-																<c:when test="${question.state == '200' or question.state =='진행중'}">
+																<c:when test="${question.state == '200'}">
 																	<td>진행중</td>
 																</c:when>
 																<c:otherwise>
