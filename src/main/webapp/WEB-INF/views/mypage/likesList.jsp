@@ -74,7 +74,7 @@
 				}, 500);
 
 				let resultLength = result.length;
-				if (resultLength < 4)
+				if (resultLength < 3)
 					isEnd = true;
 				$.each(result, function(index, item) {
 					renderList(false, item);
@@ -93,7 +93,7 @@
 		var perStyle = per;
 		if(per > 100)
 			perStyle = 100;
-		let html = '<div class="col-sm-6 col-md-3 wow fadeIn">';
+		let html = '<div class="col-sm-7 col-md-4 wow fadeIn">';
 		html += '<div class="causes bg-silver-light maxwidth500 mb-30">';
 		html += '<div class="thumb">';
 		html += '<a href="${pageContext.request.contextPath}/funding/' + item.code + '">';
@@ -113,7 +113,7 @@
 		html += '<ul class="list-inline font-weight-600 font-14 clearfix mb-5">';
 		html += '<li class="pull-left font-weight-400 text-black-333 pr-0">달성금액:';
 		html += '<span class="text-theme-colored font-weight-700">' + item.stackPrice.toLocaleString() + '원</span>';
-		html += '</li>';
+		html += '</li><br>';
 		html += '<li class="pull-right font-weight-400 text-black-333 pr-0">목표금액:';
 		html += '<span class="text-theme-colored font-weight-700">' + item.goalPrice.toLocaleString() + '원</span>';
 		html += '</li>';
@@ -184,7 +184,7 @@
 						</section>
 					</c:if>
 					<c:forEach items="${list}" var="fundingList" varStatus="status">
-						<div class="col-sm-6 col-md-3">
+						<div class="col-sm-7 col-md-4">
 							<div class="causes bg-silver-light maxwidth500 mb-30">
 								<div class="thumb">
 									<a href="${pageContext.request.contextPath}/funding/${fundingList.code}">

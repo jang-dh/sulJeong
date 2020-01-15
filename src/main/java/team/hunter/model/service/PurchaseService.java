@@ -59,4 +59,8 @@ public interface PurchaseService {
 	 */
 	public List<Purchase> purchaseList(int memberCode, int startIndex, int cntPerPage);
 
+	/**
+	 * API 결제 취소 요청
+	 * */
+	public void cancelPurchase(Purchase purchase);
 }

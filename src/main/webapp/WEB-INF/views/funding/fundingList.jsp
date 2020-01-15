@@ -95,7 +95,7 @@
 				}, 500);
 				
 				let resultLength = result.length;
-				if(resultLength < 4)
+				if(resultLength < 3)
 					isEnd = true;
 				$.each(result, function(index, item) {
 					renderList(false, item);
@@ -114,6 +114,7 @@
 		var perStyle = per;
 		if(per > 100)
 			perStyle = 100; 
+
 		let html = '<div class="col-sm-7 col-md-4 wow fadeIn">';
 		html += '<div class="causes bg-silver-light maxwidth500 mb-30">';
 		html += '<div class="thumb">';
@@ -125,6 +126,7 @@
 		html += '<h4 class="font-16 text-uppercase">';
 		html += '<a href="${pageContext.request.contextPath}/funding/' + item.code + '">' + item.title + '</a>';
 		html += '</h4>';
+		html += item.member.name;
 		html += '<ul class="list-inline font-weight-600 font-14 clearfix mb-5">';
 		html += '<li class="pull-left font-weight-400 text-black-333 pr-0">달성금액:';
 		html += '<span class="text-theme-colored font-weight-700">' + item.stackPrice.toLocaleString() + '원</span>';
@@ -146,7 +148,7 @@
 		html += '<div class="text-center" data-countdown="' + item.endDate + '"></div>';
 		html += '<a href="' + item.code + '" class="btn btn-default btn-theme-colored mt-10 font-16 btn-sm">펀딩하기 <i class="flaticon-charity-make-a-donation font-16 ml-5"></i>';
 		html += '</a>';
-		html += '<br><i class="fa fa-heart faa-pulse animated"></i> <span class="text-theme-colored font-weight-700">${fundingList.cnt}</span>';
+		html += '<br><i class="fa fa-heart faa-pulse animated"></i> <span class="text-theme-colored font-weight-700">' + item.cnt + '</span>';
 		html += '</div>';
 		html += '</div>';
 		html += '</div>';

@@ -125,7 +125,17 @@ public class myPageController {
 	public ModelAndView myOpenFunding() {
 		Member member =(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		List<Funding> myOpenFundingList = fundingReqService.myFundingOpenList(member.getCode());
-		return new ModelAndView("mypage/myOpenFundingList","myOpenFundingList",myOpenFundingList);
+		
+		
+		if(myOpenFundingList.size() > 9)
+			myOpenFundingList = myOpenFundingList.subList(0, 9);
+		
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("myOpenFundingList", myOpenFundingList);
+		mv.addObject("mdCode", myOpenFundingList.get(0).getMdCode());
+		mv.setViewName("mypage/myOpenFundingList");
+		
+		return mv;
 	}
 	
 	@PostMapping("/changeMyInfo")
