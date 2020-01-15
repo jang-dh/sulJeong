@@ -69,8 +69,8 @@
                 <a class="text-theme-colored font-weight-600 font-12" href="${pageContext.request.contextPath}/searchLoginInfoForm">Forgot Your Information?</a>
               </div>
               <div class="clear text-center pt-10">
-                <a class="btn btn-dark btn-lg btn-block no-border mt-15 mb-15" href="#" data-bg-color="#3b5998">Login with facebook</a>
-                <a class="btn btn-dark btn-lg btn-block no-border" href="#" data-bg-color="#00acee">Login with twitter</a>
+                <a class="btn btn-dark btn-lg btn-block no-border mt-15 mb-15" href="${pageContext.request.contextPath}/kakaoLogin" data-bg-color="#3b5998">Login with facebook</a>
+                <a class="btn btn-dark btn-lg btn-block no-border" href="${pageContext.request.contextPath}/googleLogin" data-bg-color="#00acee">Login with twitter</a>
               </div>
             </form>
           </div>

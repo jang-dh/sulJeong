@@ -169,7 +169,7 @@ public class AdminController {
 	/**
 	 * 펀딩 수정하기 폼으로 넘어가기
 	 */
-	@RequestMapping("/fundingModifyBtn/{code}")
+	@RequestMapping("/admin/fundingModify/{code}")
 	public ModelAndView fundingModifyBtn(@PathVariable int code) {
 		ModelAndView mv = new ModelAndView();
 		Funding funding = fundingService.selectByCode(code);
@@ -190,7 +190,6 @@ public class AdminController {
 	 */
 	@RequestMapping("/admin/fundUpdate")
 	public String fundUpdate(Funding funding, MultipartFile file,MultipartFile file2, HttpSession session) {
-		System.out.println("들어오긴하니?");
 		String fileName = null;
 		System.out.println(funding.getOpenDate());
 		System.out.println(funding.getEndDate());
