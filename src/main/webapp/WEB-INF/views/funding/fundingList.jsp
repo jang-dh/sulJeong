@@ -114,11 +114,11 @@
 		var perStyle = per;
 		if(per > 100)
 			perStyle = 100; 
-		let html = '<div class="col-sm-6 col-md-3 wow fadeIn">';
+		let html = '<div class="col-sm-7 col-md-4 wow fadeIn">';
 		html += '<div class="causes bg-silver-light maxwidth500 mb-30">';
 		html += '<div class="thumb">';
 		html += '<a href="${pageContext.request.contextPath}/funding/' + item.code + '">';
-		html += '<img src="${pageContext.request.contextPath}/resources/images/funding/Thumnail_' + item.image +'" alt="" class="img-fullwidth">';
+		html += '<img src="${pageContext.request.contextPath}/resources/images/funding/Thumnail_' + item.image +'" alt="" class="img-fullwidth" width="328" height="370">' ;
 		html += '</a>';
 		html += '</div>';
 		html += '<div class="causes-details border-1px bg-white clearfix p-15 pb-30">';
@@ -146,6 +146,7 @@
 		html += '<div class="text-center" data-countdown="' + item.endDate + '"></div>';
 		html += '<a href="' + item.code + '" class="btn btn-default btn-theme-colored mt-10 font-16 btn-sm">펀딩하기 <i class="flaticon-charity-make-a-donation font-16 ml-5"></i>';
 		html += '</a>';
+		html += '<br><i class="fa fa-heart faa-pulse animated"></i> <span class="text-theme-colored font-weight-700">${fundingList.cnt}</span>';
 		html += '</div>';
 		html += '</div>';
 		html += '</div>';
@@ -293,13 +294,13 @@
 	<section>
 		<div class="container pt-0 pb-40">
 			<div class="section-content">
-				<div class="row multi-row-clearfix" id="list-funding">
+				<div class="row multi-row-clearfix" id="list-funding" >
 					<c:forEach items="${list}" var="fundingList" varStatus="status">
-						<div class="col-sm-6 col-md-3">
+						<div class="col-sm-7 col-md-4" >
 							<div class="causes bg-silver-light maxwidth500 mb-30">
 								<div class="thumb">
 									<a href="${pageContext.request.contextPath}/funding/${fundingList.code}">
-									<img src="${pageContext.request.contextPath}/resources/images/funding/Thumnail_${fundingList.image}" alt="" class="img-fullwidth"></a>
+									<img src="${pageContext.request.contextPath}/resources/images/funding/Thumnail_${fundingList.image}" alt="" class="img-fullwidth" width="328" height="370"></a>
 								</div>
 								<div class="causes-details border-1px bg-white clearfix p-15 pb-30">
 									<h4 class="font-16 text-uppercase">
