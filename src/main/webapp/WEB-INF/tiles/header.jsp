@@ -16,11 +16,11 @@
 <!-- -----카카오----- -->
 <script src="${pageContext.request.contextPath}/resources/js/jquery-2.2.4.min.js"></script>
 <script type="text/javascript">
-	$(function(){
-		$("#logout").click(function(){
-			$("#logoutSubmit").submit();
-		});
-	});
+   $(function(){
+      $("#logout").click(function(){
+         $("#logoutSubmit").submit();
+      });
+   });
 
 </script>
 
@@ -92,7 +92,7 @@
         <!-- preloader -->
         <div id="preloader">
             <div id="spinner">
-                <img class="floating" src="${pageContext.request.contextPath}/resources/images/preloaders/13.png"
+                <img class="floating" src="${pageContext.request.contextPath}/resources/images/preloaders/loading.png"
                     alt="">
                 <h5 class="line-height-50 font-18 ml-15">Loading...</h5>
             </div>
@@ -107,24 +107,24 @@
                         <nav id="menuzord-right" class="menuzord default bg-lightest">
                             <a class="menuzord-brand pull-left flip xs-pull-center mt-20 pt-5 mt-sm-10 pt-sm-0"
                                 href="${pageContext.request.contextPath}">
-                                <img src="${pageContext.request.contextPath}/resources/images/logo-wide.png" alt="">
+                                <img src="${pageContext.request.contextPath}/resources/images/test.png" alt="">
                             </a>
                             <ul class="menuzord-menu">
                             <!-- ---카카오---- -->
-								<li>
-									<div id="kakao-add-channel-button"></div>
-									<script type='text/javascript'>
-									  //<![CDATA[
-									    // 사용할 앱의 JavaScript 키를 설정해 주세요.
-									    Kakao.init('c4c64b0fa5dfd1841cf29f48be1a0d91');
-									    // 카카오톡 채널 추가 버튼을 생성합니다.
-									    Kakao.Channel.createAddChannelButton({
-									      container: '#kakao-add-channel-button',
-									      channelPublicId: '_RgGlxb' // 채널 홈 URL에 명시된 id로 설정합니다.
-									    });
-									  //]]>
-									</script>
-								</li>
+                        <li>
+                           <div id="kakao-add-channel-button"></div>
+                           <script type='text/javascript'>
+                             //<![CDATA[
+                               // 사용할 앱의 JavaScript 키를 설정해 주세요.
+                               Kakao.init('c4c64b0fa5dfd1841cf29f48be1a0d91');
+                               // 카카오톡 채널 추가 버튼을 생성합니다.
+                               Kakao.Channel.createAddChannelButton({
+                                 container: '#kakao-add-channel-button',
+                                 channelPublicId: '_RgGlxb' // 채널 홈 URL에 명시된 id로 설정합니다.
+                               });
+                             //]]>
+                           </script>
+                        </li>
                              <!-- ---카카오---- -->
                                 <li>
                                     <a href="${pageContext.request.contextPath}/funding">펀딩</a>
@@ -137,12 +137,12 @@
                                     <a id="a" href="${pageContext.request.contextPath}/notice">공지사항</a>
 
                                     <c:if test="${empty pageContext.request.userPrincipal}">
-	                                <li><a href="${pageContext.request.contextPath}/login">로그인</a>
-	                                </li>
-	                                <li><a href="${pageContext.request.contextPath}/join">회원가입</a>
+                                   <li><a href="${pageContext.request.contextPath}/login">로그인</a>
+                                   </li>
+                                   <li><a href="${pageContext.request.contextPath}/join">회원가입</a>
                                     </li>
-	                                </c:if>
-	                                <c:if test="${not empty pageContext.request.userPrincipal}">
+                                   </c:if>
+                                   <c:if test="${not empty pageContext.request.userPrincipal}">
 
 
                                 <li>
@@ -183,7 +183,7 @@
                                             </div>
                                         </div>
                                         <div class="megamenu-row">
-                                        	<div class="col4">
+                                           <div class="col4">
                                                 <div class="icon-box" style="margin-bottom:0px;">
                                                     <a class="icon" href="${pageContext.request.contextPath}/mypage/fundingQuestion" style="margin-bottom:0px;">
                                                         <i class="fa fa-comments"></i>
@@ -212,17 +212,17 @@
                                             </sec:authorize>
                                         </div>
                                         
-    	
+       
     
                                         <div class="megamenu-row">
-                                       	 <form id="logoutSubmit" action="${pageContext.request.contextPath}/logout" method="post">
-                                       	 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                           <form id="logoutSubmit" action="${pageContext.request.contextPath}/logout" method="post">
+                                           <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                                             <input type="button" class="btn" id="logout" value="로그아웃"/>
                                          </form>
                                         </div>
                                     </div>
                                 </li>
-								</c:if>
+                        </c:if>
                                 <li><a href="${pageContext.request.contextPath}/fundingOpenRequest" style="padding:0px;"><button
                                             class="btn btn-border btn-theme-colored btn-lg">펀딩 오픈 신청하기</button></a>
                                 </li>
