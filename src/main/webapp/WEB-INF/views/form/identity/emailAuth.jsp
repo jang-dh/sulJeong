@@ -37,25 +37,48 @@
     
     <script type="text/javascript">
     $(function() {
+    	
+    	var dice = null;
+    	dice = opener.document.getElementById("hidden2").value
+    	
+    	$("#childEmailAuth").val(dice)
 		//alert(1)
-		$("#Authenticate").click(function() {
+		$("#emailAuth").click(function() {
 			//alert(1)
-		    if ($("#birthday").val() == "") {
-            alert("생년월일을 입력해주세요");
-            $("#birthday").focus();
+		    if ($("#emailAuthText").val() == "") {
+            alert("인증번호를 입력해주세요");
+            $("#emailAuthText").focus();
             return false;
          };
          
-         var now = new Date();
-         var year= now.getFullYear();
-         //alert(year);
-		 //alert(year-($("#birthday").val().substr(0,4))+1);
-		 var birth = year-($("#birthday").val().substr(0,4))+1
-		 //alert(birth);
+         var emailAuthTextVal = $("#emailAuthText").val()
+			var allDate = "${_csrf.parameterName}=${_csrf.token}"+"&childEmailAuth="+emailAuthTextVal;
+			
+			  $.ajax({
+					 url: "${pageContext.request.contextPath}/member/auth/"+dice, //서버요청주소
+					 type:"post", //요청방식(get|post|put:patch:delete)
+					 dataType:"text", //서버가 보내온 데이터 타입(text,html,xml,json)
+					 data: allDate ,//서버에게 보내는 parameter 정보
+					 success:function(result){
+						 alert(result)
+						 if(result == 'true'){
+							 alert('인증번호가 일치하였습니다. 회원가입창으로 이동합니다.');
+							 opener.document.getElementById("emailCheck").value = "이메일 인증 완료";
+							 opener.document.getElementById("emailCheckStatus").value = result;
+				        	 // 호출 한 뒤 현재 팝업 창 닫기 이벤트
+				        	 close();
+						 }else if(result == 'false'){
+							 alert("오류입니다.")
+						 }
+					 } ,//성공했을대
+					 error:function(err){
+						alert("실패")
+					 }//오류발생했을때
+				 });
+		
            if(birth >= 20) {
         	   alert("성인 인증 성공");
         	   var result = true;                 // 전송 파라미터 값
-        	   //opener.parent.completeCallback(result);
         	   opener.document.getElementById("hidden").value = result
         	   opener.document.getElementById("Authenticate").value = "성인인증 완료";
         	    // 호출 한 뒤 현재 팝업 창 닫기 이벤트
@@ -81,9 +104,11 @@
 <div class="form-group col-md-6">
 	<br><br><br>
 	<span class="text-theme-colored font-weight-700"><h3>이메일 인증번호를 입력해주세요.</h3> </span>
-	<input type="text" placeholder="ex) 19960716" id="emailAuthText" class="form-control" maxlength="8"><br>
-	<input type="button" value="이메일 인증" name="emailAuth" id="emailAuth"  class="form-control" onclick="completeCallback()">
+	<input type="text" placeholder="인증번호 입력" id="emailAuthText" class="form-control" maxlength="8"><br>
+	<input type="button" value="이메일 인증 확인" name="emailAuth" id="emailAuth"  class="form-control">
 </div>
+
+<input type="hidden" id="childEmailAuth" >
 
 
 
