@@ -15,6 +15,7 @@ import com.siot.IamportRestClient.response.Payment;
 
 import team.hunter.model.dao.FundingDAO;
 import team.hunter.model.dao.PurchaseDAO;
+import team.hunter.model.dao.StatisticsDAO;
 import team.hunter.model.dto.Member;
 import team.hunter.model.dto.Purchase;
 
@@ -26,6 +27,9 @@ public class PurchaseServiceImpl implements PurchaseService {
 
 	@Autowired
 	private FundingDAO fundingDAO;
+	
+	@Autowired
+	private StatisticsDAO statisticsDAO;
 	
 	@Override
 	@Transactional
@@ -48,21 +52,12 @@ public class PurchaseServiceImpl implements PurchaseService {
 	}
 
 	@Override
-<<<<<<< HEAD
-	public int updatePurchase(int code) {
+	@Transactional
+	public int updatePurchase(int code, int price) {
+		
 		int result = purchaseDAO.updatePurchase(code);
-=======
-	public int selectListByMemberCode(int code) {
-		int result = purchaseDAO.selectListByMemberCode(code);
-		return result;
-	}
-
-	@Override
-	public int deletePurchaseList(int code) {
-//		System.out.println("서비스를 갔다");
-		int result = purchaseDAO.deleteList(code);
-//		System.out.println("서비스를 나오니?");
->>>>>>> 7f0057dac8cacb4da1653cb4b6884972aedf13ac
+		statisticsDAO.updateFurchaseFailed(price);
+		//여기서 그거 통계 업데이트 불러
 		return result;
 	}
 

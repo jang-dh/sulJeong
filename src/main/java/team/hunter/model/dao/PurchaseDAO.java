@@ -43,6 +43,7 @@ public interface PurchaseDAO {
 	 * 우석 : 구매테이블에서 PurchaseState update
 	 * */
 	int updatePurchaseState();
+	
 	/*
 	 * 펀딩 후원 신청 갯수 가지고 오기
 	 */

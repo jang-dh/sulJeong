@@ -109,6 +109,7 @@
 											<form name="updateForm" method="post" id="updateForm">
 												<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
 												<input type="hidden" name="code" value="${list.code}" />
+												<input type="hidden" name="price" value="${list.funding.rewardPrice * list.qty}" />
 												<c:if test="${list.purchaseState=='603' }">
 													<input type="button" class="btn btn-default btn-xs pull-right" value="후원취소">
 												</c:if>
@@ -130,7 +131,7 @@
 									aria-hidden="true">&laquo;</span></a></li>
 							<c:forEach var="pageNum" begin="${paging.startPage}"
 								end="${paging.endPage}">
-								<li class="numberBtn" value="${pageNum}"><a href="#"
+		 						<li class="numberBtn" value="${pageNum}"><a href="#"
 									onClick="fn_paging(${pageNum})" id="pageBtn">${pageNum} <span
 										class="sr-only">(current)</span></a></li>
 							</c:forEach>

@@ -46,6 +46,10 @@ public class StatisticsDAOImpl implements StatisticsDAO {
 		return session.update("statisticsMapper.updateTotalFundingStackPrice", price);
 	}
 
+	@Override
+	public int updateFurchaseFailed(int price) {
+		return session.update("statisticsMapper.updateFurchaseFailed", price);
+	}
 
 
 	@Override

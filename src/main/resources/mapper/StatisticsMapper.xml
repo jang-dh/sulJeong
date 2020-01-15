@@ -18,6 +18,11 @@
 		update statistics set purchase_price =purchase_price + #{_parameter} where regdate=to_char(sysdate,'yy/mm/dd')
 	</update>
 	
+	<!-- 근딘 : 펀딩 후원 취소 -->
+	<update id="updateFurchaseFailed" parameterType="int">
+		update statistics set purchase_price = purchase_price - #{_parameter} where regdate = to_char(sysdate, 'yy/mm/dd')
+	</update>
+	
 	<select id="selectWeekData" resultType="statistics">
 		select regdate, visit, purchase_count, purchase_price, funding_apply 
 		from (select rownum,regdate, visit, purchase_count, purchase_price, funding_apply
