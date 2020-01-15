@@ -222,8 +222,8 @@
 				
 				<div class="row">
 					<div class="form-group col-md-6">
-						<label>Email Address</label> <input name="email" id="email"
-							class="form-control" type="email">
+						<label>Email Address</label> 
+						<input name="email" id="email" class="form-control" type="email">
 					</div>
 					<div class="form-group col-md-6">
 						<label>인증하기</label> 
@@ -274,4 +274,9 @@
 			
 		</div>
 	</div>
+	
+	<form action="">
+		<input type="text" id="" value="">
+		<input id="" value="">
+	</form>
 </body>
