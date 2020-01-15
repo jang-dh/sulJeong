@@ -13,26 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-<<<<<<< HEAD
-import com.siot.IamportRestClient.IamportClient;
-import com.siot.IamportRestClient.exception.IamportResponseException;
-import com.siot.IamportRestClient.request.CancelData;
-import com.siot.IamportRestClient.request.ScheduleData;
-import com.siot.IamportRestClient.request.ScheduleEntry;
-import com.siot.IamportRestClient.response.IamportResponse;
-import com.siot.IamportRestClient.response.Payment;
-import com.siot.IamportRestClient.response.Schedule;
-
-import com.siot.IamportRestClient.IamportClient;
-import com.siot.IamportRestClient.request.ScheduleData;
-import com.siot.IamportRestClient.request.ScheduleEntry;
-import com.siot.IamportRestClient.response.IamportResponse;
-import com.siot.IamportRestClient.response.Schedule;
-//import com.sun.xml.internal.ws.wsdl.writer.document.Import;
-
-import team.hunter.model.dto.Funding;
-=======
->>>>>>> 7f0057dac8cacb4da1653cb4b6884972aedf13ac
 import team.hunter.model.dto.Member;
 import team.hunter.model.dto.Paging;
 import team.hunter.model.dto.Purchase;
@@ -57,20 +37,12 @@ public class PurchaseController {
 	@ResponseBody
 	public int insertPurchase(int fundingCode, int price, int qty, String customerUid, String merchantUid) {
 		Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-<<<<<<< HEAD
-		Purchase purchase = new Purchase(0, member.getCode(), fundingCode, price, qty, Constants.PURCHASE_BEFORE, null,
-				null, null, customerUid, merchantUid, null);
-		iamportClient = new IamportClient("9641301071926320", "DGvvhuqgbRnvUxwBIwOoU5tDk5AH28ZGPvb7ZCnbtLHnjdZ1JOpETTieYSW11WIRrTYrvmCZ7jnqxnrh");
-		
-		//purchaseSchedule.requestSchedulePusrchase(purchase);
-		//결제 시도 시각 설정
-=======
+
 		Purchase purchase = new Purchase(0, member.getCode(), fundingCode, price, qty, Constants.PURCHASE_BEFORE, null, null, null, customerUid, merchantUid, null);
 //		iamportClient = new IamportClient("9641301071926320", "DGvvhuqgbRnvUxwBIwOoU5tDk5AH28ZGPvb7ZCnbtLHnjdZ1JOpETTieYSW11WIRrTYrvmCZ7jnqxnrh");
 //		
 //		purchaseSchedule.requestSchedulePusrchase(purchase);
 //		//결제 시도 시각 설정
->>>>>>> 7f0057dac8cacb4da1653cb4b6884972aedf13ac
 //		Funding funding = fundingService.selectByCode(fundingCode);
 //		String fundingEndDate = funding.getEndDate();
 //		String dates[] = fundingEndDate.split("/");
@@ -175,61 +147,4 @@ public class PurchaseController {
 		model.addAttribute("member", member);
 		return "mypage/deliveryUpdateForm";
 	}
-
-<<<<<<< HEAD
-	public void cancelPurchase(Purchase purchase) {
-		iamportClient = new IamportClient("9641301071926320",
-				"DGvvhuqgbRnvUxwBIwOoU5tDk5AH28ZGPvb7ZCnbtLHnjdZ1JOpETTieYSW11WIRrTYrvmCZ7jnqxnrh");
-		CancelData cancelData = new CancelData(purchase.getMerchantUid(), false);
-
-		try {
-			IamportResponse<Payment> response = iamportClient.cancelPaymentByImpUid(cancelData);
-			System.out.println("response.getCode() :" + response.getCode());
-			System.out.println("response.getMessage() :" + response.getMessage());
-			// System.out.println("response.getResponse().getAmount() :" +
-			// response.getResponse().getAmount());
-			// TODO : 처리 로직
-		} catch (IamportResponseException e) {
-			System.out.println(e.getMessage());
-
-			switch (e.getHttpStatusCode()) {
-			case 401:
-				// TODO : 401 Unauthorized
-				System.out.println(e.getMessage());
-				break;
-			case 404:
-				// TODO : imp_123412341234 에 해당되는 거래내역이 존재하지 않음
-				System.out.println(e.getMessage());
-				break;
-			case 500:
-				// TODO : 서버 응답 오류
-				System.out.println(e.getMessage());
-				break;
-			}
-		} catch (IOException e) {
-			// 서버 연결 실패
-			e.printStackTrace();
-		}
-	}
-=======
-//	@RequestMapping("/mypage/myFundingHistory")
-//	public ModelAndView purchaseList(@RequestParam(defaultValue = "1") int curPage) {
-//		System.out.println("나는 페이징 컨트롤 입니다.");
-//		ModelAndView mv = new ModelAndView();
-//		
-//		int listCnt = purchaseService.purchaseListCount();
-//		Paging paging = new Paging(listCnt, curPage);
-//		
-//		int startIndex = paging.getStartIndex();
-//		int cntPerPage = paging.getPageSize();
-//		List<Purchase> list = purchaseService.purchaseList(startIndex, cntPerPage);
-//		
-//		mv.addObject("list", list);
-//		mv.addObject("listCnt", listCnt);
-//		mv.addObject("paging", paging);
-//		mv.addObject("mypage/myFundingHistory");
-//		System.out.println();
-//		return mv;
-//	}
->>>>>>> 7f0057dac8cacb4da1653cb4b6884972aedf13ac
 }
