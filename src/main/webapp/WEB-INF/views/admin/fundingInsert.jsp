@@ -66,10 +66,10 @@
           <div class="col-md-3">
             <div class="vertical-tab">
               <ul class="nav nav-tabs">
-                <li><a href="siteManagement">사이트 통계</a></li>
-                <li class="active"><a href="fundingInsert" >펀딩 등록</a></li>
-                <li><a href="personalQuestion" >1:1 문의 내역</a></li>
-                <li><a href="fundingRequest" >펀딩 오픈 신청 내역</a></li>
+                <li><a href="${pageContext.request.contextPath}/admin/siteManagement">사이트 통계</a></li>
+                <li class="active"><a href="${pageContext.request.contextPath}/admin/fundingInsert" >펀딩 등록</a></li>
+                <li><a href="${pageContext.request.contextPath}/admin/personalQuestion" >1:1 문의 내역</a></li>
+                <li><a href="${pageContext.request.contextPath}/admin/fundingRequest" >펀딩 오픈 신청 내역</a></li>
               </ul>
             </div>
           </div>
@@ -82,7 +82,15 @@
     <section id="home" class="divider bg-lighter">
 
 <div class="bg-lightest border-1px p-25">
-                  <h4 class="text-theme-colored text-uppercase m-0">펀딩 등록</h4>
+					<c:choose>
+						<c:when test="${!empty funding}">
+							 <h4 class="text-theme-colored text-uppercase m-0">펀딩 수정</h4>
+						</c:when>
+						<c:otherwise>
+							<h4 class="text-theme-colored text-uppercase m-0">펀딩 등록</h4>
+						</c:otherwise>
+					</c:choose>
+                 
                   <div class="line-bottom mb-30"></div>
                   <p>다음 항목을 모두 작성해주세요.</p>
                   <form id="appointment_form" name="appointment_form" class="mt-30" method="post" action="${pageContext.request.contextPath}/admin/fundInsert?${_csrf.parameterName}=${_csrf.token}" enctype="multipart/form-data">
@@ -178,7 +186,7 @@
                           <input id="file3" name="file" class="file" 	type="file" multiple data-show-upload="false" data-show-caption="true" visbility="hidden" > 
                           <small>이미지 파일을 첨부해 주세요</small> 
                          <button type="button" id="selectFileBtn1">파일 선택</button>
-                         <span id="Thumnail">Thumnail_${funding.image}</span>
+                         <span id="Thumnail">${funding.image}</span>
                         
                          <div >
 						<label>상세보기 업로드</label>
@@ -186,7 +194,7 @@
 						 <input id="file4" name="file2" class="file"	type="file" multiple data-show-upload="false" data-show-caption="true" visbility="hidden"> 
                           <small>이미지 파일을 첨부해 주세요</small> 
 						 <button type="button" id="selectFileBtn2">파일 선택</button>
-					    <span id="Detail">Detail_${funding.image}</span>
+					    <span id="Detail">${funding.image}</span>
                          </c:otherwise>
 						</c:choose>
 						
@@ -194,7 +202,16 @@
 					 
 					<div class="form-group mb-0 mt-20">
                       <input name="form_botcheck" class="form-control" type="hidden" value="">
-                      <button type="submit" class="btn btn-dark btn-theme-colored" data-loading-text="Please wait...">펀딩 등록</button>
+                      <c:choose>
+						<c:when test="${!empty funding}">
+							  <button type="submit" class="btn btn-dark btn-theme-colored" data-loading-text="Please wait...">펀딩 수정</button>
+						</c:when>
+						<c:otherwise>
+							 <button type="submit" class="btn btn-dark btn-theme-colored" data-loading-text="Please wait...">펀딩 등록</button>
+						</c:otherwise>
+					</c:choose>
+					
+                     
                     </div>
                     <input type="hidden" value="${code}" name="code"/>
                   </form>
