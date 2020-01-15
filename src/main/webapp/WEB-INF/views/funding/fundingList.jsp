@@ -200,6 +200,7 @@
 						</div>
 					</div>
 				</div>
+				
 				<div class="form-group col-md-1">
 					<div class="media">
 						<a class="flip" href="${pageContext.request.contextPath}/funding/category/301">
