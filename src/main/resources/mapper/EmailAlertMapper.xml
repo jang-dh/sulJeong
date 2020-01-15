@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="emailAlertMapper">
+
+<!-- 이메일 수신 동의 한 멤버 -->
+<select id="emailAgreeMember" resultType="member">
+select id, name, email from member where email_accept=1
+</select>
+   
+<!-- 펀딩 마감 시 결과 - 펀딩이 됐다 안됐다 알림 -->
+<!-- 펀딩 성공 시 -->
+<select id="emailFundingSuccess" resultType="funding">
+select * from funding where funding_state = 503
+</select>
+<!-- 펀딩 실패 시 -->
+<select id="emailFundingFail" resultType="funding">
+select * from funding where funding_state = 504
+</select>
+
+<!-- 펀딩 공지사항 - 공지사항 올라왔다 알림 - 이건 스케쥴러 없이 그냥 삽입 할 때 컨트롤러나 서비스에서 보내면 될 것 같음-->
+
+<!-- 펀딩한 것과 ‘좋아요’ 목록에 있는 펀딩 마감 임박 하루 전 - 펀딩 마감임박 하루 전이다 알림 -->
+<!-- <select id="">
+ select * from funding where TO_DATE(end_date, 'YYYYMMDD') - sysdate = 1
+</select> -->
+
+</mapper>   
+
+
+
+
+
+
+
