@@ -53,6 +53,10 @@
 	            	</sec:authorize>
 	            </c:otherwise>
             </c:choose>
+            
+            <sec:authorize access="hasRole('ROLE_ADMIN')">
+            	<a href="${pageContext.request.contextPath}/admin/personalQuestion" class="active">관리자 리스트로 돌아가기</a><br>
+            </sec:authorize>
             <a href="${pageContext.request.contextPath}/mypage/myQuestion" class="active">리스트로 돌아가기</a>
             <p></p>
 			

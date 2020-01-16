@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -51,5 +52,14 @@ public class LikesController {
 		int result = likesService.delete(new Likes(member.getCode(), fundingCode));
 		
 		return result;
+	}
+	
+	
+	
+	
+	
+	@ExceptionHandler({Exception.class})
+	public String error() {
+		return "error/errorPage";
 	}
 }
