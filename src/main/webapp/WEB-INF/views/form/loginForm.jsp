@@ -57,20 +57,11 @@
                   <input id="form_password" name="pwd" class="form-control" type="password">
                 </div>
               </div>
-              <div class="checkbox pull-left mt-15">
-                <label for="form_checkbox">
-                  <input id="form_checkbox" name="form_checkbox" type="checkbox">
-                  Remember me </label>
-              </div>
               <div class="form-group pull-right mt-10">
                 <input type="submit" class="btn btn-dark btn-sm" id="login" value="Login">
               </div>
               <div class="clear text-center pt-10">
                 <a class="text-theme-colored font-weight-600 font-12" href="${pageContext.request.contextPath}/searchLoginInfoForm">Forgot Your Information?</a>
-              </div>
-              <div class="clear text-center pt-10">
-                <a class="btn btn-dark btn-lg btn-block no-border mt-15 mb-15" href="${pageContext.request.contextPath}/kakaoLogin" data-bg-color="#3b5998">Login with facebook</a>
-                <a class="btn btn-dark btn-lg btn-block no-border" href="${pageContext.request.contextPath}/googleLogin" data-bg-color="#00acee">Login with twitter</a>
               </div>
             </form>
           </div>

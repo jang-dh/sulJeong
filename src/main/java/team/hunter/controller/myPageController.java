@@ -124,17 +124,23 @@ public class myPageController {
 	 * */
 	@RequestMapping("/myOpenFunding")
 	public ModelAndView myOpenFunding() {
-		Member member =(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		List<Funding> myOpenFundingList = fundingReqService.myFundingOpenList(member.getCode());
-		
-		
-		if(myOpenFundingList.size() > 9)
-			myOpenFundingList = myOpenFundingList.subList(0, 9);
 		
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("myOpenFundingList", myOpenFundingList);
-		mv.addObject("mdCode", myOpenFundingList.get(0).getMdCode());
-		mv.setViewName("mypage/myOpenFundingList");
+		try {
+			Member member =(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			List<Funding> myOpenFundingList = fundingReqService.myFundingOpenList(member.getCode());
+			
+			if(myOpenFundingList.size() > 9)
+				myOpenFundingList = myOpenFundingList.subList(0, 9);
+			
+			
+			mv.addObject("myOpenFundingList", myOpenFundingList);
+			mv.addObject("mdCode", myOpenFundingList.get(0).getMdCode());
+			mv.setViewName("mypage/myOpenFundingList");
+		}catch (Exception e) {
+			
+			mv.setViewName("mypage/myOpenFundingListEmpty");
+		}
 		
 		return mv;
 	}

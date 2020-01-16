@@ -82,4 +82,10 @@ public class FundingServiceImpl implements FundingService {
 		int result = fundingDAO.fundUpdate(funding);
 		return result;
 	}
+
+	@Override
+	public List<Funding> selectStatePre() {
+		List<Funding> list = fundingDAO.selectStatePre();
+		return list;
+	}
 }

@@ -3,7 +3,7 @@
     
 <script>
 $(function(){
-	$("#loginGoBtn").hide();
+	$("#GotoLoginBtn").hide();
 	$("#find").click(function(){
 		if($("#name1").val()==""){
 			alert("성함을 입력해주세요");
@@ -30,11 +30,12 @@ $(function(){
 				    $("#login-form").hide();
 				    var str="";
 					$.each(result, function(index, item){
-						str+=item.name+"님의 아이디는 "+item.id+"입니다.<br>";
+						var lastNo = item.id.length;
+						str+=item.name+"님의 아이디는 "+item.id.replace(item.id.substr(lastNo-3,lastNo),'***')+"입니다.<br>";
 					});
 					
 					$("#showId").html(str);
-					$("#loginGoBtn").show();
+					$("#GotoLoginBtn").show();
 					
 					
 				 } ,//성공했을대
@@ -117,9 +118,11 @@ $(function(){
             <div id="showId">
             	
               </div>
-              </p>
-              </p>
-              <a id="loginGoBtn" href="${pageContext.request.contextPath}/login" class="btn btn-dark btn-circled">로그인</a>
+              <p/>
+              <p/>
+              <div class="text-center" id="GotoLoginBtn">
+              <a href="${pageContext.request.contextPath}/login" class="btn btn-dark btn-theme-colored btn-lg mt-20">로그인 하러가기 <i class="fa fa-arrow-circle-right"></i></a>
+         	</div>
           </div>
         </div>
       </div>

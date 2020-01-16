@@ -107,5 +107,10 @@ public class FundingDAOImpl implements FundingDAO {
 	public int fundUpdate(Funding fuding) {
 		return session.update("fundingMapper.fundUpdate", fuding);
 	}
+
+	@Override
+	public List<Funding> selectStatePre() {
+		return session.selectList("fundingMapper.selectStatePre");
+	}
 	
 }

@@ -108,16 +108,21 @@ public class PurchaseController {
 		ModelAndView mv = new ModelAndView();
 		Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		int listCnt = purchaseService.purchaseListCount(member.getCode());
-		System.out.println(listCnt);
+		int countPN = purchaseService.countPurchaseNumber(member.getCode());
+		int countTP = purchaseService.countTotalPrice(member.getCode());
+		
 		Paging paging = new Paging(listCnt, curPage);
 
 		int startIndex = paging.getStartIndex();
 		int cntPerPage = paging.getPageSize();
 		List<Purchase> list = purchaseService.purchaseList(member.getCode(), startIndex, cntPerPage);
+		//System.out.println(list.get(0).getFunding().getImage());
 
 		mv.addObject("list", list);
 		mv.addObject("listCnt", listCnt);
 		mv.addObject("paging", paging);
+		mv.addObject("countPN", countPN);
+		mv.addObject("countTP", countTP);
 		mv.setViewName("mypage/myFundingHistory");
 		return mv;
 

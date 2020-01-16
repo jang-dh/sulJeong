@@ -14,8 +14,8 @@
          $("#rewardName").val("${funding.rewardName}");
          $("#rewardPrice").val("${funding.rewardPrice}");
          $("#goalPrice").val("${funding.goalPrice}");
-         $("#openDate").val("${funding.openDate}");
-         $("#endDate").val("${funding.endDate}");
+         $("#openDate2").val("${funding.openDate}");
+         $("#endDate2").val("${funding.endDate}");
          $("#category").val("${funding.category}").prop("selected", true);
          
          $("#appointment_form").attr("action","${pageContext.request.contextPath}/admin/fundUpdate");
@@ -206,7 +206,7 @@
                         <div class="form-group mb-10">
                           <c:choose>
                            <c:when test="${!empty funding}">
-                            시작일 : <input id="openDate2" name="openDate2" class="form-control required date-picker" type="text" required=""  placeholder="시작일" aria-required="true" >
+                            시작일 : <input id="openDate2" name="openDate" class="form-control required date-picker" type="text" required=""  placeholder="시작일" aria-required="true" >
                            </c:when>
                            <c:otherwise>
                             시작일 : <input id="openDate" name="openDate" class="form-control required date-picker" type="text" required=""  placeholder="시작일" aria-required="true">
@@ -219,7 +219,7 @@
                         <c:choose>
 
                            <c:when test="${!empty funding}">
-                            마감일 : <input id="endDate2" name="endDate2" class="form-control required date-picker" type="text" required=""  placeholder="마감일" aria-required="true" >
+                            마감일 : <input id="endDate2" name="endDate" class="form-control required date-picker" type="text" required=""  placeholder="마감일" aria-required="true" >
                            </c:when>
                            <c:otherwise>
                             마감일 : <input id="endDate" name="endDate" class="form-control required date-picker" type="text" required=""  placeholder="마감일" aria-required="true">

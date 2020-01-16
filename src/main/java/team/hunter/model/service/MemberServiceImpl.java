@@ -105,8 +105,9 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public Member idDuplicateCheck(String id) {
-		return memberDAO.idDuplicateCheck(id);
+		Member member = memberDAO.idDuplicateCheck(id);
+
+		return member;
 	}
-	
 
 }
