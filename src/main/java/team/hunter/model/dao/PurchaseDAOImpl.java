@@ -33,6 +33,19 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 		int fundingSponserCount = session.selectOne("purchaseMapper.countFundingCode", fundingCode);
 		return fundingSponserCount;
 	}
+	
+	@Override
+	public int countPurchaseNumber(int memberCode) {
+		return session.selectOne("purchaseMapper.countPurchaseNumber", memberCode);
+	}
+	
+	@Override
+	public int countTotalPrice(int memberCode) {
+		int re = session.selectOne("purchaseMapper.countTotalPrice", memberCode);
+		System.out.println(re);
+		
+		return session.selectOne("purchaseMapper.countTotalPrice", memberCode);
+	}
 
 	@Override
 	public int updatePurchase(int code) {

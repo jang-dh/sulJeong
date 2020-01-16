@@ -69,6 +69,9 @@
 								<c:forEach items="${list}" var="list" varStatus="status">
 									<tr class="cart_item">
 										<td class="product-thumbnail">${list.purchaseDate } <br>
+										<ul class="variation">
+											<li class="product-title"><span>구매 코드 : ${list.code}</span></li>
+										</ul>
 											<c:choose>
 												<c:when test="${list.funding.fundingState == 501}">
 													<span class="label label-primary">진행 중</span>
@@ -84,12 +87,11 @@
 												</c:when>
 											</c:choose>
 										</td>
-										<td class="product-name"><a class="text-theme-colored"
-											href="#">${list.funding.title}</a>
-											<ul class="variation">
-												<li class="product-title"><span>펀딩 코드 :
-														${list.funding.code}</span></li>
-											</ul></td>
+										<td class="product-name">
+											<a href="${pageContext.request.contextPath}/funding/${list.funding.code}">
+											<img src="${pageContext.request.contextPath}/resources/images/funding/Thumnail_${list.funding.image }" width="50" height="70"></a>
+											<a class="text-theme-colored" href="${pageContext.request.contextPath}/funding/${list.funding.code}">${list.funding.title}</a>
+										</td>
 										<td class="product-price"><span class="amount"><fmt:formatNumber>${list.funding.rewardPrice}</fmt:formatNumber>원</span></td>
 										<td class="product-quantity">
 											${list.qty}개 
@@ -111,7 +113,7 @@
 												<input type="hidden" name="code" value="${list.code}" />
 												<input type="hidden" name="price" value="${list.funding.rewardPrice * list.qty}" />
 												<c:if test="${list.purchaseState=='603' }">
-													<input type="button" class="btn btn-default btn-xs pull-right" value="후원취소">
+												<input type="button" class="btn btn-default btn-xs pull-right" value="후원취소">
 												</c:if>
 											</form>
 											<ul>
@@ -158,6 +160,11 @@
 												<tr>
 													<td class="member-phone">연락처 : ${user.phone}</td>
 												</tr>
+												<tr>
+						                          	<td><a href="${pageContext.request.contextPath}/mypage/myInfoMenu">
+						                          		<button type="button" class="btn btn-default">회원 정보 수정</button></a>
+						                          	</td>
+						                        </tr>
 											</sec:authorize>
 										</tbody>
 									</table>
@@ -167,17 +174,17 @@
 								<h4>후원 금액 총계</h4>
 								<table class="table table-bordered">
 									<tbody>
+										<%-- <tr>
+											<td>이번 달 후원 합계</td>
+											<td>${countPN }</td>
+										</tr> --%>
 										<tr>
-											<td>Cart Subtotal</td>
-											<td>$180.00</td>
+											<td>총 후원 성공 펀딩</td>
+											<td>${countPN }개</td>
 										</tr>
 										<tr>
-											<td>Shipping and Handling</td>
-											<td>$70.00</td>
-										</tr>
-										<tr>
-											<td>Order Total</td>
-											<td>$250.00</td>
+											<td>총 누적 후원 합계</td>
+											<td><fmt:formatNumber>${countTP }</fmt:formatNumber>원</td>
 										</tr>
 									</tbody>
 								</table>

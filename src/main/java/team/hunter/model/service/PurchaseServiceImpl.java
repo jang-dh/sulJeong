@@ -50,6 +50,16 @@ public class PurchaseServiceImpl implements PurchaseService {
 		int result = purchaseDAO.countFundingCode(fundingCode);
 		return result;
 	}
+	
+	@Override
+	public int countPurchaseNumber(int memberCode) {
+		return purchaseDAO.countPurchaseNumber(memberCode);
+	}
+	
+	@Override
+	public int countTotalPrice(int memberCode) {
+		return purchaseDAO.countTotalPrice(memberCode);
+	}
 
 	@Override
 	@Transactional
