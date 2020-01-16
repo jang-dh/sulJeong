@@ -98,6 +98,12 @@
 				let resultLength = result.length;
 				if(resultLength < 3)
 					isEnd = true;
+				
+				/* window.scrollTo({
+					bottom: $(".section-content:last").offset().bottom + $(".section-content:last").outerHeight,
+					behavior:'smooth'
+				}); */
+				
 				$.each(result, function(index, item) {
 					renderList(false, item);
 				})
@@ -183,11 +189,11 @@
 				<div class="row">
 					<div class="col-md-6">
 						<h2 class="text-white font-36">펀딩</h2>
-						<!-- <ol class="breadcrumb text-left mt-10 white">
-							<li><a href="#">Home</a></li>
+						<ol class="breadcrumb text-left mt-10 white">
+							<!-- <li><a href="#">Home</a></li>
 							<li><a href="#">Pages</a></li>
-							<li class="active">Causes Grid</li>
-						</ol> -->
+							<li class="active">Causes Grid</li> -->
+						</ol>
 					</div>
 				</div>
 			</div>
@@ -213,7 +219,7 @@
 				<div class="form-group col-md-1">
 					<div class="media">
 						<a class="flip" href="${pageContext.request.contextPath}/funding/commingsoon">
-							<img class="media-object" width="60" src="${pageContext.request.contextPath}/resources/images/funding/wine.jpg" alt="">
+							<img class="media-object" width="60" src="${pageContext.request.contextPath}/resources/images/funding/close.png" alt="">
 						</a>
 						<div class="media-body">
 							<h5 class="media-heading product-title mb-0">
