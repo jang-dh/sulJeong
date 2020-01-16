@@ -1,5 +1,7 @@
 package team.hunter.model.dto;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,4 +29,7 @@ public class Funding {
 	private int cnt;
 	
 	private Member member;
+	
+	//이메일 여러사람에게 보내기 할 때 사용(한개의 펀딩에 여러 사람이 펀딩 했을 수 있으니 리스트 필요) - 수녕
+	private List<Member> memberList;
 }

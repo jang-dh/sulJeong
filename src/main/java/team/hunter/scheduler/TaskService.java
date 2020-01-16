@@ -7,15 +7,10 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import team.hunter.model.dto.Funding;
 import team.hunter.model.dao.FundingDAO;
-import team.hunter.model.dao.StatisticsDAO;
-import team.hunter.model.service.FundingService;
-import team.hunter.model.service.NoticeService;
 import team.hunter.model.dto.Purchase;
+import team.hunter.model.email.SendMailPeople;
 import team.hunter.model.service.PurchaseService;
-import team.hunter.model.service.PurchaseServiceImpl;
-import team.hunter.model.dao.FundingDAO;
 import team.hunter.model.dao.NoticeDAO;
 import team.hunter.model.dao.PurchaseDAO;
 
@@ -32,6 +27,9 @@ public class TaskService {
 	
 	@Autowired
 	private PurchaseService purchaseService;
+	
+	@Autowired
+	private SendMailPeople sendMailPeople;
 	
 	//@Scheduled(cron = "0 0/30 0 * * *")
 	@Scheduled(cron="1 0 0 * * *")//매일 0시 0분 1초에 실행
@@ -63,4 +61,15 @@ public class TaskService {
 		purchaseDAO.updatePurchaseState();
 	}
 
+	@Scheduled(cron = "0/5 * * * * *")
+	public void mail() {
+		//SendMailPeople sendMailPeople = new SendMailPeople();
+		System.out.println("call mail");
+		try {
+			sendMailPeople.mailSuccessSending();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
