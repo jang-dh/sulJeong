@@ -15,7 +15,7 @@
               <li><a href="#" data-bg-color="#05A7E3"><i class="fa fa-skype"></i></a></li>
               <li><a href="#" data-bg-color="#A11312"><i class="fa fa-google-plus"></i></a></li>
               <li><a href="#" data-bg-color="#C22E2A"><i class="fa fa-youtube"></i></a></li>
-            </ul -->>
+            </ul -->
           </div>
         </div>
         <!-- <div class="col-sm-6 col-md-3">
