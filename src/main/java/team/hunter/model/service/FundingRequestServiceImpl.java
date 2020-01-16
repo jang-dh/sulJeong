@@ -28,6 +28,7 @@ public class FundingRequestServiceImpl implements FundingRequestService {
 	@Override
 	public List<Funding> myFundingOpenList(int memberCode) {
 		List<Funding> list = fundingrequestDAO.myFundingOpenList(memberCode);
+		if(list==null) throw new RuntimeException();
 		return list;
 	}
 
