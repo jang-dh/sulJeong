@@ -151,11 +151,11 @@
 				<div class="row">
 					<div class="col-md-6">
 						<h2 class="text-white font-36">내가 좋아한 펀딩</h2>
-						<!-- <ol class="breadcrumb text-left mt-10 white">
-							<li><a href="#">Home</a></li>
+						 <ol class="breadcrumb text-left mt-10 white">
+							<!--<li><a href="#">Home</a></li>
 							<li><a href="#">Pages</a></li>
-							<li class="active">Causes Grid</li>
-						</ol> -->
+							<li class="active">Causes Grid</li> -->
+						</ol>
 					</div>
 				</div>
 			</div>
