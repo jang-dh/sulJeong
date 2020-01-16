@@ -93,11 +93,15 @@ $(function(){
 			$("#emailAccept").val("0");
 		}
 		
+		if($('#email').val()=='${member.email}'){
+			emailStatus = 'true';
+		}
+		
 		if(flage == false){
 			alert("비밀번호 일치 여부 확인해주세요.");
 			return false;
 		}else if(emailStatus == 'false'){
-		    alert("이메일 인증 후 회원가입 가능");
+		    alert("이메일 인증 후 회원수정 가능");
 			return false;
 		}
 		
@@ -230,7 +234,7 @@ $(function(){
 						<div class="row">
 							<div class="form-group col-md-6">
 								<label>Email Address</label> 
-								<input name="email" id="email" class="form-control" type="email">
+								<input name="email" id="email" class="form-control" type="email" value="${member.email}">
 							</div>
 							<div class="form-group col-md-6">
 								<label>인증하기</label> 

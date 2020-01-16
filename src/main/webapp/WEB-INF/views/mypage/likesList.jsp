@@ -41,6 +41,9 @@
 					if (result == 1) {
 						alert("내가 좋아한 펀딩에서 삭제됐습니다.");
 						deleted.remove();
+						
+						if($(".thumb").length == 0)
+							location.reload();
 					}
 				},
 				error : function(request, status, error) {

@@ -74,8 +74,8 @@ $(function() {
 	});
 	$(".question").on("click", function () {
 		var fundingCode = ${funding.code};
-		var content = $('input[name="form_content"]').val();
 		var subject = $('input[name="form_subject"]').val();
+		var content = $('textarea[name="form_content"]').val();
 		if(!'${principal.code}')
 			alert("로그인 후 사용가능합니다.");
 		else
@@ -180,13 +180,13 @@ $(function() {
 			<!-- Section Content -->
 			<div class="section-content">
 				<div class="row">
-					<div class="col-md-6">
-						<h2 class="text-white font-36">펀딩 상세 페이지</h2>
-						<!-- <ol class="breadcrumb text-left mt-10 white">
-							<li><a href="#">Home</a></li>
+					<div class="col-md-7">
+						<h2 class="text-white font-30"></h2>
+						 <ol class="breadcrumb text-left mt-10 white">
+							<!--<li><a href="#">Home</a></li>
 							<li><a href="#">Pages</a></li>
-							<li class="active">Product Details</li>
-						</ol> -->
+							<li class="active">Product Details</li>-->
+						</ol> 
 					</div>
 				</div>
 			</div>
@@ -220,7 +220,7 @@ $(function() {
 									</sec:authorize>
 								</h2>
 								
-								<div class="product_review">
+								<!-- <div class="product_review">
 									<ul class="review_text list-inline">
 										<li>
 											<div title="Rated 4.50 out of 5" class="star-rating">
@@ -230,14 +230,10 @@ $(function() {
 										<li><a href="#"><span>5</span>Reviews</a></li>
 										<li><a href="#">Add reviews</a></li>
 									</ul>
-								</div>
-								<div class="price">
-									<span class="amount"><fmt:formatNumber>${funding.rewardPrice}</fmt:formatNumber>원</span>
-								</div>
-								<div class="short-description">
-									<p>Donec volutpat purus tempor sem molestie, sed blandit
-										lacus posuere. Lorem ipsum dolor sit amet, consectetur
-										adipiscing elit. Ut posuere mollis nulla ut consectetur.</p>
+								</div> -->
+								<div class="price mb-15">
+									<span class="amount"><strong>${funding.rewardName} / </strong>
+									<fmt:formatNumber>${funding.rewardPrice}</fmt:formatNumber>원</span>
 								</div>
 								<div class="tags">
 									<strong>판매자:</strong> ${funding.member.name}
@@ -252,12 +248,12 @@ $(function() {
 										<c:when test="${funding.category == 305}">와인</c:when>
 									</c:choose>
 								</div>
-								<div class="tags">
+								<!-- <div class="tags">
 									<strong>Tags:</strong> <a href="#">Saddles</a>, <a href="#">Whip</a>
-								</div>
+								</div> -->
 								<br>
 								<div class="pull-left font-weight-400 text-black-333 pr-0">
-									<strong>펀딩종료 </strong>
+									<strong>펀딩종료까지</strong>
 								</div>
 								<div class="col-md-3">
 									<div class="text-center" data-countdown="${funding.endDate}"></div>
@@ -280,10 +276,10 @@ $(function() {
 							<br>
 							<div>
 								<ul class="list-inline font-weight-600 font-16 clearfix mt-15">
-									<li class="pull-left font-weight-400 text-black-333 pr-0"><strong>달성금액:
-									</strong><span class="text-theme-colored font-weight-700"><fmt:formatNumber>${funding.stackPrice}</fmt:formatNumber>원</span></li>
-									<li class="pull-right font-weight-400 text-black-333 pr-0"><strong>목표금액:
-									</strong><span class="text-theme-colored font-weight-700"><fmt:formatNumber>${funding.goalPrice}</fmt:formatNumber>원</span></li>
+									<li class="pull-left font-weight-400 text-black-333 pr-0"><strong>달성금액:</strong>
+									<span class="text-theme-colored font-weight-700"><fmt:formatNumber>${funding.stackPrice}</fmt:formatNumber>원</span></li>
+									<li class="pull-right font-weight-400 text-black-333 pr-0"><strong>목표금액:</strong>
+									<span class="text-theme-colored font-weight-700"><fmt:formatNumber>${funding.goalPrice}</fmt:formatNumber>원</span></li>
 								</ul>
 							</div>
 							<div class="progress-item mt-15">
@@ -300,15 +296,15 @@ $(function() {
 									</div>
 								</div>
 							</div>
-							<div class="pull-right font-weight-400 text-black-333 mt-15 mb-15">
+							<div class="pull-right font-weight-400 text-black-333 mt-15">
 								<button class="single_add_to_cart_button btn btn-theme-colored deleteLikes" type="button">
-									좋아요 취소 <i class="fa fa-thumbs-down text-white mr-10"></i>
+									좋아요 취소 <i class="fa fa-thumbs-down text-white"></i>
 								</button>
-								<div class="font-icon-list col-md-2 col-sm-3 col-xs-6 col-xs-6"></div>
+								
 								<button class="single_add_to_cart_button btn btn-default btn-theme-colored insertLikes" type="button">
 									좋아요 <i class="fa fa-thumbs-up"></i>
 								</button>
-								<div class="font-icon-list col-md-2 col-sm-3 col-xs-6 col-xs-6"></div>
+							
 							</div>
 						</div>
 						<c:if test="${funding.fundingState == 501}">
@@ -318,7 +314,7 @@ $(function() {
 									<tbody>
 										<tr>
 											<td class="col-md-5"></td>
-											<td class="name col-md-1"><div class="mt-10">수량</div></td>
+											<td class="name col-md-1"><div class="mt-10"><strong>수량</strong></div></td>
 											<td class="value mt-10 col-md-4">
 												<div class="quantity buttons_added mt-10">
 													<input type="button" class="minus" value="-"> 
@@ -350,8 +346,8 @@ $(function() {
 								<li><a href="#tab3" data-toggle="tab">배송/교환/반품 안내</a></li>
 							</ul>
 							<div class="tab-content">
-								<div class="tab-pane fade in active" id="tab1">
-										<img src="${pageContext.request.contextPath}/resources/images/funding/Detail_${funding.image}" alt="">
+								<div class="tab-pane fade in active text-center" id="tab1">
+									<img src="${pageContext.request.contextPath}/resources/images/funding/Detail_${funding.image}" alt="">
 									<!-- <table class="table table-striped">
 										<tbody>
 											<tr>
@@ -380,14 +376,15 @@ $(function() {
 									<div id="map" style="width:100%;height:350px;"></div>
 								</div>
 									<div class="tab-pane fade" id="tab2">
-									<div class="funding_question">
-										<label>제목 <small>*</small></label> 
-										<input name="form_subject" type="text" placeholder="제목을 입력해 주세요." class="form-control">
-										<label>문의내용 <small>*</small></label>
-										<input name="form_content" type="text"  class="form-control required" rows="5" placeholder="내용을 입력해 주세요.">
-										<button type="button" class="btn btn-dark btn-flat question" data-toggle="modal" data-target=".bs-example-modal-sm">문의하기</button>
+										<div class="funding_question">
+											<label>제목 <small>*</small></label> 
+											<input name="form_subject" type="text" placeholder="제목을 입력해 주세요." class="form-control">
+											<br>
+											<label>문의내용 <small>*</small></label>
+											<textarea name="form_content" type="text"  class="form-control required" rows="5" placeholder="내용을 입력해 주세요."></textarea>
+											<button type="button" class="btn btn-dark btn-flat question mt-10" data-toggle="modal" data-target=".bs-example-modal-sm">문의하기</button>
+										</div>
 									</div>
-								</div>
 								<div class="tab-pane fade" id="tab3">
 									<!-- <div class="col-sm-6"> -->
 									<h5 class="prod-delivery-return-policy-title">배송정보</h5>

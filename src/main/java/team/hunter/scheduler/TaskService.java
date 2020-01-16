@@ -34,7 +34,7 @@ public class TaskService {
 	private PurchaseService purchaseService;
 	
 	//@Scheduled(cron = "0 0/30 0 * * *")
-	@Scheduled(cron="1 0 0 * * *")//매일 0시 0분 1초에 실행
+	//@Scheduled(cron="0/5 * * * * *")//매일 0시 0분 1초에 실행
 	public void scheduler() {
 		updateDB();
 		

@@ -6,8 +6,8 @@
     <div class="container pt-70 pb-40">
       <div class="row multi-row-clearfix">
         <div class="col-sm-6 col-md-3">
-          <div class="widget dark"> <img alt="" src="${pageContext.request.contextPath}/resources/images/logo-wide-white-footer.png">
-            <p class="font-12 mt-20 mb-10">Medinova is a library of Crowdfunding and Medinova templates with predefined elements which helps you to build your own site. Lorem ipsum dolor sit amet consectetur.</p>
+          <div class="widget dark"> <img alt="" src="${pageContext.request.contextPath}/resources/images/test.png">
+            <!-- <p class="font-12 mt-20 mb-10">Medinova is a library of Crowdfunding and Medinova templates with predefined elements which helps you to build your own site. Lorem ipsum dolor sit amet consectetur.</p>
             <a class="text-gray font-12" href="#"><i class="fa fa-angle-double-right text-theme-colored"></i> Read more</a>
             <ul class="styled-icons icon-dark mt-20">
               <li><a href="#" data-bg-color="#3B5998"><i class="fa fa-facebook"></i></a></li>
@@ -15,10 +15,10 @@
               <li><a href="#" data-bg-color="#05A7E3"><i class="fa fa-skype"></i></a></li>
               <li><a href="#" data-bg-color="#A11312"><i class="fa fa-google-plus"></i></a></li>
               <li><a href="#" data-bg-color="#C22E2A"><i class="fa fa-youtube"></i></a></li>
-            </ul>
+            </ul -->>
           </div>
         </div>
-        <div class="col-sm-6 col-md-3">
+        <!-- <div class="col-sm-6 col-md-3">
           <div class="widget dark">
             <h5 class="widget-title line-bottom">Pages</h5>
             <ul class="list list-border">
@@ -43,8 +43,8 @@
               <li><a href="#">Media Center</a></li>
             </ul>
           </div>
-        </div>
-        <div class="col-sm-6 col-md-3">
+        </div> -->
+        <!-- <div class="col-sm-6 col-md-3">
           <div class="widget dark">
             <h5 class="widget-title line-bottom">Quick Contact</h5>
             <ul class="list list-border">
@@ -62,7 +62,7 @@
                 </span>
               </div>
             </form>
-            <!-- Mailchimp Subscription Form Validation-->
+            Mailchimp Subscription Form Validation
             <script type="text/javascript">
               $('#footer-mailchimp-subscription-form').ajaxChimp({
                   callback: mailChimpCallBack,
@@ -83,20 +83,20 @@
               }
             </script>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
     <div class="footer-bottom" data-bg-color="#242730">
       <div class="container pt-15 pb-15">
         <div class="row">
           <div class="col-md-6">
-            <p class="font-12 text-black-777 m-0 sm-text-center">Copyright &copy;2017 ThemeMascot. All Rights Reserved</p>
+            <p class="font-12 text-black-777 m-0 sm-text-center">Copyright &copy;2020 술:정(井). All Rights Reserved</p>
           </div>
-          <div class="col-md-6 text-right">
+          <!-- <div class="col-md-6 text-right">
             <div class="widget no-border m-0">
               <ul class="list-inline sm-text-center font-12">
                 <li>
-                  <a href="#">FAQ</a>
+                  <a href="#">공지사항</a>
                 </li>
                 <li>|</li>
                 <li>
@@ -108,7 +108,7 @@
                 </li>
               </ul>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
