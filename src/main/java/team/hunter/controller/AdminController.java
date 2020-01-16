@@ -594,12 +594,16 @@ public class AdminController {
 									System.getProperty("line.separator") +
 
 									"새로운 펀딩이 등록되었으니 홈페이지에 와서 구경하고 가세요 ~ ♡"
+									
+									+ System.getProperty("line.separator") +
+									
+									"새로 등록된 펀딩 : "+ funding.getRewardName()
 
 									+ System.getProperty("line.separator") +
 
 									System.getProperty("line.separator") +
 
-									"자동으로 결제가 진행 될 예정입니다."; // 내용
+									"술정에 놀러오세요~~~~"; // 내용
 
 					try {
 						MimeMessage message = mailSender.createMimeMessage();
@@ -608,7 +612,7 @@ public class AdminController {
 						
 						messageHelper.setFrom(setfrom); // 보내는사람 생략하면 정상작동을 안함
 						// 받는 사람 이메일주소 세팅
-						InternetAddress[] toAddr = new InternetAddress[funding.getMemberList().size()];
+						InternetAddress[] toAddr = new InternetAddress[emailAcceptList.size()];
 						
 						int i=0;
 						for(Member member : emailAcceptList) {
