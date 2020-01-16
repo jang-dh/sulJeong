@@ -137,7 +137,7 @@ public class SendMailPeople {
 		 * */
 		public void mailBeforeSending() throws Exception {
 			String setfrom = "suoung0716@gamil.com";
-			String title = "펀딩 실패 이메일 입니다."; // 제목
+			String title = "후원 펀딩 마감 하루 전 이메일 입니다."; // 제목
 			
 			List<Funding> fundingBeforeList = emailAlertService.fundingOneDayBefore();
 			for( Funding funding : fundingBeforeList) {
@@ -194,7 +194,7 @@ public class SendMailPeople {
 		 * */
 		public void mailBeforeSendingLikes() throws Exception {
 			String setfrom = "suoung0716@gamil.com";
-			String title = "펀딩 실패 이메일 입니다."; // 제목
+			String title = "좋아요 하신 펀딩 마감 하루 전 이메일 입니다."; // 제목
 			
 			List<Funding> fundingBeforeLikesList = emailAlertService.fundingOneDayBeforeLikes();
 			for( Funding funding : fundingBeforeLikesList) {

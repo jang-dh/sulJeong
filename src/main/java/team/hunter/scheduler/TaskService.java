@@ -61,12 +61,15 @@ public class TaskService {
 		purchaseDAO.updatePurchaseState();
 	}
 
-	@Scheduled(cron = "0/5 * * * * *")
+	@Scheduled(cron = "0 0/1 * * * *")
 	public void mail() {
 		//SendMailPeople sendMailPeople = new SendMailPeople();
 		System.out.println("call mail");
 		try {
-			sendMailPeople.mailSuccessSending();
+			sendMailPeople.mailSuccessSending();//펀딩 성공 시 이메일
+			sendMailPeople.mailFailSending(); //펀딩 실패 시 이메일
+			sendMailPeople.mailBeforeSending();//후원 한 사람에게 마감 1일 전 이메일
+			sendMailPeople.mailBeforeSendingLikes();// 좋아요 누른 사람에게 해당 펀딩 마감 1일 전 이메일
 			
 		} catch (Exception e) {
 			e.printStackTrace();
