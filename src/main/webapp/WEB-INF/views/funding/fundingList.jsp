@@ -82,7 +82,7 @@
 			var params = curParams.split('&');
 			order = params[0].split('?order=')[1];
 			where = params[1].split('where=')[1];
-			val = params[2].split('val=')[1];
+			val = '${val}';
 		}
 		
 		$.ajax({
@@ -108,8 +108,8 @@
 					renderList(false, item);
 				})
 			},
-			error : function(err) {
-				alert("오류 발생");
+			error : function(request, status, error) {
+				alert(request.status + ": " + request.responseText + " : " + error + "오류 발생");
 			}
 		});
 		//ajax End
