@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 <script>
 	//fetchList 제어
@@ -31,6 +32,8 @@
 	$(function() {
 		//현재 url
 		var curUrl = location.href;
+		if(curUrl.includes("commingsoon"))
+			$("#mailchimp-subscription-form").hide();
 		
 		//정렬 조건 변경 시
 		$("[name=order]").on("change", function() {
@@ -45,7 +48,7 @@
             let windowHeight = $window.height();
             let documentHeight = $(document).height();
             
-            if(scrollTop + windowHeight + 30 > documentHeight){
+            if(scrollTop + windowHeight + 30 > documentHeight && $(".thumb").length >= 6){
             	if(flag)
 	            	fetchList();
             }
@@ -63,8 +66,6 @@
 		
 		//현재 요소 개수
 		var listCnt = $(".thumb").length;
-
-		//현재 url
 		var curUrl = location.href;
 		var curParams = curUrl.split('category/')[1];
 
@@ -82,13 +83,14 @@
 			var params = curParams.split('&');
 			order = params[0].split('?order=')[1];
 			where = params[1].split('where=')[1];
-			val = params[2].split('val=')[1];
+			val = '${val}';
 		}
+		
 		$.ajax({
 			url : getContextPath() + "/funding/fetchList",
 			type : "get",
 			dataType : "json",
-			data : {categoryCode : categoryCode, order : order, where : where, val : val, listCnt : listCnt},
+			data : {categoryCode : categoryCode, order : order, where : where, val : val, listCnt : listCnt, isComming : curUrl.includes("commingsoon")},
 			success : function(result) {
 				setTimeout(function() {
 					flag = true;
@@ -97,12 +99,18 @@
 				let resultLength = result.length;
 				if(resultLength < 3)
 					isEnd = true;
+				
+				/* window.scrollTo({
+					bottom: $(".section-content:last").offset().bottom + $(".section-content:last").outerHeight,
+					behavior:'smooth'
+				}); */
+				
 				$.each(result, function(index, item) {
 					renderList(false, item);
 				})
 			},
-			error : function(err) {
-				alert("오류 발생");
+			error : function(request, status, error) {
+				alert(request.status + ": " + request.responseText + " : " + error + "오류 발생");
 			}
 		});
 		//ajax End
@@ -143,12 +151,21 @@
 		html += '</div>';
 		html += '</div>';
 		html += '<div class="pull-left font-weight-400 text-black-333 pr-0">';
-		html += '<strong>펀딩종료까지 </strong>';
-		html += '</div>';
-		html += '<div class="text-center" data-countdown="' + item.endDate + '"></div>';
-		html += '<a href="' + item.code + '" class="btn btn-default btn-theme-colored mt-10 font-16 btn-sm">펀딩하기 <i class="flaticon-charity-make-a-donation font-16 ml-5"></i>';
-		html += '</a>';
-		html += '<br><i class="fa fa-heart faa-pulse animated"></i> <span class="text-theme-colored font-weight-700">' + item.cnt + '</span>';
+		if(item.fundingState == '501'){
+			html += '<strong>펀딩종료까지 </strong>';
+			html += '</div>';
+			html += '<div class="text-center" data-countdown="' + item.endDate + '"></div>';
+			html += '<a href="' + item.code + '" class="btn btn-default btn-theme-colored mt-10 font-16 btn-sm">펀딩하기 <i class="flaticon-charity-make-a-donation font-16 ml-5"></i>';
+			html += '</a>';
+			html += '<br><i class="fa fa-heart faa-pulse animated"></i> <span class="text-theme-colored font-weight-700">' + item.cnt + '</span>';
+		}
+		else if(item.fundingState == '502'){
+			html += '<strong>펀딩시작까지 </strong>';
+			html += '</div>';
+			html += '<div class="text-center" data-countdown="' + item.openDate + '"></div>';
+			html += '<a href="' + item.code + '" class="btn btn-default btn-theme-colored mt-10 font-16 btn-sm">보러가기 <i class="fa fa-arrow-circle-right font-16 ml-5"></i>';
+			html += '</a>';
+		}
 		html += '</div>';
 		html += '</div>';
 		html += '</div>';
@@ -173,11 +190,11 @@
 				<div class="row">
 					<div class="col-md-6">
 						<h2 class="text-white font-36">펀딩</h2>
-						<!-- <ol class="breadcrumb text-left mt-10 white">
-							<li><a href="#">Home</a></li>
+						<ol class="breadcrumb text-left mt-10 white">
+							<!-- <li><a href="#">Home</a></li>
 							<li><a href="#">Pages</a></li>
-							<li class="active">Causes Grid</li>
-						</ol> -->
+							<li class="active">Causes Grid</li> -->
+						</ol>
 					</div>
 				</div>
 			</div>
@@ -195,12 +212,23 @@
 						</a>
 						<div class="media-body">
 							<h5 class="media-heading product-title mb-0">
-								<a href="${pageContext.request.contextPath}/funding/category/">전체보기</a>
+								<a href="${pageContext.request.contextPath}/funding/category/">전체</a>
 							</h5>
 						</div>
 					</div>
 				</div>
-				
+				<div class="form-group col-md-1">
+					<div class="media">
+						<a class="flip" href="${pageContext.request.contextPath}/funding/commingsoon">
+							<img class="media-object" width="60" src="${pageContext.request.contextPath}/resources/images/funding/close.png" alt="">
+						</a>
+						<div class="media-body">
+							<h5 class="media-heading product-title mb-0">
+								<a href="${pageContext.request.contextPath}/funding/commingsoon">예정</a>
+							</h5>
+						</div>
+					</div>
+				</div>
 				<div class="form-group col-md-1">
 					<div class="media">
 						<a class="flip" href="${pageContext.request.contextPath}/funding/category/301">
@@ -249,18 +277,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="form-group col-md-1">
-					<div class="media">
-						<a class="flip" href="${pageContext.request.contextPath}/funding/category/305">
-							<img class="media-object" width="60" src="${pageContext.request.contextPath}/resources/images/funding/wine.jpg" alt="">
-						</a>
-						<div class="media-body">
-							<h5 class="media-heading product-title mb-0">
-								<a href="${pageContext.request.contextPath}/funding/category/305">와인</a>
-							</h5>
-						</div>
-					</div>
-				</div>
+				
 			</div>
 			<div class="container pt-30 pb-0">
 				<div class="col-md-5"></div>
@@ -298,6 +315,21 @@
 		<div class="container pt-0 pb-40">
 			<div class="section-content">
 				<div class="row multi-row-clearfix" id="list-funding" >
+				<c:if test="${fn:length(list) == 0}">
+						<section class="bg-white-f12 exists">
+							<div class="container pb-0">
+								<div class="section-title">
+									<div class="row">
+										<div class="col-md-6 col-md-offset-3">
+											<div class="text-center">
+												<h2 class="title">등록된 펀딩이 없습니다.</h2>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+					</c:if>
 					<c:forEach items="${list}" var="fundingList" varStatus="status">
 						<div class="col-sm-7 col-md-4" >
 							<div class="causes bg-silver-light maxwidth500 mb-30">
@@ -330,10 +362,27 @@
 											</div>
 										</div>
 									</div>
-									<div class="pull-left font-weight-400 text-black-333 pr-0">
-										<strong>펀딩종료까지 </strong>
-									</div>
-									<div class="text-center" data-countdown="${fundingList.endDate}"></div>
+									<c:choose>
+										<c:when test="${fundingList.fundingState == 501}">
+										<div class="pull-left font-weight-400 text-black-333 pr-0">
+											<strong>펀딩종료까지 </strong>
+										</div>
+										<div class="text-center" data-countdown="${fundingList.endDate}"></div>
+										<a href="${pageContext.request.contextPath}/funding/${fundingList.code}" class="btn btn-default btn-theme-colored mt-10 font-16 btn-sm">펀딩하기
+											<i class="flaticon-charity-make-a-donation font-16 ml-5"></i>
+										</a>
+										<br><i class="fa fa-heart faa-pulse animated"></i> <span class="text-theme-colored font-weight-700">${fundingList.cnt}</span>
+										</c:when>
+										<c:when test="${fundingList.fundingState == 502}">
+											<div class="pull-left font-weight-400 text-black-333 pr-0">
+											<strong>펀딩시작까지 </strong>
+										</div>
+										<div class="text-center" data-countdown="${fundingList.openDate}"></div>
+										<a href="${pageContext.request.contextPath}/funding/${fundingList.code}" class="btn btn-default btn-theme-colored mt-10 font-16 btn-sm">보러가기
+											<i class="fa fa-arrow-circle-right font-16 ml-5"></i>
+										</a>
+										</c:when>
+									</c:choose>
 									<script type="text/javascript">
 										$(document).ready(function() {
 											$('[data-countdown]').each(function() {
@@ -344,10 +393,7 @@
 											});
 										});
 									</script>
-									<a href="${pageContext.request.contextPath}/funding/${fundingList.code}" class="btn btn-default btn-theme-colored mt-10 font-16 btn-sm">펀딩하기
-										<i class="flaticon-charity-make-a-donation font-16 ml-5"></i>
-									</a>
-									<br><i class="fa fa-heart faa-pulse animated"></i> <span class="text-theme-colored font-weight-700">${fundingList.cnt}</span>
+									
 								</div>
 							</div>
 						</div>

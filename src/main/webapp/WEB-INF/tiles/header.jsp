@@ -160,7 +160,7 @@
                                             <div class="col4">
                                                 <div class="icon-box" style="margin-bottom:0px;">
                                                     <a class="icon" href="${pageContext.request.contextPath}/mypage/fundingHistory" style="margin-bottom:0px;">
-                                                        <i class="fa fa-diamond"></i>
+                                                        <i class="fa fa-shopping-bag"></i>
                                                     </a>
                                                     <h5 class="icon-box-title">펀딩내역</h5>
                                                 </div>
@@ -176,9 +176,9 @@
                                             <div class="col4">
                                                 <div class="icon-box" style="margin-bottom:0px;">
                                                     <a class="icon" href="${pageContext.request.contextPath}/mypage/myOpenFunding" style="margin-bottom:0px;">
-                                                        <i class="fa fa-heart"></i>
+                                                        <i class="fa fa-upload"></i>
                                                     </a>
-                                                    <h5 class="icon-box-title">내가 만든 펀딩</h5>
+                                                    <h5 class="icon-box-title">내 펀딩</h5>
                                                 </div>
                                             </div>
                                         </div>

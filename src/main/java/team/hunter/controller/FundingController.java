@@ -32,6 +32,8 @@ public class FundingController {
 	
 	@Autowired
 	private MemberService memberService;
+	
+	int pageCnt = 3;
 
 	//목록 페이지 진입
 	@RequestMapping("/funding")
@@ -60,34 +62,50 @@ public class FundingController {
 	public String allCategory(Model model, String order, String where, String val) {
 		List<Funding> list = service.selectList("0", order, where, val);
 		
-		if(list.size() > 6)
-			list = list.subList(0, 6);
+		if(list.size() > pageCnt*2)
+			list = list.subList(0, pageCnt*2);
 		
 		model.addAttribute("list", list);
+		model.addAttribute("val", val);
 
 		return "funding/fundingList";
 	}
 
 	//카테고리별
 	@RequestMapping("/funding/category/{categoryCode}")
-	public ModelAndView eachCategory(@PathVariable String categoryCode, String order, String where, String val) {
+	public String eachCategory(@PathVariable String categoryCode, String order, String where, String val, Model model) {
 		List<Funding> list = service.selectList(categoryCode, order, where, val);
-		if(list.size() > 6)
-			list = list.subList(0, 6);
-		return new ModelAndView("funding/fundingList", "list", list);
+		if(list.size() > pageCnt*2)
+			list = list.subList(0, pageCnt*2);
+		model.addAttribute("list", list);
+		model.addAttribute("val", val);
+
+		return "funding/fundingList";
 	}
 	
 	//리스트 추가
 	@RequestMapping("/funding/fetchList")
-	public @ResponseBody List<Funding> fetchList(String categoryCode, String order, String where, String val, int listCnt){
-		List<Funding> list = service.selectList(categoryCode, order, where, val);
+	public @ResponseBody List<Funding> fetchList(String categoryCode, String order, String where, String val, int listCnt, boolean isComming){
+		List<Funding> list = null;
+		if(isComming)
+			list = service.selectStatePre();
+		else	
+			list = service.selectList(categoryCode, order, where, val);
 		
-		if(list.size() > listCnt + 3)
-			list = list.subList(listCnt, listCnt + 3);
-		else
+		if(list.size() > listCnt + pageCnt)
+			list = list.subList(listCnt, listCnt + pageCnt);
+		else if(list.size() > listCnt)
 			list = list.subList(listCnt, list.size());
 		
 		return list;
+	}
+	
+	@RequestMapping("/funding/commingsoon")
+	public ModelAndView commingsoon() {
+		List<Funding> list = service.selectStatePre();
+		if(list.size() > pageCnt*2)
+			list = list.subList(0, pageCnt*2);
+		return new ModelAndView("funding/fundingList", "list", list);
 	}
 	
 }
