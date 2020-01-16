@@ -87,14 +87,10 @@ public class FundingController {
 	@RequestMapping("/funding/fetchList")
 	public @ResponseBody List<Funding> fetchList(String categoryCode, String order, String where, String val, int listCnt, boolean isComming){
 		List<Funding> list = null;
-		System.out.println(val);
 		if(isComming)
 			list = service.selectStatePre();
 		else	
 			list = service.selectList(categoryCode, order, where, val);
-		
-		System.out.println(list.size());
-		
 		
 		if(list.size() > listCnt + pageCnt)
 			list = list.subList(listCnt, listCnt + pageCnt);

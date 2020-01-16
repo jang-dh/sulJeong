@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 <script>
 	//fetchList 제어
@@ -47,7 +48,7 @@
             let windowHeight = $window.height();
             let documentHeight = $(document).height();
             
-            if(scrollTop + windowHeight + 30 > documentHeight){
+            if(scrollTop + windowHeight + 30 > documentHeight && $(".thumb").length >= 6){
             	if(flag)
 	            	fetchList();
             }
@@ -314,6 +315,21 @@
 		<div class="container pt-0 pb-40">
 			<div class="section-content">
 				<div class="row multi-row-clearfix" id="list-funding" >
+				<c:if test="${fn:length(list) == 0}">
+						<section class="bg-white-f12 exists">
+							<div class="container pb-0">
+								<div class="section-title">
+									<div class="row">
+										<div class="col-md-6 col-md-offset-3">
+											<div class="text-center">
+												<h2 class="title">등록된 펀딩이 없습니다.</h2>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+					</c:if>
 					<c:forEach items="${list}" var="fundingList" varStatus="status">
 						<div class="col-sm-7 col-md-4" >
 							<div class="causes bg-silver-light maxwidth500 mb-30">
