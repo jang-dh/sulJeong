@@ -237,7 +237,7 @@
                        <option value="302">청주</option>
                        <option value="303">증류주</option>
                        <option value="304">과실주</option>
-                       <option value="305">와인</option>
+
                     </select>
                            
                         </div>
