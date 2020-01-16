@@ -4,7 +4,7 @@
 
 	<!-- 근딘 :  후원한 펀딩 내역 페이지 - 펀딩 후원 내역 resultMap -->
 	<resultMap type="purchase" id="listDetailInformationMap">
-		<id column="code" property="code" />
+		<id column="purchaseCode" property="code" />
 		<result column="purchase_state" property="purchaseState" />
 		<result column="purchase_date" property="purchaseDate"/>
 		<result column="courier" property="courier"/>
@@ -16,6 +16,7 @@
 				<result column="funding_state" property="fundingState"/>
 				<result column="title" property="title"/>
 				<result column="reward_price" property="rewardPrice"/>
+				<result column="image" property="image"/>
 			</association>
 	</resultMap>
 	
@@ -27,22 +28,30 @@
 	</insert>
 	
 	<!-- 근딘 : 후원 리스트 출력 -->
-	<select id="listDetail"
+	<!-- <select id="listDetail"
 		resultMap="listDetailInformationMap" parameterType="int">
 		select p.code, p.purchase_state, p.purchase_date, p.courier, 
-			p.delivery_number, p.price, p.qty, f.funding_state, f.title, f.reward_price
+			p.delivery_number, p.price, p.qty, f.funding_state, f.title, f.reward_price, f.image
 		from member m inner join purchase p
 		on m.code = p.member_code
 		inner join funding f
 		on f.code = p.funding_code
 		where m.code = #{_parameter}
-	</select>
+	</select> -->
 	
 	<!-- 근딘 : 후원 인원 카운트 -->
 	<select id="countFundingCode" parameterType="int" resultType="int">
 		select count(*) from purchase where funding_code = #{_parameter}
 	</select>
 	
+	<select id="countPurchaseNumber" parameterType="int" resultType="int">
+		select count (purchase_state) from purchase where purchase_state = 601 and member_code = #{memberCode}
+	</select>
+	
+	<select id="countTotalPrice" parameterType="int" resultType="integer">
+		select sum (price) from purchase where purchase_state = 601 and member_code = #{memberCode}
+	</select>
+		
 	<!-- 근딘 : 후원 취소 상태 변경 -->
 	<update id="purchaseFailedUpdate" parameterType="int">
 		update purchase set purchase_state = '602' where code = #{_parameter}
@@ -96,8 +105,8 @@
 	<select id="purchaseList" parameterType="map" resultMap="listDetailInformationMap">
 	<![CDATA[
 		SELECT * 
-		FROM (SELECT a.*, ROWNUM rnum FROM (select p.code, p.purchase_state, p.purchase_date, p.courier, 
-			p.delivery_number, p.price, p.qty, f.funding_state, f.title, f.reward_price
+		FROM (SELECT a.*, ROWNUM rnum FROM (select p.code as purchaseCode, p.purchase_state, p.purchase_date, p.courier, 
+			p.delivery_number, p.price, p.qty, f.code, f.funding_state, f.title, f.reward_price, f.image
 		from member m inner join purchase p
 		on m.code = p.member_code
 		inner join funding f

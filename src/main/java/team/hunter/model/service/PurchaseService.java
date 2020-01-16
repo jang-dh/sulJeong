@@ -18,6 +18,16 @@ public interface PurchaseService {
 	 * 후원인원 증가
 	 */
 	public int countFundingCode(int fundingCode);
+	
+	/*
+	 * 총 성공 후원 횟수
+	 */
+	public int countPurchaseNumber(int memberCode);
+	
+	/*
+	 * 총 누적 후원 합계
+	 */
+	public int countTotalPrice(int memberCode);
 
 	/*
 	 * 전체검색
