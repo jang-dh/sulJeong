@@ -7,11 +7,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.naming.NotContextException;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -355,6 +357,7 @@ public class AdminController {
 	 * */
 	@RequestMapping("/notice")
 	public ModelAndView notice(@RequestParam(defaultValue = "1") int curPage) {
+
 //		List<Notice> list = noticeService.select();
 //		m.addAttribute("list", list);
 //		return "notice/noticeList";
@@ -592,7 +595,13 @@ public class AdminController {
 	@RequestMapping("/admin/approve")
 	public String fundingRequestApprove(int code) {
 		noticeService.fundingRequestApprove(code);
+		
 		return "redirect:/admin/fundingRequest";
+	}
+	
+	@ExceptionHandler({Exception.class})
+	public String error() {
+		return "error/errorPage";
 	}
 	
 

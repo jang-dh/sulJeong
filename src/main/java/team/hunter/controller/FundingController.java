@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,13 +24,10 @@ import team.hunter.model.service.PurchaseService;
 public class FundingController {
 	@Autowired
 	private FundingService service;
-	
 	@Autowired
 	private LikesService likesService;
-	
 	@Autowired
 	private PurchaseService purchaseService;
-	
 	@Autowired
 	private MemberService memberService;
 	
@@ -99,7 +97,11 @@ public class FundingController {
 		
 		return list;
 	}
-	
+  
+	@ExceptionHandler({Exception.class})
+	public String error() {
+		return "error/errorPage";
+	}
 	@RequestMapping("/funding/commingsoon")
 	public ModelAndView commingsoon() {
 		List<Funding> list = service.selectStatePre();
@@ -107,6 +109,5 @@ public class FundingController {
 			list = list.subList(0, pageCnt*2);
 		return new ModelAndView("funding/fundingList", "list", list);
 	}
-	
 }
 

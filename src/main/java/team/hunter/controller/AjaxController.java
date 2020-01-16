@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -132,6 +133,13 @@ public class AjaxController {
 			myOpenFundingList = myOpenFundingList.subList(listCnt, myOpenFundingList.size());
 			
 		return myOpenFundingList;
+	}
+	
+	
+	
+	@ExceptionHandler({Exception.class})
+	public String error() {
+		return "error/errorPage";
 	}
 	
 
