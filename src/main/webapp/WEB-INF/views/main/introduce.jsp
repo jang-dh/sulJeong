@@ -13,7 +13,7 @@
   <div class="main-content">
   
     <!-- Section: inner-header -->
-    <section class="inner-header divider layer-overlay overlay-dark-8" data-bg-img="${pageContext.request.contextPath}/resources/images/main/slider-main.jpg">
+    <section class="inner-header divider layer-overlay" data-bg-img="${pageContext.request.contextPath}/resources/images/main/slider-main.jpg">
       <div class="container pt-90 pb-40">
         <!-- Section Content -->
         <div class="section-content">
@@ -41,7 +41,7 @@
               <h5 class="text-uppercase font-weight-400">사람들은 자신이 지지하는 기업에 투자합니다. 한 사람 한 사람의 투자가 모여 기업은 성장합니다.<br/>
               여기, 기업 하나가 출발선에 있습니다. 그는 자신의 가치를 증명하고 사람들이 그의 가치를 알아봅니다.<br/> 서로 지지하고 소통하고 공유하면서 더 많은 사람들이 그를 알아봅니다.
               그렇게 기업은 성장합니다.<br/> 또 다른 기업들이 용기를 얻고 출발선에 섭니다. 사람들의 지지를 받는 기업은 성장합니다.<br/>
-              세상에 자신만의 가치를 품은 기업들이 많아집니다. 세상이 조금 더 나아집니다.<br/><b>와디즈에서 퍼옴</b> </h5>
+              세상에 자신만의 가치를 품은 기업들이 많아집니다. 세상이 조금 더 나아집니다.
 
             <!--   <div class="row">
                 <div class="col-md-6">
@@ -54,7 +54,7 @@
             </div>
             <div class="col-md-4">
               <div class="thumb">
-                <img alt="" src="${pageContext.request.contextPath}/resources/images/introduce/Penguins.jpg" class="img-fullwidth">
+                <img alt="" src="${pageContext.request.contextPath}/resources/images/introduce/real_intro.PNG" class="img-fullwidth">
               </div>
             </div>
           </div>

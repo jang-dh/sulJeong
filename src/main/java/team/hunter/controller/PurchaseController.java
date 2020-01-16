@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -107,16 +108,21 @@ public class PurchaseController {
 		ModelAndView mv = new ModelAndView();
 		Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		int listCnt = purchaseService.purchaseListCount(member.getCode());
-		System.out.println(listCnt);
+		int countPN = purchaseService.countPurchaseNumber(member.getCode());
+		int countTP = purchaseService.countTotalPrice(member.getCode());
+		
 		Paging paging = new Paging(listCnt, curPage);
 
 		int startIndex = paging.getStartIndex();
 		int cntPerPage = paging.getPageSize();
 		List<Purchase> list = purchaseService.purchaseList(member.getCode(), startIndex, cntPerPage);
+		//System.out.println(list.get(0).getFunding().getImage());
 
 		mv.addObject("list", list);
 		mv.addObject("listCnt", listCnt);
 		mv.addObject("paging", paging);
+		mv.addObject("countPN", countPN);
+		mv.addObject("countTP", countTP);
 		mv.setViewName("mypage/myFundingHistory");
 		return mv;
 
@@ -145,6 +151,18 @@ public class PurchaseController {
 		Member member = purchaseService.deliveryCodeSelect(fundingCode, memberCode);
 		model.addAttribute("member", member);
 		return "mypage/deliveryUpdateForm";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	@ExceptionHandler({Exception.class})
+	public String error() {
+		return "error/errorPage";
 	}
 
 }

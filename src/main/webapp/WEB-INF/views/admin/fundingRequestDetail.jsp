@@ -10,14 +10,14 @@
 
 	   $("input[value=승인하기]").click(function(){
 		   //document.requestForm.action="${pageContext.request.contextPath}/board/updateForm";
-		   alert(1);
+		   alert("승인되었습니다.");
 		   $("#requestForm").attr("action", "${pageContext.request.contextPath}/admin/approve?code=${detail.code}");
 		   $("#requestForm").submit();
 	   })
 	   
 	   
 	   $("input[value=거절하기]").click(function(){
-		  
+		   alert("거절되었습니다.");
 		   $("#requestForm").attr("action", "${pageContext.request.contextPath}/admin/reject?code=${detail.code}");
 		   $("#requestForm").submit();
 	   })

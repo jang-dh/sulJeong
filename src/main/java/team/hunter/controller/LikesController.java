@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -16,16 +17,17 @@ import team.hunter.model.service.LikesService;
 
 @Controller
 public class LikesController {
-
 	@Autowired
 	private LikesService likesService;
+	
+	int pageCnt = 3;
 
 	@RequestMapping("/mypage/likes")
 	public String likesList(Model model) {
 		Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		List<Funding> list = likesService.selectFundingByMemberCode(member.getCode());
-		if (list.size() > 3)
-			list = list.subList(0, 3);
+		if (list.size() > pageCnt)
+			list = list.subList(0, pageCnt);
 	
 		model.addAttribute("list", list);
 
@@ -37,8 +39,8 @@ public class LikesController {
 		Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		List<Funding> list = likesService.selectFundingByMemberCode(member.getCode());
 
-		if (list.size() > listCnt + 3)
-			list = list.subList(listCnt, listCnt + 3);
+		if (list.size() > listCnt + pageCnt)
+			list = list.subList(listCnt, listCnt + pageCnt);
 		else
 			list = list.subList(listCnt, list.size());
 
@@ -51,5 +53,14 @@ public class LikesController {
 		int result = likesService.delete(new Likes(member.getCode(), fundingCode));
 		
 		return result;
+	}
+	
+	
+	
+	
+	
+	@ExceptionHandler({Exception.class})
+	public String error() {
+		return "error/errorPage";
 	}
 }

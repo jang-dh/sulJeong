@@ -14,8 +14,8 @@
          $("#rewardName").val("${funding.rewardName}");
          $("#rewardPrice").val("${funding.rewardPrice}");
          $("#goalPrice").val("${funding.goalPrice}");
-         $("#openDate").val("${funding.openDate}");
-         $("#endDate").val("${funding.endDate}");
+         $("#openDate2").val("${funding.openDate}");
+         $("#endDate2").val("${funding.endDate}");
          $("#category").val("${funding.category}").prop("selected", true);
          
          $("#appointment_form").attr("action","${pageContext.request.contextPath}/admin/fundUpdate");
@@ -51,23 +51,69 @@
          });
          
       }
-      var today = new Date().toLocaleString();
-      var year = today.substr(0,4);
-      var month = today.substr(6,1);
-      var day = today.substr(9,2);
+	  var today = new Date().toLocaleString();
+      var year = today.substr(0,4)*1;
+      var month = today.substr(6,1)*1;
+      var day = today.substr(9,2)*1;
       $("#openDate").on("change",function(){   //01/24/2020
          var openDate = $("#openDate").val();
-         var openYear = openDate.substr(6,4);
-         var openMonth = openDate.substr(0,2);
-         var openDay = openDate.substr(3,2);
-         var regDate = new Date(openYear,openMonth-1,openDay).toLocaleString();
-         console.log(regDate);
-         if(regDate<today){
+         var openYear = openDate.substr(6,4)*1;
+         var openMonth = openDate.substr(0,2)*1;
+         var openDay = openDate.substr(3,2)*1;
+         
+
+         if(openYear<year){
             alert("오늘 이전의 날짜는 선택할 수 없습니다.");
             $(this).val("");
+         }else if(openYear==year){
+        	 if(openMonth<month){
+        		 alert("오늘 이전의 날짜는 선택할 수 없습니다.");
+                 $(this).val("");
+        	 }else if(openMonth==month){
+        		 if(openDay<day){
+        			 alert("오늘 이전의 날짜는 선택할 수 없습니다.");
+                     $(this).val("");
+        		 }
+        	 }
          }
          
       });
+      
+      $("#endDate").on("change",function(){   //01/24/2020
+    	  var openDate = $("#openDate").val();
+          var openYear = openDate.substr(6,4)*1;
+          var openMonth = openDate.substr(0,2)*1;
+          var openDay = openDate.substr(3,2)*1;
+         
+    	  
+          var endDate = $("#endDate").val();
+          var endYear = endDate.substr(6,4)*1;
+          var endMonth = endDate.substr(0,2)*1;
+          var endDay = endDate.substr(3,2)*1;
+          
+
+          if(endYear<openYear){
+        	  alert("시작일 이전의 날짜는 선택할 수 없습니다.");
+              $(this).val("");
+          }else if(endYear==openYear){
+        	  if(endMonth<openMonth){
+        		  alert("시작일 이전의 날짜는 선택할 수 없습니다.");
+                  $(this).val("");
+        	  }else if(endMonth==openMonth){
+        		  if(endDay<openDay){
+        			  alert("시작일 이전의 날짜는 선택할 수 없습니다.");
+                      $(this).val("");
+        		  }else if(endDay==openDay){
+        			  alert("시작일과 종료일이 같을 수 없습니다.");
+                      $(this).val("");
+        		  }
+        	  }
+          }
+          
+       });
+
+      
+      
    });
       
       
@@ -160,7 +206,7 @@
                         <div class="form-group mb-10">
                           <c:choose>
                            <c:when test="${!empty funding}">
-                            시작일 : <input id="openDate2" name="openDate2" class="form-control required date-picker" type="text" required=""  placeholder="시작일" aria-required="true" >
+                            시작일 : <input id="openDate2" name="openDate" class="form-control required date-picker" type="text" required=""  placeholder="시작일" aria-required="true" >
                            </c:when>
                            <c:otherwise>
                             시작일 : <input id="openDate" name="openDate" class="form-control required date-picker" type="text" required=""  placeholder="시작일" aria-required="true">
@@ -173,7 +219,7 @@
                         <c:choose>
 
                            <c:when test="${!empty funding}">
-                            마감일 : <input id="endDate2" name="endDate2" class="form-control required date-picker" type="text" required=""  placeholder="마감일" aria-required="true" >
+                            마감일 : <input id="endDate2" name="endDate" class="form-control required date-picker" type="text" required=""  placeholder="마감일" aria-required="true" >
                            </c:when>
                            <c:otherwise>
                             마감일 : <input id="endDate" name="endDate" class="form-control required date-picker" type="text" required=""  placeholder="마감일" aria-required="true">
@@ -191,7 +237,7 @@
                        <option value="302">청주</option>
                        <option value="303">증류주</option>
                        <option value="304">과실주</option>
-                       <option value="305">와인</option>
+
                     </select>
                            
                         </div>

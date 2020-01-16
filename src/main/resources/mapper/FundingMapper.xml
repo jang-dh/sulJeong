@@ -112,10 +112,10 @@
 		
 	<select id="selectLastestFour" resultMap="fundingMap">
 		<![CDATA[
-			select code, md_code, title, reward_name, reward_price, goal_price, stack_price, image, category, open_date, end_date, funding_state, name , cnt
-			from ( select f.code, md_code, title, reward_name, reward_price, goal_price, stack_price, image, category, open_date, end_date, funding_state, m.name , count(l.funding_code)over(PARTITION by funding_code) as cnt
-	        		from funding f, member m, likes l
-	        		where funding_state = '501' and f.md_code = m.code and l.funding_code = f.code
+			select code, md_code, title, reward_name, reward_price, goal_price, stack_price, image, category, open_date, end_date, funding_state, name
+			from ( select f.code, md_code, title, reward_name, reward_price, goal_price, stack_price, image, category, open_date, end_date, funding_state, m.name
+	        		from funding f, member m
+	        		where funding_state = '501' and f.md_code = m.code
 	        		order by end_date)
 			where rownum < 4
 		]]>
@@ -150,7 +150,6 @@
 		]]>
 	</update>
 	
-	<!-- transaction -->
 	<update id="updateStackPrice" parameterType="map">
 		update funding
 		set stack_price = stack_price + #{purchasePrice}
@@ -168,8 +167,13 @@
 		, image=#{image}
 		</if>
 		</trim>
-		
 		where code=#{code}
 	</update>
+	
+	<select id="selectStatePre" resultMap="fundingMap">
+		select f.code, md_code, title, reward_name, reward_price, goal_price, stack_price, image, category, open_date, end_date, funding_state, name
+		from funding f, member m
+		where f.md_code = m.code and f.funding_state = '502'
+	</select>
 	
 </mapper>
