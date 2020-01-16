@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="emailAlertMapper">
+
+<!-- 수녕 : resultMap -->
+<resultMap type="funding" id="emailFundingMap">
+	<id column="code" property="code" />
+	<result column="reward_name" property="rewardName" />
+	<collection property="member"  ofType="member" >
+		<id column="code" property="code" />
+		<result column="email" property="email" />
+		<result column="name" property="name" />
+		<result column="phone" property="phone" />
+	</collection>
+</resultMap>
+
+   
+<!-- 수녕 : 펀딩 마감 시 결과 - 펀딩이 됐다 안됐다 알림 -->
+<!-- 수녕 : 펀딩 성공 시 -->
+<select id="emailFundingSuccess" resultMap="emailFundingMap">
+select distinct m.email, m.name, m.code, m.phone, f.reward_name from member m inner join purchase p
+on m.code = p.member_code inner join funding f
+on f.code = p.funding_code
+where m.email_accept=1 and (p.purchase_state=601 or p.purchase_state=603) and f.funding_state='503'
+</select>
+<!-- 수녕 : 펀딩 실패 시 -->
+<select id="emailFundingFail" resultMap="emailFundingMap">
+select distinct m.email, m.name, m.code, m.phone, f.reward_name from member m inner join purchase p
+on m.code = p.member_code inner join funding f
+on f.code = p.funding_code
+where m.email_accept=1 and (p.purchase_state=601 or p.purchase_state=603) and f.funding_state='504'
+</select>
+
+<!-- 수녕 : 펀딩 공지사항 - 공지사항 올라왔다 알림 - 스케쥴러 없이 펀딩 등록 할 때 컨트롤러나 서비스에서
+이메일 수신 동의 한 모든 사람에세 보내면 될 것 같음-->
+<!-- 수녕 : 이메일 수신 동의 한 멤버 -->
+<select id="emailAgreeMember" resultType="member">
+select id, name, email from member where email_accept=1
+</select>
+
+<!-- 수녕 : 마감 하루 전 + 펀딩 한 사람 + 이메일 수신 동의 - 펀딩 마감임박 하루 전이다 알림 -->
+<select id="emailFundingMember" resultMap="emailFundingMap">
+select distinct m.email,m.name, m.code, m.phone, f.reward_name from funding f inner join purchase p
+on f.code = p.funding_code inner join member m
+on p.member_code = m.code
+where to_date(end_date, 'yyyy/mm/dd') - to_date(to_char(sysdate, 'yyyy/mm/dd'), 'yyyy/mm/dd') = 1
+and m.email_accept=1 and p.purchase_state=603 and funding_state='501'
+</select>
+
+<!-- 수녕 : 마감 하루 전 + 좋아요 한 사람 + 이메일 수신 동의 -->
+<select id="emailFundingMemberLike" resultMap="emailFundingMap">
+select distinct m.email,m.name, m.code, m.phone, f.reward_name from funding f inner join likes l
+on f.code = l.funding_code inner join member m
+on l.member_code = m.code 
+where to_date(end_date, 'yyyy/mm/dd') - to_date(to_char(sysdate, 'yyyy/mm/dd'), 'yyyy/mm/dd') = 1
+and m.email_accept=1 and funding_state='501'
+</select>
+
+
+</mapper>   
+
+
+
+
+
+
+

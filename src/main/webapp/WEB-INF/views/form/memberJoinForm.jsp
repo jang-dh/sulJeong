@@ -192,6 +192,11 @@
 		
 		$("#emailCheck").click(function() {
 			
+			if($("#email").val()==""){
+				alert("이메일을 입력해주세요.")
+				return false;
+			}
+			
 			var emailVal = $("#email").val()
 			var allDate = "${_csrf.parameterName}=${_csrf.token}"+"&email="+emailVal;
 			
