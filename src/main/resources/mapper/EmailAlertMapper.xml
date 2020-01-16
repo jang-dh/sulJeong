@@ -6,7 +6,7 @@
 <resultMap type="funding" id="emailFundingMap">
 	<id column="code" property="code" />
 	<result column="reward_name" property="rewardName" />
-	<collection property="member"  ofType="member" >
+	<collection property="memberList"  ofType="member" >
 		<id column="code" property="code" />
 		<result column="email" property="email" />
 		<result column="name" property="name" />
