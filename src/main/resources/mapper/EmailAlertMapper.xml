@@ -21,14 +21,14 @@
 select distinct m.email, m.name, m.code, m.phone, f.reward_name from member m inner join purchase p
 on m.code = p.member_code inner join funding f
 on f.code = p.funding_code
-where m.email_accept=1 and (p.purchase_state=601 or p.purchase_state=603) and f.funding_state='503'
+where m.email_accept=1 and p.purchase_state=603 and f.funding_state='503'
 </select>
 <!-- 수녕 : 펀딩 실패 시 -->
 <select id="emailFundingFail" resultMap="emailFundingMap">
 select distinct m.email, m.name, m.code, m.phone, f.reward_name from member m inner join purchase p
 on m.code = p.member_code inner join funding f
 on f.code = p.funding_code
-where m.email_accept=1 and (p.purchase_state=601 or p.purchase_state=603) and f.funding_state='504'
+where m.email_accept=1 and p.purchase_state=603 and f.funding_state='504'
 </select>
 
 <!-- 수녕 : 펀딩 공지사항 - 공지사항 올라왔다 알림 - 스케쥴러 없이 펀딩 등록 할 때 컨트롤러나 서비스에서
