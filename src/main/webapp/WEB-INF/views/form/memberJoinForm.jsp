@@ -37,7 +37,16 @@
 	
 	
 	$(function() {
-		
+		var pattern_num = /[0-9]/;	// 숫자 
+
+    	var pattern_eng = /[a-zA-Z]/;	// 문자 
+
+    	var pattern_spc = /[~!@#$%^&*()_+|<>?:{}]/; // 특수문자
+
+    	var pattern_kor = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/; // 한글체크
+    	
+    	var pattern_check = /-/;
+
 		var status = '0'; //아이디 중복체크 상태변수
 		var authStatus = '3';//성인인증 상태변수
 		var flage = false; // 비밀번호 일치 여부
@@ -47,6 +56,19 @@
 			
 			if($('#id').val()==""){
 				alert("아이디를 입력해주세요");
+				$('#id').focus();
+				return false;
+			}
+			
+			if(pattern_kor.test($('#id').val()) || pattern_spc.test($('#id').val())){
+				alert("한글이나 특수문자는 사용할 수 없습니다.");
+				$('#id').val("");
+				$('#id').focus();
+				return false;
+			}
+			
+			if($("#id").val().length < 6){
+				alert("6글자 이상 입력해주세요");
 				$('#id').focus();
 				return false;
 			}
@@ -67,6 +89,7 @@
 					 } ,//성공했을대
 					 error:function(err){
 						 $("#idDuplicateCheck").val("중복체크완료");
+						 $("#id").attr('readonly','readonly');
 						 status = '1';
 					 }//오류발생했을때
 				 });
@@ -103,6 +126,18 @@
 				return false;
 			}
 			
+			if($('#pwd').val().length<8){
+				 alert('비밀번호는 특수문자 포함 8글자 이상 작성해주세요');
+				 $('#pwd').focus();
+				return false;
+			 }
+			
+			if(!pattern_spc.test($('#pwd').val())){
+				alert('비밀번호는 특수문자 포함 8글자 이상 작성해주세요');
+				 $('#pwd').focus();
+				return false;
+			}
+			
 			
 			if($('#email').val()==""){
 				alert("이메일을 입력해주세요");
@@ -112,6 +147,12 @@
 			
 			if($('#phone').val()==""){
 				alert("전화번호를 입력해주세요");
+				$('#phone').focus();
+				return false;
+			}
+			
+			if(pattern_check.test($('#phone').val())){
+				alert("특수문자 - 를 빼고 입력해주세요");
 				$('#phone').focus();
 				return false;
 			}
@@ -146,6 +187,7 @@
 				  return false;
 			  }
 			  
+			 
 		});
 		
 		$("#emailCheck").click(function() {
@@ -227,7 +269,7 @@
 				<div class="row">
 					<div class="form-group col-md-6">
 						<label for="form_choose_username">Choose UserID</label> <input
-							id="id" name="id" class="form-control" type="text" >
+							id="id" name="id" class="form-control" type="text" placeholder="6글자 이상 작성해주세요" >
 					</div>
 					<div class="form-group col-md-6">
 						<label>아이디 중복 체크</label> <input type="button" value="중복체크"
@@ -238,13 +280,13 @@
 				<div class="row">
 					<div class="form-group col-md-6">
 						<label for="form_choose_password">Choose Password</label> <input
-							id="pwd" name="pwd" class="form-control" type="password">
+							id="pwd" name="pwd" class="form-control" type="password" placeholder="특수문자 포함 8글자 이상 작성해주세요">
 					</div>
 					<div class="form-group col-md-6">
 						<label>Re-enter Password</label> <input id="pwdCheck"
-							name="pwdCheck" class="form-control" type="password">
+							name="pwdCheck" class="form-control" type="password" placeholder="특수문자 포함 8글자 이상 작성해주세요">
 					</div>
-					<div class="form-group col-md-6" id="pwdEqualCheck">비밀번호 확인</div>
+					<div class="form-group col-md-12" id="pwdEqualCheck">비밀번호 확인 </div>
 				</div>
 				
 				
@@ -264,7 +306,7 @@
 				<div class="row">
 					<div class="form-group col-md-6">
 						<label>휴대폰</label> <input name="phone" id="phone"
-							class="form-control" type="text">
+							class="form-control" type="text" placeholder="ex) 01012341234">
 					</div>
 					<div class="form-group col-md-6">
 						<label>생년월일 성인인증</label> 

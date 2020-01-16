@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <script>
@@ -222,7 +224,7 @@
 		<div class="container pt-0 pb-40">
 			<div class="section-content">
 				<div class="row multi-row-clearfix" id="list-funding" >
-					<c:forEach items="${myOpenFundingList}" var="fundingList" varStatus="status">
+						<c:forEach items="${myOpenFundingList}" var="fundingList" varStatus="status">
 						<div class="col-sm-7 col-md-4" >
 							<div class="causes bg-silver-light maxwidth500 mb-30">
 								<div class="thumb">
@@ -237,7 +239,6 @@
 										<li class="pull-left font-weight-400 text-black-333 pr-0">달성금액:
 											<span class="text-theme-colored font-weight-700"><fmt:formatNumber>${fundingList.stackPrice}</fmt:formatNumber>원</span>
 										</li>
-										<br>
 										<li class="pull-right font-weight-400 text-black-333 pr-0">목표금액:
 											<span class="text-theme-colored font-weight-700"><fmt:formatNumber>${fundingList.goalPrice}</fmt:formatNumber>원</span>
 										</li>
@@ -272,6 +273,7 @@
 							</div>
 						</div>
 					</c:forEach>
+					
 				</div>
 			</div>
 		</div>
