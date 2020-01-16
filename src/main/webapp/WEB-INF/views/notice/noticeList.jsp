@@ -23,14 +23,18 @@
 </script>
 <!-- -----------------------------페이지 처리좀 해보자 -->
     <!-- Section: inner-header -->
-    <section class="inner-header divider layer-overlay overlay-dark-8" data-bg-img="${pageContext.request.contextPath}/resources/images/main/slider-main.jpg">
+    <section class="inner-header divider layer-overlay" data-bg-img="${pageContext.request.contextPath}/resources/images/main/slider-main.jpg">
       <div class="container pt-90 pb-40">
         <!-- Section Content -->
         <div class="section-content">
           <div class="row"> 
             <div class="col-md-6">
               <h2 class="text-white font-36">공지사항</h2>
-              
+              <ol class="breadcrumb text-left mt-10 white">
+					<!-- <li><a href="#">Home</a></li>
+					<li><a href="#">Pages</a></li>
+					<li class="active">Causes Grid</li> -->
+				</ol>
             </div>
           </div>
         </div>
