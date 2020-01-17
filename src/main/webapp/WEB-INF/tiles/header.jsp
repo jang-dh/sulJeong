@@ -94,7 +94,7 @@
             <div id="spinner">
                 <img class="floating" src="${pageContext.request.contextPath}/resources/images/preloaders/loading.png"
                     alt="">
-                <h5 class="line-height-50 font-18 ml-15">Loading...</h5>
+                <h5 class="line-height-50 font-18 ml-15">로딩중...</h5>
             </div>
             <div id="disable-preloader" class="btn btn-default btn-sm">Disable Preloader</div>
         </div>

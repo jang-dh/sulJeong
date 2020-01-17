@@ -53,7 +53,8 @@
             <%-- <hr>
             <h4 class="text-theme-colored mt-0 mb-20">작성일 : ${detail.regdate}</h4> --%>
             <hr>
-            <p>${detail.content}</p>
+            <textarea style="border: 0px" readonly="readonly" cols="100" rows="8">${detail.content}</textarea>
+            <%-- <p>${detail.content}</p> --%>
             <p>작성일 : ${detail.regdate}</p>
             <c:if test="${!empty detail.filename}">
             <a class="btn btn-gray mt-20" href="${pageContext.request.contextPath}/down?fileName=${detail.filename}">${detail.filename }</a>
