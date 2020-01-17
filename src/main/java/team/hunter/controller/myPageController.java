@@ -23,6 +23,7 @@ import team.hunter.model.dto.Purchase;
 import team.hunter.model.service.FundingAnswerService;
 import team.hunter.model.service.FundingQuestionService;
 import team.hunter.model.service.FundingRequestService;
+import team.hunter.model.service.FundingService;
 import team.hunter.model.service.MemberService;
 import team.hunter.model.service.PersonalQuestionService;
 import team.hunter.util.Constants;
@@ -35,6 +36,7 @@ public class myPageController {
 	@Autowired private FundingAnswerService fundingAs;
 	@Autowired private MemberService memberService;
 	@Autowired private FundingRequestService fundingReqService;
+	@Autowired private FundingService fundingService;
 	
 	@RequestMapping("myQuestion")
 	public ModelAndView personalQuestionList(@RequestParam(defaultValue = "1") int curPage) {
@@ -182,6 +184,7 @@ public class myPageController {
 		//List<FundingQuestion> fundingReqManage = fundingReqService.myFundingOpenDetail(fundingCode);
 		List<Member> fundingOpenPeople = fundingReqService.myFundingOpenDetailSecond(fundingCode);
 		Funding funding = fundingReqService.fundingState(fundingCode);
+		Funding fundingInfo = fundingService.selectByCode(fundingCode);
 		
 		//펀딩 코드 보내기
 		model.addAttribute("fundingCode", fundingCode);
@@ -197,7 +200,7 @@ public class myPageController {
 		
 		//펀딩 상태에 따라 사용자 보여줄 지 말지 알아보기 위해 펀딩 상태 가져오기
 		model.addAttribute("funding", funding);
-		
+		model.addAttribute("fundingInfo", fundingInfo);
 		return "mypage/myOpenFundingDetail";
 	}
 	

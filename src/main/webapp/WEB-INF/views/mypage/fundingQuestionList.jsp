@@ -79,8 +79,7 @@
 							</tbody>
 						</table>
 					</div>
-				</div>
-				<nav style="text-align: center">
+					<nav style="text-align: center">
 					<ul class="pagination dark">
 						<li>
 							<a aria-label="Previous" onClick="fn_paging(${paging.prevPage})">
@@ -101,6 +100,8 @@
 						</li>
 					</ul>
 				</nav>
+				</div>
+				
 			</div>
 		</div>
 	</section>

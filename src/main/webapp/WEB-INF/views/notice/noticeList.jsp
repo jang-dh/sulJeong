@@ -67,7 +67,7 @@
 						</table>
 					</div>
 					<sec:authorize access="hasRole('ROLE_ADMIN')">
-						<a href="${pageContext.request.contextPath}/insertFrom" class="btn btn-dark btn-theme-colored btn-circled">등록</a>
+						<a href="${pageContext.request.contextPath}/insertFrom" class="btn btn-dark btn-theme-colored btn-circled pull-right">등록</a>
 					</sec:authorize>
 
 					<!-- -----------------페이지 처리좀 해보자 ------------------ -->

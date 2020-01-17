@@ -62,30 +62,12 @@
 	<div class="container pt-70">
 		<div class="row">
 			<div class="col-md-7 col-md-push-3">
-<<<<<<< HEAD
 				<h3 class="text-theme-colored mt-0 mb-20">제목 : ${question.subject}</h3>
-=======
-				<h3 class="text-theme-colored mt-0 mb-20">제목 :	${question.subject}</h3>
->>>>>>> 35bd1474e5e1144b906c2c17e388112885a15055
 				<p>작성자 : ${question.member.id}</p>
 				<p>작성일 : ${question.regdate}</p>
 				<hr>
 				<p>${question.content}</p>
 				<hr>
-<<<<<<< HEAD
-				<h3 class="text-theme-colored mt-0 mb-20">답변</h3>
-				<c:choose>
-					<c:when test="${empty question.fundingAnswer.content}">
-						<div class="mb-50">
-							등록된 답변이 없습니다.
-						</div>
-					</c:when>
-					<c:otherwise>
-						<textarea class="form-control required" rows="5" readonly>${question.fundingAnswer.content}</textarea>
-					</c:otherwise>
-				</c:choose>
-				<!-- 관리자 권한이 있을때만 보이게 해야함 -->
-=======
 				<div class="mb-50">
 					<h3 class="text-theme-colored mt-0 mb-20">답변</h3>
 					<c:choose>
@@ -98,7 +80,6 @@
 					</c:choose>
 					<!-- 관리자 권한이 있을때만 보이게 해야함 -->
 				</div>
->>>>>>> 35bd1474e5e1144b906c2c17e388112885a15055
 			</div>
 		</div>
 	</div>
