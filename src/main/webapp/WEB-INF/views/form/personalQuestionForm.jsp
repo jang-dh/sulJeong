@@ -4,7 +4,7 @@
   <div class="main-content">
 
     <!-- Section: inner-header -->
-    <section class="inner-header divider layer-overlay overlay-dark-8" data-bg-img="${pageContext.request.contextPath}/resources/images/main/slider-main.jpg">
+    <section class="inner-header divider layer-overlay" data-bg-img="${pageContext.request.contextPath}/resources/images/main/slider-main.jpg">
       <div class="container pt-90 pb-40">
         <!-- Section Content -->
         <div class="section-content">
@@ -12,9 +12,9 @@
             <div class="col-md-6">
               <h2 class="text-white font-36">1:1문의 등록</h2>
               <ol class="breadcrumb text-left mt-10 white">
-                <li><a href="${pageContext.request.contextPath}">Home</a></li>
+                <%-- <li><a href="${pageContext.request.contextPath}">Home</a></li>
                 <li><a href="${pageContext.request.contextPath}/myQuestion">PersonalQuestion</a></li>
-                <li class="active">Insert</li>
+                <li class="active">Insert</li> --%>
               </ol>
             </div>
           </div>
