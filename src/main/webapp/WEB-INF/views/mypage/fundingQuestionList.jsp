@@ -21,7 +21,7 @@
 <div class="main-content">
 	<!-- Section: inner-header -->
 	<section class="inner-header divider layer-overlay overlay-dark-8"
-		data-bg-img="http://placehold.it/1920x1280">
+		data-bg-img="${pageContext.request.contextPath}/resources/images/main/slider-main.jpg">
 		<div class="container pt-90 pb-40">
 			<!-- Section Content -->
 			<div class="section-content">
@@ -56,7 +56,12 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${list}" var="question" varStatus="status">
+							<c:choose>
+								<c:when test="${empty list}">
+									<th colspan="4"> <h3 align="center">아직 등록된 글이 없습니다.</h3></th>
+								</c:when>
+								<c:otherwise>
+									<c:forEach items="${list}" var="question" varStatus="status">
 									<tr>
 										<th scope="row">${question.code}</th>
 										<td><a href="${pageContext.request.contextPath}/mypage/fundingQuestionDetailPage/${question.code}">${question.subject}</a></td>
@@ -72,6 +77,9 @@
 										
 									</tr>
 								</c:forEach>
+								</c:otherwise>
+							</c:choose>
+								
 							</tbody>
 						</table>
 					</div>
