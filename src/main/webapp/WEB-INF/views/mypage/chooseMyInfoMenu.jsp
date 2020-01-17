@@ -25,12 +25,119 @@
 		//popAuthEmail.document.getElementById("childEmailAuth").value = document.getElementById('childEmailAuth').value;
 	}
 
-	$(function() {
-		var flage = false; // 비밀번호 일치 여부
-		var emailStatus = 'false'; //이메일 수신 동의 여부
+$(function(){
+	
+	var flage = false; // 비밀번호 일치 여부
+	var emailStatus = 'false'; //이메일 수신 동의 여부
+	
+	if("${member.emailAccept}"=="1"){
+		$("#emailAccept").attr("checked", true);
+	}
+	
+	$('#pwdCheck').keyup(function(){
+		  if($('#pwdCheck').val()!=$('#pwd').val()){
+		    $('#pwdEqualCheck').text('');
+		    $('#pwdEqualCheck').html("암호가 일치하지 않습니다. 다시 확인해주세요.").css("color","red"); 
+		    flage = false;
+		  }else{
+		    $('#pwdEqualCheck').text('');
+		    $('#pwdEqualCheck').html("암호가 일치합니다.").css("color","blue");
+		    flage = true;
+		  }
+	});
+	
+	$("#reg-form").submit(function() {
+		
+		var pattern_num = /[0-9]/;	// 숫자 
 
-		if ("${member.emailAccept}" == "1") {
-			$("#emailAccept").attr("checked", true);
+		var pattern_eng = /[a-zA-Z]/;	// 문자 
+
+		var pattern_spc = /[~!@#$%^&*()_+|<>?:{}]/; // 특수문자
+
+		var pattern_kor = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/; // 한글체크
+		
+		var pattern_check = /-/;
+		
+		if($('#pwd').val()==""){
+			alert("비밀번호를 입력해주세요");
+			$('#pwd').focus();
+			return false;
+		}
+		
+		if($('#pwd').val().length<8){
+			 alert('비밀번호는 특수문자 포함 8글자 이상 작성해주세요');
+			 $('#pwd').focus();
+			return false;
+		 }
+		
+		if(!pattern_spc.test($('#pwd').val())){
+			alert('비밀번호는 특수문자 포함 8글자 이상 작성해주세요');
+			 $('#pwd').focus();
+			return false;
+		}
+		
+		if($('#name').val()==""){
+			alert("성함을 입력해주세요");
+			$('#name').focus();
+			return false;
+		}
+		
+		if(pattern_spc.test($('#name').val()) || pattern_num.test($('#name').val())){
+			alert("이름에는 특수문자나 숫자를 입력할 수 없습니다.");
+			$('#name').focus();
+			return false;
+		}
+		
+		if($('#phone').val()==""){
+			alert("전화번호를 입력해주세요");
+			$('#phone').focus();
+			return false;
+		}
+		
+		if(pattern_check.test($('#phone').val()) || pattern_spc.test($('#phone').val()) || pattern_eng.test($('#phone').val()) || pattern_kor.test($('#phone').val())){
+			alert("전화번호는 숫자만 입력가능합니다.");
+			$('#phone').focus();
+			return false;
+		}
+		
+		
+		if($('#email').val()==""){
+			alert("이메일을 입력해주세요");
+			$('#email').focus();
+			return false;
+		}
+		
+		if($('#addr').val()==""){
+			alert("주소를 입력해주세요");
+			$('#addr').focus();
+			return false;
+		}
+		
+		if(flage == false){
+			  alert("비밀번호 일치 여부 확인해주세요");
+			  return false;
+		}
+		
+		if($('#emailCheckStatus').val()=='true'){
+		    emailStatus = 'true';
+		}
+		
+		if($('input:checkbox[id=emailAccept]').is(':checked') == true){
+			$("#emailAccept").val("1");
+		}else{
+			$("#emailAccept").val("0");
+		}
+		
+		if($('#email').val()=='${member.email}'){
+			emailStatus = 'true';
+		}
+		
+		if(flage == false){
+			alert("비밀번호 일치 여부 확인해주세요.");
+			return false;
+		}else if(emailStatus == 'false'){
+		    alert("이메일 인증 후 회원수정이 가능합니다.");
+			return false;
 		}
 
 		$('#pwdCheck').keyup(function() {
@@ -198,12 +305,12 @@
 
 						<div class="row">
 							<div class="form-group col-md-6">
-								<label for="form_choose_password">비밀번호</label>
-								<input id="pwd" name="pwd" class="form-control" type="password">
+								<label for="form_choose_password">비밀번호</label> 
+                <input id="pwd" name="pwd" class="form-control" type="password" placeholder="특수문자 포함 8글자 이상 작성해주세요">
 							</div>
 							<div class="form-group col-md-6">
-								<label>비밀번호 확인</label>
-								<input id="pwdCheck" name="pwdCheck" class="form-control" type="password">
+								<label>비밀번호 확인</label> 
+                <input id="pwdCheck" name="pwdCheck" class="form-control" type="password" placeholder="특수문자 포함 8글자 이상 작성해주세요">
 							</div>
 							<div class="form-group col-md-9" id="pwdEqualCheck">일치 여부</div>
 						</div>
@@ -218,7 +325,7 @@
 						<div class="row">
 							<div class="form-group col-md-12">
 								<label>휴대폰</label> 
-								<input name="phone" id="phone" class="form-control" type="text" value="${member.phone}">
+                <input name="phone" id="phone" class="form-control" type="text" value="${member.phone}" placeholder="ex) 01012341234">
 							</div>
 						</div>
 

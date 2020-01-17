@@ -4,9 +4,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html dir="ltr" lang="en">
 <!-- -----카카오----- -->
-<meta charset="utf-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width" />
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/>
+<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width"/>
 
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 
@@ -173,10 +173,8 @@
 										</div>
 										<div class="col4">
 											<div class="icon-box" style="margin-bottom: 0px;">
-												<a class="icon"
-													href="${pageContext.request.contextPath}/mypage/myQuestion"
-													style="margin-bottom: 0px;"> <i
-													class="fa fa-envelope faa-horizontal animated-hover"></i>
+												<a class="icon" href="${pageContext.request.contextPath}/mypage/myQuestion" style="margin-bottom: 0px;"> 
+                          <i class="fa fa-envelope faa-horizontal animated-hover"></i>
 												</a>
 												<h5 class="icon-box-title">1:1 문의</h5>
 											</div>
