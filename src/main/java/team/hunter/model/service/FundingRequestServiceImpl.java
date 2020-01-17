@@ -32,11 +32,11 @@ public class FundingRequestServiceImpl implements FundingRequestService {
 		return list;
 	}
 
-	@Override
-	public List<FundingQuestion> myFundingOpenDetail(int fundingCode) {
-		List<FundingQuestion> list = fundingrequestDAO.myFundingOpenDetail(fundingCode);
-		return list;
-	}
+//	@Override
+//	public List<FundingQuestion> myFundingOpenDetail(int fundingCode) {
+//		List<FundingQuestion> list = fundingrequestDAO.myFundingOpenDetail(fundingCode);
+//		return list;
+//	}
 
 	@Override
 	public List<Member> myFundingOpenDetailSecond(int fundingCode) {
@@ -60,5 +60,17 @@ public class FundingRequestServiceImpl implements FundingRequestService {
 	public Funding fundingState(int fundingCode) {
 		Funding funding = fundingrequestDAO.fundingState(fundingCode);
 		return funding;
+	}
+
+	@Override
+	public int listCount(int fundingCode) {
+		int result = fundingrequestDAO.listCount(fundingCode);
+		return result;
+	}
+
+	@Override
+	public List<FundingQuestion> myFundingOpenDetail(int startIndex, int cntPerPage, int fundingCode) {
+		List<FundingQuestion> list = fundingrequestDAO.myFundingOpenDetail(startIndex, cntPerPage, fundingCode);
+		return list;
 	}
 }

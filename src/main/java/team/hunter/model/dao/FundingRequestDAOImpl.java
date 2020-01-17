@@ -1,6 +1,8 @@
 package team.hunter.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,11 +31,11 @@ public class FundingRequestDAOImpl implements FundingRequestDAO {
 		return list;
 	}
 
-	@Override
-	public List<FundingQuestion> myFundingOpenDetail(int fundingCode) {
-		List<FundingQuestion> list = session.selectList("fundingRequestMapper.myFundingOpenDetail", fundingCode);
-		return list;
-	}
+	//@Override
+//	public List<FundingQuestion> myFundingOpenDetail(int fundingCode) {
+//		List<FundingQuestion> list = session.selectList("fundingRequestMapper.myFundingOpenDetail", fundingCode);
+//		return list;
+//	}
 
 	@Override
 	public List<Member> myFundingOpenDetailSecond(int fundingCode) {
@@ -57,5 +59,21 @@ public class FundingRequestDAOImpl implements FundingRequestDAO {
 	public Funding fundingState(int fundingCode) {
 		Funding funding = session.selectOne("fundingRequestMapper.fundingState",fundingCode);
 		return funding;
+	}
+
+	@Override
+	public int listCount(int fundingCode) {
+		int result = session.selectOne("fundingRequestMapper.listCount",fundingCode);
+		System.out.println("result" + result);
+		return result;
+	}
+
+	@Override
+	public List<FundingQuestion> myFundingOpenDetail(int startIndex, int cntPerPage, int fundingCode) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("startIndex", startIndex);
+		map.put("cntPerPage", cntPerPage);
+		map.put("fundingCode", fundingCode);
+		return session.selectList("fundingRequestMapper.myFundingOpenDetail",map);
 	}
 }
