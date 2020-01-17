@@ -212,7 +212,7 @@
 						</a>
 						<div class="media-body">
 							<h5 class="media-heading product-title mb-0">
-								<a href="${pageContext.request.contextPath}/funding/category/">전체</a>
+								<a href="${pageContext.request.contextPath}/funding/category/">&nbsp;&nbsp;&nbsp;전체</a>
 							</h5>
 						</div>
 					</div>
@@ -224,7 +224,7 @@
 						</a>
 						<div class="media-body">
 							<h5 class="media-heading product-title mb-0">
-								<a href="${pageContext.request.contextPath}/funding/commingsoon">예정</a>
+								<a href="${pageContext.request.contextPath}/funding/commingsoon">&nbsp;&nbsp;&nbsp;예정</a>
 							</h5>
 						</div>
 					</div>
@@ -236,7 +236,7 @@
 						</a>
 						<div class="media-body">
 							<h5 class="media-heading product-title mb-0">
-								<a href="${pageContext.request.contextPath}/funding/category/301">탁주</a>
+								<a href="${pageContext.request.contextPath}/funding/category/301">&nbsp;&nbsp;&nbsp;탁주</a>
 							</h5>
 						</div>
 					</div>
@@ -248,7 +248,7 @@
 						</a>
 						<div class="media-body">
 							<h5 class="media-heading product-title mb-0">
-								<a href="${pageContext.request.contextPath}/funding/category/302">청주</a>
+								<a href="${pageContext.request.contextPath}/funding/category/302">&nbsp;&nbsp;&nbsp;청주</a>
 							</h5>
 						</div>
 					</div>
@@ -260,7 +260,7 @@
 						</a>
 						<div class="media-body">
 							<h5 class="media-heading product-title mb-0">
-								<a href="${pageContext.request.contextPath}/funding/category/303">증류주</a>
+								<a href="${pageContext.request.contextPath}/funding/category/303">&nbsp;&nbsp;증류주</a>
 							</h5>
 						</div>
 					</div>
@@ -272,7 +272,7 @@
 						</a>
 						<div class="media-body">
 							<h5 class="media-heading product-title mb-0">
-								<a href="${pageContext.request.contextPath}/funding/category/304">과실주</a>
+								<a href="${pageContext.request.contextPath}/funding/category/304">&nbsp;&nbsp;과실주</a>
 							</h5>
 						</div>
 					</div>
