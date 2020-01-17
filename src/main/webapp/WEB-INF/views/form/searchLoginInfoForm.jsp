@@ -16,6 +16,12 @@ $(function(){
 			return false;
 		}
 		
+		if(pattern_check.test($('#phone1').val()) || pattern_spc.test($('#phone1').val()) || pattern_eng.test($('#phone1').val()) || pattern_kor.test($('#phone1').val())){
+			alert("전화번호는 숫자만 입력가능합니다.");
+			$('#phone').focus();
+			return false;
+		}
+		
 		var nameVal = $("#name1").val()
 		var phoneVal = $("#phone1").val();
 		
@@ -51,8 +57,15 @@ $(function(){
 			$('#name').focus();
 			return false;
 		}
+		
 		if($('#phone').val()==""){
 			alert("핸드폰 번호를 입력해주세요");
+			$('#phone').focus();
+			return false;
+		}
+		
+		if(pattern_check.test($('#phone').val()) || pattern_spc.test($('#phone').val()) || pattern_eng.test($('#phone').val()) || pattern_kor.test($('#phone').val())){
+			alert("전화번호는 숫자만 입력가능합니다.");
 			$('#phone').focus();
 			return false;
 		}
