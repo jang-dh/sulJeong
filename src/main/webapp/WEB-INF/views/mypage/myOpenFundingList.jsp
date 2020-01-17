@@ -160,66 +160,6 @@
 	</section><br><br>
 
 	<!-- Section: Causes -->
-<%-- 	<section>
-		<div class="container pt-0 pb-40">
-			<div class="section-content">
-				<div class="row multi-row-clearfix">
-					 <c:forEach items="${myOpenFundingList}" var="fundingList" varStatus="status"> 
-						<div class="col-sm-6 col-md-3">
-							<div class="causes bg-silver-light maxwidth500 mb-30">
-								<div class="thumb">
-									<a href="${pageContext.request.contextPath}/mypage/myOpenFunding/${fundingList.code}"><img
-										src="http://placehold.it/320x240" alt="" class="img-fullwidth"></a>
-								</div>
-								<div
-									class="causes-details border-1px bg-white clearfix p-15 pb-30">
-									<h4 class="font-16 text-uppercase">
-										<a href="${pageContext.request.contextPath}/mypage/myOpenFunding/${fundingList.code}">${fundingList.title}</a>
-									</h4>
-									<ul class="list-inline font-weight-600 font-14 clearfix mb-5">
-										<li class="pull-left font-weight-400 text-black-333 pr-0">달성금액:
-											<span class="text-theme-colored font-weight-700">${fundingList.stackPrice}</span>
-										</li>
-										<li class="pull-right font-weight-400 text-black-333 pr-0">목표금액:
-											<span class="text-theme-colored font-weight-700">${fundingList.goalPrice}</span>
-										</li>
-									</ul>
-									<div class="progress-item mt-5">
-										<div class="progress mb-0">
-											<div data-percent="${fundingList.stackPrice/fundingList.goalPrice *100}"
-												class="progress-bar appeared"
-												style="width: ${fundingList.stackPrice/fundingList.goalPrice *100}%;">
-												<span class="percent">0</span><span class="percent">${fundingList.stackPrice/fundingList.goalPrice *100}%</span>
-											</div>
-										</div>
-									</div>
-									<div class="pull-left font-weight-400 text-black-333 pr-0">
-										<strong>펀딩종료 </strong>
-									</div>
-									<div class="bg-light text-center"
-										data-countdown="${fundingList.endDate}"></div>
-									<script type="text/javascript">
-										$(document).ready(function() {
-											$('[data-countdown]').each(function() {
-												var $this = $(this), finalDate = $(this).data('countdown');
-												$this.countdown(finalDate,function(event) {
-													$this.html(event.strftime('%D 일 %H:%M:%S'));
-												});
-											});
-										});
-									</script>
-									
-								</div>
-							</div>
-						</div>
-				 	</c:forEach> 
-					
-				</div>
-			</div>
-		</div>
-	</section> --%>
-	
-	
 	<section>
 		<div class="container pt-0 pb-40">
 			<div class="section-content">

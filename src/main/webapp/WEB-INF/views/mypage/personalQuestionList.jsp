@@ -84,7 +84,9 @@
                               </c:choose>
                            </table>
                         </div>
-                        <a href="${pageContext.request.contextPath}/mypage/personalQuestionForm" class="btn btn-dark btn-theme-colored btn-circled">등록</a>
+                        <div class="text-center">
+                        <a href="${pageContext.request.contextPath}/mypage/personalQuestionForm" class="btn btn-dark btn-theme-colored btn-lg mt-20">1:1문의 등록하기 <i class="fa fa-arrow-circle-right"></i></a>
+                     </div>
                      </div>
                      <nav style="text-align: center">
                         <ul class="pagination dark">
