@@ -6,6 +6,10 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<security:http auto-config="true" use-expressions="true">
+	
+		
+		
+		
 		<!-- <security:intercept-url pattern="/admin/main" access="hasRole('ROLE_ADMIN')"/>
 		<security:intercept-url pattern="/member/main" access="isAuthenticated()"/> -->
 		<security:intercept-url pattern="/mypage/**" access="isAuthenticated()"/>
@@ -28,6 +32,11 @@
 			delete-cookies="JSESSIONID"
 			logout-success-url="/"
 		/>
+		
+		<security:session-management invalid-session-url="/login" >
+			<security:concurrency-control max-sessions="1" expired-url="/login"/>
+		</security:session-management>
+		
 	</security:http>
 	
 	<!--  계정에 따른 권한 설정한다. - Oracle DB이용하기 -->

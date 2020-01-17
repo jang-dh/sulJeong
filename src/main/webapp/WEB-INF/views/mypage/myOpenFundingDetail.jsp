@@ -3,27 +3,45 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <script>
+
+	//페이지 이동
+	function fn_paging(curPage){
+		location.href="${pageContext.request.contextPath}/admin/personalQuestion?curPage="+curPage;
+	}
+	
+	
 	$(function() { 
+		
+		//페이징 시작
+		var curUrl = location.href;
+		var curPageNum = curUrl.split("=")[1];
+		console.log(curPageNum);
+		
+		$(".numberBtn").eq(curPageNum-1).addClass("active");
+		//페이징 끝
+		
 		$(document).on("click", "#deliveryBtn", function() {
 			
-		 var num = $(this).prev().prev().prev().val();
-		 var cour = $(this).parent().prev().find(":first").val()
+		 var num = $(this).parent().prev().find(":first").val();
+		 var cour = $(this).parent().prev().prev().find(":first").val()
 		 
 		 if(cour==""){
 			alert("택배사를 입력해주세요");
-			$(this).parent().prev().find(":first").focus();
+			$(this).parent().prev().prev().find(":first").focus();
 			return;
 		 }
 		 
 		 if(num==""){
 			 alert("송장번호를 입력해주세요");
-			 $(this).prev().prev().prev().focus();
+			 $(this).parent().prev().find(":first").focus();
+			 
 			 return;
 		 }
 		
+		
 		 
-		 $("#fundingCode").val($(this).prev().val())
-		 $("#memberCode").val($(this).prev().prev().val())
+		 $("#fundingCode").val($(this).parent().prev().children().next().next().val())
+		 $("#memberCode").val($(this).parent().prev().children().next().val())
 		 
 		 $("#deliveryNumber").val(num)
 		 $("#courier").val(cour)
@@ -115,6 +133,25 @@
 								</div>
 							</div>
 						</div>
+						
+						<!-- 페이징 -->
+						<nav style="text-align: center">
+							<ul class="pagination dark">
+								<li>
+									<a href="#" aria-label="Previous" onClick="fn_paging(${paging.prevPage})"> <span aria-hidden="true">&laquo;</span></a>
+								</li>
+								<c:forEach var="pageNum" begin="${paging.startPage}" end="${paging.endPage}">
+									<li class="numberBtn" value="${pageNum}">
+										<a href="#" onClick="fn_paging(${pageNum})" id="pageBtn">${pageNum} <span class="sr-only">(current)</span></a>
+									</li>
+								</c:forEach>
+								<li>
+									<a href="#" aria-label="Next" onClick="fn_paging(${paging.nextPage})"> <span aria-hidden="true">»</span></a>
+								</li>
+							</ul>
+						</nav>
+						<!-- 페이징 끝 -->
+						
 					</div>
 					<div class="tab-pane fade" id="tab19">
 						<div class="row">
@@ -134,6 +171,7 @@
 												<th>주소</th>
 												<th>택배회사</th>
 												<th>송장번호</th>
+												<th></th>
 											</tr>
 										</thead>
 										<tbody>
@@ -155,6 +193,8 @@
 													
 													<input type="hidden"  value="${fundingOpenPeople.code}"> <!-- memberCode -->
 													<input type="hidden"  value="${fundingCode}"><!-- fundingCode -->
+													</td>
+													<td>
 													<input type="button"  id="deliveryBtn" class="btn btn-dark btn-sm" name="deliveryBtn" value="입력">
 													</td>
 													</c:when>
@@ -166,8 +206,10 @@
 														<input type="text" id="deliveryNumber2" name="deliveryNumber2" value="${fundingOpenPeople.purchase.deliveryNumber}" readonly="readonly">
 														<input type="hidden" id="memberCode2" name="memberCode2" value="${fundingOpenPeople.code}">
 														<input type="hidden" id="fundingCode2" name="fundingCode2" value="${fundingCode}">
+														</td>
+														<td>
 														<input type="button" class="btn btn-dark btn-sm" id="updateBtn" name="updateBtn" onclick="location.href='${pageContext.request.contextPath}/mypage/deliveryUpdate/${fundingCode}/${fundingOpenPeople.code}'" value="수정">
-													</td>
+														</td>
 													</c:otherwise>
 													</c:choose>
 													
@@ -194,6 +236,23 @@
 								</div>
 							</div>
 						</div>
+						<!-- 페이징 -->
+						<nav style="text-align: center">
+							<ul class="pagination dark">
+								<li>
+									<a href="#" aria-label="Previous" onClick="fn_paging(${paging.prevPage})"> <span aria-hidden="true">&laquo;</span></a>
+								</li>
+								<c:forEach var="pageNum" begin="${paging.startPage}" end="${paging.endPage}">
+									<li class="numberBtn" value="${pageNum}">
+										<a href="#" onClick="fn_paging(${pageNum})" id="pageBtn">${pageNum} <span class="sr-only">(current)</span></a>
+									</li>
+								</c:forEach>
+								<li>
+									<a href="#" aria-label="Next" onClick="fn_paging(${paging.nextPage})"> <span aria-hidden="true">»</span></a>
+								</li>
+							</ul>
+						</nav>
+						<!-- 페이징 끝 -->
 					</div>
 				</div>
 				<a href="${pageContext.request.contextPath}/mypage/myOpenFunding">리스트로 돌아가기</a>
