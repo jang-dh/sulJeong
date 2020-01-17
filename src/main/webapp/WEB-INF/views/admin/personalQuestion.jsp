@@ -10,8 +10,10 @@
 	
 	$(function() {
 		var curUrl = location.href;
-		var curPageNum = curUrl.split("=")[1];
-		console.log(curPageNum);
+		var curPageNum = 1;
+		
+		if(curUrl.includes("curPage"))
+			curPageNum = curUrl.split("=")[1];
 		
 		$(".numberBtn").eq(curPageNum-1).addClass("active");
 	});
