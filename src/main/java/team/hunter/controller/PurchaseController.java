@@ -96,7 +96,7 @@ public class PurchaseController {
 //		} catch (Exception e) {
 //			e.printStackTrace();
 //		}
-		statisticsService.updateTotalFundingStackPrice(price * qty);
+		statisticsService.updateTotalFundingStackPrice(price);
 		statisticsService.updateFundingTotalCount();
 
 		//cancelPurchase(purchase);

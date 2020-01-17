@@ -35,7 +35,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 	@Transactional
 	public int insert(Purchase purchase) {
 		int result = purchaseDAO.insert(purchase);
-		result = fundingDAO.updateStackPrice(purchase.getFundingCode(), purchase.getPrice() * purchase.getQty());
+		result = fundingDAO.updateStackPrice(purchase.getFundingCode(), purchase.getPrice());
 		return result;
 	}
 

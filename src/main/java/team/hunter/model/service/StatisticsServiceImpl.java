@@ -37,6 +37,7 @@ public class StatisticsServiceImpl implements StatisticsService {
 
 	@Override
 	public int updateTotalFundingStackPrice(int price) {
+		System.out.println("price : " + price);
 		int result = dao.updateTotalFundingStackPrice(price);
 		if(result==0) throw new RuntimeException();
 		return result;
