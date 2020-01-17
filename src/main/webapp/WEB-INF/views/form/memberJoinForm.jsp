@@ -115,6 +115,12 @@
 				return false;
 			}
 			
+			if(pattern_spc.test($('#name').val()) || pattern_num.test($('#name').val())){
+				alert("이름에는 특수문자나 숫자를 입력할 수 없습니다.");
+				$('#name').focus();
+				return false;
+			}
+			
 			if($('#id').val()==""){
 				alert("아이디를 입력해주세요");
 				$('#id').focus();
@@ -151,8 +157,8 @@
 				return false;
 			}
 			
-			if(pattern_check.test($('#phone').val())){
-				alert("특수문자 - 를 빼고 입력해주세요");
+			if(pattern_check.test($('#phone').val()) || pattern_spc.test($('#phone').val()) || pattern_eng($('#phone').val())){
+				alert("숫자만 입력가능합니다.");
 				$('#phone').focus();
 				return false;
 			}

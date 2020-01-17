@@ -722,5 +722,12 @@ public class AdminController {
 		return "error/errorPage";
 	}
 	
+	/**
+	 * 403에러
+	 * */
+	@RequestMapping("/error/errorPage")
+	public String error403() {
+		return "error/errorPage";
+	}
 
 }

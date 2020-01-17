@@ -21,19 +21,24 @@
 
 <div class="main-content">
     <!-- Section: inner-header -->
-    <section class="inner-header divider layer-overlay overlay-dark-8" data-bg-img="${pageContext.request.contextPath}/resources/images/main/slider-main.jpg">
-      <div class="container pt-90 pb-40">
-        <!-- Section Content -->
-        <div class="section-content">
-          <div class="row"> 
-            <div class="col-md-6">
-              <h2 class="text-white font-36">1:1문의</h2>
-              
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    
+    <section class="inner-header divider layer-overlay overlay-dark-8"
+		data-bg-img="${pageContext.request.contextPath}/resources/images/main/slider-main.jpg">
+		<div class="container pt-90 pb-40">
+			<!-- Section Content -->
+			<div class="section-content">
+				<div class="row">
+					<div class="col-md-6">
+						<h2 class="text-white font-36">1:1문의</h2>
+						<ol class="breadcrumb text-left mt-10 white">
+							<li><a href="${pageContext.request.contextPath}">Home</a></li>
+							<li class="active">PersonalQuestion</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 
     <section>
                      <div class="container">
@@ -43,8 +48,7 @@
                         <div data-example-id="hoverable-table" class="bs-example"
                            style="width: 100%">
                            <table class="table table-hover">
-                              <c:choose>
-                                 <c:when test="${not empty list}">
+                              
                                     <thead>
                                        <tr>
                                           <th scope="row">글번호</th>
@@ -53,7 +57,10 @@
                                           <th>상태</th>
                                        </tr>
                                     </thead>
+                                    <c:choose>
+                                	 <c:when test="${not empty list}">
                                     <tbody>
+                                    
                                        <c:forEach items="${list}" var="question" varStatus="status" >
                                           <tr>
                                              <th scope="row">${question.code}</th>
@@ -72,12 +79,14 @@
                                     </tbody>
                                  </c:when>
                                  <c:otherwise>
-                                    <th>아직 등록된 글이 없습니다.</th>
+                                    <th colspan="4"> <h3 align="center">아직 등록된 글이 없습니다.</h3></th>
                                  </c:otherwise>
                               </c:choose>
                            </table>
                         </div>
-                        <a href="${pageContext.request.contextPath}/mypage/personalQuestionForm" class="btn btn-dark btn-theme-colored btn-circled">등록</a>
+                        <div class="text-center">
+                        <a href="${pageContext.request.contextPath}/mypage/personalQuestionForm" class="btn btn-dark btn-theme-colored btn-lg mt-20">1:1문의 등록하기 <i class="fa fa-arrow-circle-right"></i></a>
+                     </div>
                      </div>
                      <nav style="text-align: center">
                         <ul class="pagination dark">
