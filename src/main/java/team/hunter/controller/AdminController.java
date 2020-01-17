@@ -447,6 +447,59 @@ public class AdminController {
 			}
 
 			noticeService.insert(notice);
+			
+			//메일보내기 기능 시작!! - 수녕 - 
+			//이메일 수신체크 한 사람에게 펀딩 등록 될 때 마다 메일 보내줘야 하므로 추가
+			List<Member> emailAcceptList = emailAlertService.emailAcceptMember();
+			
+			//메일 보내기 기능
+				String setfrom = "suoung0716@gamil.com";
+				String title = "펀딩 공지사항 등록 메일입니다 :) "; // 제목
+				String content =
+
+							System.getProperty("line.separator") + // 한줄씩 줄간격을 두기위해 작성
+
+									System.getProperty("line.separator") +
+
+									"안녕하세요 회원님 저희 홈페이지를 찾아주셔서 감사합니다"
+
+									+ System.getProperty("line.separator") +
+
+									System.getProperty("line.separator") +
+
+									"새로운 공지사항이 등록되었으니 홈페이지에 와서 확인 해주세요 ~ ♡"
+									
+									+ System.getProperty("line.separator") +
+									
+
+									 System.getProperty("line.separator") +
+
+									System.getProperty("line.separator") +
+
+									"술정에 놀러오세요~~~~"; // 내용
+
+					try {
+						MimeMessage message = mailSender.createMimeMessage();
+						MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+						
+						
+						messageHelper.setFrom(setfrom); // 보내는사람 생략하면 정상작동을 안함
+						// 받는 사람 이메일주소 세팅
+						InternetAddress[] toAddr = new InternetAddress[emailAcceptList.size()];
+						
+						int i=0;
+						for(Member member : emailAcceptList) {
+							toAddr[i++] = new InternetAddress(member.getEmail());
+						}
+						
+						message.setRecipients(Message.RecipientType.TO, toAddr); // 수신자 셋팅
+						messageHelper.setSubject(title); // 메일제목은 생략이 가능하다
+						messageHelper.setText(content); // 메일 내용
+						mailSender.send(message);
+					} catch (Exception e) {
+						System.out.println(e);
+					}
+			//메일 보내기 기능 끝!!!!! - 수녕 - 
 
 		} catch (IOException e) {
 			e.printStackTrace();
