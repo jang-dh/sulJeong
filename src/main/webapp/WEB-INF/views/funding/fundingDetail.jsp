@@ -210,7 +210,7 @@ $(function() {
 						<%-- <form action="transfer"> --%>
 						<div class="col-md-7">
 							<div class="product-summary">
-								<h2 class="product-title">${funding.title}
+								<h2 class="product-title mb-20">${funding.title}
 									<sec:authorize access="hasRole('ROLE_ADMIN')"> 
 										<span style="float:right">
 											<button style="text-align: right;" class="btn btn-default btn-theme-colored mt-5 font-16 btn-sm" type="button" id="fundingModifyBtn" name="fundingModifyBtn">
@@ -231,11 +231,11 @@ $(function() {
 										<li><a href="#">Add reviews</a></li>
 									</ul>
 								</div> -->
-								<div class="price mb-15">
+								<div class="price mb-20">
 									<span class="amount"><strong>${funding.rewardName} / </strong>
 									<fmt:formatNumber>${funding.rewardPrice}</fmt:formatNumber>원</span>
 								</div>
-								<div class="tags">
+								<div class="tags mb-10">
 									<strong>판매자:</strong> ${funding.member.name}
 								</div>
 								<div class="category">
@@ -274,7 +274,7 @@ $(function() {
 									class="text-theme-colored font-weight-700"> ${fundingSponser} 명</span>
 							</div>
 							<br>
-							<div>
+							<div class="mt-20">
 								<ul class="list-inline font-weight-600 font-16 clearfix mt-15">
 									<li class="pull-left font-weight-400 text-black-333 pr-0"><strong>달성금액:</strong>
 									<span class="text-theme-colored font-weight-700"><fmt:formatNumber>${funding.stackPrice}</fmt:formatNumber>원</span></li>
@@ -282,21 +282,19 @@ $(function() {
 									<span class="text-theme-colored font-weight-700"><fmt:formatNumber>${funding.goalPrice}</fmt:formatNumber>원</span></li>
 								</ul>
 							</div>
-							<div class="progress-item mt-15">
+							<div class="progress-item mt-20">
 								<div class="progress mb-0">
 									<c:set var="per" value="${funding.stackPrice/funding.goalPrice *100}"/>
 									<c:if test="${per > 100}">
 										<c:set var="per" value="100"/>
 									</c:if>
-									<div
-										data-percent="${funding.stackPrice/funding.goalPrice *100}"
-										class="progress-bar appeared"
-										style="width: ${per}%;">
+									<div data-percent="${funding.stackPrice/funding.goalPrice *100}"
+										class="progress-bar appeared" style="width: ${per}%;">
 										<span class="percent"><fmt:formatNumber value="${funding.stackPrice/funding.goalPrice}" type="percent"/></span>
 									</div>
 								</div>
 							</div>
-							<div class="pull-right font-weight-400 text-black-333 mt-15">
+							<div class="pull-right font-weight-400 text-black-333 mt-30">
 								<button class="single_add_to_cart_button btn btn-theme-colored deleteLikes" type="button">
 									좋아요 취소 <i class="fa fa-thumbs-down text-white"></i>
 								</button>
@@ -304,8 +302,11 @@ $(function() {
 								<button class="single_add_to_cart_button btn btn-default btn-theme-colored insertLikes" type="button">
 									좋아요 <i class="fa fa-thumbs-up"></i>
 								</button>
-							
 							</div>
+							<blockquote class="blockquote-reverse gray mt-100">
+								이 프로젝트는 펀딩 마감일까지 목표 금액이 100% 모이지 않으면<br>
+								결제가 진행되지 않습니다.
+							</blockquote>
 						</div>
 						<c:if test="${funding.fundingState == 501}">
 							<div class="cart-form-wrapper mt-30">
