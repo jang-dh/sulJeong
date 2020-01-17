@@ -45,11 +45,11 @@
 	</select>
 	
 	<select id="countPurchaseNumber" parameterType="int" resultType="int">
-		select count (purchase_state) from purchase where purchase_state = 601 and member_code = #{_parameter}
+		select count (purchase_state) from purchase where purchase_state = '601' and member_code = #{_parameter}
 	</select>
 	
 	<select id="countTotalPrice" parameterType="int" resultType="int">
-		select sum (price) from purchase where purchase_state = 601 and member_code = #{_parameter}
+		select sum (price) from purchase where purchase_state = '601' and member_code = #{_parameter}
 	</select>
 		
 	<!-- 근딘 : 후원 취소 상태 변경 -->

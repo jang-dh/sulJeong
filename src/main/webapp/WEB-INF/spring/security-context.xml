@@ -32,11 +32,12 @@
 			delete-cookies="JSESSIONID"
 			logout-success-url="/"
 		/>
+		<security:access-denied-handler error-page="/error/errorPage"/>
 		
 		<security:session-management invalid-session-url="/login" >
 			<security:concurrency-control max-sessions="1" expired-url="/login" error-if-maximum-exceeded="true"/>
 		</security:session-management>
-		
+
 	</security:http>
 	
 	<!--  계정에 따른 권한 설정한다. - Oracle DB이용하기 -->
