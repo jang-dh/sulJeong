@@ -89,19 +89,19 @@
 					<nav style="text-align: center">
 					<ul class="pagination dark">
 						<li>
-							<a href="#" aria-label="Previous" onClick="fn_paging(${paging.prevPage})">
+							<a aria-label="Previous" onClick="fn_paging(${paging.prevPage})">
 								<span aria-hidden="true">&laquo;</span>
 							</a>
 						</li>
 						<c:forEach var="pageNum" begin="${paging.startPage}" end="${paging.endPage}">
 							<li class="numberBtn" value="${pageNum}">
-								<a href="#" onClick="fn_paging(${pageNum})" id="pageBtn">${pageNum}
+								<a onClick="fn_paging(${pageNum})" id="pageBtn">${pageNum}
 									<span class="sr-only">(current)</span>
 								</a>
 							</li>
 						</c:forEach>
 						<li>
-							<a href="#" aria-label="Next" onClick="fn_paging(${paging.nextPage})">
+							<a aria-label="Next" onClick="fn_paging(${paging.nextPage})">
 								<span aria-hidden="true">»</span>
 							</a>
 						</li>

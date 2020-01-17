@@ -41,7 +41,13 @@ public class PurchaseDAOImpl implements PurchaseDAO {
 	
 	@Override
 	public int countTotalPrice(int memberCode) {
-		return session.selectOne("purchaseMapper.countTotalPrice", memberCode);
+		Object result = session.selectOne("purchaseMapper.countTotalPrice", memberCode);
+		
+		if(result==null) {
+			return 0;
+		}
+		
+		return (Integer)result;
 	}
 
 	@Override
