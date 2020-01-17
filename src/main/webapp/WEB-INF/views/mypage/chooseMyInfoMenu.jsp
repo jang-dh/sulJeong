@@ -236,18 +236,18 @@ $(function(){
 						<hr>
 						<div class="row">
 							<div class="form-group col-md-12">
-								<label>UserID</label> <input name="id" id="id"
+								<label>아이디</label> <input name="id" id="id"
 									class="form-control" type="text" value="${member.id}" readonly>
 							</div>
 						</div>
 
 						<div class="row">
 							<div class="form-group col-md-6">
-								<label for="form_choose_password">Choose Password</label> <input
+								<label for="form_choose_password">비밀번호</label> <input
 									id="pwd" name="pwd" class="form-control" type="password" placeholder="특수문자 포함 8글자 이상 작성해주세요">
 							</div>
 							<div class="form-group col-md-6">
-								<label>Re-enter Password</label> <input id="pwdCheck"
+								<label>비밀번호 재확인</label> <input id="pwdCheck"
 									name="pwdCheck" class="form-control" type="password" placeholder="특수문자 포함 8글자 이상 작성해주세요">
 							</div>
 							<div class="form-group col-md-6" id="pwdEqualCheck">비밀번호 확인</div>
@@ -255,7 +255,7 @@ $(function(){
 
 						<div class="row">
 							<div class="form-group col-md-12">
-								<label for="form_choose_username">Name</label> <input id="name"
+								<label for="form_choose_username">성함</label> <input id="name"
 									name="name" class="form-control" type="text"
 									value="${member.name}">
 							</div>
@@ -270,7 +270,7 @@ $(function(){
 
 						<div class="row">
 							<div class="form-group col-md-6">
-								<label>Email Address</label> 
+								<label>이메일 주소</label> 
 								<input name="email" id="email" class="form-control" type="email" value="${member.email}">
 							</div>
 							<div class="form-group col-md-6">
@@ -299,7 +299,7 @@ $(function(){
 							</div>
 						</div>
 						<div class="form-group">
-							<button class="btn btn-border btn-theme-colored btn-lg btn-block mt-15" type="submit" id="register">Register Now</button>
+							<button class="btn btn-border btn-theme-colored btn-lg btn-block mt-15" type="submit" id="register">수정하기</button>
 						</div>
 					</form>
 				</div>
@@ -328,20 +328,20 @@ $(function(){
 						<hr>
 						<div class="row">
 							<div class="form-group col-md-12">
-								<label>UserID</label> 
+								<label>아이디</label> 
 								<input name="id" id="id2" class="form-control" type="text" value="${member.id}" readonly>
 							</div>
 						</div>
 
 						<div class="row">
 							<div class="form-group col-md-12">
-								<label for="form_choose_password">Check Password</label> 
+								<label for="form_choose_password">비밀번호 확인</label> 
 								<input id="pwd2" name="pwd" class="form-control" type="password">
 							</div>
 						</div>
 
 						<div class="form-group">
-							<button class="btn btn-border btn-theme-colored btn-lg btn-block mt-15" type="button" id="membership_withdrawal">membership withdrawal</button>
+							<button class="btn btn-border btn-theme-colored btn-lg btn-block mt-15" type="button" id="membership_withdrawal">회원 탈퇴하기</button>
 						</div>
 						
 						
