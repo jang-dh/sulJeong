@@ -31,7 +31,8 @@ on f.code = p.funding_code
 where m.email_accept=1 and p.purchase_state=603 and f.funding_state='504'
 </select>
 
-<!-- 수녕 : 펀딩 공지사항 - 공지사항 올라왔다 알림 - 스케쥴러 없이 펀딩 등록 할 때 컨트롤러나 서비스에서
+<!-- 수녕 : 펀딩 공지사항 - 공지사항 올라왔다 알림 - 
+스케쥴러 없이 펀딩 등록 할 때 컨트롤러나 서비스에서
 이메일 수신 동의 한 모든 사람에세 보내면 될 것 같음-->
 <!-- 수녕 : 이메일 수신 동의 한 멤버 -->
 <select id="emailAgreeMember" resultType="member">
