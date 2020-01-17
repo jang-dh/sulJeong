@@ -28,6 +28,7 @@
 			delete-cookies="JSESSIONID"
 			logout-success-url="/"
 		/>
+		<security:access-denied-handler error-page="/error/errorPage"/>
 	</security:http>
 	
 	<!--  계정에 따른 권한 설정한다. - Oracle DB이용하기 -->
