@@ -37,34 +37,32 @@ content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1
 		if('${errorMessage}' != ""){
 			alert('${errorMessage}');
 		}
-			
-		
-		$("#login-form").submit(function(){
-			if($("#form_username_email").val()==""){
+
+		$("#login-form").submit(function() {
+			if ($("#form_username_email").val() == "") {
 				alert("아이디를 입력해주세요");
 				$("#form_username_email").focus();
 				return false;
 			}
-			if($("#form_password").val()==""){
+			if ($("#form_password").val() == "") {
 				alert("비밀번호를 입력해주세요");
 				$("#form_password").focus();
 				return false;
 			}
 		});
-		
+
 		$("#login-form").submit(function() {
-				if($('#id').val()==""){
-					alert("아이디를 입력해주세요");
-					$('#id').focus();
-					return false;
-				}
-				
-				if($('#pwd').val()==""){
-					alert("비밀번호를 입력해주세요");
-					$('#pwd').focus();
-					return false;
-				}
-			});
+			if ($('#id').val() == "") {
+				alert("아이디를 입력해주세요");
+				$('#id').focus();
+				return false;
+			}
+
+			if ($('#pwd').val() == "") {
+				alert("비밀번호를 입력해주세요");
+				$('#pwd').focus();
+				return false;
+			}
 		});
 	
 	function setCookie(cookieName, value, exdays){
