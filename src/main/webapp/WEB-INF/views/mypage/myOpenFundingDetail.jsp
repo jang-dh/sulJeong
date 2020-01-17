@@ -6,7 +6,7 @@
 
 	//페이지 이동
 	function fn_paging(curPage){
-		location.href="${pageContext.request.contextPath}/admin/personalQuestion?curPage="+curPage;
+		location.href="${pageContext.request.contextPath}/mypage/myOpenFunding/${fundingCode}?curPage="+curPage;
 	}
 	
 	
@@ -113,7 +113,7 @@
 										<tbody>
 											<c:forEach items="${fundingReqManage}" var="fundingReqManage" varStatus="state">
 												<tr>
-													<th scope="row">${state.count}</th>
+													<th scope="row">${fundingReqManage.member.code}</th>
 													<td>${fundingReqManage.member.id}</td>
 													<td><a href="${pageContext.request.contextPath}/mypage/myOpenFundingReqManage/${fundingReqManage.code}">${fundingReqManage.subject}</a></td>
 													<td>${fundingReqManage.regdate}</td>
@@ -236,23 +236,6 @@
 								</div>
 							</div>
 						</div>
-						<!-- 페이징 -->
-						<nav style="text-align: center">
-							<ul class="pagination dark">
-								<li>
-									<a href="#" aria-label="Previous" onClick="fn_paging(${paging.prevPage})"> <span aria-hidden="true">&laquo;</span></a>
-								</li>
-								<c:forEach var="pageNum" begin="${paging.startPage}" end="${paging.endPage}">
-									<li class="numberBtn" value="${pageNum}">
-										<a href="#" onClick="fn_paging(${pageNum})" id="pageBtn">${pageNum} <span class="sr-only">(current)</span></a>
-									</li>
-								</c:forEach>
-								<li>
-									<a href="#" aria-label="Next" onClick="fn_paging(${paging.nextPage})"> <span aria-hidden="true">»</span></a>
-								</li>
-							</ul>
-						</nav>
-						<!-- 페이징 끝 -->
 					</div>
 				</div>
 				<a href="${pageContext.request.contextPath}/mypage/myOpenFunding">리스트로 돌아가기</a>

@@ -23,7 +23,7 @@ public interface FundingRequestService {
 	/**
 	 * 펀딩 디테일 페이지 - 펀딩 문의 관리
 	 * */
-	List<FundingQuestion> myFundingOpenDetail(int fundingCode);
+	//List<FundingQuestion> myFundingOpenDetail(int fundingCode);
 	
 	/**
 	 * 펀딩 디테일 페이지 - 펀딩 참가 사용자 관리
@@ -44,4 +44,14 @@ public interface FundingRequestService {
 	 * 펀딩 상태 조회
 	 * */
 	Funding fundingState(int fundingCode);
+	
+	/**
+	 * 페이징 처리 위한 갯수
+	 * */
+	int listCount(int fundingCode);
+	
+	/**
+	 * 페이징 처리 - 펀딩 문의 관리 
+	 * */
+	List<FundingQuestion> myFundingOpenDetail(int startIndex, int cntPerPage, int fundingCode);
 }
