@@ -28,7 +28,7 @@
 			<div class="col-md-3">
 				<div class="vertical-tab">
 					<ul class="nav nav-tabs">
-						<li><a href="${pageContext.request.contextPath}/admin/nsiteManagement">사이트 통계</a></li>
+						<li><a href="${pageContext.request.contextPath}/admin/siteManagement">사이트 통계</a></li>
 						<li><a href="${pageContext.request.contextPath}/admin/fundingInsert">펀딩 등록</a></li>
 						<li class="active"><a href="${pageContext.request.contextPath}/admin/personalQuestion">1:1 문의 내역</a></li>
 						<li><a href="${pageContext.request.contextPath}/admin/fundingRequest">펀딩 오픈 신청 내역</a></li>

@@ -6,7 +6,7 @@
     <div class="container pt-70 pb-40">
       <div class="row multi-row-clearfix">
         <div class="col-sm-6 col-md-3">
-          <div class="widget dark"> <img alt="" src="${pageContext.request.contextPath}/resources/images/test.png">
+          <div class="widget dark"> <img alt="" src="${pageContext.request.contextPath}/resources/images/sulJeong_gray.png">
             <!-- <p class="font-12 mt-20 mb-10">Medinova is a library of Crowdfunding and Medinova templates with predefined elements which helps you to build your own site. Lorem ipsum dolor sit amet consectetur.</p>
             <a class="text-gray font-12" href="#"><i class="fa fa-angle-double-right text-theme-colored"></i> Read more</a>
             <ul class="styled-icons icon-dark mt-20">
