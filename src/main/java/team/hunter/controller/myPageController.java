@@ -161,11 +161,25 @@ public class myPageController {
 	 * 내가 오픈한 펀딩 상세페이지
 	 * */
 	@RequestMapping("/myOpenFunding/{fundingCode}")
-	public String myOpenDetail(@PathVariable int fundingCode, Model model) {
+	public String myOpenDetail(@PathVariable int fundingCode, Model model, @RequestParam(defaultValue = "1") int curPage) {
 //		Member member = null;
 //		if(!SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser"))
 //			member =(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		List<FundingQuestion> fundingReqManage = fundingReqService.myFundingOpenDetail(fundingCode);
+		System.out.println("fundingCode"+fundingCode);
+		int listCnt = fundingReqService.listCount(fundingCode);
+		Paging paging = new Paging(listCnt, curPage);
+
+		
+		int startIndex = paging.getStartIndex();
+		int cntPerPage = paging.getPageSize();
+		System.out.println("listCnt"+listCnt);
+		System.out.println("startIndex"+startIndex+"cntPerPage"+cntPerPage+"페이징 나오니????");
+		System.out.println("paging.prevPage"+paging.getPrevPage()+"paging.startPage"+paging.getStartPage()+"paging.endPage"+paging.getEndPage()+"paging.nextPage"+paging.getNextPage()+"페이징 222나오니??");
+		
+		List<FundingQuestion> fundingReqManage = fundingReqService.myFundingOpenDetail(startIndex, cntPerPage, fundingCode);
+		
+		
+		//List<FundingQuestion> fundingReqManage = fundingReqService.myFundingOpenDetail(fundingCode);
 		List<Member> fundingOpenPeople = fundingReqService.myFundingOpenDetailSecond(fundingCode);
 		Funding funding = fundingReqService.fundingState(fundingCode);
 		
@@ -174,6 +188,9 @@ public class myPageController {
 		
 		//펀딩 문의 관리
 		model.addAttribute("fundingReqManage", fundingReqManage);
+		//피이징 정보 보내기
+		model.addAttribute("listCnt", listCnt);
+		model.addAttribute("paging", paging);
 		
 		//펀딩 참가한 사용자
 		model.addAttribute("fundingOpenPeople", fundingOpenPeople);
@@ -205,11 +222,11 @@ public class myPageController {
 	
 	
 	
-	
-	@ExceptionHandler({Exception.class})
-	public String error() {
-		return "error/errorPage";
-	}
+//	
+//	@ExceptionHandler({Exception.class})
+//	public String error() {
+//		return "error/errorPage";
+//	}
 	
 	
 }

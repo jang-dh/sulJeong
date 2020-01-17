@@ -35,7 +35,7 @@
 		<security:access-denied-handler error-page="/error/errorPage"/>
 		
 		<security:session-management invalid-session-url="/login" >
-			<security:concurrency-control max-sessions="1" expired-url="/login"/>
+			<security:concurrency-control max-sessions="1" expired-url="/login" error-if-maximum-exceeded="true"/>
 		</security:session-management>
 
 	</security:http>
