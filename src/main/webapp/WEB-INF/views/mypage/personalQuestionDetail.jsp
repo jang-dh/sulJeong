@@ -28,7 +28,8 @@
             <h3 class="text-theme-colored mt-0 mb-20">제목 : ${question.subject}</h3>
 			<p>작성자 : ${question.member.id}</p>
             <hr>
-            <p>${question.content}</p>
+            <textarea style="border: 0px" readonly="readonly" cols="100" rows="8">${question.content}</textarea>
+            <%-- <p>${question.content}</p> --%>
             <p>작성일 : ${question.regdate}</p> 
             <hr>
             <h3 class="text-theme-colored mt-0 mb-20">답변</h3>
