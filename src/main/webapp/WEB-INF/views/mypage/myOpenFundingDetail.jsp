@@ -3,15 +3,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <script>
-
 	//페이지 이동
 	function fn_paging(curPage){
 		location.href="${pageContext.request.contextPath}/mypage/myOpenFunding/${fundingCode}?curPage="+curPage;
 	}
-	
-	
+  
 	$(function() { 
-		
 		//페이징 시작
 		var curUrl = location.href;
 		var curPageNum = curUrl.split("=")[1];
@@ -54,52 +51,66 @@
 			
 		});//버튼 클릭시
 		
+		if(num==""){
+			alert("송장번호를 입력해주세요");
+			$(this).prev().prev().prev().focus();
+			return;
+		}
 		
+		$("#fundingCode").val($(this).prev().val())
+		$("#memberCode").val($(this).prev().prev().val())
+		$("#deliveryNumber").val(num)
+		$("#courier").val(cour)
 		
-	});
+		//전송하기
+		$("#userInfo").submit();			
+	});//버튼 클릭시
+});
 </script>
 
 <!-- Section: inner-header -->
-<section class="inner-header divider layer-overlay overlay-dark-8"
-	data-bg-img="http://placehold.it/1920x1280">
+<section class="inner-header divider layer-overlay"	data-bg-img="${pageContext.request.contextPath}/resources/images/main/slider-main.jpg">
 	<div class="container pt-90 pb-40">
 		<!-- Section Content -->
 		<div class="section-content">
 			<div class="row">
 				<div class="col-md-6">
-					<h2 class="text-white font-36">내가 만든 펀딩 Detail</h2>
+					<h2 class="text-white font-36">내가 만든 펀딩</h2>
+					<ol class="breadcrumb text-left mt-10 white">
+						<!--<li><a href="#">Home</a></li>
+						<li><a href="#">Pages</a></li>
+						<li class="active">Causes Grid</li>-->
+					</ol> 
 				</div>
 			</div>
 		</div>
 	</div>
 </section>
-<br>
-<br>
+
 <section>
-	<div class="container pt-20 pb-20">
-		<div class="esc-heading lr-line left-heading">
+	<div class="container pt-20 pb-20 mt-20">
+		<!-- <div class="esc-heading lr-line left-heading">
 			<h4>내가 만든 펀딩</h4>
-		</div>
+		</div> -->
 		<div class="row">
 			<div class="col-md-3">
 				<div class="vertical-tab">
 					<ul class="nav nav-tabs">
-						<li class="active"><a href="#tab18" data-toggle="tab"
-							aria-expanded="true">펀딩 문의 관리</a></li>
-						<li class=""><a href="#tab19" data-toggle="tab"
-							aria-expanded="false">참가한 사용자</a></li>
+						<li class="active">
+							<a href="#tab18" data-toggle="tab" aria-expanded="true">펀딩 문의 관리</a>
+						</li>
+						<li class="">
+							<a href="#tab19" data-toggle="tab" aria-expanded="false">참가한 사용자</a>
+						</li>
 					</ul>
 				</div>
 			</div>
 			<div class="col-md-9">
 				<div class="tab-content">
-
 					<div class="tab-pane fade active in" id="tab18">
 						<div class="row">
 							<div class="col-md-12">
 								<div data-example-id="hoverable-table" class="bs-example">
-								
-								
 									<table class="table table-hover">
 										<thead>
 											<tr>
@@ -118,16 +129,15 @@
 													<td><a href="${pageContext.request.contextPath}/mypage/myOpenFundingReqManage/${fundingReqManage.code}">${fundingReqManage.subject}</a></td>
 													<td>${fundingReqManage.regdate}</td>
 													<c:choose>
-													<c:when test="${fundingReqManage.state=='201'}">
-													<td>답변완료</td>
-													</c:when>
-													<c:otherwise>
-													<td>답변 대기중</td>
-													</c:otherwise>
+														<c:when test="${fundingReqManage.state=='201'}">
+															<td>답변완료</td>
+														</c:when>
+														<c:otherwise>
+															<td>답변 대기중</td>
+														</c:otherwise>
 													</c:choose>
 												</tr>
 											</c:forEach>
-
 										</tbody>
 									</table>
 								</div>
@@ -157,7 +167,6 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div data-example-id="hoverable-table" class="bs-example">
-								
 								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 								
 								<c:choose>
@@ -232,13 +241,12 @@
 								  <input type="hidden" id="memberCode" name="memberCode" >
 								  <input type="hidden" id="fundingCode" name="fundingCode" >
 								</form>
-								
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<a href="${pageContext.request.contextPath}/mypage/myOpenFunding">리스트로 돌아가기</a>
+				<a href="${pageContext.request.contextPath}/mypage/myOpenFunding" class="pull-right mt-10">리스트로 돌아가기</a>
 			</div>
 		</div>
 	</div>
