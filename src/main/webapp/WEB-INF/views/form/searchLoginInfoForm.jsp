@@ -3,6 +3,18 @@
     
 <script>
 $(function(){
+	
+	var pattern_num = /[0-9]/;	// 숫자 
+
+	var pattern_eng = /[a-zA-Z]/;	// 문자 
+
+	var pattern_spc = /[~!@#$%^&*()_+|<>?:{}]/; // 특수문자
+
+	var pattern_kor = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/; // 한글체크
+	
+	var pattern_check = /-/;
+	
+	
 	$("#GotoLoginBtn").hide();
 	$("#find").click(function(){
 		if($("#name1").val()==""){
@@ -18,7 +30,7 @@ $(function(){
 		
 		if(pattern_check.test($('#phone1').val()) || pattern_spc.test($('#phone1').val()) || pattern_eng.test($('#phone1').val()) || pattern_kor.test($('#phone1').val())){
 			alert("전화번호는 숫자만 입력가능합니다.");
-			$('#phone').focus();
+			$('#phone1').focus();
 			return false;
 		}
 		
@@ -79,7 +91,7 @@ $(function(){
 	  }); 
 	 
 	 if(${result>0}){
-			alert("임시 비밀번호를 이메일로 전송하였습니다.")
+			alert("임시 비밀번호를 이메일로 전송하였습니다.");
 		}else if(${result==0}){
 			alert("입력 정보를 다시 확인해주세요");
 			$('#name').focus();
@@ -113,14 +125,14 @@ $(function(){
             	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" >
               <div class="row">
                 <div class="form-group col-md-12">
-                  <label for="form_username_email">Name</label>
+                  <label for="form_username_email">성함</label>
                   <input id="name1" name="name1" class="form-control" type="text">
                 </div>
               </div>
               <div class="row">
                 <div class="form-group col-md-12">
-                  <label for="form_password">Phone</label>
-                  <input id="phone1" name="phone1" class="form-control" type="text" >
+                  <label for="form_password">핸드폰 번호</label>
+                  <input id="phone1" name="phone1" class="form-control" type="text" placeholder="ex) 01012341234">
                 </div>
                <div class="form-group pull-right mt-10">
                 <button type="button" class="btn btn-dark btn-sm" id="find" value="Login">찾기</button>
@@ -154,18 +166,18 @@ $(function(){
             	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" >
               <div class="row">
                 <div class="form-group col-md-12">
-                  <label for="form_username_email">id</label>
+                  <label for="form_username_email">아이디</label>
                   <input id="name" name="id" class="form-control" type="text">
                 </div>
               </div>
               <div class="row">
                 <div class="form-group col-md-12">
-                  <label for="form_password">Phone</label>
-                  <input id="phone" name="phone" class="form-control" type="text" >
+                  <label for="form_password">핸드폰 번호</label>
+                  <input id="phone" name="phone" class="form-control" type="text" placeholder="ex) 01012341234">
                 </div>
                 
                 <div class="form-group col-md-12">
-                  <label for="form_password">email</label>
+                  <label for="form_password">이메일 주소</label>
                   <input id="email" name="email" class="form-control" type="text" >
                 </div>
                 

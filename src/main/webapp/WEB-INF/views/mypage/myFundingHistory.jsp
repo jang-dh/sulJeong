@@ -29,8 +29,8 @@
 <!-- Start main-content-->
 <div class="main-content">
 	<!-- Section: inner-header -->
-	<section class="inner-header divider layer-overlay overlay-dark-8"
-		data-bg-img="http://placehold.it/1920x1280">
+	<section class="inner-header divider layer-overlay"
+		data-bg-img="${pageContext.request.contextPath}/resources/images/main/slider-main.jpg">
 		<div class="container pt-90 pb-40">
 			<!-- Section Content -->
 			<div class="section-conte<nt">
@@ -38,9 +38,6 @@
 					<div class="col-md-6">
 						<h2 class="text-white font-36">펀딩 내역</h2>
 						<ol class="breadcrumb text-left mt-10 white">
-							<li><a href="${pageContext.request.contextPath}">Home</a></li>
-							<li><a href="${pageContext.request.contextPath}">Pages</a></li>
-							<li class="active">Funding Cart</li>
 						</ol>
 					</div>
 				</div>

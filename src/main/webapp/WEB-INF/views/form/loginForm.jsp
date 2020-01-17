@@ -99,52 +99,32 @@ content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1
       <div class="container">
         <div class="row">
           <div class="col-md-6 col-md-push-3">
-            <h4 class="text-gray mt-0 pt-5"> Login</h4>
+            <h4 class="text-gray mt-0 pt-5"> 로그인</h4>
             <hr>
             <form id="login-form" name="login-form" class="clearfix" action="${pageContext.request.contextPath}/loginCheck" method="post">
             	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" >
               <div class="row">
                 <div class="form-group col-md-12">
-                  <label for="form_username_email">Username/Email</label>
+                  <label for="form_username_email">아이디</label>
                   <input id="form_username_email" name="id" class="form-control" type="text">
                 </div>
               </div>
               <div class="row">
                 <div class="form-group col-md-12">
-                  <label for="form_password">Password</label>
+                  <label for="form_password">비밀번호</label>
                   <input id="form_password" name="pwd" class="form-control" type="password">
                 </div>
               </div>
               <div class="checkbox pull-left mt-15">
                 <label for="form_checkbox">
                   <input id="form_checkbox" name="form_checkbox" type="checkbox">
-                  Remember me </label>
+                  아이디 저장하기 </label>
               </div>
               <div class="form-group pull-right mt-10">
-                <input type="submit" class="btn btn-dark btn-sm" id="login" value="Login">
+                <input type="submit" class="btn btn-dark btn-sm" id="login" value="로그인">
               </div>
-              <!-- ------- -->
-				<a id="kakao-login-btn">카카오톡 로그인</a> <a
-					href="http://developers.kakao.com/logout"></a>
-				<script type='text/javascript'>
-					//<![CDATA[
-					// 사용할 앱의 JavaScript 키를 설정해 주세요.
-					Kakao.init('f993f805dafe9538c884ac2dd9331589');
-					// 카카오 로그인 버튼을 생성합니다.
-					Kakao.Auth.createLoginButton({
-						container : '#kakao-login-btn',
-						success : function(authObj) {
-							alert(JSON.stringify(authObj));
-						},
-						fail : function(err) {
-							alert(JSON.stringify(err));
-						}
-					});
-					//]]>
-				</script>
-			  <!-- ------- -->
               <div class="clear text-center pt-10">
-                <a class="text-theme-colored font-weight-600 font-12" href="${pageContext.request.contextPath}/searchLoginInfoForm">Forgot Your Information?</a>
+                <a class="text-theme-colored font-weight-600 font-12" href="${pageContext.request.contextPath}/searchLoginInfoForm">아이디/비밀번호 찾기</a>
               </div>
             </form>
           </div>

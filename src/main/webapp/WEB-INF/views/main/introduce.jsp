@@ -30,22 +30,16 @@
 	</section>
 
 	<!-- Section: -->
-	<section>
-		<div class="container pt-70 pb-40">
-			<div class="section-content">
-				<div class="row">
-					<div class="col-md-8">
-						<h3 class="text-uppercase font-28 letter-space-3 mt-0">
-							술:정(井)에서는 <span class="text-theme-colored">누구나</span> 투자받고 투자하면서<br>
-							함께 성장합니다.
-						</h3>
-						<h5 class="text-uppercase font-weight-400">
-							사람들은 자신이 지지하는 기업에 투자합니다. 한 사람 한 사람의 투자가 모여 기업은 성장합니다.<p>
-							여기, 기업 하나가 출발선에 있습니다. 그는 자신의 가치를 증명하고 사람들이 그의 가치를 알아봅니다.<br />
-							서로	지지하고 소통하고 공유하면서 더 많은 사람들이 그를 알아봅니다. 그렇게 기업은 성장합니다.<br /> 
-							또 다른 기업들이 용기를 얻고 출발선에 섭니다. 사람들의 지지를 받는 기업은 성장합니다.<br />
-							세상에 자신만의 가치를 품은 기업들이 많아집니다. 세상이 조금 더 나아집니다.
-						</h5>
+    <section>
+      <div class="container pt-70 pb-40">
+        <div class="section-content">
+          <div class="row">
+            <div class="col-md-8">
+              <h3 class="text-uppercase font-28 letter-space-3 mt-0">술:정(井)에서는 <span class="text-theme-colored">누구나</span> 투자받고 투자하면서<br> 함께 성장합니다.</h3>
+              <h5 class="text-uppercase font-weight-400">사람들은 자신이 지지하는 기업에 투자합니다. 한 사람 한 사람의 투자가 모여 기업은 성장합니다.<br/>
+              여기, 기업 하나가 출발선에 있습니다. 그는 자신의 가치를 증명하고 사람들이 그의 가치를 알아봅니다.<br/> 서로 지지하고 소통하고 공유하면서 더 많은 사람들이 그를 알아봅니다.
+              그렇게 기업은 성장합니다.<br/> 또 다른 기업들이 용기를 얻고 출발선에 섭니다. 사람들의 지지를 받는 기업은 성장합니다.<br/>
+              세상에 자신만의 가치를 품은 기업들이 많아집니다. 세상이 조금 더 나아집니다.</h5>
 							<!-- <div class="row">
 				                <div class="col-md-6">
 				                  <p>Etiam ullamcorper. Suspendisse a pellentesque dui, non felis. Maecenas malesuada elit lectus felis, malesuada ultricies. Curabitur et ligula. Ut mole stie a, ultricies porta urna. Vestibulum commodo volutpat a, convallis ac, laoreet enim. Phasellus fermen. </p>

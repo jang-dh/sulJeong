@@ -10,7 +10,8 @@
 		<result column="regdate" property="regdate" />
 		<result column="state" property="state" />
 		<association property="member" javaType="member">
-			<id column="id" property="id" />
+			<id column="code" property="code"/>
+			<result column="id" property="id" />
 		</association>
 	</resultMap>
 
@@ -22,6 +23,7 @@
 		<result column="subject" property="subject" />
 		<result column="content" property="content" />
 		<association property="member" javaType="member">
+			<id column="code" property="code"/>
 			<result column="id" property="id" />
 		</association>
 	</resultMap>
@@ -59,16 +61,16 @@
 	</select>
 
 	<!-- 수녕 : 내가 만든 펀딩 detail페이지 - 펀딩 문의 관리 -->
-	<select id="myFundingOpenDetail"
+	<!-- <select id="myFundingOpenDetail"
 		resultMap="fundingQuestionResultMap" parameterType="int">
 		select fq.code,
 		fq.subject, fq.regdate, fq.state , m.id
 		from
-		funding_question fq, member
-		m
+		funding_question fq, member m
 		where fq.member_code=m.code and
-		funding_code=#{_parameter}
-	</select>
+		fq.funding_code=#{_parameter}
+		order by fq.state asc
+	</select> -->
 
 	<!-- 수녕 : 내가 만든 펀딩 detail페이지 - 참가한 사용자 관리 -->
 	<select id="myFundingOpenDetailUserManage" resultMap="deliveryCodeSelect"
@@ -79,6 +81,7 @@
 		on p.funding_code=f.code inner join member m
 		on p.member_code= m.code
 		where f.code=#{_parameter}
+		order by p.delivery_number nulls first
 	</select>
 
 	<!-- 수녕 : 내가 만든 펀딩 detail페이지 - 펀딩 문의 관리 상세페이지(사용자아이디,문의등록일,제목,내용) -->
@@ -107,6 +110,25 @@
 		select funding_state
 		from funding
 		where code = #{_parameter}
+	</select>
+	
+	<!-- 펀딩 문의 관리 페이징 처리 위한 매퍼 -->
+	<select id="listCount" resultType="int" parameterType="int">
+		select count(*)
+		from
+		funding_question fq, member m
+		where fq.member_code=m.code and
+		fq.funding_code=#{_parameter}
+	</select>
+	
+	<!-- 수녕 : 내가 만든 펀딩 detail페이지 - 펀딩 문의 관리 -->
+	<select id="myFundingOpenDetail" resultMap="fundingQuestionResultMap" parameterType="map">
+	<![CDATA[
+	select fq.code, fq.subject, fq.regdate, fq.state , m.id, m.code
+	FROM (SELECT f.*, ROWNUM rnum FROM (SELECT * FROM funding_question ORDER BY state asc) f
+	WHERE ROWNUM <= (#{startIndex}*#{cntPerPage}) and f.funding_code=#{fundingCode}) fq
+	inner join member m on fq.member_code=m.code WHERE rnum >= ((#{startIndex}-1)*#{cntPerPage}+1) order by fq.state asc
+	]]>	
 	</select>
 	
 </mapper>	

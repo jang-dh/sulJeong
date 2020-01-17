@@ -299,26 +299,26 @@ $(function(){
 						<div class="row">
 							<div class="form-group col-md-12">
 								<label>아이디</label> 
-								<input name="id" id="id" class="form-control" type="text" value="${member.id}" readonly>
+                <input name="id" id="id" class="form-control" type="text" value="${member.id}" readonly>
 							</div>
 						</div>
 
 						<div class="row">
 							<div class="form-group col-md-6">
-								<label for="form_choose_password">비밀번호</label> 
-                <input id="pwd" name="pwd" class="form-control" type="password" placeholder="특수문자 포함 8글자 이상 작성해주세요">
+								<label for="form_choose_password">비밀번호</label> <input
+									id="pwd" name="pwd" class="form-control" type="password" placeholder="특수문자 포함 8글자 이상 작성해주세요">
 							</div>
 							<div class="form-group col-md-6">
-								<label>비밀번호 확인</label> 
-                <input id="pwdCheck" name="pwdCheck" class="form-control" type="password" placeholder="특수문자 포함 8글자 이상 작성해주세요">
+								<label>비밀번호 재확인</label> <input id="pwdCheck"
+									name="pwdCheck" class="form-control" type="password" placeholder="특수문자 포함 8글자 이상 작성해주세요">
 							</div>
 							<div class="form-group col-md-9" id="pwdEqualCheck">일치 여부</div>
 						</div>
 
 						<div class="row">
 							<div class="form-group col-md-12">
-								<label for="form_choose_username">이름</label>
-								<input id="name" name="name" class="form-control" type="text" value="${member.name}">
+								<label for="form_choose_username">성함</label> 
+                <input id="name" name="name" class="form-control" type="text" value="${member.name}">
 							</div>
 						</div>
 
@@ -358,9 +358,7 @@ $(function(){
 							</div>
 						</div>
 						<div class="form-group">
-							<button	class="btn btn-border btn-theme-colored btn-lg btn-block mt-15"	type="submit" id="register">
-								정보 수정
-							</button>
+							<button class="btn btn-border btn-theme-colored btn-lg btn-block mt-15" type="submit" id="register">수정하기</button>
 						</div>
 					</form>
 				</div>
@@ -373,35 +371,37 @@ $(function(){
 		<div id="content">
 			<div class="row">
 				<div class="col-md-6 col-md-push-3">
-					<br> <br>
-					<!-- 스프링 security 4에선 POST 전송시무조건 csrt 를 보내야 한다. (GET은 안보내도 됨)-->
-					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-					<div class="icon-box mt-0 p-0">
-						<a href="#" class="icon icon-bordered icon-rounded icon-sm pull-left mb-0 mr-10">
-							<i class="pe-7s-users"></i>
-						</a>
-						<h4 class="text-gray pt-10 mt-0 mb-30">본인 확인</h4>
+					<br>
+					<br>
+						<!-- 스프링 security 4에선 POST 전송시무조건 csrt 를 보내야 한다. (GET은 안보내도 됨)-->
+						<input type="hidden" name="${_csrf.parameterName}"
+							value="${_csrf.token}">
+						<div class="icon-box mb-0 p-0">
+							<a href="#"
+								class="icon icon-bordered icon-rounded icon-sm pull-left mb-0 mr-10">
+								<i class="pe-7s-users"></i>
+							</a>
+							<h4 class="text-gray pt-10 mt-0 mb-30">본인 확인</h4>
+						</div>
+						<hr>
+						<div class="row">
+							<div class="form-group col-md-12">
+								<label>아이디</label> 
+								<input name="id" id="id2" class="form-control" type="text" value="${member.id}" readonly>
+							</div>
+						</div>
 					</div>
-					<hr>
-					<div class="row">
-						<div class="form-group col-md-12">
-							<label>아이디</label> 
-							<input name="id" id="id2" class="form-control" type="text" value="${member.id}" readonly>
+						<div class="row">
+							<div class="form-group col-md-12">
+								<label for="form_choose_password">비밀번호 확인</label> 
+								<input id="pwd2" name="pwd" class="form-control" type="password">
+							</div>
 						</div>
 					</div>
 
-					<div class="row">
-						<div class="form-group col-md-12">
-							<label for="form_choose_password">비밀번호 입력</label> 
-							<input id="pwd2" name="pwd" class="form-control" type="password">
+						<div class="form-group">
+							<button class="btn btn-border btn-theme-colored btn-lg btn-block mt-15" type="button" id="membership_withdrawal">회원 탈퇴하기</button>
 						</div>
-					</div>
-
-					<div class="form-group mt-60">
-						<button	class="btn btn-border btn-theme-colored btn-lg btn-block mt-15"	type="button" id="membership_withdrawal">
-							회원 탈퇴
-						</button>
-					</div>
 				</div>
 			</div>
 		</div>

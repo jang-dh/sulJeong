@@ -24,23 +24,20 @@
 		</div>
 	</section>
 
-	<section>
-		<div class="container pt-70">
-			<div class="row">
-				<div class="col-md-7 col-md-push-3">
-					<h3 class="text-theme-colored mt-0 mb-20">제목 :	${question.subject}</h3>
-					<p>작성자 : ${question.member.id}</p>
-					<p>작성일 : ${question.regdate}</p>
-					<hr>
-					<p>${question.content}</p>
-					<hr>
-					<h3 class="text-theme-colored mt-0 mb-20">답변</h3>
-					<c:choose>
-						<c:when test="${!empty question.personalAnswer.content}">
-							<%-- 		            <form>
-		            	<input class="form-control" type="text" value=" ${question.personalAnswer.content} " readonly/>
-		            </form>
- --%>
+    <section>
+      <div class="container pt-70">
+        <div class="row">
+          <div class="col-md-7">
+            <h3 class="text-theme-colored mt-0 mb-20">제목 : ${question.subject}</h3>
+			      <p>작성자 : ${question.member.id}</p>
+            <hr>
+            <textarea style="border: 0px" readonly="readonly" cols="100" rows="8">${question.content}</textarea>
+            <%-- <p>${question.content}</p> --%>
+            <p>작성일 : ${question.regdate}</p> 
+            <hr>
+            <h3 class="text-theme-colored mt-0 mb-20">답변</h3>
+            <c:choose>
+            	<c:when test="${!empty question.personalAnswer.content}">
 							<textarea class="form-control required" rows="5" readonly>${question.personalAnswer.content}</textarea>
 						</c:when>
 						<c:otherwise>
