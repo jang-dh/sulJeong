@@ -15,18 +15,15 @@
 		
 		if(curUrl.includes("curPage"))
 			curPageNum = curUrl.split("=")[1];
-		console.log(curPageNum);
 		
 		$(".numberBtn").eq(curPageNum-1).addClass("active");
 	});
-	
 </script>
 
 <div class="main-content">
 	<!-- -----------------------------페이지 처리좀 해보자 -->
 	<!-- Section: inner-header -->
-	<section class="inner-header divider layer-overlay"
-		data-bg-img="${pageContext.request.contextPath}/resources/images/main/slider-main.jpg">
+	<section class="inner-header divider layer-overlay" data-bg-img="${pageContext.request.contextPath}/resources/images/main/slider-main.jpg">
 		<div class="container pt-90 pb-40">
 			<!-- Section Content -->
 			<div class="section-content">
@@ -62,8 +59,7 @@
 								<c:forEach items="${list}" var="notice" varStatus="status">
 									<tr>
 										<th scope="row">${notice.code}</th>
-										<td><a
-											href="${pageContext.request.contextPath}/noticeDetail/${notice.code}">${notice.subject}</a></td>
+										<td><a href="${pageContext.request.contextPath}/noticeDetail/${notice.code}">${notice.subject}</a></td>
 										<td>${notice.regdate}</td>
 									</tr>
 								</c:forEach>
@@ -78,7 +74,7 @@
 					<nav style="text-align: center">
 						<ul class="pagination dark">
 							<li>
-								<a aria-label="Previous" onClick="fn_paging(${paging.prevPage})"> 
+								<a aria-label="Previous" onClick="fn_paging(${paging.prevPage})">
 									<span aria-hidden="true">&laquo;</span>
 								</a>
 							</li>
@@ -90,7 +86,7 @@
 								</li>
 							</c:forEach>
 							<li>
-								<a aria-label="Next" onClick="fn_paging(${paging.nextPage})"> 
+								<a aria-label="Next" onClick="fn_paging(${paging.nextPage})">
 									<span aria-hidden="true">»</span>
 								</a>
 							</li>

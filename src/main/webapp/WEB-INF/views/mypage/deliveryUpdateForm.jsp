@@ -17,6 +17,7 @@
 						<li><a href="#">Pages</a></li>
 						<li class="active">Causes Grid</li> -->
 						</ol>
+
 					</div>
 				</div>
 			</div>
@@ -27,7 +28,6 @@
 		<div class="container pt-70">
 			<div class="row">
 				<div class="col-md-7">
-					<!-- <h3 class="text-theme-colored mt-0 mb-20">배송정보 수정</h3> -->
 					<p>아이디 : ${member.id}</p>
 					<hr>
 					<p>이름 : ${member.name}</p>
