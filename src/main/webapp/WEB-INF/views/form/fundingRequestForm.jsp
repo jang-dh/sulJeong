@@ -44,22 +44,17 @@
 			<div data-example-id="basic-forms" class="bs-example mb-30">
 				<form name="writeForm"
 					action="${pageContext.request.contextPath}/fundingInsert?${_csrf.parameterName}=${_csrf.token}"
-					method="post" onSubmit='return checkValid()'
-					enctype="multipart/form-data">
-					<div class="form-group">
-						<br>
-						<br> 
+					method="post" onSubmit='return checkValid()' enctype="multipart/form-data">
+					<div class="form-group mt-30">
 						<label for="exampleInputEmail2">펀딩 주제</label>
 						<input type="text" placeholder="제목" id="subject" name="subject" class="form-control">
 					</div>
-					<div class="form-group">
+					<div class="form-group mt-10">
 						<label for="exampleInputFile2">파일 첨부</label>
 						<input type="file" id="file" name="file">
 					</div>
 					<br>
-					<button class="btn btn-default pull-right" type="submit">신청</button>
-					<br>
-					<br>
+					<button class="btn btn-gray btn-transparent btn-theme-colored btn-lg pull-right mb-30" type="submit">신청</button>
 				</form>
 			</div>
 		</div>

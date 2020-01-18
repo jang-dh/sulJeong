@@ -48,7 +48,7 @@
 									<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"> 
 									<input type="hidden" name="questionCode" value="${question.code}"> 
 									<label>답변하기<small>*</small></label>
-									<textarea name="content" class="form-control required" rows="5" placeholder="내용을 입력해 주세요"></textarea>
+									<textarea name="content" class="form-control required" rows="5" placeholder="내용을 입력해 주세요" required=""></textarea>
 									<br> 
 									<input type="submit" value="등록" class="btn btn-dark btn-theme-colored btn-circled">
 								</form>
