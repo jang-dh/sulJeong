@@ -12,7 +12,6 @@
 				$("#answerText").focus();
 				return false;
 			}
-
 			var answerVal = $("#answerText").val();
 			//console.log(${fundingAnswer.questionCode});
 			var allDate = "${_csrf.parameterName}=${_csrf.token}"
@@ -23,8 +22,9 @@
 				dataType : "json", //서버가 보내온 데이터 타입(text,html,xml,json)
 				data : allDate,//서버에게 보내는 parameter 정보
 				success : function(result) {
-					$("#showId").html(result.content)
-					$("#showDate").html(result.regdate)
+					$("#showId").html(result.content);
+					$("#showDate").html(result.regdate);
+					location.reload();
 				},//성공했을대
 				error : function(err) {
 					alert("답변은 한번만 입력 가능합니다.")
@@ -69,20 +69,14 @@
 		            <form>
 		            	<input class="form-control" type="text" value="${fundingAnswer.content} " readonly/><br>
 		            	 <ul class="etcArea">
-	                     	<li class=""><strong>답변 작성일</strong> <span class="txtNum">${fundingQuestion.regdate}</span>
+	                     	<li class=""><strong>답변 작성일</strong> <span class="txtNum">${fundingAnswer.regdate}</span>
 	                     	</li>
                   		</ul>
 		            	
 		            </form>
 	            </c:when>
 	            <c:otherwise>
-		            <form>
-			           <div class="form-control" id="showId"></div><br>
-			           <ul class="etcArea">
-	                     	<li class=""><strong>답변 작성일</strong> <span class="txtNum" id="showDate"></span>
-	                     	</li>
-                  		</ul>
-			        </form>
+	            	
 	            </c:otherwise>
 	        </c:choose>
 	            
@@ -110,4 +104,3 @@
     
   </div>
   <!-- end main-content -->
-    
