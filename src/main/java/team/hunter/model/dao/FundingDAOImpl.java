@@ -96,10 +96,6 @@ public class FundingDAOImpl implements FundingDAO {
 		//map 타입에 map 이름으로 code와 purchasePrice를 넣어 주세요
 		map.put("code", code);
 		map.put("purchasePrice", price);
-		
-		System.out.println("DaoCode : " + code);
-		System.out.println("DaoPrice : " + price);
-		
 		return session.update("fundingMapper.updateStackPrice", map);
 	}
 
