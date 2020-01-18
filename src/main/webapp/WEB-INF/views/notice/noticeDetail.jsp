@@ -18,11 +18,28 @@
 		});
 	});
 </script>
+<section class="inner-header divider layer-overlay" data-bg-img="${pageContext.request.contextPath}/resources/images/main/slider-main.jpg">
+		<div class="container pt-90 pb-40">
+			<!-- Section Content -->
+			<div class="section-content">
+				<div class="row">
+					<div class="col-md-6">
+						<h2 class="text-white font-36">공지사항</h2>
+						<ol class="breadcrumb text-left mt-10 white">
+							<!-- <li><a href="#">Home</a></li>
+					<li><a href="#">Pages</a></li>
+					<li class="active">Causes Grid</li> -->
+						</ol>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
     <section>
       <div class="container pt-70">
         <div class="row">
-          
-          <div class="col-md-7">
+          <div class="col-md-8 col-md-push-2">
             <h3 class="text-theme-colored mt-0 mb-20">제목 : ${detail.subject }</h3>
             <%-- <hr>
             <h4 class="text-theme-colored mt-0 mb-20">작성일 : ${detail.regdate}</h4> --%>
@@ -34,7 +51,7 @@
             <a class="btn btn-gray mt-20" href="${pageContext.request.contextPath}/down?fileName=${detail.filename}">${detail.filename }</a>
             </c:if>   
             <hr>         
-            <a href="${pageContext.request.contextPath}/notice" class="active">리스트로 돌아가기</a>
+            <a href="${pageContext.request.contextPath}/notice" class="active pull-right">목록으로 돌아가기</a>
             <p></p>
 			<sec:authorize access="hasRole('ROLE_ADMIN')">
             <form name="requestForm" method="post" id="requestForm">

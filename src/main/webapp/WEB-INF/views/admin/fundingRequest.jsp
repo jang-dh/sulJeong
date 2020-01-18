@@ -11,8 +11,10 @@
 	
 	$(function() {
 		var curUrl = location.href;
-		var curPageNum = curUrl.split("=")[1];
-		console.log(curPageNum);
+		var curPageNum = 1;
+		
+		if(curUrl.includes("curPage"))
+			curPageNum = curUrl.split("=")[1];
 		
 		$(".numberBtn").eq(curPageNum-1).addClass("active");
 	});
@@ -42,9 +44,8 @@
 					<div class="main-content">
 						<section>
 							<div class="container">
-
-								<h4 class="title">펀딩등록신청</h4>
-
+								<h4 class="text-theme-colored text-uppercase m-0">펀딩등록신청</h4>
+								<div class="line-bottom mb-30"></div>
 								<div data-example-id="hoverable-table" class="bs-example"
 									style="width: 70%">
 									<table class="table table-hover">

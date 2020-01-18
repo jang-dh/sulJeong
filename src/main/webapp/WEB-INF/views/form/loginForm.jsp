@@ -9,8 +9,6 @@ content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1
 
 <script>
 	$(function(){
-		
-		
 		// 저장된 쿠키값을 가져와서 ID 칸에 넣어준다. 없으면 공백으로 들어감.
 	    var key = getCookie("key");
 	    $("#form_username_email").val(key); 
@@ -37,32 +35,33 @@ content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1
 		if('${errorMessage}' != ""){
 			alert('${errorMessage}');
 		}
-
-		$("#login-form").submit(function() {
-			if ($("#form_username_email").val() == "") {
+		
+		$("#login-form").submit(function(){
+			if($("#form_username_email").val()==""){
 				alert("아이디를 입력해주세요");
 				$("#form_username_email").focus();
 				return false;
 			}
-			if ($("#form_password").val() == "") {
+			if($("#form_password").val()==""){
 				alert("비밀번호를 입력해주세요");
 				$("#form_password").focus();
 				return false;
 			}
 		});
-
+		
 		$("#login-form").submit(function() {
-			if ($('#id').val() == "") {
-				alert("아이디를 입력해주세요");
-				$('#id').focus();
-				return false;
-			}
-
-			if ($('#pwd').val() == "") {
-				alert("비밀번호를 입력해주세요");
-				$('#pwd').focus();
-				return false;
-			}
+				if($('#id').val()==""){
+					alert("아이디를 입력해주세요");
+					$('#id').focus();
+					return false;
+				}
+				
+				if($('#pwd').val()==""){
+					alert("비밀번호를 입력해주세요");
+					$('#pwd').focus();
+					return false;
+				}
+			});
 		});
 	
 	function setCookie(cookieName, value, exdays){
@@ -71,7 +70,6 @@ content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1
 	    var cookieValue = escape(value) + ((exdays==null) ? "" : "; expires=" + exdate.toGMTString());
 	    document.cookie = cookieName + "=" + cookieValue;
 	}
-	
 	
 	function deleteCookie(cookieName){
 	    var expireDate = new Date();
@@ -123,11 +121,12 @@ content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1
               <div class="form-group pull-right mt-10">
                 <input type="submit" class="btn btn-dark btn-sm" id="login" value="로그인">
               </div>
+              
+			  <!-- ------- -->
               <div class="clear text-center pt-10">
                 <a class="text-theme-colored font-weight-600 font-12" href="${pageContext.request.contextPath}/searchLoginInfoForm">아이디/비밀번호 찾기</a>
               </div>
             </form>
-          </div>
         </div>
       </div>
     </section>
