@@ -71,7 +71,7 @@
 
     <section>
       <div class="container pt-20 pb-20">
-        <div class="esc-heading lr-line left-heading">
+        <div class="esc-heading lr-line left-heading mb-30">
           <h4>사이트 관리</h4>
         </div>
         <div class="row">
