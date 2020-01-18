@@ -9,8 +9,6 @@ content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1
 
 <script>
 	$(function(){
-		
-		
 		// 저장된 쿠키값을 가져와서 ID 칸에 넣어준다. 없으면 공백으로 들어감.
 	    var key = getCookie("key");
 	    $("#form_username_email").val(key); 
@@ -37,7 +35,6 @@ content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1
 		if('${errorMessage}' != ""){
 			alert('${errorMessage}');
 		}
-			
 		
 		$("#login-form").submit(function(){
 			if($("#form_username_email").val()==""){
@@ -73,7 +70,6 @@ content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1
 	    var cookieValue = escape(value) + ((exdays==null) ? "" : "; expires=" + exdate.toGMTString());
 	    document.cookie = cookieName + "=" + cookieValue;
 	}
-	
 	
 	function deleteCookie(cookieName){
 	    var expireDate = new Date();
@@ -131,27 +127,6 @@ content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1
                 <a class="text-theme-colored font-weight-600 font-12" href="${pageContext.request.contextPath}/searchLoginInfoForm">아이디/비밀번호 찾기</a>
               </div>
             </form>
-            <div class="clear text-center pt-10">
-				<a id="kakao-login-btn">카카오톡 로그인</a> <a
-					href="http://developers.kakao.com/logout"></a>
-					 </div>
-				<script type='text/javascript'>
-					//<![CDATA[
-					// 사용할 앱의 JavaScript 키를 설정해 주세요.
-					Kakao.init('f993f805dafe9538c884ac2dd9331589');
-					// 카카오 로그인 버튼을 생성합니다.
-					Kakao.Auth.createLoginButton({
-						container : '#kakao-login-btn',
-						success : function(authObj) {
-							alert(JSON.stringify(authObj));
-						},
-						fail : function(err) {
-							alert(JSON.stringify(err));
-						}
-					});
-					//]]>
-				</script>
-          </div>
         </div>
       </div>
     </section>

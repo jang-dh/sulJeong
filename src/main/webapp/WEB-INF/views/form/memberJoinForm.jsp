@@ -2,9 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script type="text/javascript">
-
 	var popAuthEmail = null;
 	var emailAuthResult=null;
 	
@@ -223,7 +221,6 @@
 				 });
 		})
 	});
-		
 
 	function CheckForm(join) {
 		if ($('input:checkbox[id=emailAccept]').is(':checked') == false) {
@@ -235,7 +232,7 @@
 		}
 	};
 </script>
-<body>
+<section>
 	<div class="row">
 		<div class="col-md-6 col-md-push-3">
 			<br>
@@ -294,8 +291,6 @@
 					<div class="form-group col-md-12" id="pwdEqualCheck">비밀번호 확인 </div>
 				</div>
 				
-				
-				
 				<div class="row">
 					<div class="form-group col-md-6">
 						<label>이메일 주소</label> 
@@ -306,7 +301,6 @@
 						<input name="emailCheck" id="emailCheck" class="form-control" type="button" value="이메일 인증">
 					</div>
 				</div>
-				
 				
 				<div class="row">
 					<div class="form-group col-md-6">
@@ -331,7 +325,6 @@
 					</div>
 				</div>
 
-
 				<div class="row">
 					<div class="form-group col-md-12">
 						<label for="form_choose_username">이메일 수신동의(선택)</label> <input
@@ -345,16 +338,10 @@
 			</form>
 			
 			<input type="hidden" id="hidden" name="hidden">
-			
-			<input type="hidden" id="hidden2" name="hidden2">
-			
-			<input type="hidden" id="emailCheckStatus" name="emailCheckStatus">
-			</c:otherwise>
+					<input type="hidden" id="hidden2" name="hidden2">
+					<input type="hidden" id="emailCheckStatus" name="emailCheckStatus">
+				</c:otherwise>
 			</c:choose>
-			
 		</div>
 	</div>
-	
-	
-	
-</body>
+</section>
