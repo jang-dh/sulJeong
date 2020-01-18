@@ -27,24 +27,24 @@
 	<section>
 		<div class="container pt-70">
 			<div class="row">
-				<div class="col-md-7">
-					<p>아이디 : ${member.id}</p>
-					<hr>
-					<p>이름 : ${member.name}</p>
-					<hr>
-					<p>주소 : ${member.addr}</p>
+				<div class="col-md-7 col-md-push-3">
+					<p><strong>아이디 : </strong> ${member.id}</p>
+					<p><strong>이름 : </strong>${member.name}</p>
+					<p><strong>주소 : </strong>${member.addr}</p>
 					<hr>
 					<form action="${pageContext.request.contextPath}/mypage/deliveryCode" method="post">
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"> 
-						택배회사 : <input class="form-control" id="courier" name="courier" type="text" value="${member.purchase.courier}" /><br> 
-						송장번호 : <input class="form-control" id="deliveryNumber" name="deliveryNumber" type="text" value="${member.purchase.deliveryNumber} " /><br>
+						<strong>택배회사 : </strong><br><br>
+						<input class="form-control" id="courier" name="courier" type="text" value="${member.purchase.courier}"/><br> 
+						<strong>송장번호 : </strong><br><br>
+						<input class="form-control" id="deliveryNumber" name="deliveryNumber" type="text" value="${member.purchase.deliveryNumber} " /><br>
 						<input type="hidden" id="memberCode" name="memberCode" value="${member.code}"> 
 						<input type="hidden" id="fundingCode" name="fundingCode" value="${member.purchase.fundingCode}"> 
-						<input type="submit" id="answerButton" value="수정" class="btn btn-dark btn-theme-colored btn-circled">
+						<input type="submit" id="answerButton" value="수정" class="btn btn-dark btn-theme-colored btn-circled pull-right">
 					</form>
 					<br> <br>
 					<hr>
-					<a href="${pageContext.request.contextPath}/mypage/myOpenFunding/${member.purchase.fundingCode}" class="active">목록으로 돌아가기</a>
+					<a href="${pageContext.request.contextPath}/mypage/myOpenFunding/${member.purchase.fundingCode}" class="active pull-right">목록으로 돌아가기</a>
 					<p></p>
 				</div>
 			</div>

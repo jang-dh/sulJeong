@@ -20,8 +20,10 @@
 	
 	$(function() {
 		var curUrl = location.href;
-		var curPageNum = curUrl.split("=")[1];
-		console.log(curPageNum);
+		var curPageNum = 1;
+		
+		if(curUrl.includes("curPage"))
+			curPageNum = curUrl.split("=")[1];
 		
 		$(".numberBtn").eq(curPageNum-1).addClass("active");
 	});
@@ -33,7 +35,7 @@
 		data-bg-img="${pageContext.request.contextPath}/resources/images/main/slider-main.jpg">
 		<div class="container pt-90 pb-40">
 			<!-- Section Content -->
-			<div class="section-conte<nt">
+			<div class="section-content">
 				<div class="row">
 					<div class="col-md-6">
 						<h2 class="text-white font-36">펀딩 내역</h2>
@@ -125,18 +127,17 @@
 					</div>
 					<nav style="text-align: center">
 						<ul class="pagination dark">
-							<li><a href="#" aria-label="Previous"
-								onClick="fn_paging(${paging.prevPage})"> <span
-									aria-hidden="true">&laquo;</span></a></li>
-							<c:forEach var="pageNum" begin="${paging.startPage}"
-								end="${paging.endPage}">
-		 						<li class="numberBtn" value="${pageNum}"><a href="#"
-									onClick="fn_paging(${pageNum})" id="pageBtn">${pageNum} <span
-										class="sr-only">(current)</span></a></li>
+							<li><a aria-label="Previous" onClick="fn_paging(${paging.prevPage})">
+							<span aria-hidden="true">&laquo;</span></a></li>
+							<c:forEach var="pageNum" begin="${paging.startPage}" end="${paging.endPage}">
+		 						<li class="numberBtn" value="${pageNum}">
+		 							<a onClick="fn_paging(${pageNum})" id="pageBtn">${pageNum} 
+		 								<span class="sr-only">(current)</span>
+		 							</a>
+		 						</li>
 							</c:forEach>
-							<li><a href="#" aria-label="Next"
-								onClick="fn_paging(${paging.nextPage})"> <span
-									aria-hidden="true">»</span></a></li>
+							<li><a aria-label="Next"conClick="fn_paging(${paging.nextPage})"> 
+								<span aria-hidden="true">»</span></a></li>
 						</ul>
 					</nav>
 					<div class="col-md-10 col-md-offset-1 mt-30">
