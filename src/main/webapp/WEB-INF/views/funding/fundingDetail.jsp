@@ -100,6 +100,8 @@ $(function() {
 				success: function (result) {
 					if(result == '1')
 						alert("문의가 등록되었습니다.");
+						document.documentElement.scrollTop = 0;
+						location.reload();
 				},
 				erorr: function (err) {
 					alert(err + "오류 발생");

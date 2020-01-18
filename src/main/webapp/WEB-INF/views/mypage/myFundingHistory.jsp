@@ -16,6 +16,7 @@
 			$("[name=code]").val(purchaseCode);
 			$("#updateForm").submit();
 		})
+		
 	})
 	
 	function fn_paging(curPage){
@@ -124,10 +125,20 @@
 													<span class="label label-info">펀딩 결제 완료</span>
 													<p/>
 													<span>
-														<ul>
-															<li class="deliver">송장 번호 : ${list.deliveryNumber}</li>
+														<c:if test="${empty list.deliveryNumber}">
+															<ul>
+															<li class="deliver">송장 번호 : 배송전 입니다.</li>
+															<li class="courier">운송 업체 : 배송전 입니다.</li>
+														</ul>
+														</c:if>
+														<c:if test="${!empty list.deliveryNumber}">
+															<ul>
+														<li class="deliver">송장 번호 : ${list.deliveryNumber}</li>
 															<li class="courier">운송 업체 : ${list.courier}</li>
 														</ul>
+														</c:if>
+														
+															
 													</span>
 												</c:when>
 												<c:otherwise>
@@ -139,9 +150,6 @@
 												<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
 												<input type="hidden" name="code" value="${list.code}" />
 												<input type="hidden" name="price" value="${list.funding.rewardPrice * list.qty}" />
-												<c:if test="${list.purchaseState=='603' }">
-													<input type="button" class="btn btn-default btn-xs pull-right" value="후원취소">
-												</c:if>
 											</form>
 											
 										</td>

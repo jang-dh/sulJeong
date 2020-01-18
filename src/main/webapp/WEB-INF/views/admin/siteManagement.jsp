@@ -75,7 +75,7 @@
           <h4>사이트 관리</h4>
         </div>
         <div class="row">
-          <div class="col-md-3">
+          <div class="col-md-2">
             <div class="vertical-tab">
               <ul class="nav nav-tabs">
                 <li class="active"><a href="${pageContext.request.contextPath}/admin/siteManagement">사이트 통계</a></li>
@@ -92,26 +92,52 @@
 	            <h3 id="display3" class="text-theme-colored text-uppercase m-0"></h3>
 	            <h3 id="display4" class="text-theme-colored text-uppercase m-0"></h3>
 	            <hr/>
-				<h3>주간 방문자 수</h3> 
-				<div style="width: 90%" class="text-center">
-				  <canvas id="lineChart"<%--  height="200" width="500" --%>></canvas>
-				</div><br>
-				
-				
-				<h3>주간 펀딩 수</h3>
-				<div style="width: 90%" class="text-center">
-  					<canvas id="barChart"<%--  width="500" height="200" --%>></canvas>
-				</div>
-				
-				<h3>주간 펀딩 금액</h3>
+	            
+	            <table >
+	            	<tr align="center">
+	            		<td width="500" height="300">
+	            			<h3>주간 방문자 수</h3>
+								<div class="line-bottom mb-30"></div>
+								<div style="width: 90%" class="text-center">
+								  <canvas id="lineChart"<%--  height="200" width="500" --%>></canvas>
+								</div>
+	            		</td>
+	            		<td width="500" height="300">
+				            		<h3>주간 펀딩 수</h3>
+							<div class="line-bottom mb-30"></div>
+							<div style="width: 90%" class="text-center">
+			  					<canvas id="barChart"<%--  width="500" height="200" --%>></canvas>
+							</div>
+	            		</td>
+	            	</tr>
+	            	<tr align="center">
+	            		<td width="500" height="300">
+	            			<h3>주간 펀딩 금액</h3>
+				<div class="line-bottom mb-30"></div>
 				<div style="width: 90%" class="text-center">
   					<canvas id="lineChart2"<%--  width="500" height="200" --%>></canvas>
 				</div>
-				
+	            		</td>
+	            		<td width="500" height="300">
+	            			
 				<h3>주간 펀딩 등록 수</h3>
+				<div class="line-bottom mb-30"></div>
 				<div style="width: 90%" class="text-center">
   					<canvas id="barChart2"<%--  width="500" height="200" --%>></canvas>
 				</div>
+	            		</td>
+	            	</tr>
+	            	
+	            	
+	            
+	            </table>
+				
+				
+				
+				
+				
+				
+				
 				
 
             </div>

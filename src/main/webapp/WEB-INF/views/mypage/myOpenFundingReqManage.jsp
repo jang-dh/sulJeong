@@ -56,7 +56,7 @@
       <div class="container pt-70">
         <div class="row">
           
-          <div class="col-md-7">
+          <div class="col-md-7 col-md-push-3">
             <h3 class="text-theme-colored mt-0 mb-20">제목 : ${fundingQuestion.subject}</h3>
 			<p>작성자 : ${fundingQuestion.member.id}</p>
             <hr>

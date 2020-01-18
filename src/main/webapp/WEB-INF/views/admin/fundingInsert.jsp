@@ -110,7 +110,7 @@
 			<h4>사이트 관리</h4>
 		</div>
 		<div class="row">
-			<div class="col-md-3">
+			<div class="col-md-2">
 				<div class="vertical-tab">
 					<ul class="nav nav-tabs">
 						<li>

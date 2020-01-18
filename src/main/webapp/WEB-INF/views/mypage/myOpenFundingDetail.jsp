@@ -85,10 +85,12 @@
 <section>
 	<div class="container pt-20 pb-20">
 		<div class="esc-heading lr-line left-heading">
-			<h4>${fundingInfo.title}</h4>
+			<h2 align="center">${fundingInfo.title}</h2>
 		</div>
+		<div>&nbsp;</div>
+		<div>&nbsp;</div>
 		<div class="row">
-			<div class="col-md-3">
+			<div class="col-md-2">
 				<div class="vertical-tab">
 					<ul class="nav nav-tabs">
 						<li class="active"><a href="#tab18" data-toggle="tab"
@@ -118,7 +120,12 @@
 											</tr>
 										</thead>
 										<tbody>
-											<c:forEach items="${fundingReqManage}" var="fundingReqManage"
+										<c:choose>
+											<c:when test="${empty fundingReqManage}">
+												<tr><th colspan='5' align="center"> <h3 align="center">등록된 문의 내역이 없습니다.</h3></th></tr>
+											</c:when>
+											<c:otherwise>
+												<c:forEach items="${fundingReqManage}" var="fundingReqManage"
 												varStatus="state">
 												<tr>
 													<th scope="row">${fundingReqManage.member.code}</th>
@@ -136,11 +143,14 @@
 													</c:choose>
 												</tr>
 											</c:forEach>
+											</c:otherwise>
+										</c:choose>
 										</tbody>
 									</table>
 								</div>
 							</div>
 						</div>
+
 
 						<!-- 페이징 -->
 						<nav style="text-align: center">
@@ -233,7 +243,7 @@
 											</table>
 										</c:when>
 										<c:otherwise>
-											<h3>펀딩이 성공된 후 회원 목록을 볼 수 있습니다.</h3>
+											<h3 align="center">펀딩이 성공된 후 회원 목록을 볼 수 있습니다.</h3>
 										</c:otherwise>
 									</c:choose>
 
