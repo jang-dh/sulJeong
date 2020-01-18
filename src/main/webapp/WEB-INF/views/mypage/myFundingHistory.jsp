@@ -11,9 +11,9 @@
 		$("input[value=후원취소]").click(function(){
 			$("#updateForm").attr("action", "${pageContext.request.contextPath}/purchase/update");
 			var purchaseCode = $(this).parent().parent().parent().find("li").eq(0).text();
-	         purchaseCode = purchaseCode.split(":")[1];
-	         //alert(purchaseCode);
-	         $("[name=code]").val(purchaseCode);
+			purchaseCode = purchaseCode.split(":")[1];
+			//alert(purchaseCode);
+			$("[name=code]").val(purchaseCode);
 			$("#updateForm").submit();
 		})
 	})
@@ -139,7 +139,9 @@
 												<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
 												<input type="hidden" name="code" value="${list.code}" />
 												<input type="hidden" name="price" value="${list.funding.rewardPrice * list.qty}" />
-												
+												<c:if test="${list.purchaseState=='603' }">
+													<input type="button" class="btn btn-default btn-xs pull-right" value="후원취소">
+												</c:if>
 											</form>
 											
 										</td>
