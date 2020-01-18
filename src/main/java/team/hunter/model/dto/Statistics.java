@@ -15,4 +15,5 @@ public class Statistics {
 	private int purchasePrice;
 	private int purchaseCount;
 	private int fundingApply;
+	private int cancelPrice;
 }
