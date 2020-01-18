@@ -25,7 +25,6 @@
 		insert into purchase (code, member_code, funding_code, price, qty, purchase_state, purchase_date, delivery_number, courier, customer_uid, merchant_uid) 
 		values (seq_no.nextval, #{memberCode}, #{fundingCode}, #{price}, #{qty},
 		 #{purchaseState}, sysdate, #{deliveryNumber}, #{courier}, #{customerUid}, #{merchantUid})
-		order by desc
 	</insert>
 	
 	<!-- 근딘 : 후원 리스트 출력 -->
