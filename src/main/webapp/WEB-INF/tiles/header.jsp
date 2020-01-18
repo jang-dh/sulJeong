@@ -99,7 +99,7 @@
 					<ul class="menuzord-menu">
 						<!-- ---카카오---- -->
 						<li>
-							<div id="kakao-add-channel-button"></div> 
+							<div id="kakao-add-channel-button" class="mr-5" style="margin-top : 7px;"></div> 
 							<script type='text/javascript'>
 								//<![CDATA[
 								// 사용할 앱의 JavaScript 키를 설정해 주세요.
@@ -113,49 +113,42 @@
 							</script>
 						</li>
 						<!-- ---카카오---- -->
-						<li><a href="${pageContext.request.contextPath}/funding">펀딩</a> </li>
-						<li><a href="${pageContext.request.contextPath}/introduce">서비스 소개</a></li>
-						<li><a id="a" href="${pageContext.request.contextPath}/notice">공지사항</a></li> 
+						<li><a href="${pageContext.request.contextPath}/funding" class="mr-5 mt-5">펀딩</a> </li>
+						<li><a href="${pageContext.request.contextPath}/introduce" class="mr-5 mt-5">서비스 소개</a></li>
+						<li><a id="a" href="${pageContext.request.contextPath}/notice" class="mr-5 mt-5">공지사항</a></li> 
 						<c:if test="${empty pageContext.request.userPrincipal}">
-							<li><a href="${pageContext.request.contextPath}/login">로그인</a></li>
-							<li><a href="${pageContext.request.contextPath}/join">회원가입</a></li>
+							<li><a href="${pageContext.request.contextPath}/login" class="mr-5 mt-5">로그인</a></li>
+							<li><a href="${pageContext.request.contextPath}/join" class="mr-5 mt-5">회원가입</a></li>
 						</c:if> 
 						<c:if test="${not empty pageContext.request.userPrincipal}">
-							<li><a class="icon icon-dark icon-bordered icon-circled icon-border-effect effect-circled" href="#">
+							<li><a class="icon icon-dark icon-bordered icon-circled icon-border-effect effect-circled mt-5 mr-5" href="#">
 									<i class="fa fa-user"></i>
 								</a>
 								<div class="megamenu" style="width: fit-content; left: auto;">
 									<div class="megamenu-row">
-										<h3>
-											<a href="${pageContext.request.contextPath}/mypage/myInfoMenu">${principal.name}님 ></a>
-										</h3>
+										<h3><a href="${pageContext.request.contextPath}/mypage/myInfoMenu">${principal.name}님 ></a></h3>
 									</div>
 									<div class="megamenu-row">
 										<div class="col4">
 											<div class="icon-box" style="margin-bottom: 0px;">
-												<a class="icon"
-													href="${pageContext.request.contextPath}/mypage/fundingHistory"
-													style="margin-bottom: 0px;"> <i
-													class="fa fa-shopping-bag"></i>
+												<a class="icon" href="${pageContext.request.contextPath}/mypage/fundingHistory" style="margin-bottom: 0px;"> 
+													<i class="fa fa-shopping-bag"></i>
 												</a>
 												<h5 class="icon-box-title">펀딩내역</h5>
 											</div>
 										</div>
 										<div class="col4">
 											<div class="icon-box" style="margin-bottom: 0px;">
-												<a class="icon"
-													href="${pageContext.request.contextPath}/mypage/likes"
-													style="margin-bottom: 0px;"> <i
-													class="fa fa-heart faa-pulse animated-hover"></i>
+												<a class="icon" href="${pageContext.request.contextPath}/mypage/likes" style="margin-bottom: 0px;"> 
+													<i class="fa fa-heart faa-pulse animated-hover"></i>
 												</a>
 												<h5 class="icon-box-title">좋아요</h5>
 											</div>
 										</div>
 										<div class="col4">
 											<div class="icon-box" style="margin-bottom: 0px;">
-												<a class="icon"
-													href="${pageContext.request.contextPath}/mypage/myOpenFunding"
-													style="margin-bottom: 0px;"> <i class="fa fa-upload"></i>
+												<a class="icon" href="${pageContext.request.contextPath}/mypage/myOpenFunding" style="margin-bottom: 0px;"> 
+													<i class="fa fa-upload"></i>
 												</a>
 												<h5 class="icon-box-title">내 펀딩</h5>
 											</div>
@@ -164,9 +157,8 @@
 									<div class="megamenu-row">
 										<div class="col4">
 											<div class="icon-box" style="margin-bottom: 0px;">
-												<a class="icon"
-													href="${pageContext.request.contextPath}/mypage/fundingQuestion"
-													style="margin-bottom: 0px;"> <i class="fa fa-comments"></i>
+												<a class="icon" href="${pageContext.request.contextPath}/mypage/fundingQuestion" style="margin-bottom: 0px;"> 
+													<i class="fa fa-comments"></i>
 												</a>
 												<h5 class="icon-box-title">펀딩문의</h5>
 											</div>
@@ -174,7 +166,7 @@
 										<div class="col4">
 											<div class="icon-box" style="margin-bottom: 0px;">
 												<a class="icon" href="${pageContext.request.contextPath}/mypage/myQuestion" style="margin-bottom: 0px;"> 
-                          <i class="fa fa-envelope faa-horizontal animated-hover"></i>
+                          							<i class="fa fa-envelope faa-horizontal animated-hover"></i>
 												</a>
 												<h5 class="icon-box-title">1:1 문의</h5>
 											</div>
@@ -183,9 +175,8 @@
 										<sec:authorize access="hasRole('ROLE_ADMIN')">
 											<div class="col4">
 												<div class="icon-box" style="margin-bottom: 0px;">
-													<a class="icon"
-														href="${pageContext.request.contextPath}/admin/siteManagement"
-														style="margin-bottom: 0px;"> <i class="fa fa-cog"></i>
+													<a class="icon" href="${pageContext.request.contextPath}/admin/siteManagement" style="margin-bottom: 0px;"> 
+														<i class="fa fa-cog"></i>
 													</a>
 													<h5 class="icon-box-title">&nbsp;&nbsp;관리자</h5>
 												</div>
@@ -203,7 +194,7 @@
 						</c:if>
 						<li>
 							<a href="${pageContext.request.contextPath}/fundingOpenRequest" style="padding: 0px;">
-								<button class="btn btn-border btn-theme-colored btn-lg">펀딩 오픈 신청하기</button>
+								<button class="btn btn-border btn-theme-colored btn-circled btn-lg">펀딩 오픈 신청</button>
 							</a>
 						</li>
 					</ul>
