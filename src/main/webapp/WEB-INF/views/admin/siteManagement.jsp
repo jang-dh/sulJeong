@@ -7,29 +7,32 @@
    $(document).ready(function () {
       var allDate = "${_csrf.parameterName}=${_csrf.token}";
       
-      $.ajax({
-         url: "${pageContext.request.contextPath}/selectVisitData", //서버요청주소
-         type : "post", //서버 요청방식(get,put, put, patch)
-         dataType :"json", //서버가 보내온 데이터 타입(text, html, xml, json)
-         data: allDate,
-         success : function (result) {
+//       $.ajax({
+//          url: "${pageContext.request.contextPath}/selectVisitData", //서버요청주소
+//          type : "post", //서버 요청방식(get,put, put, patch)
+//          dataType :"json", //서버가 보내온 데이터 타입(text, html, xml, json)
+//          data: allDate,
+//          success : function (result) {
         	
         	
         	
-            var str ="오늘 사이트를 방문한 사람 수 : "+result.visit+"명";
-            var str2 ="오늘 등록한 펀딩 수 : "+result.fundingApply+"개";
-            var str3 ="오늘 사람들이 결제한 총 금액 : "+AddComma(result.purchasePrice)+"원";
-            var str4 ="오늘 사람들이 펀딩에 참여한 수 : "+result.purchaseCount+"번";
-            $("#display").html(str);
-            $("#display2").html(str2);
-            $("#display3").html(str3);
-            $("#display4").html(str4);
-         }, //성공시 
-         error: function (err) {
+//             var str ="오늘 사이트를 방문한 사람 수 : "+result.visit+"명";
+//             var str2 ="오늘 등록한 펀딩 수 : "+result.fundingApply+"개";
+//             var str3 ="오늘 사람들이 결제한 총 금액 : "+AddComma(result.purchasePrice)+"원";
+//             var str4 ="오늘 사람들이 펀딩에 참여한 수 : "+result.purchaseCount+"번";
+//             var str5 ="오늘 사람들이 결제 취소한 금액 : "+AddComma(result.cancelPrice)+"원";
+//             $("#display").html(str);
+//             $("#display2").html(str2);
+//             $("#display3").html(str3);
+//             $("#display4").html(str4);
+//             $("#display5").html(str5);
+//          }, //성공시 
+//          error: function (err) {
             
-         }//실패시
-      });
-      setInterval(function () {
+//          }//실패시
+//       });
+      
+      var  cStop = setInterval(function () {
             $.ajax({
                url: "${pageContext.request.contextPath}/selectVisitData", //서버요청주소
              type : "post", //서버 요청방식(get,put, put, patch)
@@ -40,16 +43,19 @@
                  var str2 ="오늘 등록한 펀딩 수 : "+result.fundingApply+"개";
                  var str3 ="오늘 사람들이 결제한 총 금액 : "+AddComma(result.purchasePrice)+"원";
                  var str4 ="오늘 사람들이 펀딩에 참여한 수 : "+result.purchaseCount+"번";
+                 var str5 ="오늘 사람들이 결제 취소한 금액 : "+AddComma(result.cancelPrice)+"원";
                  $("#display").html(str);
                  $("#display2").html(str2);
                  $("#display3").html(str3);
                  $("#display4").html(str4);
+                 $("#display5").html(str5);
              }, //성공시 
              error: function (err) {
-                
+                console.log(err)
+                clearTimeout(cStop);
              }//실패시
          }, 30000);
-      
+      	
 
    
       });
@@ -91,6 +97,7 @@
 	            <h3 id="display2" class="text-theme-colored text-uppercase m-0"></h3>
 	            <h3 id="display3" class="text-theme-colored text-uppercase m-0"></h3>
 	            <h3 id="display4" class="text-theme-colored text-uppercase m-0"></h3>
+	            <h3 id="display5" class="text-theme-colored text-uppercase m-0"></h3>
 	            <hr/>
 	            
 	            <table >
@@ -138,6 +145,11 @@
 				
 				
 				
+				
+				<h3>주간 펀딩 취소 금액</h3>
+				<div style="width: 90%" class="text-center">
+  					<canvas id="lineChart3"<%--  width="500" height="200" --%>></canvas>
+				</div>
 				
 
             </div>
@@ -188,6 +200,14 @@
  			fundingApply.push('${fundingApply.fundingApply}');		</c:forEach>
 		fundingApply.splice(0,1);
 		fundingApply.reverse();
+		
+		//펀딩 취소 금액
+		var cancelPrice = new Array();
+ 		<c:forEach var="cancelPrice" items="${weekData}" varStatus="state">
+ 			cancelPrice.push('${cancelPrice.cancelPrice}');
+		</c:forEach>
+		cancelPrice.splice(0,1);
+		cancelPrice.reverse();
  		
         var lineChartData = {
           labels : regdate,
@@ -255,6 +275,25 @@
               
             };
         
+        var lineChartData3 = {
+                labels : regdate,
+                datasets : [
+                  {
+                    label: "My Second dataset",
+                    fillColor : "rgba(151,187,205,0.2)",
+                    strokeColor : "rgba(151,187,205,1)",
+                    pointColor : "rgba(151,187,205,1)",
+                    pointStrokeColor : "#fff",
+                    pointHighlightFill : "#fff",
+                    pointHighlightStroke : "rgba(151,187,205,1)",
+//                     data : [randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor()]
+                    data : cancelPrice
+                  }
+                ]
+            
+            	};
+        
+        
         window.onload = function(){
           var chart_lineChart = document.getElementById("lineChart").getContext("2d");
           window.myLine = new Chart(chart_lineChart).Line(lineChartData, {
@@ -274,6 +313,11 @@
           var chart_barChart2 = document.getElementById("barChart2").getContext("2d");
           window.myBar = new Chart(chart_barChart2).Bar(barChartData2, {
             responsive : true
+          });
+          
+          var chart_lineChart3 = document.getElementById("lineChart3").getContext("2d");
+          window.myLine = new Chart(chart_lineChart3).Line(lineChartData3, {
+            responsive: true
           });
           
         };

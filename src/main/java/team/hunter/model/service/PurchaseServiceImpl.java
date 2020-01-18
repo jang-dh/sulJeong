@@ -69,8 +69,8 @@ public class PurchaseServiceImpl implements PurchaseService {
 		Purchase purchase = purchaseDAO.selectByCode(code);
 		System.out.println(purchase.getMerchantUid());
 		cancelPurchase(purchase);
-		statisticsDAO.updateFurchaseFailed(price);
-		fundingDAO.updateStackPrice(purchase.getFundingCode(), -1 * price);
+		statisticsDAO.updateFurchaseFailed(purchase.getPrice());
+		fundingDAO.updateStackPrice(purchase.getFundingCode(), -1 * purchase.getPrice());
 		return result;
 	}
 		

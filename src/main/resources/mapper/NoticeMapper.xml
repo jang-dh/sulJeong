@@ -80,7 +80,7 @@
 	</select>
 	
 	<insert id="insertStatistics">
-		insert into statistics values(sysdate, 0,0,0,0)
+		insert into statistics values(sysdate, 0,0,0,0,0)
 	</insert>
 
 </mapper>	

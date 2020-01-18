@@ -18,6 +18,7 @@
 		<listener-class>team.hunter.listener.SessionListener</listener-class>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+		
 		<listener-class>
 	      org.springframework.security.web.session.HttpSessionEventPublisher
 	    </listener-class>
