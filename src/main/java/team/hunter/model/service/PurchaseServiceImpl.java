@@ -98,7 +98,9 @@ public class PurchaseServiceImpl implements PurchaseService {
 
 	@Override
 	public List<Purchase> purchaseList(int memberCode, int startIndex, int cntPerPage) {
-		return purchaseDAO.purchaseList(memberCode, startIndex, cntPerPage);
+		List<Purchase> list = purchaseDAO.purchaseList(memberCode, startIndex, cntPerPage);
+		if(list.get(0).getCode()==0) throw new RuntimeException();
+		return list;
 	}
 	
 	@Override

@@ -24,7 +24,7 @@ public class SessionListener implements HttpSessionListener {
 	
 
     public void sessionCreated(HttpSessionEvent arg0) {
-    	
+    	System.out.println("sessionCreated(HttpSessionEvent arg0) call..............");
     	HttpSession session = arg0.getSession();
     	WebApplicationContext wac = WebApplicationContextUtils.getRequiredWebApplicationContext(session.getServletContext());
     	

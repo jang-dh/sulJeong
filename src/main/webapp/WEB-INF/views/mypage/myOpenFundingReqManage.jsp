@@ -56,7 +56,7 @@
       <div class="container pt-70">
         <div class="row">
           
-          <div class="col-md-7">
+          <div class="col-md-7 col-md-push-3">
             <h3 class="text-theme-colored mt-0 mb-20">제목 : ${fundingQuestion.subject}</h3>
 			<p>작성자 : ${fundingQuestion.member.id}</p>
             <hr>
@@ -67,7 +67,7 @@
             <c:choose>
             	<c:when test="${not empty fundingAnswer}">
 		            <form>
-		            	<input class="form-control" type="text" value="${fundingAnswer.content} " readonly/><br>
+		            	<textarea class="form-control required" rows="5" readonly>${fundingAnswer.content}</textarea>
 		            	 <ul class="etcArea">
 	                     	<li class=""><strong>답변 작성일</strong> <span class="txtNum">${fundingAnswer.regdate}</span>
 	                     	</li>

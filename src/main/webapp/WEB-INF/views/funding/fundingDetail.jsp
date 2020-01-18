@@ -76,6 +76,19 @@ $(function() {
 		var fundingCode = ${funding.code};
 		var subject = $('input[name="form_subject"]').val();
 		var content = $('textarea[name="form_content"]').val();
+		
+		if(subject == ""){
+			alert("제목을 입력하세요");
+			$('input[name="form_subject"]').focus();
+			return false;
+		}
+		
+		if(content == ""){
+			alert("내용을 입력하세요");
+			$('textarea[name="form_content"]').focus();
+			return false;
+		}
+		
 		if(!'${principal.code}')
 			alert("로그인 후 사용가능합니다.");
 		else
@@ -87,6 +100,8 @@ $(function() {
 				success: function (result) {
 					if(result == '1')
 						alert("문의가 등록되었습니다.");
+						document.documentElement.scrollTop = 0;
+						location.reload();
 				},
 				erorr: function (err) {
 					alert(err + "오류 발생");
@@ -378,10 +393,10 @@ $(function() {
 									<div class="tab-pane fade" id="tab2">
 										<div class="funding_question">
 											<label>제목 <small>*</small></label> 
-											<input name="form_subject" type="text" placeholder="제목을 입력해 주세요." class="form-control">
+											<input id="form_subject" name="form_subject" type="text" placeholder="제목을 입력해 주세요." class="form-control">
 											<br>
 											<label>문의내용 <small>*</small></label>
-											<textarea name="form_content" type="text"  class="form-control required" rows="5" placeholder="내용을 입력해 주세요."></textarea>
+											<textarea id="form_content" name="form_content" type="text"  class="form-control required" rows="5" placeholder="내용을 입력해 주세요."></textarea>
 											<button type="button" class="btn btn-dark btn-flat question mt-10" data-toggle="modal" data-target=".bs-example-modal-sm">문의하기</button>
 										</div>
 									</div>

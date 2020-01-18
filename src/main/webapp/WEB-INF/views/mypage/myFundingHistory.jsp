@@ -16,6 +16,7 @@
 			$("[name=code]").val(purchaseCode);
 			$("#updateForm").submit();
 		})
+		
 	})
 	
 	function fn_paging(curPage){
@@ -32,6 +33,16 @@
 		$(".numberBtn").eq(curPageNum-1).addClass("active");
 	});
 </script>
+
+<style>
+.amount{
+	line-height: 75px;
+}
+.product-name{
+	vertical-align: middle;
+}
+
+</style>
 <!-- Start main-content-->
 <div class="main-content">
 	<!-- Section: inner-header -->
@@ -70,11 +81,12 @@
 							</thead>
 							<tbody>
 								<c:forEach items="${list}" var="list" varStatus="status">
-									<tr class="cart_item">
+									<tr class="cart_item" height="75">
 										<td class="product-thumbnail">${list.purchaseDate } <br>
 										<ul class="variation">
 											<li class="product-title"><span>구매 코드 : ${list.code}</span></li>
 										</ul>
+										<p/><p/><p/>
 											<c:choose>
 												<c:when test="${list.funding.fundingState == 501}">
 													<span class="label label-primary">진행 중</span>
@@ -90,24 +102,47 @@
 												</c:when>
 											</c:choose>
 										</td>
-										<td class="product-name">
-											<a href="${pageContext.request.contextPath}/funding/${list.funding.code}">
-											<img src="${pageContext.request.contextPath}/resources/images/funding/Thumnail_${list.funding.image }" width="50" height="70"></a>
+										<td class="product-name" align="left">
+											<img src="${pageContext.request.contextPath}/resources/images/funding/Thumnail_${list.funding.image }" width="55" height="75" align="center"></a>
 											<a class="text-theme-colored" href="${pageContext.request.contextPath}/funding/${list.funding.code}">${list.funding.title}</a>
 										</td>
-										<td class="product-price"><span class="amount"><fmt:formatNumber>${list.funding.rewardPrice}</fmt:formatNumber>원</span></td>
-										<td class="product-quantity">
-											${list.qty}개 
+										<td class="product-price" align="right"><span class="amount"><fmt:formatNumber>${list.funding.rewardPrice}</fmt:formatNumber>원</span></td>
+										<td class="product-quantity" align="right">
+											<span class="amount">${list.qty}개 </span>
 										</td>
-										<td class="product-subtotal"><span class="amount"><fmt:formatNumber>${list.funding.rewardPrice * list.qty}</fmt:formatNumber>원</span></td>
-										<td><c:choose>
+										<td class="product-subtotal" align="right"><span class="amount"><fmt:formatNumber>${list.funding.rewardPrice * list.qty}</fmt:formatNumber>원</span></td>
+										<td align="left" valign="middle" ><c:choose>
 												<c:when test="${list.purchaseState=='603'}">
-													<span class="label label-default">펀딩 결제 예정</span>
+												<br/>
+												<span class="adjust">
+													<span class="label label-default">펀딩 결제 예정</span> <br/><br/>
+													
+												<input type="button" class="btn btn-default btn-xs pull-center" value="후원취소">
+												</span>
 												</c:when>
 												<c:when test="${list.purchaseState=='601'}">
+												<br/>
 													<span class="label label-info">펀딩 결제 완료</span>
+													<p/>
+													<span>
+														<c:if test="${empty list.deliveryNumber}">
+															<ul>
+															<li class="deliver">송장 번호 : 배송전 입니다.</li>
+															<li class="courier">운송 업체 : 배송전 입니다.</li>
+														</ul>
+														</c:if>
+														<c:if test="${!empty list.deliveryNumber}">
+															<ul>
+														<li class="deliver">송장 번호 : ${list.deliveryNumber}</li>
+															<li class="courier">운송 업체 : ${list.courier}</li>
+														</ul>
+														</c:if>
+														
+															
+													</span>
 												</c:when>
 												<c:otherwise>
+												<br/>
 													<span class="label label-danger">펀딩 결제 취소</span>
 												</c:otherwise>
 											</c:choose>
@@ -115,21 +150,14 @@
 												<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
 												<input type="hidden" name="code" value="${list.code}" />
 												<input type="hidden" name="price" value="${list.funding.rewardPrice * list.qty}" />
-												<c:if test="${list.purchaseState=='603' }">
-													<input type="button" class="btn btn-default btn-xs pull-right" value="후원취소">
-												</c:if>
 											</form>
-											<ul>
-												<li class="deliver">송장 번호 : ${list.deliveryNumber}</li>
-												<li class="courier">운송 업체 : ${list.courier}</li>
-											</ul>
+											
 										</td>
 									</tr>
 								</c:forEach>
 							</tbody>
 						</table>
-					</div>
-					<nav style="text-align: center">
+						<nav style="text-align: center">
 						<ul class="pagination dark">
 
 							<li><a aria-label="Previous"
@@ -148,6 +176,8 @@
 
 						</ul>
 					</nav>
+					</div>
+					
 					<div class="col-md-10 col-md-offset-1 mt-30">
 						<div class="row">
 							<div class="col-md-6">
@@ -204,4 +234,3 @@
 	<!-- end main-content -->
 
 </div>
-
