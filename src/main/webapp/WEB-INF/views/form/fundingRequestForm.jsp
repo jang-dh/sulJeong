@@ -38,7 +38,45 @@
 			</div>
 		</div>
 	</section>
-
+	
+	<section>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2">
+            <div id="accordion1" class="panel-group accordion transparent">
+              <div class="panel">
+                <div class="panel-title"> <a data-parent="#accordion1" data-toggle="collapse" href="#accordion11" class="collapse" aria-expanded="true"> <span class="open-sub"></span> <strong>Q. 펀딩 등록시 제출해야할 서류 확인 하셨나요?</strong></a> </div>
+                <div id="accordion11" class="panel-collapse collapse" role="tablist" aria-expanded="true">
+                  <div class="panel-content">
+                    <p align="center"><a href="http://localhost:8000/controller/noticeDetail/893"> 펀딩 등록 제출 서류 보러가기 </a></p> 
+                  </div>
+                </div>
+              </div>
+              <div class="panel">
+                <div class="panel-title"> <a class="collapsed" data-parent="#accordion1" data-toggle="collapse" href="#accordion12" aria-expanded="false"> <span class="open-sub"></span> <strong>Q. 제출 서류 확인 사항 확인 하셨나요?</strong></a> </div>
+                <div id="accordion12" class="panel-collapse collapse" role="tablist" aria-expanded="false" style="height: 0px;">
+                  <div class="panel-content">
+                    <p align="center"><a href="http://localhost:8000/controller/noticeDetail/898"> 제출 서류 확인 사항 보러가기 </a></p>
+                  </div>
+                </div>
+              </div>
+              <div class="panel">
+                <div class="panel-title"> <a data-parent="#accordion1" data-toggle="collapse" href="#accordion13" class="collapsed" aria-expanded="false"> <span class="open-sub"></span> <strong>Q. 리워드펀딩 노하우 보고가세요!</strong></a> </div>
+                <div id="accordion13" class="panel-collapse collapse" role="tablist" aria-expanded="false">
+                  <div class="panel-content">
+                    <p><div class="visual-youtube">
+				        <iframe id="reward-youtube" width="343" height="193" src="https://www.youtube.com/embed/BL5kDSNuv1o" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+				      </div></p> 
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+          
 	<div class="row">
 		<div class="col-md-6 col-md-push-3">
 			<div data-example-id="basic-forms" class="bs-example mb-30">
