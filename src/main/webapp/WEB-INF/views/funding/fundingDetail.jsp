@@ -175,13 +175,13 @@ $(function() {
 <!-- Start main-content -->
 <div class="main-content">
 	<!-- Section: inner-header -->
-	<section class="inner-header divider layer-overlay overlay-dark-8" data-bg-img="${pageContext.request.contextPath}/resources/images/main/slider-main.jpg">
+	<section class="inner-header divider layer-overlay" data-bg-img="${pageContext.request.contextPath}/resources/images/main/slider-main.jpg">
 		<div class="container pt-90 pb-40">
 			<!-- Section Content -->
 			<div class="section-content">
 				<div class="row">
 					<div class="col-md-7">
-						<h2 class="text-white font-30"></h2>
+						<h2 class="text-white font-30"> </h2>
 						 <ol class="breadcrumb text-left mt-10 white">
 							<!--<li><a href="#">Home</a></li>
 							<li><a href="#">Pages</a></li>

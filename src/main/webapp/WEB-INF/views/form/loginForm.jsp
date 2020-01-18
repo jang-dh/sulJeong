@@ -117,7 +117,7 @@
 							<input type="submit" class="btn btn-dark btn-lg btn-block" id="login" value="로그인">
 						</div>
 						<div class="checkbox pull-left">
-							<label for="form_checkbox" class="font-weight-600 font-12"">
+							<label for="form_checkbox" class="font-weight-600 font-12">
 								<input id="form_checkbox" name="form_checkbox" type="checkbox">
 								아이디 저장하기
 							</label>
@@ -130,5 +130,6 @@
 					</form>
 				</div>
 			</div>
+		</div>
 	</section>
 </div>

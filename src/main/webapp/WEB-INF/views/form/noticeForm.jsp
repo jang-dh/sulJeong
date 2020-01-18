@@ -37,19 +37,17 @@
 							action="${pageContext.request.contextPath}/insert?${_csrf.parameterName}=${_csrf.token}"
 							method="post" enctype="multipart/form-data">
 							<div class="form-group">
-								<label>제목 <small>*</small></label> <input name="subject"
-									type="text" placeholder="제목을 입력하세요" required=""
-									class="form-control">
+								<label>제목 <small>*</small></label> 
+								<input name="subject" type="text" placeholder="제목을 입력하세요" class="form-control">
 							</div>
 
 							<div class="form-group">
 								<label>내용 <small>*</small></label>
-								<textarea name="content" class="form-control required" rows="5"
-									placeholder="내용을 입력해 주세요"></textarea>
+								<textarea name="content" class="form-control required" rows="5" placeholder="내용을 입력해 주세요"></textarea>
 							</div>
 							<div class="form-group">
-								<label>파일 업로드</label> <input name="file" class="file"
-									type="file" multiple data-show-upload="false"
+								<label>파일 업로드</label> 
+								<input name="file" class="file" type="file" multiple data-show-upload="false"
 									data-show-caption="true"> <small>Maximum upload
 									file size: 12 MB</small>
 							</div>

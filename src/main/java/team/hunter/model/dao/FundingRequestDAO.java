@@ -7,7 +7,6 @@ import team.hunter.model.dto.FundingAnswer;
 import team.hunter.model.dto.FundingQuestion;
 import team.hunter.model.dto.FundingRequest;
 import team.hunter.model.dto.Member;
-import team.hunter.model.dto.PersonalQuestion;
 
 public interface FundingRequestDAO {
 

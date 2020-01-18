@@ -144,7 +144,7 @@
 <!-- Start main-content -->
 <div class="main-content">
 	<!-- Section: inner-header -->
-	<section class="inner-header divider layer-overlay" data-bg-img="${pageContext.request.contextPath}/resources/images/main/slider-main.jpg"">
+	<section class="inner-header divider layer-overlay" data-bg-img="${pageContext.request.contextPath}/resources/images/main/slider-main.jpg">
 		<div class="container pt-90 pb-40">
 			<!-- Section Content -->
 			<div class="section-content">
