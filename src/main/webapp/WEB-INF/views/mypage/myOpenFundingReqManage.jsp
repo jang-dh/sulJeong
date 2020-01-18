@@ -67,7 +67,7 @@
             <c:choose>
             	<c:when test="${not empty fundingAnswer}">
 		            <form>
-		            	<input class="form-control" type="text" value="${fundingAnswer.content} " readonly/><br>
+		            	<textarea class="form-control required" rows="5" readonly>${fundingAnswer.content}</textarea>
 		            	 <ul class="etcArea">
 	                     	<li class=""><strong>답변 작성일</strong> <span class="txtNum">${fundingAnswer.regdate}</span>
 	                     	</li>
