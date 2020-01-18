@@ -64,12 +64,13 @@ public class PurchaseServiceImpl implements PurchaseService {
 	@Override
 	@Transactional
 	public int updatePurchase(int code, int price) {
-		
+		System.out.println(code);
 		int result = purchaseDAO.updatePurchase(code);
 		Purchase purchase = purchaseDAO.selectByCode(code);
+		System.out.println(purchase.getMerchantUid());
 		cancelPurchase(purchase);
-		statisticsDAO.updateFurchaseFailed(price);
-		fundingDAO.updateStackPrice(purchase.getFundingCode(), -1 * price);
+		statisticsDAO.updateFurchaseFailed(purchase.getPrice());
+		fundingDAO.updateStackPrice(purchase.getFundingCode(), -1 * purchase.getPrice());
 		return result;
 	}
 		

@@ -298,14 +298,13 @@ $(function() {
 								<button class="single_add_to_cart_button btn btn-theme-colored deleteLikes" type="button">
 									좋아요 취소 <i class="fa fa-thumbs-down text-white"></i>
 								</button>
-								
 								<button class="single_add_to_cart_button btn btn-default btn-theme-colored insertLikes" type="button">
 									좋아요 <i class="fa fa-thumbs-up"></i>
 								</button>
 							</div>
 							<blockquote class="blockquote-reverse gray mt-100">
 								이 프로젝트는 펀딩 마감일까지 목표 금액이 100% 모이지 않으면<br>
-								결제가 진행되지 않습니다.
+								결제가 취소됩니다.
 							</blockquote>
 						</div>
 						<c:if test="${funding.fundingState == 501}">

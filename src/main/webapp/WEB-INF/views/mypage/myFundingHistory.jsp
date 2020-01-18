@@ -10,6 +10,10 @@
 	$(function(){
 		$("input[value=후원취소]").click(function(){
 			$("#updateForm").attr("action", "${pageContext.request.contextPath}/purchase/update");
+			var purchaseCode = $(this).parent().parent().parent().find("li").eq(0).text();
+			purchaseCode = purchaseCode.split(":")[1];
+			//alert(purchaseCode);
+			$("[name=code]").val(purchaseCode);
 			$("#updateForm").submit();
 		})
 	})
@@ -20,8 +24,10 @@
 	
 	$(function() {
 		var curUrl = location.href;
-		var curPageNum = curUrl.split("=")[1];
-		console.log(curPageNum);
+		var curPageNum = 1;
+		
+		if(curUrl.includes("curPage"))
+			curPageNum = curUrl.split("=")[1];
 		
 		$(".numberBtn").eq(curPageNum-1).addClass("active");
 	});
@@ -33,7 +39,7 @@
 		data-bg-img="${pageContext.request.contextPath}/resources/images/main/slider-main.jpg">
 		<div class="container pt-90 pb-40">
 			<!-- Section Content -->
-			<div class="section-conte<nt">
+			<div class="section-content">
 				<div class="row">
 					<div class="col-md-6">
 						<h2 class="text-white font-36">펀딩 내역</h2>
@@ -110,7 +116,7 @@
 												<input type="hidden" name="code" value="${list.code}" />
 												<input type="hidden" name="price" value="${list.funding.rewardPrice * list.qty}" />
 												<c:if test="${list.purchaseState=='603' }">
-												<input type="button" class="btn btn-default btn-xs pull-right" value="후원취소">
+													<input type="button" class="btn btn-default btn-xs pull-right" value="후원취소">
 												</c:if>
 											</form>
 											<ul>
@@ -125,6 +131,7 @@
 					</div>
 					<nav style="text-align: center">
 						<ul class="pagination dark">
+
 							<li><a aria-label="Previous"
 								onClick="fn_paging(${paging.prevPage})"> <span
 									aria-hidden="true">&laquo;</span></a></li>
@@ -137,6 +144,8 @@
 							<li><a aria-label="Next"
 								onClick="fn_paging(${paging.nextPage})"> <span
 									aria-hidden="true">»</span></a></li>
+
+
 						</ul>
 					</nav>
 					<div class="col-md-10 col-md-offset-1 mt-30">

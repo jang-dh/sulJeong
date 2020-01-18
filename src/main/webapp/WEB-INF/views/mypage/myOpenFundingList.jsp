@@ -58,10 +58,8 @@
 		
 		//현재 요소 개수
 		var listCnt = $(".thumb").length;
-
 		
 		$.ajax({
-			
 			url : getContextPath() + "/myOpenFunding/fetchList",
 			type : "get",
 			dataType : "json",
@@ -102,6 +100,12 @@
 		html += '<div class="causes-details border-1px bg-white clearfix p-15 pb-30">';
 		html += '<h4 class="font-16 text-uppercase">';
 		html += '<a href="${pageContext.request.contextPath}/mypage/myOpenFunding/' + item.code + '">' + item.title + '</a>';
+		if (item.fundingState == '502')
+			html += '<span class="label label-default">진행예정</span>';
+		else if (item.fundingState == '503')
+			html += '<span class="label label-success">달성성공</span>';
+		else
+			html += '<span class="label label-warning">달성실패</span>';
 		html += '</h4>';
 		html += '<ul class="list-inline font-weight-600 font-14 clearfix mb-5">';
 		html += '<li class="pull-left font-weight-400 text-black-333 pr-0">달성금액:';
@@ -174,6 +178,17 @@
 								<div class="causes-details border-1px bg-white clearfix p-15 pb-30">
 									<h4 class="font-16 text-uppercase">
 										<a href="${pageContext.request.contextPath}/mypage/myOpenFunding/${fundingList.code}">${fundingList.title}</a>
+										<c:choose>
+											<c:when test="${fundingList.fundingState == 502}">
+												<span class="label label-default">진행예정</span>
+											</c:when>
+											<c:when test="${fundingList.fundingState == 503}">
+												<span class="label label-success">달성성공</span>
+											</c:when>
+											<c:when test="${fundingList.fundingState == 504}">
+												<span class="label label-warning">달성실패</span>
+											</c:when>
+										</c:choose>
 									</h4>
 									<ul class="list-inline font-weight-600 font-14 clearfix mb-5">
 										<li class="pull-left font-weight-400 text-black-333 pr-0">달성금액:

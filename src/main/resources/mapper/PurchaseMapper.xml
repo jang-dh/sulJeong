@@ -41,7 +41,7 @@
 	
 	<!-- 근딘 : 후원 인원 카운트 -->
 	<select id="countFundingCode" parameterType="int" resultType="int">
-		select count(*) from purchase where funding_code = #{_parameter}
+		select count(*) from purchase where funding_code = #{_parameter} and purchase_state in ('603', '601')
 	</select>
 	
 	<select id="countPurchaseNumber" parameterType="int" resultType="int">
@@ -111,7 +111,7 @@
 		on m.code = p.member_code
 		inner join funding f
 		on f.code = p.funding_code
-		where m.code = #{memberCode} ORDER BY code DESC) a 
+		where m.code = #{memberCode} ORDER BY purchaseCode DESC) a 
 		WHERE ROWNUM <= (#{startIndex}*#{cntPerPage})) WHERE rnum >= ((#{startIndex}-1)*#{cntPerPage}+1)
 	]]>		
 	</select>
