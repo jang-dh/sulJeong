@@ -43,7 +43,7 @@ public class MemberAuthenticationProvider implements AuthenticationProvider {
 		String id = authentication.getName(); // 입력된 id
 		Member member = memberDAO.selectMemberById(id);
 		if(member == null) {
-			throw new UsernameNotFoundException("ID 또는 ,비밀번호를 확인해주세요");
+			throw new UsernameNotFoundException("ID 또는 비밀번호를 확인해주세요");
 		}
 		
 		//비밀번호 비교
