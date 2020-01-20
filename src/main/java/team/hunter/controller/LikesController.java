@@ -39,11 +39,12 @@ public class LikesController {
 		Member member = (Member) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		List<Funding> list = likesService.selectFundingByMemberCode(member.getCode());
 
-		if (list.size() > listCnt + pageCnt)
+		if(list.size() > listCnt + pageCnt)
 			list = list.subList(listCnt, listCnt + pageCnt);
-		else
+		else if(list.size() > listCnt)
 			list = list.subList(listCnt, list.size());
-
+		else
+			list = list.subList(listCnt, listCnt);
 		return list;
 	}
 

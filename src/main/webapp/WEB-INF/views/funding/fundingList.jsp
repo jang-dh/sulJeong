@@ -48,7 +48,7 @@
             let windowHeight = $window.height();
             let documentHeight = $(document).height();
             
-            if(scrollTop + windowHeight + 30 > documentHeight && $(".thumb").length >= 6){
+            if(scrollTop + windowHeight + 35 > documentHeight && $(".thumb").length >= 6){
             	if(flag)
 	            	fetchList();
             }
@@ -74,12 +74,12 @@
 		var order = null;
 		var where = null;
 		var val = null;
-		if(curParams.startsWith('3')){
+		if(!curUrl.includes("comming") && curParams.startsWith('3')){
 			categoryCode = parseInt(curParams.substring(0, 3));
 			curParams = curParams.substring(3, curParams.length);
 		}
 		
-		if(curParams.startsWith('?')){
+		if(!curUrl.includes("comming") && curParams.startsWith('?')){
 			var params = curParams.split('&');
 			order = params[0].split('?order=')[1];
 			where = params[1].split('where=')[1];

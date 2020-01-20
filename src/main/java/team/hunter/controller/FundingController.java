@@ -94,6 +94,8 @@ public class FundingController {
 			list = list.subList(listCnt, listCnt + pageCnt);
 		else if(list.size() > listCnt)
 			list = list.subList(listCnt, list.size());
+		else
+			list = list.subList(listCnt, listCnt);
 		
 		return list;
 	}
@@ -107,6 +109,7 @@ public class FundingController {
 		List<Funding> list = service.selectStatePre();
 		if(list.size() > pageCnt*2)
 			list = list.subList(0, pageCnt*2);
+		
 		return new ModelAndView("funding/fundingList", "list", list);
 	}
 }
