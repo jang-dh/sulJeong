@@ -346,7 +346,7 @@
 			
 			<input type="hidden" id="hidden" name="hidden">
 					<input type="hidden" id="hidden2" name="hidden2">
-					<input type="text" id="emailCheckStatus" name="emailCheckStatus">
+					<input type="hidden" id="emailCheckStatus" name="emailCheckStatus">
 				</c:otherwise>
 			</c:choose>
 		</div>
