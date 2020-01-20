@@ -404,7 +404,6 @@
 	<!-- Section: Causes -->
 	
 	<section>
-	
 		<div class="container pt-70 pb-40">
 			<div class="section-content">
 				<div class="row">
@@ -566,6 +565,10 @@
 				</div>
 			</div>
 	</section>
-	<img style="position:relative; left: 14%; width:70%"  alt="test" src="${pageContext.request.contextPath}/resources/images/funding/test.PNG"/>
+	
+	<h2 align="center">술:정(井)에서<br/>성공 메이커가 되어보세요</h2><br/><p align="center">메이커 | 술:정(井)에서 펀딩을 오픈하는 사람들</p><br/>
+	<img style="position:relative; left: 18%; width:65%"  alt="test" src="${pageContext.request.contextPath}/resources/images/funding/test.PNG"/>
+	<div>&nbsp;</div>
+	<div>&nbsp;</div>
 </div>
 <!-- end main-content -->
