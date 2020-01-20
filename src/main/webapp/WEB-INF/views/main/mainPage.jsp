@@ -402,6 +402,7 @@
 	</section>
 
 	<!-- Section: Causes -->
+	
 	<section>
 		<div class="container pt-70 pb-40">
 			<div class="section-content">
@@ -409,6 +410,7 @@
 					<h2 class="text-uppercase line-bottom-center mt-0">
 						<span class="text-theme-colored">인기</span> 펀딩
 					</h2>
+					<div class="line-bottom mb-30"></div>
 					<c:forEach items="${likesFour}" var="list">
 						<div class="col-sm-7 col-md-4">
 							<div class="causes bg-silver-light maxwidth500 mb-30">
@@ -461,6 +463,7 @@
 					<h2 class="text-uppercase line-bottom-center mt-0">
 						<span class="text-theme-colored">마감임박</span> 펀딩
 					</h2>
+					<div class="line-bottom mb-30"></div>
 					<c:forEach items="${endFour}" var="list">
 						<div class="col-sm-7 col-md-4">
 							<div class="causes bg-silver-light maxwidth500 mb-30">
@@ -512,6 +515,7 @@
 					<h2 class="text-uppercase line-bottom-center mt-0">
 						<span class="text-theme-colored">오픈임박</span> 펀딩
 					</h2>
+					<div class="line-bottom mb-30"></div>
 					<c:forEach items="${openFour}" var="list">
 						<div class="col-sm-7 col-md-4">
 							<div class="causes bg-silver-light maxwidth500 mb-30">
@@ -561,5 +565,10 @@
 				</div>
 			</div>
 	</section>
+	
+	<h2 align="center">술:정(井)에서<br/>성공 메이커가 되어보세요</h2><br/><p align="center">메이커 | 술:정(井)에서 펀딩을 오픈하는 사람들</p><br/>
+	<img style="position:relative; left: 18%; width:65%"  alt="test" src="${pageContext.request.contextPath}/resources/images/funding/test.PNG"/>
+	<div>&nbsp;</div>
+	<div>&nbsp;</div>
 </div>
 <!-- end main-content -->

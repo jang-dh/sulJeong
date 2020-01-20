@@ -44,7 +44,7 @@
         <div class="section-content">
           <div class="row"> 
             <div class="col-md-6">
-              <h2 class="text-white font-36">1:1 문의</h2>
+              <h2 class="text-white font-36">펀딩 문의</h2>
               
             </div>
           </div>
