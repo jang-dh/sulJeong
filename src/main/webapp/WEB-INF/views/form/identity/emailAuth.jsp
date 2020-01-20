@@ -40,6 +40,7 @@
     	
     	var dice = null;
     	dice = opener.document.getElementById("hidden2").value
+    	opener.document.getElementById("emailCheckStatus").value = 'false';
     	
     	$("#childEmailAuth").val(dice)
 		//alert(1)
@@ -67,8 +68,9 @@
 							 opener.document.getElementById("emailCheckStatus").value = result;
 				        	 // 호출 한 뒤 현재 팝업 창 닫기 이벤트
 				        	 close();
-						 }else if(result == 'false'){
+						 }else {
 							 alert("오류입니다.")
+							 opener.document.getElementById("emailCheckStatus").value = 'false';
 						 }
 					 } ,//성공했을대
 					 error:function(err){

@@ -149,6 +149,12 @@
 				return false;
 			}
 			
+			if($('#emailCheckStatus').val()=='false'){
+				emailStatus = 'false';
+				alert("이메일 인증 후 회원가입 가능");
+				return false;
+			}
+			
 			if($('#phone').val()==""){
 				alert("전화번호를 입력해주세요");
 				$('#phone').focus();
@@ -166,6 +172,7 @@
 				$('#addr').focus();
 				return false;
 			}
+			
 			
 			
 			if($('#hidden').val()=='true'){
@@ -339,7 +346,7 @@
 			
 			<input type="hidden" id="hidden" name="hidden">
 					<input type="hidden" id="hidden2" name="hidden2">
-					<input type="hidden" id="emailCheckStatus" name="emailCheckStatus">
+					<input type="text" id="emailCheckStatus" name="emailCheckStatus">
 				</c:otherwise>
 			</c:choose>
 		</div>
