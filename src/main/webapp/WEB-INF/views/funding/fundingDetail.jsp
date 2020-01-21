@@ -153,6 +153,7 @@ $(function() {
 						success: function (result) {
 							if(result == '1')
 								alert("펀딩이 추가 되었습니다.");
+								location.reload();
 						},
 						erorr: function (err) {
 							alert(err + "오류 발생");
