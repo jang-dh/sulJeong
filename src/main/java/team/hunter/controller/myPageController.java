@@ -153,6 +153,8 @@ public class myPageController {
 			member.setEmailAccept("0");
 		}
 		member = memberService.changeMyInfo(member);
+		Member pvo=(Member)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		pvo.setName(member.getName());
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("member", member);
 		mv.setViewName("mypage/chooseMyInfoMenu");
