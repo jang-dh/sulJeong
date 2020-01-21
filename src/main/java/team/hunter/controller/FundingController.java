@@ -94,6 +94,8 @@ public class FundingController {
 			list = list.subList(listCnt, listCnt + pageCnt);
 		else if(list.size() > listCnt)
 			list = list.subList(listCnt, list.size());
+		else
+			list = list.subList(listCnt, listCnt);
 		
 		return list;
 	}

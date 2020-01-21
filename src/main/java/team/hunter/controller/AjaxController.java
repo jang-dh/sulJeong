@@ -129,9 +129,11 @@ public class AjaxController {
 			
 		if(myOpenFundingList.size() > listCnt + 3)
 			myOpenFundingList = myOpenFundingList.subList(listCnt, listCnt + 3);
-		else
+		else if(myOpenFundingList.size() > listCnt)
 			myOpenFundingList = myOpenFundingList.subList(listCnt, myOpenFundingList.size());
-			
+		else 
+			myOpenFundingList = myOpenFundingList.subList(listCnt, listCnt);
+
 		return myOpenFundingList;
 	}
 	
